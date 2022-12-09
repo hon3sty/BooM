@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- [게시판 : 고객센터] 메인 : 이지은 -->
+<!-- [게시판 : 고객센터] 메인 : 이지은  -->
 <title>Insert title here</title>
 </head>
 <body>

@@ -52,7 +52,7 @@ public class BoardController {
 	
 	//공지사항 삭제
 	public void noticeDelete() {
-		
+		 
 	}
 	
 }
