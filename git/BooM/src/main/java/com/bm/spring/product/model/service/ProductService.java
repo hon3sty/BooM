@@ -20,5 +20,8 @@ public interface ProductService {
 
 	// 주문상품 조회
 	ArrayList<Order> orderListGet(int MemberNo);
+	
+	
+	//변경
 
 }
