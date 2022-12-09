@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- [게시판 : 고객센터] 공지사항 관리 : 이지은 -->
-<title>0지사항</title>
+<title>0지사항x</title>
 </head>
 <body>
 
