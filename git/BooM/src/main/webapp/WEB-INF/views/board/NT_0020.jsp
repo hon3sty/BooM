@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- [게시판 : 고객센터] 공지사항 관리 : 이지은 -->
-<title>Insert title here</title>
+<title>공지사항</title>
 </head>
 <body>
 
