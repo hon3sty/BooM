@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- [마이페이지] 구매&구매내역 : 오하늘 -->
 <title>Insert title here</title>
 </head>
 <body>
