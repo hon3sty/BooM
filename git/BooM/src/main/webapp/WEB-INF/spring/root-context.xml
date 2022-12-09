@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- DB 연결 설정 -->
+	 <!-- 1단계. DB연결을 위한 도구 설정 -->
+	 <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
+	 	<!-- 어느 DB에 접속할 것인지 설정 -->
+	 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	 	<property name="username" value="boom"/>
+	 	<property name="password" value="boom"/>
+	 </bean>
+	  <!-- 2단계. Mybatis Spring에서 제공하는 SQL 명령어 실행을 위한 도구 등록 -->
+	  <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		  <property name="configLocation" value="classpath:mybatis-config.xml"/>
+		  <!-- 연결을 위한 도구 참조(위에서 만든 dataSource Bean을 참조) -->
+		  <property name="dataSource" ref="dataSource"/>
+	  </bean>
+	   <!-- 3단계. SQL 구문 실행을 위한 템플릿을 제공하는 도구 등록 -->
+	   <bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+		   <!-- SQL명령어 실행을 위한 도구에 대한 참조 설정 -->
+		   <constructor-arg ref="sqlSessionFactory"/>
+	   </bean>
+	   <!-- 파일 업로드를 위한 도구 등록 -->
+	   <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		   <property name="defaultEncoding" value="UTF-8"/>
+		   <property name="maxUploadSize" value="10000000"/>
+		   <property name="maxInMemorySize" value="10000000"/>
+	   </bean>	
+</beans>
