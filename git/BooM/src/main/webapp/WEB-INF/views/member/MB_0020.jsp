@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- [회원] 로그인 : 이지윤 -->
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
 <body>
 
