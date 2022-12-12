@@ -52,8 +52,8 @@
                                 <li><a href="productList.pd">Categories <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="productList.pd">Categories</a></li>
-                                        <li><a href="./anime-details.jsp">Anime Details</a></li>
-                                        <li><a href="./anime-watching.jsp">Anime Watching</a></li>
+                                        <li><a href="productPurchase.pd">Anime Details</a></li>
+                                        <li><a href="wishList.me">Anime Watching</a></li>
                                         <li><a href="./blog-details.jsp">Blog Details</a></li>
                                         <li><a href="./signup.jsp">Sign Up</a></li>
                                         <li><a href="./login.jsp">Login</a></li>

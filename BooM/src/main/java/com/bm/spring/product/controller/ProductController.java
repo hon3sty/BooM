@@ -6,9 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ProductController {
 	
-	// Ä«Å×°í¸® ÀÌµ¿
+	// 
 	@RequestMapping("productList.pd")
 	public String myPage() {
 		return "product/PD_0010";
 	}
+	
+	//ê²°ì œí•˜ê¸° í˜ì´ì§€
+	@RequestMapping("productPurchase.pd")
+	public String productPurchasList() {
+		return "product/PD_0030";
+	}
+	
+	
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-	<!-- 장바구니 [하늘] -->
+	<!-- 구매하기 페이지 [하늘] -->
   <head>
     <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
@@ -31,15 +31,14 @@
     <link rel="stylesheet" href="resources/css2/icomoon.css">
     <link rel="stylesheet" href="resources/css2/style.css">
   </head>
+  <!-- Header Section Begin -->
+	<jsp:include page="../common/header.jsp"/>
   <body class="goto-here">
-  <jsp:include page="../common/header.jsp"/>
-		
-  
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread">장바구니</h1>
+            <h1 class="mb-0 bread">결제 하기</h1>
           </div>
         </div>
       </div>
@@ -54,25 +53,25 @@
 						    <thead class="thead-primary">
 						      <tr class="text-center">
 						        <th>&nbsp;</th>
-						        <th>상품명</th>
 						        <th>&nbsp;</th>
-						        <th>판매 금액</th>
+						        <th>상품명</th>
+						        <th>가격</th>
 						        <th>수량</th>
-						        <th>총 금액</th>
+						        <th>구매금액</th>
 						      </tr>
 						    </thead>
 						    <tbody>
-						      <tr  class="text-center">
-						        <td class="product-remove"><a href="#">x</a></td>
+						      <tr class="text-center">
+						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div class="img" style="background-image:url(images/product-6.jpg);"></div></td>
+						        <td class="image-prod"><div class="img" ></div></td>
 						        
-						        <td  class="product-name">
-						        	<h3 style="color:white">Bell Pepper</h3>
+						        <td class="product-name">
+						        	<h3>Bell Pepper</h3>
 						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
 						        </td>
 						        
-						        <td style="color:white" class="price">$15.70</td>
+						        <td style="color:white" class="price">$4.90</td>
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
@@ -80,11 +79,62 @@
 					          	</div>
 					          </td>
 						        
-						        <td  style="color:white" class="total">$15.70</td>
+						        <td style="color:white" class="total">$4.90</td>
+						      </tr><!-- END TR-->
+
+						      <tr class="text-center">
+						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+						        
+						        <td class="image-prod"><div class="img" ></div></td>
+						        
+						        <td class="product-name">
+						        	<h3>Bell Pepper</h3>
+						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
+						        </td>
+						        
+						        <td class="price">$15.70</td>
+						        
+						        <td class="quantity">
+						        	<div class="input-group mb-3">
+					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					          	</div>
+					          </td>
+						        
+						        <td class="total">$15.70</td>
 						      </tr><!-- END TR-->
 						    </tbody>
 						  </table>
 					  </div>
+    			</div>
+    		</div>
+    		<div class="row justify-content-end">
+    			
+    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3 style="color:white">구매자 정보 입력</h3>
+    					<p style="color:white">수령자의 전화번호를 입력해주세요.</p>
+  						<form action="#" class="info">
+  						  <div class="form-group">
+			              	<label style="color:white" for="">이름</label>
+			                <input type="text" class="form-control text-left px-3" placeholder="">
+			              </div>
+			              <div class="form-group">
+			              	<label style="color:white" for="">전화번호('-'를 포함해서 입력해주세요)</label>
+			                <input type="text" class="form-control text-left px-3" placeholder="">
+			              </div>
+			              <p style="color:white">●구매하신 부귀영화 기프트콘은 주문자 정보에 입력된 휴대전화 번호로 MMS로 발송됩니다.입력된 휴대전화 번호가 맞는지 꼭 확인하세요.</p>
+	            		</form>
+    				</div>
+    				
+    			</div>
+    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3 style="color:white">총 상품 구매금액</h3>
+    					<p  class="d-flex total-price">
+    						<span style="color:red">86,000 원</span>
+    					</p>
+    				</div>
+    				<p ><a href="checkout.html" class="btn btn-primary py-3 px-4">결제 하기</a></p>
     			</div>
     		</div>
 			</div>
@@ -121,7 +171,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Vegefoods</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+              <p style="color:white">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -173,7 +223,7 @@
         <div class="row">
           <div class="col-md-12 text-center">
 
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <p style="color:white"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
