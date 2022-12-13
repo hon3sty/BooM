@@ -34,11 +34,10 @@
   <!-- Header Section Begin -->
 	<jsp:include page="../common/header.jsp"/>
   <body class="goto-here">
-    <div class="hero-wrap hero-bread">
+    <div class="hero-wrap hero-bread" style="background-image: url('resources/img/list.jpg'); background-size:contain;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread">구매 목록</h1>
           </div>
         </div>
       </div>
@@ -50,12 +49,19 @@
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
     				
-					<div class="box-inner"  style="background-color:white; padding:5px; display:inline-block; float: right;">
-						<strong class="period">조회기간</strong>
-						<p style="background-color:white">
-	            	        <span>기간 선택</span> <input id="startDate" type="date"> ~ <input id="endDate" type="date">
-							<button id="btn_search">조회하기</button>
-						</p>
+    				
+					<div class="box-inner"  style="background-color:#82ae46; width:100%; padding:5px; display:inline-block;">
+						<div style="display:inline-block;">
+							<h3>구매 목록</h3>
+						</div>
+						<div  style="float: right;display:inline-block;" ;>
+							<strong class="period">조회기간</strong>
+							<p style="background-color:white">
+		            	        <span>기간 선택</span> <input id="startDate" type="date"> ~ <input id="endDate" type="date">
+								<button id="btn_search">조회하기</button>
+							</p>
+						</div>
+						
 					</div>
 				
 	    				<table class="table">
@@ -66,6 +72,7 @@
 						        <th>가격</th>
 						        <th>수량</th>
 						        <th>구매금액</th>
+						        
 						      </tr>
 						    </thead>
 						    <tbody>
@@ -100,6 +107,7 @@
     					<p  class="d-flex total-price">
     						<span style="color:red">86,000 원</span>
     					</p>
+						      <button id="btn_cancel" style="float:right">구매 취소</button>
     				</div>
     			</div>
     		</div>
@@ -132,45 +140,16 @@
   <script src="resources/js2/main.js"></script>
 
   <script>
-		$(document).ready(function(){
-
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-		        
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		            
-		            $('#quantity').val(quantity + 1);
-
-		          
-		            // Increment
-		        
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		      
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
-		     
-		    
-		});
+		
 		
 		$("#btn_search").click(function(){
+			//기간에 맞는 주문 조회
 			console.log($("#startDate").val());
 			console.log($("#endDate").val());
+		})
+		
+		$("#btn_cancel").click(function(){
+			//주문 취소
 		})
 	</script>
     

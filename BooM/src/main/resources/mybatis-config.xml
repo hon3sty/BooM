@@ -12,7 +12,7 @@
 		<typeAlias type="com.bm.spring.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.bm.spring.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.bm.spring.movie.model.vo.Movie" alias="movie"/>
-		<typeAlias type="com.bm.spring.product.model.vo.Poroduct" alias="product"/>
+		<typeAlias type="com.bm.spring.product.model.vo.Product" alias="product"/>
 	</typeAliases>
 	 -->
 	<!-- <mappers>

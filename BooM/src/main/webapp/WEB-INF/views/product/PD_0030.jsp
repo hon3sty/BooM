@@ -83,6 +83,7 @@
 						        
 						        <td style="color:white" class="total">$4.90</td>
 						      </tr><!-- END TR-->
+
 						    </tbody>
 						  </table>
 					  </div>
