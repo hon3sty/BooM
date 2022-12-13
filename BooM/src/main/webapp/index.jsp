@@ -54,7 +54,7 @@
                                         <li><a href="productList.pd">Categories</a></li>
                                         <li><a href="productPurchase.pd">Anime Details</a></li>
                                         <li><a href="wishList.me">Anime Watching</a></li>
-                                        <li><a href="./blog-details.jsp">Blog Details</a></li>
+                                        <li><a href="purchaseList.me">Blog Details</a></li>
                                         <li><a href="./signup.jsp">Sign Up</a></li>
                                         <li><a href="./login.jsp">Login</a></li>
                                     </ul>
