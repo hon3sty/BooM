@@ -11,6 +11,11 @@ public class MemberController {
 		return "mypage/MY_0030";
 	}
 	
+	@RequestMapping("purchaseList.me")
+	public String purchaseList() {
+		return "mypage/MY_0020";
+	}
+	
 	
 
 }
