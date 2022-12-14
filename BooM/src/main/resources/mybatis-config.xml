@@ -7,19 +7,21 @@
 	</settings>
 	
 	<!-- 별칭 등록 -->
-	<!-- 
+	 
 	<typeAliases>
 		<typeAlias type="com.bm.spring.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.bm.spring.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.bm.spring.movie.model.vo.Movie" alias="movie"/>
 		<typeAlias type="com.bm.spring.product.model.vo.Product" alias="product"/>
+		<typeAlias type="com.bm.spring.product.model.vo.Cart" alias="cart"/>
+		<typeAlias type="com.bm.spring.product.model.vo.Order" alias="order"/>
 	</typeAliases>
-	 -->
-	<!-- <mappers>
+	 
+	<mappers>
 		<mapper resource="/mappers/board-mapper.xml" />
 		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/movie-mapper.xml" />
 		<mapper resource="/mappers/product-mapper.xml" />
-	</mappers> -->
+	</mappers> 
 
 </configuration>
