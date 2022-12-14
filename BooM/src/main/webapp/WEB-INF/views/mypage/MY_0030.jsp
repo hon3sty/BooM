@@ -35,11 +35,11 @@
   <jsp:include page="../common/header.jsp"/>
 		
   
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread" style="background-image: url('resources/img/cart6.jpg'); background-size:contain;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread">장바구니</h1>
+            
           </div>
         </div>
       </div>
@@ -50,21 +50,22 @@
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
+    				<h3 style="color:white">장바구니</h3>
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
+						        <th><input type="checkbox" id="checkAll"></th>
 						        <th>&nbsp;</th>
 						        <th>상품명</th>
-						        <th>&nbsp;</th>
 						        <th>판매 금액</th>
 						        <th>수량</th>
 						        <th>총 금액</th>
+						        <th>&nbsp;</th>
 						      </tr>
 						    </thead>
 						    <tbody>
 						      <tr class="text-center">
-						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
-						        
+						        <td><input type="checkbox"></td>
 						        <td class="image-prod"><div class="img" ></div></td>
 						        
 						        <td class="product-name">
@@ -80,14 +81,61 @@
 					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
 					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
 					          	</div>
-					          </td>
+					            </td>
 						        
 						        <td style="color:white" class="total">$4.90</td>
+						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
+						      </tr><!-- END TR-->
+						      <tr class="text-center">
+						        <td><input type="checkbox"></td>
+						        <td class="image-prod"><div class="img" ></div></td>
+						        
+						        <td class="product-name">
+						        	<h3>Bell Pepper</h3>
+						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
+						        </td>
+						        
+						        <td style="color:white" class="price">$4.90</td>
+						        
+						        <td class="quantity">
+						        	<div class="input-group mb-3">
+						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
+					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
+					          	</div>
+					            </td>
+						        
+						        <td style="color:white" class="total">$4.90</td>
+						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
+						      </tr><!-- END TR-->
+						      <tr class="text-center">
+						        <td><input type="checkbox"></td>
+						        <td class="image-prod"><div class="img" ></div></td>
+						        
+						        <td class="product-name">
+						        	<h3>Bell Pepper</h3>
+						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
+						        </td>
+						        
+						        <td style="color:white" class="price">$4.90</td>
+						        
+						        <td class="quantity">
+						        	<div class="input-group mb-3">
+						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
+					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
+					          	</div>
+					            </td>
+						        
+						        <td style="color:white" class="total">$4.90</td>
+						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
 						      </tr><!-- END TR-->
 						    </tbody>
 						  </table>
+						 
 					  </div>
     			</div>
+    			 <button style="margin:15px;" id="btn_del">선택 항목 삭제</button>
     		</div>
 			</div>
 			<div class="row justify-content-end">
@@ -162,6 +210,27 @@
 		            $('#quantity').val(quantity - 1);
 		            }
 		    });
+		     
+		     $("#checkAll").click(function(){
+		    	 var check=$(this).is(':checked');
+		    	 console.log(check);
+		    	 
+		    	 if(check){
+		    		 //전체 체크
+		    		 $('tbody input:checkbox').prop('checked',true)
+		    	 }else{
+		    		 //전체 체크 해제
+		    		 $('tbody input:checkbox').prop('checked',false)
+		    	 }
+		    	 
+		     })
+		     
+		     $("#btn_del").click(function(){
+		    	 //체크박스 체크된 항목 삭제
+		    	 //체크된 놈의 번호 받아서 삭제
+		    	 
+		     })
+		     
 		    
 		});
 	</script>

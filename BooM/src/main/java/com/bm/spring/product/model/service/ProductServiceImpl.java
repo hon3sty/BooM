@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService {
 	private SqlSessionTemplate sqlSession;
 
 	@Autowired
-	private ProductDao boardDao;
+	private ProductDao productDao;
 
 	@Override
 	public ArrayList<Cart> cartGetList() {
