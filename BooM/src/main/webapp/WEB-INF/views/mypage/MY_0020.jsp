@@ -48,26 +48,17 @@
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
-    				
-    				
-					<div class="box-inner"  style="background-color:#82ae46; width:100%; padding:5px; display:inline-block;">
-						<div style="display:inline-block;">
-							<h3>구매 목록</h3>
-						</div>
-						<div  style="float: right;display:inline-block;" ;>
-							<strong class="period">조회기간</strong>
-							<p style="background-color:white">
-		            	        <span>기간 선택</span> <input id="startDate" type="date"> ~ <input id="endDate" type="date">
-								<button id="btn_search">조회하기</button>
-							</p>
-						</div>
-						
-					</div>
-				
+						<h3 style="color:white">구매 목록</h3>
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th>&nbsp;</th>
+						        <th><div  style="float: right;display:inline-block; border:1px solid black";>
+							<strong class="period">조회기간</strong>
+							<p style="background-color:#82ae46">
+		            	        <input id="startDate" type="date"> ~ <input id="endDate" type="date">
+								<button id="btn_search">조회하기</button>
+							</p>
+						</div></th>
 						        <th>상품명</th>
 						        <th>가격</th>
 						        <th>수량</th>
@@ -151,6 +142,7 @@
 		$("#btn_cancel").click(function(){
 			//주문 취소
 		})
+		
 	</script>
     
   </body>

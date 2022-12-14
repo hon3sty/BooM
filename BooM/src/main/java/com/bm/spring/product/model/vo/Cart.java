@@ -12,4 +12,5 @@ public class Cart {
 	private int productNo;
 	private int memberNo;
 	private int cartCount;
+	private Product product;
 }
