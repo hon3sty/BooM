@@ -125,6 +125,73 @@
 								        <td class="product-remove"><div class="wrap"><a href="delete.pd">삭제</a></div></td>
 							      </tr> 
 							    </c:forEach>
+						    <tbody>
+						      <tr class="text-center">
+						        <td><input type="checkbox"></td>
+						        <td class="image-prod"><div class="img" ></div></td>
+						        
+						        <td class="product-name">
+						        	<h3>Bell Pepper</h3>
+						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
+						        </td>
+						        
+						        <td style="color:white" class="price">$4.90</td>
+						        
+						        <td class="quantity">
+						        	<div class="input-group mb-3">
+						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
+					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
+					          	</div>
+					            </td>
+						        
+						        <td style="color:white" class="total">$4.90</td>
+						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
+						      </tr><!-- END TR-->
+						      <tr class="text-center">
+						        <td><input type="checkbox"></td>
+						        <td class="image-prod"><div class="img" ></div></td>
+						        
+						        <td class="product-name">
+						        	<h3>Bell Pepper</h3>
+						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
+						        </td>
+						        
+						        <td style="color:white" class="price">$4.90</td>
+						        
+						        <td class="quantity">
+						        	<div class="input-group mb-3">
+						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
+					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
+					          	</div>
+					            </td>
+						        
+						        <td style="color:white" class="total">$4.90</td>
+						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
+						      </tr><!-- END TR-->
+						      <tr class="text-center">
+						        <td><input type="checkbox"></td>
+						        <td class="image-prod"><div class="img" ></div></td>
+						        
+						        <td class="product-name">
+						        	<h3>Bell Pepper</h3>
+						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
+						        </td>
+						        
+						        <td style="color:white" class="price">$4.90</td>
+						        
+						        <td class="quantity">
+						        	<div class="input-group mb-3">
+						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
+					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
+					          	</div>
+					            </td>
+						        
+						        <td style="color:white" class="total">$4.90</td>
+						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
+						      </tr><!-- END TR-->
 						    </tbody>
 						  </table>
 						 
@@ -132,6 +199,7 @@
     			</div>
     			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     			 <div class="col-md-12 ftco-animate"><button class="button" id="btn_delOne">선택 항목 삭제</button></div>
+    			 <button style="margin:15px;" id="btn_del">선택 항목 삭제</button>
     		</div>
 			</div>
 			<div class="row justify-content-end">
@@ -229,6 +297,7 @@
 				
 				location.href=''
 		     })
+		    
 		});
 	</script>
     
