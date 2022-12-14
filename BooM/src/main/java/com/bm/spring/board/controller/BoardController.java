@@ -11,7 +11,13 @@ public class BoardController {
 	public String csMain() {
 		return "board/CS_0010";
 	}
-
+	
+	// 공지사항 리스트로 이동
+	@RequestMapping("noticeListForm.bo")
+	public String noticeList() {
+		return "board/NT_0010";
+	}
+	
 	// 공지사항 작성
 	public void noticeInsert() {
 
