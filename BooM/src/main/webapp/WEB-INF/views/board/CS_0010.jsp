@@ -19,7 +19,7 @@
     height: 30px;
     margin: 12px 0px 9px;
     text-align: left;
-    background-color: #fff;
+    background-color: #fff; 
 
 }
 #searchtext {

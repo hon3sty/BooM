@@ -16,7 +16,7 @@ public class BoardController {
 	@RequestMapping("noticeListForm.bo")
 	public String noticeList() {
 		return "board/NT_0010";
-	}
+	} 
 	
 	// 공지사항 작성
 	public void noticeInsert() {

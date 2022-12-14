@@ -21,7 +21,7 @@
 
 }
 #ntc2 #list li a {
-    padding: 24px 20px 25px 17px;
+    padding: 24px 20px 25px 17px; 
     display: block;
     width: 94px;
     height: 32px;
