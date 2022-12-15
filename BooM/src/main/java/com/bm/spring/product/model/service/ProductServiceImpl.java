@@ -60,4 +60,14 @@ public class ProductServiceImpl implements ProductService {
 		return 0;
 	}
 
+	@Override
+	public int changeCount(Cart c) {
+		return productDao.changeCount(sqlSession,c);
+	}
+
+	@Override
+	public int cartDelete(int cno) {
+		return productDao.cartDelete(sqlSession,cno);
+	}
+
 }

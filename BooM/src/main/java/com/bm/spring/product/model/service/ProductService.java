@@ -29,5 +29,11 @@ public interface ProductService {
 
 	// 상품 상세
 	int productDetail();
+	
+	//장바구니 수량 변경
+	int changeCount(Cart c);
+	
+	//장바구니 삭제
+	int cartDelete(int cno);
 
 }

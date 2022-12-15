@@ -54,11 +54,14 @@ public class ProductController {
 	@RequestMapping("wishList.me")
 	public String wishList(Model model) {
 		ArrayList<Cart> list = productService.cartGetList();
+			
+		int sum=0;
+		for(Cart c : list) {
+			sum+= c.getProduct().getProductPrice() * c.getCartCount();
+		}
 		
 		model.addAttribute("list",list);
-		
-		System.out.println(list);
-		
+		model.addAttribute("sum", sum);
 		return "mypage/MY_0030";
 	}
 	
@@ -68,5 +71,31 @@ public class ProductController {
 		return "mypage/MY_0020";
 	}
 	
+	//장바구니 수량 변경
+	@RequestMapping("countUpdate.pd")
+	public String countUpdate(int cno,int count,Model model) {
+		Cart c = new Cart(); c.setCartNo(cno); c.setCartCount(count);
+			  
+		int result=productService.changeCount(c);
+		  
+		if(result>0) { 
+			  return "redirect:/wishList.me"; 
+		}else {
+			  model.addAttribute("errorMsg", "수량 변경 실패"); return "common/errorPage"; 
+		}
+	}
 	
+	@RequestMapping("cartDelte.pd")
+	public String cartDelte(int cno,Model model) {
+		int result=productService.cartDelete(cno); 		 		
+		  
+		
+		if(result>0) { 			
+			  	return "redirect:/wishList.me"; 		
+		  }else { 			
+			  	model.addAttribute("errorMsg", "목록 삭제 실패"); 			
+			  	return "common/errorPage"; 		
+		  } 		
+		
+	}
 }
