@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.product.model.dao.ProductDao;
 import com.bm.spring.product.model.vo.Cart;
 import com.bm.spring.product.model.vo.Order;
@@ -44,9 +45,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ArrayList<Product> productGet() {
-		// TODO Auto-generated method stub
-		return null;
+	public int productGetListCount() {
+		return productDao.productGetListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Product> productGetList(PageInfo pi) {
+		return productDao.productGetList(sqlSession, pi);
 	}
 
 	@Override
@@ -54,7 +59,5 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
 
 }

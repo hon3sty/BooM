@@ -2,32 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="productMapper">
 
-<resultMap type="cart" id="cartResult">
-	<result column="CART_NO" property="cartNo"/>
-	<result column="PRODUCT_NO" property="productNo"/>
-	<result column="MEMBER_NO" property="memberNo"/>
-	<result column="CART_COUNT" property="cartCount"/>
-	<collection property="product" resultMap="productResult"/>
-</resultMap>
+	<resultMap type="cart" id="cartResult">
+		<result column="CART_NO" property="cartNo"/>
+		<result column="PRODUCT_NO" property="productNo"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="CART_COUNT" property="cartCount"/>
+		<collection property="product" resultMap="productResult"/>
+	</resultMap>
 
-<resultMap type="product" id="productResult" >
-	<result column="PRODUCT_NO" property="productNo"/>
-	<result column="CATEGORY_NO" property="categoryNo"/>
-	<result column="PRODUCT_NAME" property="productName"/>
-	<result column="PRODUCT_PRICE" property="productPrice"/>
-	<result column="PRODUCT_IMG" property="productImg"/>
-	<result column="PRODUCT_DESC" property="productDesc"/>
-	<result column="PRODUCT_DATE" property="productDate"/>
-	<result column="STATUS" property="status"/>
-</resultMap>
+	<resultMap type="product" id="productResult" >
+		<result column="PRODUCT_NO" property="productNo"/>
+		<result column="CATEGORY_NO" property="categoryNo"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="PRODUCT_PRICE" property="productPrice"/>
+		<result column="PRODUCT_IMG" property="productImg"/>
+		<result column="PRODUCT_DESC" property="productDesc"/>
+		<result column="PRODUCT_DATE" property="productDate"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
 
-<select id="selectCart" resultMap="cartResult">
-	SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,CART_COUNT
-	FROM CART
-	JOIN PRODUCT USING(PRODUCT_NO)
-</select>
+	<select id="selectCart" resultMap="cartResult">
+		SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,CART_COUNT
+		FROM CART
+		JOIN PRODUCT USING(PRODUCT_NO)
+	</select>
 
-
+	<select id="productGetListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+		WHERE STATUS='Y'
+	</select>
+	
+	<select id="productGetList" resultMap="productResult">
+	  	SELECT PRODUCT_NO, CATEGORY_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_IMG, PRODUCT_DESC, PRODUCT_DATE, STATUS, CATEGORY_NAME
+		FROM PRODUCT
+		JOIN CATEGORY USING(CATEGORY_NO)
+		WHERE STATUS = 'Y'
+		ORDER BY PRODUCT_DATE DESC
+	</select>
 
 
 

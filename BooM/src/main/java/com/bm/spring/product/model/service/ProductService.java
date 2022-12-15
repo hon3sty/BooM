@@ -1,6 +1,8 @@
 package com.bm.spring.product.model.service;
 
 import java.util.ArrayList;
+
+import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.product.model.vo.Cart;
 import com.bm.spring.product.model.vo.Order;
 import com.bm.spring.product.model.vo.Product;
@@ -19,8 +21,11 @@ public interface ProductService {
 	// 구매 목록
 	ArrayList<Order> orderGetList();
 
+	// 상품 개수
+	int productGetListCount();
+
 	// 상품 목록
-	ArrayList<Product> productGet();
+	ArrayList<Product> productGetList(PageInfo pi);
 
 	// 상품 상세
 	int productDetail();
