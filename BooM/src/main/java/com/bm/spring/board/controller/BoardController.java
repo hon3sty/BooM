@@ -18,6 +18,24 @@ public class BoardController {
 		return "board/NT_0010";
 	} 
 	
+	// 공지사항 관리페이지로 이동
+	@RequestMapping("noticeAdminForm.bo")
+	public String noticeAdmin() {
+		return "board/NT_0020";
+	} 
+	
+	// 공지사항 작성페이지로 이동
+	@RequestMapping("noticeInsertForm.bo")
+	public String noticeInsertForm() {
+		return "board/NT_0030";
+	} 
+	
+	//공지사항 상세페이지로 이동
+	@RequestMapping("noticeDetailForm.bo")
+	public String noticeDetailForm() {
+		return "board/NT_0040";
+	} 
+	
 	// 공지사항 작성
 	public void noticeInsert() {
 
