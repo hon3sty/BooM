@@ -30,4 +30,12 @@ public class ProductDao {
 
 		return (ArrayList) sqlSession.selectList("productMapper.productGetList", null, rowBounds);
 	}
+
+	public int changeCount(SqlSessionTemplate sqlSession,Cart c) {
+		return sqlSession.update("productMapper.changeCount",c);
+	}
+
+	public int cartDelete(SqlSessionTemplate sqlSession, int cno) {
+		return sqlSession.delete("productMapper.cartDelete", cno);
+	}
 }

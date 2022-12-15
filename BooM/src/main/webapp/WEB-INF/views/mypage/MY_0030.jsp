@@ -100,10 +100,11 @@
 						        <th>&nbsp;</th>
 						      </tr>
 						    </thead>
+						    
 						    <tbody id="body">
 							    <c:forEach var="c" items="${list}">
 							      <tr class="text-center">
-							      		<input type="hidden" value="${c.cartNo }">
+							      		<input type="hidden" id="cartNo" value="${c.cartNo }"> 
 								        <td><input type="checkbox"></td>
 								        <td class="image-prod"><div class="img" ></div></td>
 								        
@@ -116,90 +117,22 @@
 								        <td class="quantity">
 								        	<div class="input-group mb-3">
 								        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
-							             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
+							             	<input type="text" id="quantity" id="cartCount" name="cartCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
 							             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
 							             	<button id="btn_change" style="background-color:white">변경</button>
 							          	</div>
 							            </td>
 								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
-								        <td class="product-remove"><div class="wrap"><a href="delete.pd">삭제</a></div></td>
+								        <td><a href="cartDelte.pd?cno=${c.cartNo }"; class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
 							      </tr> 
 							    </c:forEach>
-						    <tbody>
-						      <tr class="text-center">
-						        <td><input type="checkbox"></td>
-						        <td class="image-prod"><div class="img" ></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td style="color:white" class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
-					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
-					          	</div>
-					            </td>
-						        
-						        <td style="color:white" class="total">$4.90</td>
-						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
-						      </tr><!-- END TR-->
-						      <tr class="text-center">
-						        <td><input type="checkbox"></td>
-						        <td class="image-prod"><div class="img" ></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td style="color:white" class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
-					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
-					          	</div>
-					            </td>
-						        
-						        <td style="color:white" class="total">$4.90</td>
-						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
-						      </tr><!-- END TR-->
-						      <tr class="text-center">
-						        <td><input type="checkbox"></td>
-						        <td class="image-prod"><div class="img" ></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td style="color:white" class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
-					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
-					          	</div>
-					            </td>
-						        
-						        <td style="color:white" class="total">$4.90</td>
-						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
-						      </tr><!-- END TR-->
 						    </tbody>
 						  </table>
 						 
 					  </div>
     			</div>
     			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    			 <div class="col-md-12 ftco-animate"><button class="button" id="btn_delOne">선택 항목 삭제</button></div>
-    			 <button style="margin:15px;" id="btn_del">선택 항목 삭제</button>
+    			 <div class="col-md-12 ftco-animate"><button class="button" id="btn_delSel">선택 항목 삭제</button></div>
     		</div>
 			</div>
 			<div class="row justify-content-end">
@@ -207,13 +140,14 @@
     				<div class="cart-total mb-3">
     					<h3 style="color:white">총 상품 구매금액</h3>
     					<p  class="d-flex total-price">
-    						<span style="color:red">86,000 원</span>
+   							<span id="sum"style="color:red">${sum }원</span>
     					</p>
     				</div>
     				<p ><a href="productPurchase.pd" class="btn btn-primary py-3 px-4">결제 하기</a></p>
     			</div>
     		</div>
 			</div>
+			
 		</section>
 
 		
@@ -241,36 +175,36 @@
   <script src="resources/js2/main.js"></script>
 
   <script>
-		$(document).ready(function(){
-
 		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-		        // Stop acting like a button
+			$(document).on("click",".quantity-right-plus",function(e){
+				// Stop acting like a button
 		        e.preventDefault();
 		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
+		        var quantity = parseInt($(this).siblings().eq(1).val());
 		        // If is not undefined
 		            
-		            $('#quantity').val(quantity + 1);
-
-		          
+		             $(this).siblings().eq(1).val(quantity + 1)
+					
 		            // Increment
-		        
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
+				
+			})
+			
+			$(document).on("click",".quantity-left-minus",function(e){
+				// Stop acting like a button
 		        e.preventDefault();
 		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
+		        var quantity = parseInt($(this).siblings().eq(0).val());
 		        
 		        // If is not undefined
 		      
 		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
+		            if(quantity>1){
+		           		 $(this).siblings().eq(0).val(quantity - 1)
+		            }else{
+		            	window.alert("1개 미만으로는 지정할 수 없습니다.")
 		            }
-		    });
+		        
+			})
 		     
 		     $("#checkAll").click(function(){
 		    	 var check=$(this).is(':checked');
@@ -286,20 +220,21 @@
 		    	 
 		     })
 		     
-		     $("#btn_del").click(function(){
-		    	 //체크박스 체크된 항목 삭제
-		    	 //체크된 놈의 번호 받아서 삭제
-		    	 
+		    function del(){
+				var result=confirm("삭제하시겠습니까?")
+				return result;
+			}
+	
+		     
+		     $(document).on("click","#btn_change",function(){
+				location.href="countUpdate.pd?cno="+$(this).parents().eq(2).children().eq(0).val()+"&count="+$(this).siblings().eq(1).val();
+				     
 		     })
 		     
-		     $(document).on("click","#btn_delOne",function(){
-				console.log($(this).parents().eq(2).children().eq(0).val());
-				
-				location.href=''
+		     $("#btn_delSel").click(function(){
+		    	 
 		     })
-		    
-		});
+		
 	</script>
-    
   </body>
 </html>
