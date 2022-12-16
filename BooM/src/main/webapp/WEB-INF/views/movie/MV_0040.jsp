@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- [영화] 영화예매페이지2(인원, 좌석 선택) : 박연/우도균 -->
-<title>Insert title here</title>
+<title>예매페이지2</title>
 </head>
 <body>
 

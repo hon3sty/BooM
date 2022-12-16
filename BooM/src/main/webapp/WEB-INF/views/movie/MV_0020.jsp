@@ -46,7 +46,7 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Anime Section Begin -->
+   <!-- Anime Section Begin -->
     <section class="anime-details spad">
         <div class="container">
             <div class="anime__details__content">
@@ -105,7 +105,7 @@
                                         <ul>
                                             <li><span>키워드 : </span>멜로/로맨스, 드라마, 서스펜스</li>
                                             <li><span>개봉일 : </span>2022 .06.29</li>
-                                            <li><span>누적관객 : </span>1,891,137명(12.08 기준)</li>
+                                            <li><span>상영시간 : </span>136분</li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
