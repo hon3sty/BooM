@@ -6,83 +6,87 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BoardController {
 	
-	// 고객센터 메인으로 이동
+	// 怨좉컼�꽱�꽣 硫붿씤�쑝濡� �씠�룞
 	@RequestMapping("csMainForm.bo")
 	public String csMain() {
 		return "board/CS_0010";
 	}
 	
-	// 공지사항 리스트로 이동
+	// 怨듭��궗�빆 由ъ뒪�듃濡� �씠�룞
 	@RequestMapping("noticeListForm.bo")
 	public String noticeList() {
 		return "board/NT_0010";
 	} 
 	
-	// 공지사항 관리페이지로 이동
+	// 怨듭��궗�빆 愿�由ы럹�씠吏�濡� �씠�룞
 	@RequestMapping("noticeAdminForm.bo")
 	public String noticeAdmin() {
 		return "board/NT_0020";
 	} 
 	
-	// 공지사항 작성페이지로 이동
+	// 怨듭��궗�빆 �옉�꽦�럹�씠吏�濡� �씠�룞
 	@RequestMapping("noticeInsertForm.bo")
 	public String noticeInsertForm() {
 		return "board/NT_0030";
 	} 
 	
-	//공지사항 상세페이지로 이동
+	//怨듭��궗�빆 �긽�꽭�럹�씠吏�濡� �씠�룞
 	@RequestMapping("noticeDetailForm.bo")
 	public String noticeDetailForm() {
 		return "board/NT_0040";
 	} 
 	
-	// 공지사항 작성
+	// 怨듭��궗�빆 �옉�꽦
 	public void noticeInsert() {
 
 	}
 
-	// 공지사항 수정
+	// 怨듭��궗�빆 �닔�젙
 	public void noticeUpdate() {
 
 	}
 
-	// 공지사항 삭제
+	// 怨듭��궗�빆 �궘�젣
 	public void noticeDelete() {
 
 	}
 
-	// 공지사항 게시글 리스트 조회
+	// 怨듭��궗�빆 寃뚯떆湲� 由ъ뒪�듃 議고쉶
 	public void noticeSelectList() {
 
 	}
 
-	// 공지사항 게시글 상세 조회
+	// 怨듭��궗�빆 寃뚯떆湲� �긽�꽭 議고쉶
 	public void noticeSelect() {
 
 	}
 
-	// FAQ 작성
+	// FAQ �옉�꽦
 	public void faqInsert() {
 
 	}
 
-	// FAQ 수정
+	// FAQ �닔�젙
 	public void faqUpdate() {
 
 	}
 
-	// FAQ 삭제
+	// FAQ �궘�젣
 	public void faqDelete() {
 
 	}
 
-	// FAQ 게시글 리스트 조회
+	// FAQ 寃뚯떆湲� 由ъ뒪�듃 議고쉶
 	public void faqSelectList() {
 
 	}
 
-	// FAQ 게시글 상세 조회
+	// FAQ 寃뚯떆湲� �긽�꽭 議고쉶
 	public void faqSelect() {
 
 	}
+	
+	// test01
+	
+	
 }

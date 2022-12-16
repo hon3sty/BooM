@@ -40,6 +40,17 @@
 		WHERE STATUS = 'Y'
 		ORDER BY PRODUCT_DATE DESC
 	</select>
+	
+	<update id="changeCount">
+		UPDATE CART
+		SET CART_COUNT = #{cartCount}
+		WHERE CART_NO = #{cartNo}
+	</update>
+	
+	<delete id="cartDelete">
+		DELETE FROM CART
+		WHERE CART_NO=#{cartNo}
+	</delete>
 
 
 
