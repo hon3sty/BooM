@@ -27,6 +27,7 @@
 <!-- ============== 영화 시간표 관리페이지(관리자) / 박연 ============= -->   
 
    <!-- 메뉴바 영역 -->
+   <jsp:include page="../common/header.jsp"/>
     
 
     <!-- Blog Details Section Begin -->
@@ -381,6 +382,7 @@
         <script src="js/main.js"></script>
 
         <!-- 푸터바 영역 -->
+        <jsp:include page="../common/footer.jsp"/>
 
     </body>
 

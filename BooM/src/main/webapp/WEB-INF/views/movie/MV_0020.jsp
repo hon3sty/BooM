@@ -21,10 +21,12 @@
     <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+    
 </head>
 <body>
 
   <!-- 메뉴바 -->
+  <jsp:include page="../common/header.jsp"/>
  <%--  <jsp:include page=""/> --%>
  
  <!-- ========== 카테고리링크 영역 ========== -->
@@ -237,6 +239,19 @@
         </section>
         
          <!-- 푸터바 -->
+	     <jsp:include page="../common/footer.jsp"/>
+
+
+  <!-- Search model Begin -->
+  <div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
  <%--  <jsp:include page=""/> --%>
 
          <!-- Js Plugins -->

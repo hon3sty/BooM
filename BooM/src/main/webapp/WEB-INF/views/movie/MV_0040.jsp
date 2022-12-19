@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Anime Template">
-    <meta name="keywords" content="Anime, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>예매페이지1</title>
+<meta charset="UTF-8">
+<!-- [영화] 영화예매페이지2(인원, 좌석 선택) : 박연/우도균 -->
+<title>예매페이지2</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -30,7 +26,7 @@
 <body>
 
    <!-- 메뉴바 영역 -->
-    
+   <jsp:include page="../common/header.jsp"/> 
 
     <!-- Blog Details Section Begin -->
     <section class="blog-details spad">
@@ -154,6 +150,7 @@
          <script src="resources/js/main.js"></script>
 
          <!-- 푸터바 영역 -->
+         <jsp:include page="../common/footer.jsp"/>
         
       </body>
 

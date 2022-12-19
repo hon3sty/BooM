@@ -6,12 +6,25 @@
 <meta charset="UTF-8">
 <!-- [영화] 영화예매페이지1(날짜,영화,영화관,회차 선택) : 박연/우도균 -->
 <title>영화 예매페이지1</title>
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+
+
 </head>
 
 
 <body>
 
    <!-- 메뉴바 영역 -->
+   <jsp:include page="../common/header.jsp"/>
     
 
     <!-- Blog Details Section Begin -->
@@ -320,16 +333,17 @@
 
         
         <!-- Js Plugins -->
-        <script src="resources/js/jquery-3.3.1.min.js"></script>
-        <script src="resources/js/bootstrap.min.js"></script>
-        <script src="resources/js/player.js"></script>
-        <script src="resources/js/jquery.nice-select.min.js"></script>
-        <script src="resources/js/mixitup.min.js"></script>
-        <script src="resources/js/jquery.slicknav.js"></script>
-        <script src="resources/js/owl.carousel.min.js"></script>
-        <script src="resources/js/main.js"></script>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/player.js"></script>
+        <script src="js/jquery.nice-select.min.js"></script>
+        <script src="js/mixitup.min.js"></script>
+        <script src="js/jquery.slicknav.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/main.js"></script>
 
         <!-- 푸터바 영역 -->
+	    <jsp:include page="../common/footer.jsp"/>
 
     </body>
 

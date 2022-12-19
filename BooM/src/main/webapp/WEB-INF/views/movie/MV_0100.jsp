@@ -35,7 +35,7 @@
 <body>
 
   <!-- 메뉴바 -->
- <%--  <jsp:include page=""/> --%>
+  <jsp:include page="../common/header.jsp"/>
  
    <!-- ========== 카테고리링크 영역 ========== -->
    <!-- Breadcrumb Begin -->
@@ -142,8 +142,8 @@
                  
         
          <!-- 푸터바 -->
- <%--  <jsp:include page=""/> --%>
-      
+         <jsp:include page="../common/footer.jsp"/>
+         
          <script>
             function readURL(input) {
                if (input.files && input.files[0]) {
