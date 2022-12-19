@@ -105,7 +105,7 @@
 							    <c:forEach var="c" items="${list}">
 							      <tr class="text-center">
 							      		<input type="hidden" id="cartNo" value="${c.cartNo }"> 
-								        <td><input type="checkbox"></td>
+								        <td><input id="chk" name="chk" type="checkbox" value=${c.product.productPrice * c.cartCount}></td>
 								        <td class="image-prod"><div class="img" ></div></td>
 								        
 								        <td class="product-name">
@@ -123,7 +123,7 @@
 							          	</div>
 							            </td>
 								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
-								        <td><a href="cartDelte.pd?cno=${c.cartNo }"; class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
+								        <td><a href="cartDelete.pd?cno=${c.cartNo }"; class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
 							      </tr> 
 							    </c:forEach>
 						    </tbody>
@@ -140,22 +140,16 @@
     				<div class="cart-total mb-3">
     					<h3 style="color:white">총 상품 구매금액</h3>
     					<p  class="d-flex total-price">
-   							<span id="sum"style="color:red">${sum }원</span>
+   							<span id="sum"style="color:red"></span>
     					</p>
     				</div>
-    				<p ><a href="productPurchase.pd" class="btn btn-primary py-3 px-4">결제 하기</a></p>
+    				<p ><a href="#" id="buy" onclick="buyChk()" class="btn btn-primary py-3 px-4">결제 하기</a></p>
     			</div>
     		</div>
 			</div>
-			
 		</section>
-
-		
-  
-
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
 
   <script src="resources/js2/jquery.min.js"></script>
   <script src="resources/js2/jquery-migrate-3.0.1.min.js"></script>
@@ -175,7 +169,9 @@
   <script src="resources/js2/main.js"></script>
 
   <script>
+  
 		var quantitiy=0;
+	  		//수량 +
 			$(document).on("click",".quantity-right-plus",function(e){
 				// Stop acting like a button
 		        e.preventDefault();
@@ -189,6 +185,7 @@
 				
 			})
 			
+			//수량 -
 			$(document).on("click",".quantity-left-minus",function(e){
 				// Stop acting like a button
 		        e.preventDefault();
@@ -206,9 +203,9 @@
 		        
 			})
 		     
+			//전부 체크/해제
 		     $("#checkAll").click(function(){
 		    	 var check=$(this).is(':checked');
-		    	 console.log(check);
 		    	 
 		    	 if(check){
 		    		 //전체 체크
@@ -217,24 +214,77 @@
 		    		 //전체 체크 해제
 		    		 $('tbody input:checkbox').prop('checked',false)
 		    	 }
+		    	 var arr=[];
+			   		var sum=0;
+			   		$('input[id="chk"]:checked').each(function(){
+			   			arr.push($(this).val())
+			   		})
+			   		
+			   		for(var i=0;i<arr.length;i++){
+			   			sum+=parseInt(arr[i])
+			   		}
+			   		$("#sum").html(sum)
+			   		
+			   		
 		    	 
 		     })
 		     
+		    //한개 삭제 버튼 
 		    function del(){
 				var result=confirm("삭제하시겠습니까?")
 				return result;
 			}
 	
 		     
+	  		//수량 변경 버튼
 		     $(document).on("click","#btn_change",function(){
 				location.href="countUpdate.pd?cno="+$(this).parents().eq(2).children().eq(0).val()+"&count="+$(this).siblings().eq(1).val();
 				     
 		     })
 		     
+		     //선택항목 삭제
 		     $("#btn_delSel").click(function(){
+		    	 var arr=[];
+		    	 $('input[id="chk"]:checked').each(function(){
+			   			arr.push($(this).parents().eq(1).children().eq(0).val())
+			   	  })
+			   	  
+			   	  for(var i=0;i<arr.length;i++){
+			   		  location.href="cartDelete.pd?cno="+arr[i]
+			   	  } 
 		    	 
 		     })
-		
+		     
+		    //선택항목 가격 합 
+		   	$(document).on("click","#chk",function(){
+		   		//선택된 항목 값 담을 배열
+		   		var arrP=[];
+		   		var sum=0;
+		   		$('input[id="chk"]:checked').each(function(){
+		   			arrP.push($(this).val())
+		   		})
+		   		
+		   		for(var i=0;i<arrP.length;i++){
+		   			sum+=parseInt(arrP[i])
+		   		}
+		   		$("#sum").html(sum)
+		   		
+		   		
+		   	})
+		   	
+		   	function buyChk(){
+		    	//선택된 항목 cartNo담을 배열
+			   		var arrS=[];
+			   		$('input[id="chk"]:checked').each(function(){
+			   			arrS.push($(this).parents().eq(0).siblings().eq(0).val())
+			   		})
+			   		
+			   		for(var i=0;i<arrS.length;i++){
+						$('#buy').prop("href","checkedCart.pd?cno="+arrS[i])			   		
+			   		}
+	  			
+	  		}
+		   	
 	</script>
   </body>
 </html>
