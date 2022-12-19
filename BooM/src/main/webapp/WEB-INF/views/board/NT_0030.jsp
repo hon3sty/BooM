@@ -168,27 +168,26 @@ h2.tit {
 <div id="cs">
 	<div id="cols-content">
 		<section class="product spad">
-		  <div class="container">
      		 <div class="row">
 		 		  <!-- 사이드바 시작 -->
 		          <div class="col-lg-4 col-md-6 col-sm-8">
 		              <div class="product__sidebar">
 		    			<div class="product__sidebar__comment">
 					        <div class="section-title">
-					            <h5>고객센터</h5>
+					            <h5><a href="csMainForm.bo" style="color:#fff;">고객센터</a></h5>
 					        </div>
 					        <div class="product__sidebar__comment__item">
 					            <div class="product__sidebar__comment__item__pic">
 					            </div>
 					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="noticeListForm.bo" style="color:#e53637;">공지사항</a></h5>
+					                <h5><a href="noticeList.bo" style="color:#e53637;">공지사항</a></h5>
 					            </div>
 					        </div>
 					        <div class="product__sidebar__comment__item">
 					            <div class="product__sidebar__comment__item__pic">
 					            </div>
 					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">자주하는 질문</a></h5>
+					                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 					            </div>
 					        </div>
 					        <div class="product__sidebar__comment__item">
