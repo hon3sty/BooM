@@ -62,6 +62,7 @@
 
 <body>
     <!-- 메뉴바 영역 -->
+    <jsp:include page="../common/header.jsp"/>
 
     <!-- Normal Breadcrumb Begin -->
     <section class="normal-breadcrumb set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20190502_289%2F1556759412539S91Cw_JPEG%2Fmovie_image.jpg">
@@ -174,6 +175,7 @@
     <!-- Blog Section End -->
 
     <!-- 푸터바 영역 -->
+    <jsp:include page="../common/footer.jsp"/>
    
    
     <!-- 페이지업버튼 영역 -->

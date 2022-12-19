@@ -104,6 +104,15 @@
 </head>
 
 <body>
+
+<!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+	<jsp:include page="../common/header.jsp"/>
+    <!-- Header End -->
 <!--=========================================================== 영화리스트, 영화 검색결과 페이지 =================================================================-->
     
 <!-- 메뉴바 영역 -->
@@ -414,7 +423,7 @@
 </div>
 </section>
 
-<!-- Js Plugins -->
+<!-- Js Plugins 
 <script src="resources/js/jquery-3.3.1.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
 <script src="resources/js/player.js"></script>
@@ -422,12 +431,26 @@
 <script src="resources/js/mixitup.min.js"></script>
 <script src="resources/js/jquery.slicknav.js"></script>
 <script src="resources/js/owl.carousel.min.js"></script>
-<script src="resources/js/main.js"></script>
+<script src="resources/js/main.js"></script>-->
 
 
 <!-- Product Section End -->
 
 <!-- 푸터바 영역 -->
+<!-- Footer Section Begin -->
+	<jsp:include page="../common/footer.jsp"/>
+<!-- Footer Section End -->
+
+  <!-- Search model Begin -->
+  <div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
 
 </body>
 

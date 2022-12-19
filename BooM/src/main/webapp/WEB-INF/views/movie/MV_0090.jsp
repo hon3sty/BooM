@@ -126,6 +126,7 @@
 <body>
    
    <!--해더바 영역 시작-->
+   <jsp:include page="../common/header.jsp"/>
    <!--해더바 영역 끝  -->
 
    
@@ -230,6 +231,7 @@
    </section>
       
       <!--풋터바 영역 시작-->
+      <jsp:include page="../common/footer.jsp"/>
       <!--풋터바 영역 끝  -->
 </body>
 
