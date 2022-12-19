@@ -12,19 +12,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+        <!-- Css Styles -->
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+    
 </head>
 <body>
 
   <!-- 메뉴바 -->
+  <jsp:include page="../common/header.jsp"/>
  <%--  <jsp:include page=""/> --%>
  
  <!-- ========== 카테고리링크 영역 ========== -->
@@ -46,7 +48,7 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Anime Section Begin -->
+   <!-- Anime Section Begin -->
     <section class="anime-details spad">
         <div class="container">
             <div class="anime__details__content">
@@ -105,7 +107,7 @@
                                         <ul>
                                             <li><span>키워드 : </span>멜로/로맨스, 드라마, 서스펜스</li>
                                             <li><span>개봉일 : </span>2022 .06.29</li>
-                                            <li><span>누적관객 : </span>1,891,137명(12.08 기준)</li>
+                                            <li><span>상영시간 : </span>136분</li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
@@ -237,6 +239,19 @@
         </section>
         
          <!-- 푸터바 -->
+	     <jsp:include page="../common/footer.jsp"/>
+
+
+  <!-- Search model Begin -->
+  <div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
  <%--  <jsp:include page=""/> --%>
 
          <!-- Js Plugins -->

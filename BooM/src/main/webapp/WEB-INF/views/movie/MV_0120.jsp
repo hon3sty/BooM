@@ -4,24 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- [영화] 영화예매페이지1(날짜,영화,영화관,회차 선택) : 박연/우도균 -->
-<title>영화 예매페이지1</title>
+<!-- 영화 시간표 관리페이지(관리자) / 박연 -->
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
-
-
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
-
 <body>
+
+<!-- ============== 영화 시간표 관리페이지(관리자) / 박연 ============= -->   
 
    <!-- 메뉴바 영역 -->
    <jsp:include page="../common/header.jsp"/>
@@ -36,8 +39,8 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="section-title">
-                                <!-- ============== 예매페이지1 타이틀 영역 ============= -->
-                                    <h4>영화 예매</h4>
+                                <!-- ============== 영화 시간표 관리페이지(관리자) 타이틀 영역 ============= -->
+                                    <h4>스케줄 등록</h4>
                                 </div>
                             </div>
                             
@@ -47,7 +50,7 @@
                 
                 <!-- 영화, 지역, 영화관, 날짜 줄 begin -->
                  <div class="col-lg-12">
-                  
+                 
                     <div class="row">
                     
                     <!-- 영화 목록 출력 -->
@@ -55,10 +58,13 @@
                         <div class="card shadow mb-4">
                             <div class="card-header bg-danger">
 
-                                <h6 class="m-0 text-white"><i class="fas fa-video"></i>영화 선택</h6>
+                                <a href="#" id="mv_insert"><h6 class="m-0 text-white">영화 등록</h6></a>
+                                
                             </div>
-                             <div class="list-group list-group-flush small" style="height: 200px; overflow: auto;">
-                               <a class="list-group-item list-group-item-action" href="#">
+                             
+                            <div class="list-group list-group-flush small" style="height: 200px; overflow: auto;">
+                              
+                              <a class="list-group-item list-group-item-action" href="#">
                                   <i class="fas fa-caret-right"></i> 헤어질 결심
                                </a>
 
@@ -240,21 +246,54 @@
                                 <h6 class="m-0 text-white"><i class="fas fa-video"></i>시간표 선택</h6>
                             </div>
                              <div class="list-group list-group-flush small" style="height: 200px; overflow: auto;">
-                               <a class="list-group-item list-group-item-action" href="#">
-                                  <i class="fas fa-caret-right"></i> 08:00 ~ 11:22 &nbsp; 헤어질 결심
-                               </a>
+                              <h6>[ 1관 ]</h6>
+                              <ul class="list-group list-group-horizontal">
+                                  <li class="list-group-item"><a href="">8:00</a></li>
+                                  <li class="list-group-item"><a href="">10:30</a></li>
+                                  <li class="list-group-item"><a href="">13:00</a></li>
+                                  <li class="list-group-item"><a href="">15:30</a></li>
+                                  <li class="list-group-item"> <a href="">18:00</a></li>
+                                  <li class="list-group-item"><a href="">20:30</a></li>
+                                  <li class="list-group-item"><a href="">23:00</a></li>
+                                  <li class="list-group-item"><a href="">25:30</a></li>
+                                </ul>
 
-                               <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 08:30 ~ 11:52 &nbsp; 헤어질 결심
-                             </a>
+                               <h6>[ 2관 ]</h6>
+                              <ul class="list-group list-group-horizontal">
+                                  <li class="list-group-item"><a href="">8:00</a></li>
+                                  <li class="list-group-item"><a href="">10:30</a></li>
+                                  <li class="list-group-item"><a href="">13:00</a></li>
+                                  <li class="list-group-item"><a href="">15:30</a></li>
+                                  <li class="list-group-item"> <a href="">18:00</a></li>
+                                  <li class="list-group-item"><a href="">20:30</a></li>
+                                  <li class="list-group-item"><a href="">23:00</a></li>
+                                  <li class="list-group-item"><a href="">25:30</a></li>
+                                </ul>
 
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 10:00 ~ 13:22 &nbsp; 헤어질 결심
-                             </a>
+                               <h6>[ 3관 ]</h6>
+                               <ul class="list-group list-group-horizontal">
+                                  <li class="list-group-item"><a href="">8:00</a></li>
+                                  <li class="list-group-item"><a href="">10:30</a></li>
+                                  <li class="list-group-item"><a href="">13:00</a></li>
+                                  <li class="list-group-item"><a href="">15:30</a></li>
+                                  <li class="list-group-item"> <a href="">18:00</a></li>
+                                  <li class="list-group-item"><a href="">20:30</a></li>
+                                  <li class="list-group-item"><a href="">23:00</a></li>
+                                  <li class="list-group-item"><a href="">25:30</a></li>
+                                </ul>
 
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 10:30 ~ 13:52 &nbsp; 헤어질 결심
-                             </a>
+                                <h6>[ 4관 ]</h6>
+                               <ul class="list-group list-group-horizontal">
+                                  <li class="list-group-item"><a href="">8:00</a></li>
+                                  <li class="list-group-item"><a href="">10:30</a></li>
+                                  <li class="list-group-item"><a href="">13:00</a></li>
+                                  <li class="list-group-item"><a href="">15:30</a></li>
+                                  <li class="list-group-item"> <a href="">18:00</a></li>
+                                  <li class="list-group-item"><a href="">20:30</a></li>
+                                  <li class="list-group-item"><a href="">23:00</a></li>
+                                  <li class="list-group-item"><a href="">25:30</a></li>
+                                </ul>
+
                              </div>
 
                         </div>
@@ -281,7 +320,7 @@
                                  
                                  <tr>
                                      <th>&nbsp; 극장 : </th>
-                                     <td>&nbsp;CGV센텀시티/스타리움1관</td>
+                                     <td>&nbsp;CGV센텀시티/ 1관</td>
  
                                  </tr>
                                  <tr>
@@ -317,7 +356,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="blog__details__btns__item" align="center">
-                                        <h5><a href="#"><span class="arrow_right"></span> 좌석선택</a>
+                                        <h5><a href="#"><span class="arrow_right"></span>스케줄 등록</a>
                                         </h5>
                                     </div>
                                 </div>
@@ -343,7 +382,7 @@
         <script src="js/main.js"></script>
 
         <!-- 푸터바 영역 -->
-	    <jsp:include page="../common/footer.jsp"/>
+        <jsp:include page="../common/footer.jsp"/>
 
     </body>
 
