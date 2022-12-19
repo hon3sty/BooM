@@ -96,20 +96,20 @@
 			              <div class="product__sidebar">
 			    			<div class="product__sidebar__comment">
 						        <div class="section-title">
-						            <h5 style="color:#e53637;">고객센터 메인</h5>
+						            <h5><a href="csMainForm.bo" style="color:#e53637;">고객센터 메인</a></h5>
 						        </div>
 						        <div class="product__sidebar__comment__item">
 						            <div class="product__sidebar__comment__item__pic">
 						            </div>
 						            <div class="product__sidebar__comment__item__text">
-						                <h5><a href="noticeListForm.bo">공지사항</a></h5>
+						                <h5><a href="noticeList.bo">공지사항</a></h5>
 						            </div>
 						        </div>
 						        <div class="product__sidebar__comment__item">
 						            <div class="product__sidebar__comment__item__pic">
 						            </div>
 						            <div class="product__sidebar__comment__item__text">
-						                <h5><a href="#">자주하는 질문</a></h5>
+						                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 						            </div>
 						        </div>
 						        <div class="product__sidebar__comment__item">
@@ -143,11 +143,9 @@
 						<div id="service_area">
 							<ul id="list">
 								<li style="width: 245px; height: 200px; text-align: center;"><h4>
-									<a href="noticeListForm.bo"  title="새창열기" 
-									style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">공지사항</a></h4></li>
+									<a href="noticeList.bo" style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">공지사항</a></h4></li>
 								<li style="width: 245px; height: 200px; text-align: center;"><h4>
-									<a href="/user/login/find-account.aspx" target="_blank" title="새창열기" 
-									style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">자주하는 질문</a></h4></li>
+									<a href="faqListForm.bo" style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">자주하는 질문</a></h4></li>
 								<li style="width: 245px; height: 200px; text-align: center;"><h4>
 									<a href="/user/mycgv/reserve/?g=1#contaniner" target="_blank" title="새창열기" 
 									style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">1:1 문의</a></h4></li>

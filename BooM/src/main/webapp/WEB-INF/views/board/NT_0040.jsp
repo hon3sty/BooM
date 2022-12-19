@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -172,8 +173,32 @@ h2.tit {
     font-weight: 400;
     line-height: 25px;
     margin: 0 0 15px 0;
-
-
+}
+.board-view .tit-area {
+    display: table;
+    width: 100%;
+    padding: 15px 0;
+}
+.board-view .info {
+    padding-bottom: 20px;
+    font-size: .9333em;
+}
+.board-view .info p:first-child {
+    margin-left: 0;
+    padding-left: 0;
+}
+.board-view .info p {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 0 0 8px;
+    padding: 0 0 0 11px;
+}
+.board-view .cont {
+    overflow: hidden;
+    width: 100%;
+    padding: 20px 0;
+    border-top: 1px solid #eaeaea;
 }
 </style>
 </head>
@@ -186,14 +211,13 @@ h2.tit {
 <div id="cs">
 	<div id="cols-content">
 		<section class="product spad">
-		  <div class="container">
      		 <div class="row">
 		 		  <!-- 사이드바 시작 -->
 		          <div class="col-lg-4 col-md-6 col-sm-8">
 		              <div class="product__sidebar">
 		    			<div class="product__sidebar__comment">
 					        <div class="section-title">
-					            <h5>고객센터</h5>
+					            <h5><a href="csMainForm.bo" style="color:#fff;">고객센터</a></h5>
 					        </div>
 					        <div class="product__sidebar__comment__item">
 					            <div class="product__sidebar__comment__item__pic">
@@ -206,7 +230,7 @@ h2.tit {
 					            <div class="product__sidebar__comment__item__pic">
 					            </div>
 					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">자주하는 질문</a></h5>
+					                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 					            </div>
 					        </div>
 					        <div class="product__sidebar__comment__item">
@@ -287,10 +311,20 @@ Dolby Cinema관 (4K HDR HFR) 아바타: 물의 길<br>
                                     </div>
                                 </div>
                             </div>
-
-							<div class="anime__details__btn"  style="text-align:center;">
-                                <a href="noticeListForm.bo" class="follow-btn">목록</a>
-                            </div>
+							<c:choose>
+								<c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
+									<div class="anime__details__btn"  style="text-align:center;">
+		                                <a href="noticeList.bo" class="follow-btn">목록</a>
+		                                <a href="noticeList.bo" class="follow-btn">수정</a>
+		                                <a href="noticeList.bo" class="follow-btn">삭제</a>
+		                            </div>
+	                            </c:when>
+	                            <c:otherwise>
+	                            	<div class="anime__details__btn"  style="text-align:center;">
+		                                <a href="noticeList.bo" class="follow-btn">목록</a>
+		                            </div>
+	                            </c:otherwise>
+                            </c:choose>
 			</div>
 					
 					<!-- 리스트 영역 끝 -->

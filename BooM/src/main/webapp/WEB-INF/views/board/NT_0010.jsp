@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,20 +131,20 @@ h2.tit {
 		              <div class="product__sidebar">
 		    			<div class="product__sidebar__comment">
 					        <div class="section-title">
-					            <h5>고객센터</h5>
+					            <h5><a href="csMainForm.bo" style="color:#fff;">고객센터</a></h5>
 					        </div>
 					        <div class="product__sidebar__comment__item">
 					            <div class="product__sidebar__comment__item__pic">
 					            </div>
 					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="noticeListForm.bo" style="color:#e53637;">공지사항</a></h5>
+					                <h5><a href="noticeList.bo" style="color:#e53637;">공지사항</a></h5>
 					            </div>
 					        </div>
 					        <div class="product__sidebar__comment__item">
 					            <div class="product__sidebar__comment__item__pic">
 					            </div>
 					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">자주하는 질문</a></h5>
+					                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 					            </div>
 					        </div>
 					        <div class="product__sidebar__comment__item">
@@ -211,6 +212,12 @@ h2.tit {
 		                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
                     		</div>
                     		<!-- 페이징 영역 끝 -->
+                    		<!-- 관리자 로그인 시 공지사항 관리 페이지로 이동하는 버튼 보이게 함 -->
+                    		<c:if test="${not empty loginUser and loginUser.memberId eq 'admin'}">
+                    			<div class="anime__details__btn">
+                                	<a href="noticeAdminForm.bo" class="follow-btn" style="float:right;">관리자</a>
+                           		 </div>
+                           	</c:if>
 						</div>
 					</div>
 					<!-- 리스트 영역 끝 -->
