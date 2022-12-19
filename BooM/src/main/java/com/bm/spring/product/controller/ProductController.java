@@ -54,14 +54,8 @@ public class ProductController {
 	@RequestMapping("wishList.me")
 	public String wishList(Model model) {
 		ArrayList<Cart> list = productService.cartGetList();
-			
-		int sum=0;
-		for(Cart c : list) {
-			sum+= c.getProduct().getProductPrice() * c.getCartCount();
-		}
 		
 		model.addAttribute("list",list);
-		model.addAttribute("sum", sum);
 		return "mypage/MY_0030";
 	}
 	
@@ -85,7 +79,7 @@ public class ProductController {
 		}
 	}
 	
-	@RequestMapping("cartDelte.pd")
+	@RequestMapping("cartDelete.pd")
 	public String cartDelte(int cno,Model model) {
 		int result=productService.cartDelete(cno); 		 		
 		  
@@ -97,5 +91,11 @@ public class ProductController {
 			  	return "common/errorPage"; 		
 		  } 		
 		
+	}
+	
+	@RequestMapping("checkedCart.pd")
+	public String checkedCartList(int cno) {
+		
+		return null;
 	}
 }
