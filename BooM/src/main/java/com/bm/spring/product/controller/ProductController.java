@@ -2,6 +2,8 @@ package com.bm.spring.product.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,25 +69,27 @@ public class ProductController {
 	
 	//장바구니 수량 변경
 	@RequestMapping("countUpdate.pd")
-	public String countUpdate(int cno,int count,Model model) {
+	public String countUpdate(int cno,int count,Model model,HttpServletRequest request) {
 		Cart c = new Cart(); c.setCartNo(cno); c.setCartCount(count);
 			  
 		int result=productService.changeCount(c);
 		  
 		if(result>0) { 
-			  return "redirect:/wishList.me"; 
+			  return "redirect:"+request.getHeader("Referer");
 		}else {
 			  model.addAttribute("errorMsg", "수량 변경 실패"); return "common/errorPage"; 
 		}
 	}
 	
+	
+	
 	@RequestMapping("cartDelete.pd")
-	public String cartDelte(int cno,Model model) {
+	public String cartDelte(int cno,Model model,HttpServletRequest request) {
 		int result=productService.cartDelete(cno); 		 		
 		  
 		
 		if(result>0) { 			
-			  	return "redirect:/wishList.me"; 		
+			  	return "redirect:"+request.getHeader("Referer"); 		
 		  }else { 			
 			  	model.addAttribute("errorMsg", "목록 삭제 실패"); 			
 			  	return "common/errorPage"; 		
@@ -94,8 +98,31 @@ public class ProductController {
 	}
 	
 	@RequestMapping("checkedCart.pd")
-	public String checkedCartList(int cno) {
+	public String checkedCartList(String cnoArr,Model model) {
+		
+		String[]str= cnoArr.split(",");
+		
+		ArrayList arr=new ArrayList();
+		
+		for(int i=0;i<str.length;i++) {
+			arr.add(Integer.parseInt(str[i]));
+		}
+		
+		ArrayList<Cart> plist = productService.checkedCartList(arr);
+		
+		
+		model.addAttribute("plist", plist);
+		
+		return "product/PD_0030";
+		
+	}
+	
+	//상품 구매
+	@RequestMapping("purchase.pd")
+	public String purchaseInsert() {
 		
 		return null;
 	}
+	
+	
 }

@@ -70,4 +70,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.cartDelete(sqlSession,cno);
 	}
 
+	@Override
+	public ArrayList<Cart> checkedCartList(ArrayList list) {
+		return productDao.checkedCartList(sqlSession,list);
+	}
+
 }

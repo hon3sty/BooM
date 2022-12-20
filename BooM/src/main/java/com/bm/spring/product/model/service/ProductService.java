@@ -35,5 +35,8 @@ public interface ProductService {
 	
 	//장바구니 삭제
 	int cartDelete(int cno);
+	
+	//장바구니에서 체크된 목록 리스트
+	ArrayList<Cart> checkedCartList(ArrayList list);
 
 }

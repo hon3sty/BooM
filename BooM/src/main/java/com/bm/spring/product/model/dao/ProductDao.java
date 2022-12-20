@@ -1,6 +1,7 @@
 package com.bm.spring.product.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -37,5 +38,9 @@ public class ProductDao {
 
 	public int cartDelete(SqlSessionTemplate sqlSession, int cno) {
 		return sqlSession.delete("productMapper.cartDelete", cno);
+	}
+
+	public ArrayList<Cart> checkedCartList(SqlSessionTemplate sqlSession, ArrayList list) {
+		return (ArrayList)sqlSession.selectList("productMapper.checkedCartList", list);
 	}
 }
