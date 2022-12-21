@@ -51,7 +51,16 @@
 		DELETE FROM CART
 		WHERE CART_NO=#{cartNo}
 	</delete>
-
+	
+	<select id="checkedCartList" resultMap="cartResult">
+		SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_IMG,CART_COUNT
+		FROM CART
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE CART_NO in
+		<foreach collection="list" item="cartNo" open="(" close=")" separator=",">
+ 			#{cartNo}
+		</foreach>
+	</select>
 
 
 

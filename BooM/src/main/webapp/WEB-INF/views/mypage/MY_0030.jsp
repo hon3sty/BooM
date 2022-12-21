@@ -267,9 +267,7 @@
 		   		for(var i=0;i<arrP.length;i++){
 		   			sum+=parseInt(arrP[i])
 		   		}
-		   		$("#sum").html(sum)
-		   		
-		   		
+		   		$("#sum").html(sum+'원')
 		   	})
 		   	
 		   	function buyChk(){
@@ -279,8 +277,12 @@
 			   			arrS.push($(this).parents().eq(0).siblings().eq(0).val())
 			   		})
 			   		
-			   		for(var i=0;i<arrS.length;i++){
-						$('#buy').prop("href","checkedCart.pd?cno="+arrS[i])			   		
+			   		if(arrS.length!=0){
+				   		
+							$('#buy').prop("href","checkedCart.pd?cnoArr="+arrS)		   		
+				   		
+			   		}else{
+			   			alert('구매할 항목을 선택해 주세요')
 			   		}
 	  			
 	  		}
