@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,6 +113,13 @@ h2.tit {
     text-indent: -9999px;
     background: #fff url(https://img.megabox.co.kr/static/pc/images/common/btn/btn-search-input.png) no-repeat center;
 }
+.table-wrap td, .table-wrap th {
+    padding: 0.75rem;
+}
+.table-wrap tbody>tr:hover {
+	text-decoration: underline;
+}
+
 </style>
 </head>
 
@@ -136,7 +144,7 @@ h2.tit {
 					            <div class="product__sidebar__comment__item__pic">
 					            </div>
 					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="noticeAdminForm.bo" style="color:#e53637;">공지사항 관리</a></h5>
+					                <h5><a href="noticeAdmin.bo" style="color:#e53637;">공지사항 관리</a></h5>
 					            </div>
 					        </div>
 					        <div class="product__sidebar__comment__item">
@@ -170,7 +178,7 @@ h2.tit {
 					<h2 class="tit">공지사항 관리</h2>
 						<div id="ntc2">
 							<div class="board-list-util">
-								<p class="result-count"><strong>전체 <em class="font-gblue">5,825</em>건</strong></p>
+								<p class="result-count" style="color:#fff"><strong>전체 <em class="font-gblue">${pi.listCount }</em>건</strong></p>
 								<select name="selsearchfield" id="selsearchfield" class="c_select" style="width:100px;" selected="selected">
 									<option selected="selected" value="0">제목</option>
 									<option value="1">내용</option>
@@ -180,40 +188,73 @@ h2.tit {
 									<button type="button" id="searchBtn" class="btn-search-input">검색</button>
 								</div>
 							</div>
+							<br>
 							<div class="table-wrap">
-								<table class="board-list">
+								<table class="board-list" id="noticeList" style="text-align: center; cursor: pointer">
 									<colgroup>
 										<col style="width:72px;">
-										<col style="width:133px;">
-										<col style="width:95px;">
-										<col>
-										<col style="width:116px;">
+										<col style="width:300px;">
+										<col style="width:153px;">
+										<col style="width:145px;">
+										<col style="width:96px;">
 									</colgroup>
 									<thead>
 										<tr>
 											<th scope="col">번호</th>
-											<th scope="col">극장</th>
-											<th scope="col">구분</th>
 											<th scope="col">제목</th>
+											<th scope="col">글쓴이</th>
 											<th scope="col">등록일</th>
+											<th scope="col">조회수</th>
 										</tr>
 									</thead>
-									<tbody><tr><td>1</td><td>남양주현대아울렛 스페이스원</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10733" title="공지사항 상세보기"><span class="font-green"></span>[<span class="font-green"></span>남<span class="font-green"></span>양<span class="font-green"></span>주<span class="font-green"></span> <span class="font-green"></span>현<span class="font-green"></span>대<span class="font-green"></span>아<span class="font-green"></span>울<span class="font-green"></span>렛<span class="font-green"></span> <span class="font-green"></span>스<span class="font-green"></span>페<span class="font-green"></span>이<span class="font-green"></span>스<span class="font-green"></span>원<span class="font-green"></span>]<span class="font-green"></span> <span class="font-green"></span>1<span class="font-green"></span>2<span class="font-green"></span>월<span class="font-green"></span> <span class="font-green"></span>1<span class="font-green"></span>4<span class="font-green"></span>일<span class="font-green"></span>(<span class="font-green"></span>수<span class="font-green"></span>)<span class="font-green"></span> <span class="font-green"></span>D<span class="font-green"></span>o<span class="font-green"></span>l<span class="font-green"></span>b<span class="font-green"></span>y<span class="font-green"></span> <span class="font-green"></span>C<span class="font-green"></span>i<span class="font-green"></span>n<span class="font-green"></span>e<span class="font-green"></span>m<span class="font-green"></span>a<span class="font-green"></span>관<span class="font-green"></span> <span class="font-green"></span>상<span class="font-green"></span>영<span class="font-green"></span>재<span class="font-green"></span>개<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span></a></th><td>2022.12.14</td></tr><tr><td>2</td><td>영통</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10731" title="공지사항 상세보기"><span class="font-green"></span>[<span class="font-green"></span>영<span class="font-green"></span>통<span class="font-green"></span>]<span class="font-green"></span> <span class="font-green"></span>1<span class="font-green"></span>2<span class="font-green"></span>월<span class="font-green"></span> <span class="font-green"></span>1<span class="font-green"></span>4<span class="font-green"></span>일<span class="font-green"></span> <span class="font-green"></span>장<span class="font-green"></span>비<span class="font-green"></span> <span class="font-green"></span>오<span class="font-green"></span>류<span class="font-green"></span>로<span class="font-green"></span> <span class="font-green"></span>인<span class="font-green"></span>한<span class="font-green"></span> <span class="font-green"></span>M<span class="font-green"></span>X<span class="font-green"></span>관<span class="font-green"></span> <span class="font-green"></span>상<span class="font-green"></span>영<span class="font-green"></span> <span class="font-green"></span>취<span class="font-green"></span>소<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span></a></th><td>2022.12.14</td></tr><tr><td>3</td><td>남양주현대아울렛 스페이스원</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10730" title="공지사항 상세보기"><span class="font-green"></span>[<span class="font-green"></span>남<span class="font-green"></span>양<span class="font-green"></span>주<span class="font-green"></span> <span class="font-green"></span>현<span class="font-green"></span>대<span class="font-green"></span>아<span class="font-green"></span>울<span class="font-green"></span>렛<span class="font-green"></span> <span class="font-green"></span>스<span class="font-green"></span>페<span class="font-green"></span>이<span class="font-green"></span>스<span class="font-green"></span>원<span class="font-green"></span>]<span class="font-green"></span> <span class="font-green"></span>1<span class="font-green"></span>2<span class="font-green"></span>월<span class="font-green"></span> <span class="font-green"></span>1<span class="font-green"></span>4<span class="font-green"></span>일<span class="font-green"></span> <span class="font-green"></span>장<span class="font-green"></span>비<span class="font-green"></span> <span class="font-green"></span>오<span class="font-green"></span>작<span class="font-green"></span>동<span class="font-green"></span>으<span class="font-green"></span>로<span class="font-green"></span> <span class="font-green"></span>인<span class="font-green"></span>한<span class="font-green"></span> <span class="font-green"></span>D<span class="font-green"></span>o<span class="font-green"></span>l<span class="font-green"></span>b<span class="font-green"></span>y<span class="font-green"></span> <span class="font-green"></span>C<span class="font-green"></span>i<span class="font-green"></span>n<span class="font-green"></span>e<span class="font-green"></span>m<span class="font-green"></span>a<span class="font-green"></span>관<span class="font-green"></span> <span class="font-green"></span>상<span class="font-green"></span>영<span class="font-green"></span>중<span class="font-green"></span>단<span class="font-green"></span> <span class="font-green"></span>및<span class="font-green"></span> <span class="font-green"></span>취<span class="font-green"></span>소<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span></a></th><td>2022.12.14</td></tr><tr><td>4</td><td>메가박스</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10728" title="공지사항 상세보기"><span class="font-green"></span>&lt;<span class="font-green"></span>워<span class="font-green"></span>너<span class="font-green"></span> <span class="font-green"></span>필<span class="font-green"></span>름<span class="font-green"></span> <span class="font-green"></span>소<span class="font-green"></span>사<span class="font-green"></span>이<span class="font-green"></span>어<span class="font-green"></span>티<span class="font-green"></span> <span class="font-green"></span>기<span class="font-green"></span>획<span class="font-green"></span> <span class="font-green"></span>상<span class="font-green"></span>영<span class="font-green"></span>전<span class="font-green"></span>&gt;<span class="font-green"></span> <span class="font-green"></span>스<span class="font-green"></span>탬<span class="font-green"></span>프<span class="font-green"></span> <span class="font-green"></span>이<span class="font-green"></span>벤<span class="font-green"></span>트<span class="font-green"></span> <span class="font-green"></span>굿<span class="font-green"></span>즈<span class="font-green"></span> <span class="font-green"></span>지<span class="font-green"></span>급<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span></a></th><td>2022.12.08</td></tr><tr><td>5</td><td>메가박스</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10723" title="공지사항 상세보기"><span class="font-green"></span>[<span class="font-green"></span>G<span class="font-green"></span>S<span class="font-green"></span>&amp;<span class="font-green"></span>P<span class="font-green"></span>O<span class="font-green"></span>I<span class="font-green"></span>N<span class="font-green"></span>T<span class="font-green"></span>]<span class="font-green"></span> <span class="font-green"></span>시<span class="font-green"></span>스<span class="font-green"></span>템<span class="font-green"></span> <span class="font-green"></span>정<span class="font-green"></span>기<span class="font-green"></span> <span class="font-green"></span>점<span class="font-green"></span>검<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span> <span class="font-green"></span>(<span class="font-green"></span>1<span class="font-green"></span>2<span class="font-green"></span>/<span class="font-green"></span>8<span class="font-green"></span>)<span class="font-green"></span></a></th><td>2022.12.01</td></tr><tr><td>6</td><td>메가박스</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10722" title="공지사항 상세보기"><span class="font-green"></span>2<span class="font-green"></span>0<span class="font-green"></span>2<span class="font-green"></span>3<span class="font-green"></span>년<span class="font-green"></span> <span class="font-green"></span>우<span class="font-green"></span>수<span class="font-green"></span>회<span class="font-green"></span>원<span class="font-green"></span> <span class="font-green"></span>선<span class="font-green"></span>정<span class="font-green"></span> <span class="font-green"></span>및<span class="font-green"></span> <span class="font-green"></span>승<span class="font-green"></span>급<span class="font-green"></span> <span class="font-green"></span>제<span class="font-green"></span>도<span class="font-green"></span> <span class="font-green"></span>변<span class="font-green"></span>경<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span></a></th><td>2022.11.30</td></tr><tr><td>7</td><td>메가박스</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10720" title="공지사항 상세보기"><span class="font-green"></span>메<span class="font-green"></span>가<span class="font-green"></span>박<span class="font-green"></span>스<span class="font-green"></span> <span class="font-green"></span>개<span class="font-green"></span>인<span class="font-green"></span>정<span class="font-green"></span>보<span class="font-green"></span> <span class="font-green"></span>처<span class="font-green"></span>리<span class="font-green"></span>방<span class="font-green"></span>침<span class="font-green"></span> <span class="font-green"></span>변<span class="font-green"></span>경<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span></a></th><td>2022.11.23</td></tr><tr><td>8</td><td>메가박스</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10716" title="공지사항 상세보기"><span class="font-green"></span>메<span class="font-green"></span>가<span class="font-green"></span>박<span class="font-green"></span>스<span class="font-green"></span> <span class="font-green"></span>시<span class="font-green"></span>스<span class="font-green"></span>템<span class="font-green"></span> <span class="font-green"></span>점<span class="font-green"></span>검<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span> <span class="font-green"></span>(<span class="font-green"></span>1<span class="font-green"></span>1<span class="font-green"></span>/<span class="font-green"></span>2<span class="font-green"></span>2<span class="font-green"></span>)<span class="font-green"></span></a></th><td>2022.11.15</td></tr><tr><td>9</td><td>메가박스</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10707" title="공지사항 상세보기"><span class="font-green"></span>[<span class="font-green"></span>북<span class="font-green"></span>앤<span class="font-green"></span>라<span class="font-green"></span>이<span class="font-green"></span>프<span class="font-green"></span>(<span class="font-green"></span>도<span class="font-green"></span>서<span class="font-green"></span>문<span class="font-green"></span>화<span class="font-green"></span>상<span class="font-green"></span>품<span class="font-green"></span>권<span class="font-green"></span>)<span class="font-green"></span>]<span class="font-green"></span> <span class="font-green"></span>시<span class="font-green"></span>스<span class="font-green"></span>템<span class="font-green"></span> <span class="font-green"></span>점<span class="font-green"></span>검<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span> <span class="font-green"></span>(<span class="font-green"></span>1<span class="font-green"></span>1<span class="font-green"></span>/<span class="font-green"></span>1<span class="font-green"></span>5<span class="font-green"></span>)<span class="font-green"></span></a></th><td>2022.11.01</td></tr><tr><td>10</td><td>메가박스</td><td>공지</td><th><a href="#" class="moveBtn" data-no="10706" title="공지사항 상세보기"><span class="font-green"></span>[<span class="font-green"></span>메<span class="font-green"></span>가<span class="font-green"></span>박<span class="font-green"></span>스<span class="font-green"></span>X<span class="font-green"></span>스<span class="font-green"></span>타<span class="font-green"></span>필<span class="font-green"></span>드<span class="font-green"></span>]<span class="font-green"></span> <span class="font-green"></span>영<span class="font-green"></span>화<span class="font-green"></span>로<span class="font-green"></span> <span class="font-green"></span>하<span class="font-green"></span>나<span class="font-green"></span>되<span class="font-green"></span>다<span class="font-green"></span>!<span class="font-green"></span> <span class="font-green"></span>M<span class="font-green"></span>G<span class="font-green"></span>B<span class="font-green"></span>X<span class="font-green"></span> <span class="font-green"></span>F<span class="font-green"></span>A<span class="font-green"></span>M<span class="font-green"></span>I<span class="font-green"></span>L<span class="font-green"></span>Y<span class="font-green"></span> <span class="font-green"></span>잠<span class="font-green"></span>정<span class="font-green"></span> <span class="font-green"></span>연<span class="font-green"></span>기<span class="font-green"></span> <span class="font-green"></span>안<span class="font-green"></span>내<span class="font-green"></span></a></th><td>2022.10.31</td></tr></tbody>
+									<tbody>
+										<c:forEach var="b" items="${list}">
+										<tr>
+											<td>${b.boardNo}</td>
+											<td>${b.boardTitle}</td>
+											<td>${b.boardWriter}</td>
+											<td>${b.boardDate}</td>
+											<td>${b.boardCount}</td>
+										</tr>
+										</c:forEach>
+									</tbody>
 								</table>
 							</div>
+							<br>
+							<script>
+								$(function(){
+									$("#noticeList>tbody tr").click(function(){
+										location.href="noticeDetail.bo?bno="+$(this).children().eq(0).text();
+									})
+								})
+							</script>
 							<!-- 페이징 영역 시작 -->
-							<div class="product__pagination" style="padding-top:20px; padding-left:250px;">
-		                        <a href="#" class="current-page">1</a>
-		                        <a href="#">2</a>
-		                        <a href="#">3</a>
-		                        <a href="#">4</a>
-		                        <a href="#">5</a>
-		                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
+							<div class="product__pagination" style="padding-top:20px; padding-left:160px;">
+								<a href="noticeList.bo?currentPage=${pi.startPage}"><i class="fa fa-angle-double-left"></i></a>
+									<!-- currentPage가 1이면 숨기기 -->
+									<c:if test="${pi.currentPage ne 1}">
+										<a href="noticeList.bo?currentPage=${pi.currentPage-1}">&lt</a>
+									</c:if>
+									<c:forEach begin="${pi.startPage}" end="${pi.endPage}" var="p">
+										<c:choose>
+			              					<c:when test="${pi.currentPage eq p }">
+			                        			<a href="noticeList.bo?currentPage=${p}" class="current-page">${p}</a>
+			                        		</c:when>
+			                        		<c:otherwise>
+			                        			<a href="noticeList.bo?currentPage=${p}">${p}</a>
+			                        		</c:otherwise>
+			                        	</c:choose>
+									</c:forEach>
+		                        	<!-- currentPage가 maxPage와 일치하면 숨기기 -->
+		                        	<c:if test="${pi.currentPage ne pi.maxPage}">
+		                        		<a href="noticeList.bo?currentPage=${pi.currentPage+1}">&gt</a>
+		                        	</c:if>
+	                        	<a href="noticeList.bo?currentPage=${pi.endPage }"><i class="fa fa-angle-double-right"></i></a>
                     		</div>
                     		<!-- 페이징 영역 끝 -->
                     		<div class="anime__details__btn">
                                 <a href="#" class="follow-btn" style="float:right;">삭제</a>
-                                <a href="noticeInsertForm.bo" class="follow-btn" style="float:right;">등록</a>
+                                <a href="noticeInsert.bo" class="follow-btn" style="float:right;">등록</a>
                             </div>
 						</div>
 					</div>

@@ -157,6 +157,63 @@ h2.tit {
     border: 1px solid #d8d9db;
     vertical-align: middle;
 }
+/* 파일 첨부 css 시작*/
+.file-upload label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    margin-bottom: 0rem;
+}
+.file-upload .upload-name {
+    display: inline-block;
+    padding: .5em .75em;  /* label의 패딩값과 일치 */
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+}
+/* imaged preview */
+.file-upload .upload-display {  /* 이미지가 표시될 지역 */
+    margin-bottom: 5px;
+}
+@media(min-width: 768px) { 
+    .file-upload .upload-display {
+        display: inline-block;
+        margin-right: 5px;
+        margin-bottom: 0;
+    }
+}
+.file-upload .upload-thumb-wrap {  /* 추가될 이미지를 감싸는 요소 */
+    display: inline-block;
+    width: 54px;
+    padding: 2px;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.file-upload .upload-display img {  /* 추가될 이미지 */
+    display: block;
+    max-width: 100%;
+    width: 100% \9;
+    height: auto;
+}
+/* 파일 첨부 css 끝*/
 </style>
 </head>
 
@@ -228,49 +285,39 @@ h2.tit {
 							</colgroup>
 							<tbody>
 								<tr>
-									<th scope="row"><label for="qnaCustInqTitle">제목</label> <em class="font-orange"></em></th>
+									<th scope="row"><label for="qnaCustInqTitle">제목*</label> <em class="font-orange"></em></th>
 									<td colspan="3" style="width:700px;"><input type="text" name="custInqTitle" id="qnaCustInqTitle" class="input-text" maxlength="100"></td>
 								</tr>
 								<tr>
-									<th scope="row"><label for="textarea">내용</label> <em class="font-orange"></em></th>
+									<th scope="row"><label for="textarea">내용*</label> <em class="font-orange"></em></th>
 									<td colspan="3" style="width:700px;">
 										<div class="textarea">
-											<textarea id="textarea" name="custInqCn" rows="5" cols="30" title="내용입력" class="input-textarea" placeholder="내용 입력" style="width:100%;"></textarea>
+											<textarea id="textarea" name="custInqCn" rows="5" cols="30" title="내용입력" 
+											class="input-textarea" placeholder="내용 입력" style="width:100%;" maxlength="500"></textarea>
 											<div class="util">
-												<p class="count">
-													<span id="textareaCnt">0</span> / 2000
+												<p class="count" style="color:#fff">
+													<span id="textareaCnt">0</span> / 500
 												</p>
 											</div>
 										</div>
 									</td>
 								</tr>
-								<!-- 2019-02-14 사진첨부 마크업 수정 -->
 								<tr>
-									<th scope="row">사진첨부</th>
+									<th scope="row">첨부파일</th>
 									<td colspan="3">
-										<div class="upload-image-box">
-
-											<div class="info-txt">
-												<p>* JPEG, PNG 형식의 5M 이하의 파일만 첨부 가능합니다. (최대 5개)</p>
-
-												<!-- to 개발 : 이미지 추가가 5개가 되면 버튼 숨김 -->
-												<button type="button" id="uploadBtn" class="btn-image-add"><span>파일선택</span></button>
-												<!--// to 개발 : 이미지 추가가 5개가 되면 버튼 숨김 -->
-												<p>* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-											</div>
-
-											<div id="imgList"></div>
-
+										<div class="file-upload preview-image">
+										    <input type="text" class="upload-name" value="파일선택" disabled="disabled">
+										   	 	<label for="input-file">파일선택</label> 
+										    <input type="file" id="input-file" class="upload-hidden" style="display:none;"> 
 										</div>
 									</td>
 								</tr>
-								<!--// 2019-02-14 사진첨부 마크업 수정 -->
 							</tbody>
 						</table>
 					</div>
 					<br>
 					<div class="anime__details__btn" style="text-align:center;">
-                        <a href="noticeInsertForm.bo" class="follow-btn">등록</a>
+                        <a href="noticeInsert.bo" class="follow-btn">등록</a>
                     </div>
 				</form>
 					<!-- 리스트 영역 끝 -->
@@ -279,5 +326,68 @@ h2.tit {
 		</section>
 	</div>
 </div>
+
+<!-- 본문 글자 수 세기 -->
+ <script>
+        $(function(){
+            $("#textarea").keyup(function(){    
+                $("#textareaCnt").text($(this).val().length); 
+            });
+        });
+ 
+  
+  $(document).ready(function(){
+
+     //$('#ex_filename').change(function() {
+     //	var filename = $(this).val();
+     //	$('.upload-name').val(filename);
+     //});
+
+     var fileTarget = $('.file-upload .upload-hidden');
+
+     fileTarget.on('change', function(){  // 값이 변경되면
+          if(window.FileReader){  // modern browser
+               var filename = $(this)[0].files[0].name;
+          } 
+          else {  // old IE
+               var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+          }
+
+          // 추출한 파일명 삽입
+          $(this).siblings('.upload-name').val(filename);
+     });
+}); 
+
+//preview image 
+var imgTarget = $('.preview-image .upload-hidden');
+
+imgTarget.on('change', function(){
+     var parent = $(this).parent();
+     parent.children('.upload-display').remove();
+
+     if(window.FileReader){
+          //image 파일만
+          if (!$(this)[0].files[0].type.match(/image\//)) return;
+
+          var reader = new FileReader();
+          reader.onload = function(e){
+               var src = e.target.result;
+               parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
+          }
+          reader.readAsDataURL($(this)[0].files[0]);
+     }
+
+     else {
+          $(this)[0].select();
+          $(this)[0].blur();
+          var imgSrc = document.selection.createRange().text;
+          parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
+
+          var img = $(this).siblings('.upload-display').find('img');
+          img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
+     }
+});
+
+</script>
 </body>
 </html>

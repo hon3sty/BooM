@@ -26,8 +26,19 @@ public class BoardServiceImpl implements BoardService {
 	//공지사항 리스트 조회 + 페이징처리
 	@Override
 	public ArrayList<Board> noticeSelectList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.noticeSelectList(sqlSession,pi);
+	}
+	
+	//공지사항 조회수 증가
+	@Override
+	public int noticeCountIncrease(int boardNo) {
+		return boardDao.noticeCountIncrease(sqlSession,boardNo);
+	}
+
+	//공지사항 상세 조회
+	@Override
+	public Board noticeSelect(int boardNo) {
+		return boardDao.noticeSelect(sqlSession,boardNo);
 	}
 
 	//공지사항 작성
@@ -35,20 +46,6 @@ public class BoardServiceImpl implements BoardService {
 	public int noticeInsert(Board b) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	//공지사항 조회수 증가
-	@Override
-	public int noticeCountIncrease(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	//공지사항 상세 조회
-	@Override
-	public Board noticeSelect(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	//공지사항 삭제

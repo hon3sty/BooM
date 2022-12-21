@@ -16,7 +16,7 @@
 #ntc2{
     float: left;
     width: 800px;
-    height: 600px;
+    height: 550px;
     padding-top: 15px;
     margin: -5px 0px 0px -5px;
 
@@ -182,6 +182,7 @@ h2.tit {
 .board-view .info {
     padding-bottom: 20px;
     font-size: .9333em;
+    border-bottom: 1px solid #eaeaea;
 }
 .board-view .info p:first-child {
     margin-left: 0;
@@ -194,11 +195,20 @@ h2.tit {
     margin: 0 0 0 8px;
     padding: 0 0 0 11px;
 }
+
 .board-view .cont {
     overflow: hidden;
     width: 100%;
+    height: 300px;
     padding: 20px 0;
     border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+}
+.blog__details__btns {
+    /* border-top: 1px solid rgba(255, 255, 255, 0.2); */
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+    padding: 20px 0 15px;
+    margin-bottom: 65px;
 }
 </style>
 </head>
@@ -222,9 +232,18 @@ h2.tit {
 					        <div class="product__sidebar__comment__item">
 					            <div class="product__sidebar__comment__item__pic">
 					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="noticeListForm.bo" style="color:#e53637;">공지사항</a></h5>
-					            </div>
+					            <c:choose>
+	              					<c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
+	                        			<div class="product__sidebar__comment__item__text">
+					                		<h5><a href="noticeList.bo" style="color:#e53637;">공지사항 관리</a></h5>
+					            		</div>
+	                        		</c:when>
+	                        		<c:otherwise>
+	                        			<div class="product__sidebar__comment__item__text">
+					                		<h5><a href="noticeList.bo" style="color:#e53637;">공지사항</a></h5>
+					            		</div>
+	                        		</c:otherwise>
+	                        	</c:choose>
 					        </div>
 					        <div class="product__sidebar__comment__item">
 					            <div class="product__sidebar__comment__item__pic">
@@ -255,62 +274,69 @@ h2.tit {
 				<!-- 리스트 영역 시작 -->
 				<div id="ntc1">
 					<div id="contents">
-				<h2 class="tit">공지사항</h2>
-
+				 <c:choose>
+   					<c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
+               			<h2 class="tit">공지사항 관리</h2>
+               		</c:when>
+               		<c:otherwise>
+               			<h2 class="tit">공지사항</h2>
+               		</c:otherwise>
+               	 </c:choose>
 				<div class="table-wrap" id="ntc2">
 					<div class="board-view">
 						<div class="tit-area">
-							<p class="tit">[지점] [남양주 현대아울렛 스페이스원] 12월 14일(수) Dolby Cinema관 상영재개 안내</p>
+							<p class="tit">${b.boardTitle }</p>
 						</div>
 
 						<div class="info">
-							
-								
-									<p>
-										<span class="tit">영화관</span>
-										<span class="txt">남양주현대아울렛 스페이스원</span>
-									</p>
-									<p>
-										<span class="tit">구분</span>
-										<span class="txt">공지</span>
-									</p>
-								
-								
-							
+							<p>
+								<span class="tit">글쓴이</span>
+								<span class="txt">${b.boardWriter}</span>
+							</p>
+							<p>
+								<span class="tit">조회수</span>
+								<span class="txt">${b.boardCount}</span>
+							</p>
 							<p>
 								<span class="tit">등록일</span>
-								<span class="txt">2022.12.14</span>
+								<span class="txt">${b.boardDate}</span>
 							</p>
 						</div>
-
-						<div class="cont">안녕하세요.<br>
-메가박스 남양주 현대아울렛 스페이스원입니다.&nbsp;<br>
-<br>
-금일 발생되었던 Dolby Cinema관 장비오류로인한 상영불가에 대해 복구 작업이 완료되어,&nbsp;<br>
-Dolby Cinema관 (4K HDR HFR) 아바타: 물의 길<br>
-12월 14일(수) 5회차 23:55부터 상영재개 일정이 확정되어 안내드립니다.<br>
-<br>
-극장 이용에 불편을 드리게 된 점 다시 한 번 진심으로 사과드립니다.<br>
-더 나은 서비스로 보답해 드리는 남양주 현대아울렛 스페이스원지점이 되겠습니다.<br>
-감사합니다.</div>
+						<div class="cont">${b.boardContent}</div>
+						<div class="info">
+							<br>
+							<p>
+								<span class="tit">첨부파일</span>
+								<span class="txt">첨부파일이 없습니다.</span>
+							</p>
+						</div>
 					</div>
 				</div>
-
-				<div class="blog__details__btns">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="blog__details__btns__item">
-                                        <h5><a href="#"><span class="arrow_left"></span> Building a Better LiA...</a>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="blog__details__btns__item next__btn">
-                                        <h5><a href="#">Mugen no Juunin: Immortal – 21 <span class="arrow_right"></span></a></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+						<section class="blog-details spad" style="padding-bottom: 0px;">
+				        <div class="container">
+				            <div class="row d-flex justify-content-center">
+										<div class="col-lg-12">
+											<div class="blog__details__content">
+												<div class="blog__details__btns" style="padding: 20px 0 15px; margin-bottom: 65px;">
+						                            	<div class="row">
+		                                	<div class="col-lg-6">
+		                                    	<div class="blog__details__btns__item">
+		                                        	<h5><a href="#"><span class="arrow_left"></span>이전글</a>
+		                                        </h5>
+		                                   		</div>
+		                                	</div>
+		                                	<div class="col-lg-6">
+		                                    	<div class="blog__details__btns__item next__btn">
+		                                        	<h5><a href="#">다음글<span class="arrow_right"></span></a></h5>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                           </div>
+	                          </div>
+                          </div>
+                          </div>
+                          </div>
+                          </section>
 							<c:choose>
 								<c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
 									<div class="anime__details__btn"  style="text-align:center;">
