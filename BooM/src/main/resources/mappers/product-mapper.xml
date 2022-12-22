@@ -61,6 +61,17 @@
  			#{cartNo}
 		</foreach>
 	</select>
+	
+	<insert id="purchaseInsert">
+		INSERT INTO ORDER_INFO(ORDER_NO
+							  ,MEMBER_NO
+							  ,ORDER_NAME
+							  ,MEMBER_PHONE)
+					VALUES(SEQ_OINO.NEXTVAL
+						  ,1
+						  ,#{orderName}
+						  ,#{memberPhone})
+	</insert>
 
 
 

@@ -75,4 +75,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.checkedCartList(sqlSession,list);
 	}
 
+	@Override
+	public int purchaseInsert(Order order) {
+		return productDao.purchaseInsert(sqlSession,order);
+	}
+
 }

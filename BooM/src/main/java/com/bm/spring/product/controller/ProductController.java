@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,6 +15,7 @@ import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.common.template.Pagination;
 import com.bm.spring.product.model.service.ProductService;
 import com.bm.spring.product.model.vo.Cart;
+import com.bm.spring.product.model.vo.Order;
 import com.bm.spring.product.model.vo.Product;
 
 @Controller
@@ -118,11 +120,21 @@ public class ProductController {
 	}
 	
 	//상품 구매
-	@RequestMapping("purchase.pd")
-	public String purchaseInsert() {
+	@PostMapping("purchase.pd")
+	public String purchaseInsert(Order order,@RequestParam("chkCount") int count, Model model) {
 		
+			System.out.println(order);
+		
+		
+//		int result=productService.purchaseInsert(order);
+		
+//		if(result>0) {
+//			
+//			return "mypage/MY_0020";
+//		}else {
+//			model.addAttribute("errorMsg", "결제 실패");
+//			return "common/errorPage";
+//		}
 		return null;
 	}
-	
-	
 }

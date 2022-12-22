@@ -38,5 +38,8 @@ public interface ProductService {
 	
 	//장바구니에서 체크된 목록 리스트
 	ArrayList<Cart> checkedCartList(ArrayList list);
+	
+	//구매페이지에서 결제하기
+	int purchaseInsert(Order order);
 
 }
