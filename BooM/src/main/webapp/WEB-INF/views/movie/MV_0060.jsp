@@ -19,19 +19,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../../resources/css/style.css" type="text/css">
+        <!-- Css Styles -->
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+    
 </head>
 <body>
+  
   <!-- 메뉴바 -->
- <%--  <jsp:include page=""/> --%>
+  <jsp:include page="../common/header.jsp"/>
  
   <!-- Blog Details Section Begin -->
     <section class="blog-details spad">
@@ -130,8 +132,9 @@
         <!-- Blog Details Section End -->
         
         <!-- 푸터바 -->
-        <%-- <jsp:include page=""/> --%>
- 
+        <jsp:include page="../common/header.jsp"/>
+       
+       
        <!-- Js Plugins -->
         <!-- -->  
         <script src="../../resources/js/jquery-3.3.1.min.js"></script>

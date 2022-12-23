@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html lang="en">
 	<!-- 구매하기 페이지 [하늘] -->
@@ -30,82 +32,123 @@
     <link rel="stylesheet" href="resources/css2/flaticon.css">
     <link rel="stylesheet" href="resources/css2/icomoon.css">
     <link rel="stylesheet" href="resources/css2/style.css">
+        <style>
+    	.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 130px;
+  height: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+    </style>
   </head>
   <!-- Header Section Begin -->
 	<jsp:include page="../common/header.jsp"/>
   <body class="goto-here">
-    <div class="hero-wrap hero-bread">
+    <div class="hero-wrap hero-bread" style="background-image:url('resources/img/movie.jpg'); background-size:contain;">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread">결제 하기</h1>
+            
           </div>
         </div>
       </div>
     </div>
-
     <section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
+    				<h3 style="color:white">결제 하기</h3>
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th>&nbsp;</th>
+						          <th><input type="checkbox" id="checkAll"></th>
 						        <th>&nbsp;</th>
 						        <th>상품명</th>
-						        <th>가격</th>
+						        <th>판매 금액</th>
 						        <th>수량</th>
-						        <th>구매금액</th>
+						        <th>총 금액</th>
+						        <th>&nbsp;</th>
 						      </tr>
 						    </thead>
-						    <tbody>
-						      <tr class="text-center">
-						        <td class="product-remove"><a style="background-color:white" href="#">x</a></td>
-						        
-						        <td class="image-prod"><div class="img" ></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td style="color:white" class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-						        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
-					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>
-					          	</div>
-					          </td>
-						        
-						        <td style="color:white" class="total">$4.90</td>
-						      </tr><!-- END TR-->
-
+						    <tbody id="body">
+							    <form action="purchase.pd" method="post">
+							    <input type="hidden" id="chkCount" name="chkCount" value="">
+							    
+							    <c:forEach var="c" items="${plist}">
+							      <tr class="text-center">
+							      		<input type="hidden" id="cartNo" value="${c.cartNo }"> 
+							      		<input type="hidden" id="productNo" name="productNo" value="${c.product.productNo }"> 
+							      		<input type="hidden" id="productPrice" name="productPrice" value="${c.product.productPrice * c.cartCount}"> 
+							      		<input type="text" value="${c.product.productNo}"> 
+								        <td><input id="chk" name="chk" type="checkbox" value=${c.product.productPrice * c.cartCount}></td>
+								        <td class="image-prod"><div class="img" ></div></td>
+								        
+								        <td class="product-name">
+								        	<p style="color:white">${c.product.productName}</p>
+								        </td>
+								        
+								        <td style="color:white" class="price">${c.product.productPrice}</td>
+								        
+								        <td class="quantity">
+								        	<div class="input-group mb-3">
+									        	<button type="button" class="quantity-left-minus" style="background-color:white">&lt;</button>
+								             	<input type="text" id="quantity" name="productCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
+								             	<button type="button" class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
+								             	<button type="button" id="btn_change" style="background-color:white">변경</button>
+							          		</div>
+							            </td>
+								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
+								        <td><a href="cartDelete.pd?cno=${c.cartNo }" class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
+							      </tr> 
+							    </c:forEach>
 						    </tbody>
 						  </table>
 					  </div>
     			</div>
     		</div>
+    		
+    			 <div class="col-md-12 ftco-animate"><button type="button" class="button" id="btn_delSel">선택 항목 삭제</button></div>
+    		
     		<div class="row justify-content-end">
-    			
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3 style="color:white">구매자 정보 입력</h3>
     					<p style="color:white">수령자의 전화번호를 입력해주세요.</p>
-  						<form action="#" class="info">
   						  <div class="form-group">
 			              	<label style="color:white" for="">이름</label>
-			                <input type="text" class="form-control text-left px-3" placeholder="">
+			                <input type="text" class="form-control text-left px-3" name="orderName" required>
 			              </div>
 			              <div class="form-group">
 			              	<label style="color:white" for="">전화번호('-'를 포함해서 입력해주세요)</label>
-			                <input type="text" class="form-control text-left px-3" placeholder="">
+			                <input type="text" class="form-control text-left px-3" name="memberPhone" placeholder="'-'를 포함해서 입력해주세요" required>
 			              </div>
 			              <p style="color:white">●구매하신 부귀영화 기프트콘은 주문자 정보에 입력된 휴대전화 번호로 MMS로 발송됩니다.입력된 휴대전화 번호가 맞는지 꼭 확인하세요.</p>
-	            		</form>
     				</div>
     				
     			</div>
@@ -113,108 +156,16 @@
     				<div class="cart-total mb-3">
     					<h3 style="color:white">총 상품 구매금액</h3>
     					<p  class="d-flex total-price">
-    						<span style="color:red">86,000 원</span>
+    						<span id="sum"style="color:red"></span>
     					</p>
     				</div>
-    				<p ><a href="checkout.html" class="btn btn-primary py-3 px-4">결제 하기</a></p>
+	    				<p><button  class="btn btn-primary py-3 px-4" onclick="return pur()">결제 하기</button></p>
+    				</form>
     			</div>
     		</div>
 			</div>
 		</section>
 
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-      <div class="container py-4">
-        <div class="row d-flex justify-content-center py-5">
-          <div class="col-md-6">
-          	<h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-          	<span>Get e-mail updates about our latest shops and special offers</span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center">
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <input type="text" class="form-control" placeholder="Enter email address">
-                <input type="submit" value="Subscribe" class="submit px-3">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-    <footer class="ftco-footer ftco-section">
-      <div class="container">
-      	<div class="row">
-      		<div class="mouse">
-						<a href="#" class="mouse-icon">
-							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-						</a>
-					</div>
-      	</div>
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Vegefoods</h2>
-              <p style="color:white">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Menu</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Help</h2>
-              <div class="d-flex">
-	              <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-	                <li><a href="#" class="py-2 d-block">Shipping Information</a></li>
-	                <li><a href="#" class="py-2 d-block">Returns &amp; Exchange</a></li>
-	                <li><a href="#" class="py-2 d-block">Terms &amp; Conditions</a></li>
-	                <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
-	              </ul>
-	              <ul class="list-unstyled">
-	                <li><a href="#" class="py-2 d-block">FAQs</a></li>
-	                <li><a href="#" class="py-2 d-block">Contact</a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <p style="color:white"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-    
-  
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
@@ -238,40 +189,132 @@
   <script src="resources/js2/main.js"></script>
 
   <script>
-		$(document).ready(function(){
+  			$(function(){
+  				
+  			})
+		
 
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-		        
-		        // Stop acting like a button
+			var quantitiy=0;
+	  		//수량 +
+			$(document).on("click",".quantity-right-plus",function(e){
+				// Stop acting like a button
 		        e.preventDefault();
 		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
+		        var quantity = parseInt($(this).siblings().eq(1).val());
 		        // If is not undefined
 		            
-		            $('#quantity').val(quantity + 1);
-
-		          
+		             $(this).siblings().eq(1).val(quantity + 1)
+					
 		            // Increment
-		        
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
+				
+			})
+			
+			//수량 -
+			$(document).on("click",".quantity-left-minus",function(e){
+				// Stop acting like a button
 		        e.preventDefault();
 		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
+		        var quantity = parseInt($(this).siblings().eq(0).val());
 		        
 		        // If is not undefined
 		      
 		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
+		            if(quantity>1){
+		           		 $(this).siblings().eq(0).val(quantity - 1)
+		            }else{
+		            	window.alert("1개 미만으로는 지정할 수 없습니다.")
 		            }
-		    });
-		    
-		});
+		        
+			})
+		     
+			//전부 체크/해제
+		     $("#checkAll").click(function(){
+		    	 var check=$(this).is(':checked');
+		    	 
+		    	 if(check){
+		    		 //전체 체크
+		    		 $('tbody input:checkbox').prop('checked',true)
+		    	 }else{
+		    		 //전체 체크 해제
+		    		 $('tbody input:checkbox').prop('checked',false)
+		    	 }
+		    	 var arr=[];
+			   		var sum=0;
+			   		$('input[id="chk"]:checked').each(function(){
+			   			arr.push($(this).val())
+			   		})
+			   		
+			   		for(var i=0;i<arr.length;i++){
+			   			sum+=parseInt(arr[i])
+			   		}
+			   		$("#sum").html(sum)
+			   		
+			   		
+		    	 
+		     })
+		     
+	  		//수량 변경 버튼
+		     $(document).on("click","#btn_change",function(){
+				location.href="countUpdate.pd?cno="+$(this).parents().eq(2).children().eq(0).val()+"&count="+$(this).siblings().eq(1).val();
+				     
+		     })
+		     
+		     //선택항목 삭제
+		     $("#btn_delSel").click(function(){
+		    	 var arr=[];
+		    	 $('input[id="chk"]:checked').each(function(){
+			   			arr.push($(this).parents().eq(1).children().eq(0).val())
+			   	  })
+			   	  
+			   	  for(var i=0;i<arr.length;i++){
+			   		  location.href="cartDelete.pd?cno="+arr[i]
+			   	  } 
+		    	 
+		     })
+		     
+		    //선택항목 가격 합 
+		   	$(document).on("click","#chk",function(){
+		   		//선택된 항목 값 담을 배열
+		   		var arrP=[];
+		   		var sum=0;
+		   		$('input[id="chk"]:checked').each(function(){
+		   			arrP.push($(this).val())
+		   		})
+		   		
+		   		for(var i=0;i<arrP.length;i++){
+		   			sum+=parseInt(arrP[i])
+		   		}
+		   		$("#sum").html(sum+'원')
+		   		
+		   	})
+		
+		
+	  	function pur(){
+    		var arrS=[];
+		   		$('input[id="chk"]:checked').each(function(){
+		   			arrS.push($(this).parents().eq(0).siblings().eq(0).val())
+		   			
+		   		})
+		   		if(arrS.length==0){
+		   			alert('구매할 항목을 선택해 주세요')
+		   			return false;
+		   		}else{
+			   		var count=$('input[id="chk"]:checked').length;
+			   		$("#chkCount").val(count)
+		   			$('input[id="chk"]:checked').each(function(i,el){
+		   						$(this).parents().eq(1).children().eq(1).attr("name","list["+i+"].productNo")
+					   			$(this).parents().eq(1).children().eq(2).attr("name","list["+i+"].productPrice")
+					   			$(this).parents().eq(1).children().eq(7).children().eq(0).children().eq(1).attr("name","list["+i+"].productCount")
+		   			})
+ 		   			return true
+		   		}
+	  		}
+		
+	  	 //한개 삭제 버튼 
+	    function del(){
+			var result=confirm("삭제하시겠습니까?")
+			return result;
+		}
 	</script>
     
   </body>
