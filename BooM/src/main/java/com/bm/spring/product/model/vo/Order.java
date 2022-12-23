@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class Order {
 	private int orderDetailNo;
 	private int orderNo;
+	private String orderName;
 	private int productNo;
 	private int productCount;
 	private int productPrice;

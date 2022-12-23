@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +78,6 @@
         </div>
       </div>
     </div>
-
     <section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
@@ -98,9 +97,15 @@
 						      </tr>
 						    </thead>
 						    <tbody id="body">
+							    <form action="purchase.pd" method="post">
+							    <input type="hidden" id="chkCount" name="chkCount" value="">
+							    
 							    <c:forEach var="c" items="${plist}">
 							      <tr class="text-center">
 							      		<input type="hidden" id="cartNo" value="${c.cartNo }"> 
+							      		<input type="hidden" id="productNo" name="productNo" value="${c.product.productNo }"> 
+							      		<input type="hidden" id="productPrice" name="productPrice" value="${c.product.productPrice * c.cartCount}"> 
+							      		<input type="text" value="${c.product.productNo}"> 
 								        <td><input id="chk" name="chk" type="checkbox" value=${c.product.productPrice * c.cartCount}></td>
 								        <td class="image-prod"><div class="img" ></div></td>
 								        
@@ -112,14 +117,14 @@
 								        
 								        <td class="quantity">
 								        	<div class="input-group mb-3">
-								        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
-							             	<input type="text" id="quantity" id="cartCount" name="cartCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
-							             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
-							             	<button id="btn_change" style="background-color:white">변경</button>
-							          	</div>
+									        	<button type="button" class="quantity-left-minus" style="background-color:white">&lt;</button>
+								             	<input type="text" id="quantity" name="productCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
+								             	<button type="button" class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
+								             	<button type="button" id="btn_change" style="background-color:white">변경</button>
+							          		</div>
 							            </td>
 								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
-								        <td><a href="cartDelete.pd?cno=${c.cartNo }"; class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
+								        <td><a href="cartDelete.pd?cno=${c.cartNo }" class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
 							      </tr> 
 							    </c:forEach>
 						    </tbody>
@@ -128,24 +133,22 @@
     			</div>
     		</div>
     		
-    			 <div class="col-md-12 ftco-animate"><button class="button" id="btn_delSel">선택 항목 삭제</button></div>
+    			 <div class="col-md-12 ftco-animate"><button type="button" class="button" id="btn_delSel">선택 항목 삭제</button></div>
+    		
     		<div class="row justify-content-end">
-    			
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3 style="color:white">구매자 정보 입력</h3>
     					<p style="color:white">수령자의 전화번호를 입력해주세요.</p>
-  						<form action="#" class="info">
   						  <div class="form-group">
 			              	<label style="color:white" for="">이름</label>
-			                <input type="text" class="form-control text-left px-3" placeholder="">
+			                <input type="text" class="form-control text-left px-3" name="orderName" required>
 			              </div>
 			              <div class="form-group">
 			              	<label style="color:white" for="">전화번호('-'를 포함해서 입력해주세요)</label>
-			                <input type="text" class="form-control text-left px-3" placeholder="'-'를 포함해서 입력해주세요">
+			                <input type="text" class="form-control text-left px-3" name="memberPhone" placeholder="'-'를 포함해서 입력해주세요" required>
 			              </div>
 			              <p style="color:white">●구매하신 부귀영화 기프트콘은 주문자 정보에 입력된 휴대전화 번호로 MMS로 발송됩니다.입력된 휴대전화 번호가 맞는지 꼭 확인하세요.</p>
-	            		</form>
     				</div>
     				
     			</div>
@@ -156,7 +159,8 @@
     						<span id="sum"style="color:red"></span>
     					</p>
     				</div>
-    				<p ><a href="#" onclick="purchase.pd" class="btn btn-primary py-3 px-4">결제 하기</a></p>
+	    				<p><button  class="btn btn-primary py-3 px-4" onclick="return pur()">결제 하기</button></p>
+    				</form>
     			</div>
     		</div>
 			</div>
@@ -185,7 +189,10 @@
   <script src="resources/js2/main.js"></script>
 
   <script>
-		$(document).ready(function(){
+  			$(function(){
+  				
+  			})
+		
 
 			var quantitiy=0;
 	  		//수량 +
@@ -246,13 +253,6 @@
 		    	 
 		     })
 		     
-		    //한개 삭제 버튼 
-		    function del(){
-				var result=confirm("삭제하시겠습니까?")
-				return result;
-			}
-	
-		     
 	  		//수량 변경 버튼
 		     $(document).on("click","#btn_change",function(){
 				location.href="countUpdate.pd?cno="+$(this).parents().eq(2).children().eq(0).val()+"&count="+$(this).siblings().eq(1).val();
@@ -285,9 +285,36 @@
 		   			sum+=parseInt(arrP[i])
 		   		}
 		   		$("#sum").html(sum+'원')
+		   		
 		   	})
-		    
-		});
+		
+		
+	  	function pur(){
+    		var arrS=[];
+		   		$('input[id="chk"]:checked').each(function(){
+		   			arrS.push($(this).parents().eq(0).siblings().eq(0).val())
+		   			
+		   		})
+		   		if(arrS.length==0){
+		   			alert('구매할 항목을 선택해 주세요')
+		   			return false;
+		   		}else{
+			   		var count=$('input[id="chk"]:checked').length;
+			   		$("#chkCount").val(count)
+		   			$('input[id="chk"]:checked').each(function(i,el){
+		   						$(this).parents().eq(1).children().eq(1).attr("name","list["+i+"].productNo")
+					   			$(this).parents().eq(1).children().eq(2).attr("name","list["+i+"].productPrice")
+					   			$(this).parents().eq(1).children().eq(7).children().eq(0).children().eq(1).attr("name","list["+i+"].productCount")
+		   			})
+ 		   			return true
+		   		}
+	  		}
+		
+	  	 //한개 삭제 버튼 
+	    function del(){
+			var result=confirm("삭제하시겠습니까?")
+			return result;
+		}
 	</script>
     
   </body>

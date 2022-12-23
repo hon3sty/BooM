@@ -115,12 +115,12 @@
 								        <td style="color:white" class="price">${c.product.productPrice}</td>
 								        
 								        <td class="quantity">
-								        	<div class="input-group mb-3">
-								        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
-							             	<input type="text" id="quantity" id="cartCount" name="cartCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
-							             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
-							             	<button id="btn_change" style="background-color:white">변경</button>
-							          	</div>
+									        <div class="input-group mb-3">
+									        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
+								             	<input type="text" id="quantity" id="cartCount" name="cartCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
+								             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
+								             	<button id="btn_change" style="background-color:white">변경</button>
+								          	</div>
 							            </td>
 								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
 								        <td><a href="cartDelete.pd?cno=${c.cartNo }"; class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
@@ -252,7 +252,6 @@
 			   	  for(var i=0;i<arr.length;i++){
 			   		  location.href="cartDelete.pd?cno="+arr[i]
 			   	  } 
-		    	 
 		     })
 		     
 		    //선택항목 가격 합 
@@ -284,7 +283,6 @@
 			   		}else{
 			   			alert('구매할 항목을 선택해 주세요')
 			   		}
-	  			
 	  		}
 		   	
 	</script>

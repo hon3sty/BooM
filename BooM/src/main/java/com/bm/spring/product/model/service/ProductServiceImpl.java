@@ -10,6 +10,7 @@ import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.product.model.dao.ProductDao;
 import com.bm.spring.product.model.vo.Cart;
 import com.bm.spring.product.model.vo.Order;
+import com.bm.spring.product.model.vo.OrderList;
 import com.bm.spring.product.model.vo.Product;
 
 @Service
@@ -73,6 +74,16 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ArrayList<Cart> checkedCartList(ArrayList list) {
 		return productDao.checkedCartList(sqlSession,list);
+	}
+
+	@Override
+	public int purchaseInsert(Order order) {
+		return productDao.purchaseInsert(sqlSession,order);
+	}
+
+	@Override
+	public int orderDetailInsert(OrderList list) {
+		return productDao.orderDetailInsert(sqlSession,list);
 	}
 
 }
