@@ -72,6 +72,10 @@
 						  ,#{orderName}
 						  ,#{memberPhone})
 	</insert>
+	
+	<insert id="orderDetailInsert">
+		INSERT INTO ORDER_DETAIL VALUES(SEQ_ODNO.NEXTVAL,#{productNo},SEQ_OINO.CURRVAL,#{productCount},#{productPrice})
+	</insert>
 
 
 

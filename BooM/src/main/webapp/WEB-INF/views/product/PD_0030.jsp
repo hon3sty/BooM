@@ -103,8 +103,9 @@
 							    <c:forEach var="c" items="${plist}">
 							      <tr class="text-center">
 							      		<input type="hidden" id="cartNo" value="${c.cartNo }"> 
-							      		<input type="hidden" name="productNo" value="${c.product.productNo }"> 
-							      		<input type="hidden" name="productPrice" value="${c.product.productPrice * c.cartCount}"> 
+							      		<input type="hidden" id="productNo" name="productNo" value="${c.product.productNo }"> 
+							      		<input type="hidden" id="productPrice" name="productPrice" value="${c.product.productPrice * c.cartCount}"> 
+							      		<input type="text" value="${c.product.productNo}"> 
 								        <td><input id="chk" name="chk" type="checkbox" value=${c.product.productPrice * c.cartCount}></td>
 								        <td class="image-prod"><div class="img" ></div></td>
 								        
@@ -116,11 +117,11 @@
 								        
 								        <td class="quantity">
 								        	<div class="input-group mb-3">
-								        	<button type="button" class="quantity-left-minus" style="background-color:white">&lt;</button>
-							             	<input type="text" id="quantity" name="productCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
-							             	<button type="button" class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
-							             	<button type="button" id="btn_change" style="background-color:white">변경</button>
-							          	</div>
+									        	<button type="button" class="quantity-left-minus" style="background-color:white">&lt;</button>
+								             	<input type="text" id="quantity" name="productCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
+								             	<button type="button" class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
+								             	<button type="button" id="btn_change" style="background-color:white">변경</button>
+							          		</div>
 							            </td>
 								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
 								        <td><a href="cartDelete.pd?cno=${c.cartNo }" class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
@@ -158,7 +159,7 @@
     						<span id="sum"style="color:red"></span>
     					</p>
     				</div>
-	    				<p><button class="btn btn-primary py-3 px-4" onclick="return pur()">결제 하기</button></p>
+	    				<p><button  class="btn btn-primary py-3 px-4" onclick="return pur()">결제 하기</button></p>
     				</form>
     			</div>
     		</div>
@@ -290,14 +291,23 @@
 		
 	  	function pur(){
     		var arrS=[];
-	   		$('input[id="chk"]:checked').each(function(){
-	   			arrS.push($(this).parents().eq(0).siblings().eq(0).val())
-	   		})
-	   		if(arrS.length==0){
-	   			alert('구매할 항목을 선택해 주세요')
-	   			return false
-	   		}
-			    $("#chkCount").val($('input[id="chk"]:checked').length)
+		   		$('input[id="chk"]:checked').each(function(){
+		   			arrS.push($(this).parents().eq(0).siblings().eq(0).val())
+		   			
+		   		})
+		   		if(arrS.length==0){
+		   			alert('구매할 항목을 선택해 주세요')
+		   			return false;
+		   		}else{
+			   		var count=$('input[id="chk"]:checked').length;
+			   		$("#chkCount").val(count)
+		   			$('input[id="chk"]:checked').each(function(i,el){
+		   						$(this).parents().eq(1).children().eq(1).attr("name","list["+i+"].productNo")
+					   			$(this).parents().eq(1).children().eq(2).attr("name","list["+i+"].productPrice")
+					   			$(this).parents().eq(1).children().eq(7).children().eq(0).children().eq(1).attr("name","list["+i+"].productCount")
+		   			})
+ 		   			return true
+		   		}
 	  		}
 		
 	  	 //한개 삭제 버튼 
