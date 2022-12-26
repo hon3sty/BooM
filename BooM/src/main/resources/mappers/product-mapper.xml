@@ -22,6 +22,7 @@
 	</resultMap>
 	
 	<resultMap type="order" id="orderResult">
+		<result column="ROWNUM" property="rownum"/>
 		<result column="ORDER_DETAIL_NO" property="orderDetailNo"/>
 		<result column="ORDER_NO" property="orderNo"/>
 		<result column="ORDER_NAME" property="orderName"/>
@@ -101,11 +102,26 @@
 	
 	
 	<select id="purchaseList" resultMap="orderResult">
-		SELECT PRODUCT_IMG,PRODUCT_NAME,ORDER_NO,ORDER_DATE,EXPIRY_DATE,ORDER_DETAIL_NO
-		FROM ORDER_DETAIL
-		JOIN ORDER_INFO USING (ORDER_NO)
-		JOIN PRODUCT USING (PRODUCT_NO)
-		ORDER BY ORDER_DATE DESC 
+		SELECT ROWNUM,A.*
+		FROM (SELECT ORDER_NO,ORDER_NAME,ORDER_DATE,ORDER_STATUS,EXPIRY_DATE
+		        FROM ORDER_INFO
+		        WHERE MEMBER_NO=1)A
+		ORDER BY ORDER_DATE DESC
+	</select>
+	
+	<select id="dateList" resultMap="orderResult">
+		SELECT ROWNUM,A.*
+		FROM (SELECT ORDER_NO,ORDER_NAME,ORDER_DATE,ORDER_STATUS,EXPIRY_DATE
+		        FROM ORDER_INFO
+		        WHERE MEMBER_NO=1)A
+        WHERE ORDER_DATE BETWEEN #{startDate} AND #{endDate}
+        ORDER BY ORDER_DATE DESC
+	
+	</select>
+	
+	<select id="detailList" resultMap="orderResult">
+		
+	
 	</select>
 
 
