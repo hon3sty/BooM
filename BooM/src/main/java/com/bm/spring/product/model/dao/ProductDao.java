@@ -50,7 +50,11 @@ public class ProductDao {
 		return sqlSession.insert("productMapper.purchaseInsert",order);
 	}
 
-	public int orderDetailInsert(SqlSessionTemplate sqlSession, OrderList list) {
-		return sqlSession.insert("productMapper.orderDetailInsert", list);
+	public int orderDetailInsert(SqlSessionTemplate sqlSession, Order order) {
+		return sqlSession.insert("productMapper.orderDetailInsert", order);
 	}
+
+	public ArrayList<Order> purchaseList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("productMapper.purchaseList");
+		}
 }

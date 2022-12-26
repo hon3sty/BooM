@@ -62,12 +62,18 @@ public class ProductController {
 		ArrayList<Cart> list = productService.cartGetList();
 		
 		model.addAttribute("list",list);
+		
 		return "mypage/MY_0030";
 	}
 	
 	//구매목록
 	@RequestMapping("purchaseList.me")
-	public String purchaseList() {
+	public String purchaseList(Model model) {
+		//로그인 기능 후 memberNo 가져오기
+		ArrayList<Order> list=productService.purchaseList();
+		
+		model.addAttribute("list",list);
+		
 		return "mypage/MY_0020";
 	}
 	
@@ -124,35 +130,28 @@ public class ProductController {
 	//상품 구매
 	@PostMapping("purchase.pd")
 	public String purchaseInsert(Order order,@ModelAttribute(value="OrderList") OrderList list,@RequestParam("chkCount") int count, Model model) {
+		ArrayList<Order> oList=new ArrayList();
 		
-		ArrayList<Order> o = new ArrayList();
-		
-		
-		
-		for(int i = 0 ; i<list.getList().size();i++) {
-
+		for(int i=0;i<count;i++) {
+			oList.add(new Order(list.getList().get(i).getProductNo(),list.getList().get(i).getProductCount(),list.getList().get(i).getProductPrice()));
 		}
 		
+		//ORDER_INFO 값 넣기
+		int result=productService.purchaseInsert(order);
+		int result2=1;
 		
-		System.out.println(order);
+		//ORDER_DETAIL 값 넣기 
+		if (result > 0) {
+			for (int i = 0; i < count; i++) {
+				result2 = productService.orderDetailInsert(oList.get(i));
+			}
+		}
 		
-		return null;
-		
-//		int result=productService.purchaseInsert(order);
-//		int result2=1;
-//		
-//		if (result > 0) {
-//			for (int i = 0; i < count; i++) {
-//				result2 = productService.orderDetailInsert(list);
-//			}
-//		}
-//
-//		if (result * result2 > 0) {
-//			return "mypage/MY_0020";
-//		} else {
-//			model.addAttribute("errorMsg", "결제 실패");
-//			return "common/errorPage";
-//		}
-		
+		if (result * result2 > 0) {
+			return "mypage/MY_0020";
+		} else {
+			model.addAttribute("errorMsg", "결제 실패");
+			return "common/errorPage";
+		}
 	}
 }

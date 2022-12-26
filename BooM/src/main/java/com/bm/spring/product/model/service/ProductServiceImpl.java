@@ -82,8 +82,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int orderDetailInsert(OrderList list) {
-		return productDao.orderDetailInsert(sqlSession,list);
+	public int orderDetailInsert(Order order) {
+		return productDao.orderDetailInsert(sqlSession,order);
+	}
+
+	@Override
+	public ArrayList<Order> purchaseList() {
+		return productDao.purchaseList(sqlSession);
 	}
 
 }

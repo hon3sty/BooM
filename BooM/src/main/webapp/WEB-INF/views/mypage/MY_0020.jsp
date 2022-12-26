@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 	<!-- 구매 내역 [하늘] -->
@@ -54,56 +56,42 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th><div  style="float: right;display:inline-block; border:1px solid black";>
-							<strong class="period">조회기간</strong>
-							<p style="background-color:#82ae46">
-		            	        <input id="startDate" type="date"> ~ <input id="endDate" type="date">
-								<button id="btn_search">조회하기</button>
-							</p>
-						</div></th>
+						        
+							        <div  style="float: right;display:inline-block; border:1px solid black";>
+										<strong class="period">조회기간</strong>
+										<p style="background-color:#82ae46">
+					            	        <input id="startDate" type="date"> ~ <input id="endDate" type="date">
+											<button id="btn_search">조회하기</button>
+										</p>
+									</div>
+								
+								<th>구매 번호</th>
 						        <th>상품명</th>
-						        <th>가격</th>
 						        <th>수량</th>
 						        <th>구매금액</th>
+						        <th>구매일</th>
 						        
 						      </tr>
 						    </thead>
-						    <tbody>
-						      <tr class="text-center">
-						        
-						        <td class="image-prod"><div class="img" ></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td style="color:white" class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" readonly>
-					          	</div>
-					          </td>
-						        
-						        <td style="color:white" class="total">$4.90</td>
-						      </tr><!-- END TR-->
+						    <tbody id="body">
+							    <c:forEach var="c" items="${list}">
+							      <tr class="text-center">
+							      		<td style="color:white" class="total"></td>
+								        <td class="image-prod"><div class="img" >${c.product.productImg }</div></td>
+								        <td class="product-name">
+								        	<p style="color:white">${c.product.productName }</p>
+								        </td>
+								        <td class="quantity">수량</td>
+								        <td style="color:white" class="total">총가격</td>
+								        <td style="color:white" class="total">${c.orderDate }</td>
+							      </tr> 
+							    </c:forEach>
 						    </tbody>
 						  </table>
 					  </div>
     			</div>
     		</div>
-    		<div class="row justify-content-end">
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3 style="color:white">총 상품 구매금액</h3>
-    					<p  class="d-flex total-price">
-    						<span style="color:red">86,000 원</span>
-    					</p>
-						      <button id="btn_cancel" style="float:right">구매 취소</button>
-    				</div>
-    			</div>
-    		</div>
+    	
 			</div>
 		</section>
 

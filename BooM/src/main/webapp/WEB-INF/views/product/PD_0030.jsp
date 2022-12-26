@@ -105,7 +105,6 @@
 							      		<input type="hidden" id="cartNo" value="${c.cartNo }"> 
 							      		<input type="hidden" id="productNo" name="productNo" value="${c.product.productNo }"> 
 							      		<input type="hidden" id="productPrice" name="productPrice" value="${c.product.productPrice * c.cartCount}"> 
-							      		<input type="text" value="${c.product.productNo}"> 
 								        <td><input id="chk" name="chk" type="checkbox" value=${c.product.productPrice * c.cartCount}></td>
 								        <td class="image-prod"><div class="img" ></div></td>
 								        
