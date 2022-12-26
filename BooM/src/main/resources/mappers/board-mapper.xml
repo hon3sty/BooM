@@ -17,6 +17,16 @@
 	  	<result column="BOARD_DEPTH" property="boardDepth"/>
   </resultMap>
   
+  <resultMap type="boardAttachment" id="boardAttachResultSet">
+  		<result column="FILE_NO" property="fileNo"/>
+  		<result column="BOARD_NO" property="boardNo"/>
+  		<result column="ORIGIN_NAME" property="originName"/>
+  		<result column="SAVE_NAME" property="saveName"/>
+  		<result column="FILE_PATH" property="filePath"/>
+  		<result column="THUMBNAIL" property="thumbnail"/>
+  		<result column="UPLOAD_DATE" property="uploadDate"/>
+  </resultMap>
+  
   <!-- 공지사항 게시글 총 개수 -->
   <select id="noticeListCount" resultType="_int">
   		SELECT COUNT(*)
@@ -26,12 +36,12 @@
   </select>
   
   <!-- 공지사항 리스트 조회 -->
-  <select id="noticeSelectList" resultMap="boardResultSet">
+  <select id="noticeSelectList" resultMap="boardResultSet" >
 		SELECT BOARD_NO,BOARD_TITLE,MEMBER_NAME,BOARD_DATE,BOARD_COUNT
  		FROM BOARD B
  		JOIN MEMBER ON(BOARD_WRITER=MEMBER_NO)
  		WHERE B.BCATEGORY_NO = 1 AND B.BOARD_STATUS='Y'
- 		ORDER BY BOARD_NO
+ 		ORDER BY BOARD_DATE DESC
   </select>
   
   <!-- 공지사항 조회수 증가 -->
@@ -52,5 +62,23 @@
   		AND BOARD_NO = #{boardNo}
   		ORDER BY BOARD_NO
   </select>
-	
+  
+  <!-- 공지사항 첨부파일 조회 -->
+  <select id="noticeAttachSelect" resultMap="boardAttachResultSet">
+  		SELECT FILE_NO ,ORIGIN_NAME ,SAVE_NAME ,FILE_PATH , BOARD_NO
+  		FROM BOARD_ATTA
+  		WHERE BOARD_NO = #{boardNo}
+  </select>
+  
+  <!-- 공지사항 등록 -->
+  <insert id="noticeInsert">
+  		INSERT INTO BOARD(BOARD_NO,BCATEGORY_NO,BOARD_TITLE,BOARD_WRITER,BOARD_DATE,BOARD_CONTENT)
+  					VALUES(SEQ_BNO.NEXTVAL,1,#{boardTitle},#{boardWriter},sysdate,#{boardContent})
+  </insert>
+  
+  <!-- 공지사항 첨부파일 등록 -->
+  <insert id="noticeAttachInsert">
+  		INSERT INTO BOARD_ATTA(FILE_NO,BOARD_NO,ORIGIN_NAME,SAVE_NAME,FILE_PATH)
+  					VALUES(SEQ_BD_INO.NEXTVAL,SEQ_BNO.CURRVAL,#{originName},#{saveName},#{filePath})
+  </insert>
 </mapper>

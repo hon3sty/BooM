@@ -274,85 +274,89 @@ h2.tit {
 				<!-- 리스트 영역 시작 -->
 				<div id="ntc1">
 					<div id="contents">
-				 <c:choose>
-   					<c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
-               			<h2 class="tit">공지사항 관리</h2>
-               		</c:when>
-               		<c:otherwise>
-               			<h2 class="tit">공지사항</h2>
-               		</c:otherwise>
-               	 </c:choose>
-				<div class="table-wrap" id="ntc2">
-					<div class="board-view">
-						<div class="tit-area">
-							<p class="tit">${b.boardTitle }</p>
+					 <c:choose>
+	   					<c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
+	               			<h2 class="tit">공지사항 관리</h2>
+	               		</c:when>
+	               		<c:otherwise>
+	               			<h2 class="tit">공지사항</h2>
+	               		</c:otherwise>
+	               	 </c:choose>
+						<div class="table-wrap" id="ntc2">
+							<div class="board-view">
+								<div class="tit-area">
+									<p class="tit">${b.boardTitle }</p>
+								</div>
+								<div class="info">
+									<p>
+										<span class="tit">글쓴이</span>
+										<span class="txt">${b.boardWriter}</span>
+									</p>
+									<p>
+										<span class="tit">조회수</span>
+										<span class="txt">${b.boardCount}</span>
+									</p>
+									<p>
+										<span class="tit">등록일</span>
+										<span class="txt">${b.boardDate}</span>
+									</p>
+								</div>
+								<div class="cont">${b.boardContent}</div>
+								<div class="info">
+									<br>
+									<p>
+										<span class="tit">첨부파일</span>
+										<c:choose>
+	   										<c:when test="${empty ba}">
+												<span class="txt">첨부파일이 없습니다.</span>
+											</c:when>
+	               							<c:otherwise>
+												<span class="txt"><a href="${ba.saveName}" download="${ba.originName}">${ba.originName}</a></span>
+											</c:otherwise>
+										</c:choose>
+									</p>
+								</div>
+							</div>
 						</div>
-
-						<div class="info">
-							<p>
-								<span class="tit">글쓴이</span>
-								<span class="txt">${b.boardWriter}</span>
-							</p>
-							<p>
-								<span class="tit">조회수</span>
-								<span class="txt">${b.boardCount}</span>
-							</p>
-							<p>
-								<span class="tit">등록일</span>
-								<span class="txt">${b.boardDate}</span>
-							</p>
-						</div>
-						<div class="cont">${b.boardContent}</div>
-						<div class="info">
-							<br>
-							<p>
-								<span class="tit">첨부파일</span>
-								<span class="txt">첨부파일이 없습니다.</span>
-							</p>
-						</div>
-					</div>
-				</div>
 						<section class="blog-details spad" style="padding-bottom: 0px;">
-				        <div class="container">
-				            <div class="row d-flex justify-content-center">
+				        	<div class="container">
+				           		 <div class="row d-flex justify-content-center">
 										<div class="col-lg-12">
 											<div class="blog__details__content">
 												<div class="blog__details__btns" style="padding: 20px 0 15px; margin-bottom: 65px;">
-						                            	<div class="row">
-		                                	<div class="col-lg-6">
-		                                    	<div class="blog__details__btns__item">
-		                                        	<h5><a href="#"><span class="arrow_left"></span>이전글</a>
-		                                        </h5>
-		                                   		</div>
-		                                	</div>
-		                                	<div class="col-lg-6">
-		                                    	<div class="blog__details__btns__item next__btn">
-		                                        	<h5><a href="#">다음글<span class="arrow_right"></span></a></h5>
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                           </div>
-	                          </div>
-                          </div>
-                          </div>
-                          </div>
-                          </section>
+					                            	<div class="row">
+					                                	<div class="col-lg-6">
+					                                    	<div class="blog__details__btns__item">
+					                                        	<h5><a href="#"><span class="arrow_left"></span>이전글</a></h5>
+					                                   		</div>
+					                                	</div>
+					                                	<div class="col-lg-6">
+					                                    	<div class="blog__details__btns__item next__btn">
+					                                        	<h5><a href="#">다음글<span class="arrow_right"></span></a></h5>
+					                                        </div>
+					                                    </div>
+		                              				 </div>
+		                          				 </div>
+		                         			</div>
+		                        		</div>
+		                   		 </div>
+		                 	 </div>
+		                   </section>
 							<c:choose>
-								<c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
+							   <c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
 									<div class="anime__details__btn"  style="text-align:center;">
-		                                <a href="noticeList.bo" class="follow-btn">목록</a>
-		                                <a href="noticeList.bo" class="follow-btn">수정</a>
-		                                <a href="noticeList.bo" class="follow-btn">삭제</a>
+		                               <a href="noticeList.bo" class="follow-btn">목록</a>
+		                               <a href="noticeList.bo" class="follow-btn">수정</a>
+		                               <a href="noticeList.bo" class="follow-btn">삭제</a>
 		                            </div>
-	                            </c:when>
-	                            <c:otherwise>
-	                            	<div class="anime__details__btn"  style="text-align:center;">
-		                                <a href="noticeList.bo" class="follow-btn">목록</a>
-		                            </div>
-	                            </c:otherwise>
-                            </c:choose>
-			</div>
-					
+		                   	   </c:when>
+		                       <c:otherwise>
+			                       	<div class="anime__details__btn"  style="text-align:center;">
+			                            <a href="noticeList.bo" class="follow-btn">목록</a>
+			                        </div>
+		                       </c:otherwise>
+		                    </c:choose>
+						</div>
 					<!-- 리스트 영역 끝 -->
  				 </div>
 			</div>

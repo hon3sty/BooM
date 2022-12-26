@@ -2,11 +2,8 @@ package com.bm.spring.board.model.service;
 
 import java.util.ArrayList;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.bm.spring.board.model.dao.BoardDao;
 import com.bm.spring.board.model.vo.Board;
+import com.bm.spring.board.model.vo.BoardAttachment;
 import com.bm.spring.common.model.vo.PageInfo;
 
 public interface BoardService {
@@ -24,8 +21,14 @@ public interface BoardService {
 	//공지사항 상세 조회
 	Board noticeSelect(int boardNo);
 	
+	//공지사항 첨부파일 조회
+	BoardAttachment noticeAttachSelect(int boardNo);
+	
 	//공지사항 작성
 	int noticeInsert(Board b);
+	
+	//공지사항 첨부파일 등록
+	int noticeAttachInsert(BoardAttachment ba);
 	
 	//공지사항 삭제
 	int noticeDelete(int boardNo);

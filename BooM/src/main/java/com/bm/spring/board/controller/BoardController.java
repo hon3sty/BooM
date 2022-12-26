@@ -1,6 +1,10 @@
 package com.bm.spring.board.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bm.spring.board.model.service.BoardService;
 import com.bm.spring.board.model.vo.Board;
+import com.bm.spring.board.model.vo.BoardAttachment;
 import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.common.template.Pagination;
 
@@ -91,25 +96,50 @@ public class BoardController {
 		
 		if(count>0) {
 			Board b = boardService.noticeSelect(bno);
-			mv.addObject("b",b).setViewName("board/NT_0040");
+			BoardAttachment ba = boardService.noticeAttachSelect(bno);
+			mv.addObject("b",b).addObject("ba", ba).setViewName("board/NT_0040");
 		}else {
 			mv.addObject("errorMsg", "공지사항 조회 실패").setViewName("common/errorPage");
 		}
 		return mv;
 		
 	}
-	
+
+
 	// 공지사항 작성 페이지로 이동
 	@GetMapping("noticeInsert.bo")
 	public String noticeInsert() {
 		return "board/NT_0030";
 	}
-	
-	// 공지사항 등록 
+
+	// 공지사항 등록
 	@PostMapping("noticeInsert.bo")
-	public ModelAndView noticeInsert(Board b, MultipartFile upfile, ModelAndView mv, HttpSession session) {
-		return null;
+	public ModelAndView noticeInsert(Board b, BoardAttachment ba, ModelAndView mv, HttpSession session, MultipartFile upfile) {
+
+		int result = boardService.noticeInsert(b);
+		int result2 = 1;
+		
+		if (result > 0) {
+			
+			
+			if (result * result2 > 0 && !upfile.getOriginalFilename().equals("")) {
+				String saveName = saveFile(upfile,session);
+				
+				ba.setOriginName(upfile.getOriginalFilename());
+				ba.setSaveName("resources/uploadFiles/"+saveName);
+				result2 = boardService.noticeAttachInsert(ba);
+				}
+		session.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
+		mv.setViewName("redirect:/noticeAdmin.bo");
+		} 
+		
+		else {
+			mv.addObject("errorMsg", "공지사항 등록 실패").setViewName("common/errorPage");
+		}
+
+		return mv;
 	}
+
 	
 	// 공지사항 수정
 	public void noticeUpdate() {
@@ -121,6 +151,39 @@ public class BoardController {
 
 	}
 
+	//현재 넘어온 첨부파일 그 자체를 서버의 폴더에 저장시키는 메소드(모듈)
+		public String saveFile(MultipartFile upfile,HttpSession session) {
+			
+			//1.원본파일명 뽑기
+			String originName = upfile.getOriginalFilename();
+			
+			//2.시간 형식 뽑기
+			//"20221205153533" 
+			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			
+			//3.확장자 추출하기
+			String ext = originName.substring(originName.lastIndexOf("."));
+			
+			//4.랜덤숫자 추출하기 5자리
+			int ranNum = (int)(Math.random() * 90000 + 10000); //5자리 랜덤값
+			
+			//5.모두 이어붙이기
+			String saveName = currentTime+ranNum+ext;
+			
+			//6.파일을 업로드할 실질적인 위치(물리경로)찾기
+			String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+			
+			try {
+			//7. 물리경로+변경이름으로 파일 생성 및 업로드
+				upfile.transferTo(new File(savePath+saveName));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return saveName;
+		}
 
 	// FAQ 작성
 	public void faqInsert() {

@@ -15,6 +15,7 @@
 		<typeAlias type="com.bm.spring.product.model.vo.Product" alias="product"/>
 		<typeAlias type="com.bm.spring.product.model.vo.Cart" alias="cart"/>
 		<typeAlias type="com.bm.spring.product.model.vo.Order" alias="order"/>
+		<typeAlias type="com.bm.spring.board.model.vo.BoardAttachment" alias="boardAttachment"/>
 	</typeAliases>
 	 
 	<mappers>

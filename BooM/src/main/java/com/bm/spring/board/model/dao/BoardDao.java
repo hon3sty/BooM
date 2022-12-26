@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bm.spring.board.model.vo.Board;
+import com.bm.spring.board.model.vo.BoardAttachment;
 import com.bm.spring.common.model.vo.PageInfo;
 
 @Repository
@@ -37,5 +38,21 @@ public class BoardDao {
 	public Board noticeSelect(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.selectOne("boardMapper.noticeSelect", boardNo);
 	}
+
+	//공지사항 등록
+	public int noticeInsert(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.noticeInsert", b);
+	}
+
+	//공지사항 첨부파일 등록
+	public int noticeAttachInsert(SqlSessionTemplate sqlSession, BoardAttachment ba) {
+		return sqlSession.insert("boardMapper.noticeAttachInsert", ba);
+	}
+
+	//공지사항 첨부파일 조회
+	public BoardAttachment noticeAttachSelect(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.noticeAttachSelect", boardNo);
+	}
+	
 
 }
