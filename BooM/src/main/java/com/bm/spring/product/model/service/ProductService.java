@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.product.model.vo.Cart;
+import com.bm.spring.product.model.vo.DateChk;
 import com.bm.spring.product.model.vo.Order;
 import com.bm.spring.product.model.vo.OrderList;
 import com.bm.spring.product.model.vo.Product;
@@ -45,7 +46,13 @@ public interface ProductService {
 	
 	//구매페이지에서 결제하기(order Detail)
 	int orderDetailInsert(Order order);
-
+	
+	//구매목록 리스트
 	ArrayList<Order> purchaseList();
+	
+	//날짜 조회 후 구매목록 리스트
+	ArrayList<Order> dateGet(DateChk date);
+
+	ArrayList<Order> detailGetList(int ono);
 
 }

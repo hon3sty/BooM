@@ -1,5 +1,7 @@
 package com.bm.spring.product.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.common.template.Pagination;
 import com.bm.spring.product.model.service.ProductService;
 import com.bm.spring.product.model.vo.Cart;
+import com.bm.spring.product.model.vo.DateChk;
 import com.bm.spring.product.model.vo.Order;
 import com.bm.spring.product.model.vo.OrderList;
 import com.bm.spring.product.model.vo.Product;
@@ -154,4 +157,27 @@ public class ProductController {
 			return "common/errorPage";
 		}
 	}
+	
+	//구매목록 날짜 조회
+	@PostMapping("date.pd")
+	public String dateGet(DateChk date,Model model,HttpServletRequest request) {
+		
+		ArrayList<Order> list=productService.dateGet(date);
+		
+		model.addAttribute("list", list);
+		
+		return "mypage/MY_0020"; 
+	}
+	
+	//구매목록 detail
+	@RequestMapping("orderDetail.pd")
+	public String detailGetList(int ono) {
+		ArrayList<Order> list=productService.detailGetList(ono);
+		
+		return null;
+	}
+
+
+	
+	
 }

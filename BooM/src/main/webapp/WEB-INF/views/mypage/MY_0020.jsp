@@ -32,6 +32,11 @@
     <link rel="stylesheet" href="resources/css2/flaticon.css">
     <link rel="stylesheet" href="resources/css2/icomoon.css">
     <link rel="stylesheet" href="resources/css2/style.css">
+    <style>
+    	tbody tr:hover{
+    		cursor:pointer;
+    	}
+    </style>
   </head>
   <!-- Header Section Begin -->
 	<jsp:include page="../common/header.jsp"/>
@@ -56,35 +61,39 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        
 							        <div  style="float: right;display:inline-block; border:1px solid black";>
 										<strong class="period">조회기간</strong>
 										<p style="background-color:#82ae46">
-					            	        <input id="startDate" type="date"> ~ <input id="endDate" type="date">
-											<button id="btn_search">조회하기</button>
+											<form action="date.pd" method="post">
+					            	        	<input id="startDate" name="startDate" type="date"> ~ <input id="endDate" name="endDate" type="date">
+												<button  class="btn btn-primary py-3 px-4" onclick="return date()" >조회 하기</button>
+											</form>
 										</p>
 									</div>
-								
 								<th>구매 번호</th>
-						        <th>상품명</th>
-						        <th>수량</th>
-						        <th>구매금액</th>
+						        <th>보내신 분</th>
 						        <th>구매일</th>
-						        
+						        <th>만료일</th>
+						        <th>상품 상태</th>
 						      </tr>
 						    </thead>
 						    <tbody id="body">
 							    <c:forEach var="c" items="${list}">
 							      <tr class="text-center">
-							      		<td style="color:white" class="total"></td>
-								        <td class="image-prod"><div class="img" >${c.product.productImg }</div></td>
-								        <td class="product-name">
-								        	<p style="color:white">${c.product.productName }</p>
-								        </td>
-								        <td class="quantity">수량</td>
-								        <td style="color:white" class="total">총가격</td>
+							      		<input type="hidden" name="orderNo" value="${c.orderNo }">
+							      		<td style="color:white" class="total">${c.rownum }</td>
+								        <td style="color:white" class="total">${c.orderName }</td>
 								        <td style="color:white" class="total">${c.orderDate }</td>
-							      </tr> 
+								        <td style="color:white" class="total">${c.expiryDate }</td>
+								       	<c:choose>
+								       		<c:when test="${c.orderStatus eq 'Y' }">
+								       			<td style="color:white" class="total">사용 가능</td>
+								       		</c:when>
+								       		<c:otherwise>
+								       			<td style="color:white" class="total">사용 만료</td>
+								       		</c:otherwise>
+								        </c:choose>
+							   	  </tr> 
 							    </c:forEach>
 						    </tbody>
 						  </table>
@@ -121,18 +130,24 @@
   <script src="resources/js2/main.js"></script>
 
   <script>
+		function date(){
+			var start=$("#startDate").val();
+			var end=$("#endDate").val()
+			
+			var sD=new Date(start);
+			var eD=new Date(end);
+			
+			if(sD>eD){
+				alert("날짜를 잘못 입력하셨습니다")
+				return false
+			}else{
+				return true
+			}			
+		}	
 		
-		
-		$("#btn_search").click(function(){
-			//기간에 맞는 주문 조회
-			console.log($("#startDate").val());
-			console.log($("#endDate").val());
-		})
-		
-		$("#btn_cancel").click(function(){
-			//주문 취소
+		$(document).on("click","tbody>tr",function(){
+			location.href="orderDetail.pd?ono="+$(this).children().eq(0).val()
 		})
 	</script>
-    
   </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.product.model.dao.ProductDao;
 import com.bm.spring.product.model.vo.Cart;
+import com.bm.spring.product.model.vo.DateChk;
 import com.bm.spring.product.model.vo.Order;
 import com.bm.spring.product.model.vo.OrderList;
 import com.bm.spring.product.model.vo.Product;
@@ -89,6 +90,16 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ArrayList<Order> purchaseList() {
 		return productDao.purchaseList(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Order> dateGet(DateChk date) {
+		return productDao.dateGet(sqlSession,date);
+	}
+
+	@Override
+	public ArrayList<Order> detailGetList(int ono) {
+		return productDao.detailGetList(sqlSession,ono);
 	}
 
 }

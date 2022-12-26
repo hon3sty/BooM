@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Order {
+	private int rownum;
 	private int orderDetailNo;
 	private int orderNo;
 	private String orderName;
