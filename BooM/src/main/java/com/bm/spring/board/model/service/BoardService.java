@@ -35,4 +35,6 @@ public interface BoardService {
 	
 	//공지사항 수정
 	int noticeUpdate(Board b);
+	
+	// 막 장성함
 }
