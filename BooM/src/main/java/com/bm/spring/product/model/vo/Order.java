@@ -21,4 +21,14 @@ public class Order {
 	private Date orderDate;
 	private String orderStatus;
 	private Date expiryDate;
+	private Product product;
+	
+	public Order(int productNo, int productCount, int productPrice) {
+		super();
+		this.productNo = productNo;
+		this.productCount = productCount;
+		this.productPrice = productPrice;
+	}
+	
+	
 }

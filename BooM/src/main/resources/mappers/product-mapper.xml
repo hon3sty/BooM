@@ -20,18 +20,36 @@
 		<result column="PRODUCT_DATE" property="productDate"/>
 		<result column="STATUS" property="status"/>
 	</resultMap>
-
+	
+	<resultMap type="order" id="orderResult">
+		<result column="ORDER_DETAIL_NO" property="orderDetailNo"/>
+		<result column="ORDER_NO" property="orderNo"/>
+		<result column="ORDER_NAME" property="orderName"/>
+		<result column="PRODUCT_NO" property="productNo"/>
+		<result column="PRODUCT_COUNT" property="productCount"/>
+		<result column="PRODUCT_PRICE" property="productPrice"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="MEMBER_PHONE" property="memberPhone"/>
+		<result column="ORDER_DATE" property="orderDate"/>
+		<result column="ORDER_STATUS" property="orderStatus"/>
+		<result column="EXPIRY_DATE" property="expiryDate"/>
+		<collection property="product" resultMap="productResult"/>
+	</resultMap>
+	
+	
 	<select id="selectCart" resultMap="cartResult">
 		SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,CART_COUNT
 		FROM CART
 		JOIN PRODUCT USING(PRODUCT_NO)
 	</select>
 
+
 	<select id="productGetListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM PRODUCT
 		WHERE STATUS='Y'
 	</select>
+	
 	
 	<select id="productGetList" resultMap="productResult">
 	  	SELECT PRODUCT_NO, CATEGORY_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_IMG, PRODUCT_DESC, PRODUCT_DATE, STATUS, CATEGORY_NAME
@@ -41,16 +59,19 @@
 		ORDER BY PRODUCT_DATE DESC
 	</select>
 	
+	
 	<update id="changeCount">
 		UPDATE CART
 		SET CART_COUNT = #{cartCount}
 		WHERE CART_NO = #{cartNo}
 	</update>
 	
+	
 	<delete id="cartDelete">
 		DELETE FROM CART
 		WHERE CART_NO=#{cartNo}
 	</delete>
+	
 	
 	<select id="checkedCartList" resultMap="cartResult">
 		SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_IMG,CART_COUNT
@@ -61,6 +82,7 @@
  			#{cartNo}
 		</foreach>
 	</select>
+	
 	
 	<insert id="purchaseInsert">
 		INSERT INTO ORDER_INFO(ORDER_NO
@@ -76,12 +98,15 @@
 	<insert id="orderDetailInsert">
 		INSERT INTO ORDER_DETAIL VALUES(SEQ_ODNO.NEXTVAL,#{productNo},SEQ_OINO.CURRVAL,#{productCount},#{productPrice})
 	</insert>
-
-
-
-
-
-
+	
+	
+	<select id="purchaseList" resultMap="orderResult">
+		SELECT PRODUCT_IMG,PRODUCT_NAME,ORDER_NO,ORDER_DATE,EXPIRY_DATE,ORDER_DETAIL_NO
+		FROM ORDER_DETAIL
+		JOIN ORDER_INFO USING (ORDER_NO)
+		JOIN PRODUCT USING (PRODUCT_NO)
+		ORDER BY ORDER_DATE DESC 
+	</select>
 
 
 

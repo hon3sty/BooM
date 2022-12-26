@@ -44,6 +44,8 @@ public interface ProductService {
 	int purchaseInsert(Order order);
 	
 	//구매페이지에서 결제하기(order Detail)
-	int orderDetailInsert(OrderList list);
+	int orderDetailInsert(Order order);
+
+	ArrayList<Order> purchaseList();
 
 }
