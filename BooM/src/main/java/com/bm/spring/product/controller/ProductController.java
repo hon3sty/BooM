@@ -1,5 +1,7 @@
 package com.bm.spring.product.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,6 +18,9 @@ import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.common.template.Pagination;
 import com.bm.spring.product.model.service.ProductService;
 import com.bm.spring.product.model.vo.Cart;
+import com.bm.spring.product.model.vo.DateChk;
+import com.bm.spring.product.model.vo.Order;
+import com.bm.spring.product.model.vo.OrderList;
 import com.bm.spring.product.model.vo.Product;
 
 @Controller
@@ -58,12 +65,18 @@ public class ProductController {
 		ArrayList<Cart> list = productService.cartGetList();
 		
 		model.addAttribute("list",list);
+		
 		return "mypage/MY_0030";
 	}
 	
 	//구매목록
 	@RequestMapping("purchaseList.me")
-	public String purchaseList() {
+	public String purchaseList(Model model) {
+		//로그인 기능 후 memberNo 가져오기
+		ArrayList<Order> list=productService.purchaseList();
+		
+		model.addAttribute("list",list);
+		
 		return "mypage/MY_0020";
 	}
 	
@@ -118,11 +131,53 @@ public class ProductController {
 	}
 	
 	//상품 구매
-	@RequestMapping("purchase.pd")
-	public String purchaseInsert() {
+	@PostMapping("purchase.pd")
+	public String purchaseInsert(Order order,@ModelAttribute(value="OrderList") OrderList list,@RequestParam("chkCount") int count, Model model) {
+		ArrayList<Order> oList=new ArrayList();
+		
+		for(int i=0;i<count;i++) {
+			oList.add(new Order(list.getList().get(i).getProductNo(),list.getList().get(i).getProductCount(),list.getList().get(i).getProductPrice()));
+		}
+		
+		//ORDER_INFO 값 넣기
+		int result=productService.purchaseInsert(order);
+		int result2=1;
+		
+		//ORDER_DETAIL 값 넣기 
+		if (result > 0) {
+			for (int i = 0; i < count; i++) {
+				result2 = productService.orderDetailInsert(oList.get(i));
+			}
+		}
+		
+		if (result * result2 > 0) {
+			return "mypage/MY_0020";
+		} else {
+			model.addAttribute("errorMsg", "결제 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	//구매목록 날짜 조회
+	@PostMapping("date.pd")
+	public String dateGet(DateChk date,Model model,HttpServletRequest request) {
+		
+		ArrayList<Order> list=productService.dateGet(date);
+		
+		model.addAttribute("list", list);
+		
+		return "mypage/MY_0020"; 
+	}
+	
+	//구매목록 detail
+	@RequestMapping("orderDetail.pd")
+	public String detailGetList(int ono) {
+		ArrayList<Order> list=productService.detailGetList(ono);
 		
 		return null;
 	}
+
+
 	
 	
 }

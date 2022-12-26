@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 	<!-- 구매 내역 [하늘] -->
@@ -30,6 +32,11 @@
     <link rel="stylesheet" href="resources/css2/flaticon.css">
     <link rel="stylesheet" href="resources/css2/icomoon.css">
     <link rel="stylesheet" href="resources/css2/style.css">
+    <style>
+    	tbody tr:hover{
+    		cursor:pointer;
+    	}
+    </style>
   </head>
   <!-- Header Section Begin -->
 	<jsp:include page="../common/header.jsp"/>
@@ -54,56 +61,46 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th><div  style="float: right;display:inline-block; border:1px solid black";>
-							<strong class="period">조회기간</strong>
-							<p style="background-color:#82ae46">
-		            	        <input id="startDate" type="date"> ~ <input id="endDate" type="date">
-								<button id="btn_search">조회하기</button>
-							</p>
-						</div></th>
-						        <th>상품명</th>
-						        <th>가격</th>
-						        <th>수량</th>
-						        <th>구매금액</th>
-						        
+							        <div  style="float: right;display:inline-block; border:1px solid black";>
+										<strong class="period">조회기간</strong>
+										<p style="background-color:#82ae46">
+											<form action="date.pd" method="post">
+					            	        	<input id="startDate" name="startDate" type="date"> ~ <input id="endDate" name="endDate" type="date">
+												<button  class="btn btn-primary py-3 px-4" onclick="return date()" >조회 하기</button>
+											</form>
+										</p>
+									</div>
+								<th>구매 번호</th>
+						        <th>보내신 분</th>
+						        <th>구매일</th>
+						        <th>만료일</th>
+						        <th>상품 상태</th>
 						      </tr>
 						    </thead>
-						    <tbody>
-						      <tr class="text-center">
-						        
-						        <td class="image-prod"><div class="img" ></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p style="color:white">Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td style="color:white" class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" readonly>
-					          	</div>
-					          </td>
-						        
-						        <td style="color:white" class="total">$4.90</td>
-						      </tr><!-- END TR-->
+						    <tbody id="body">
+							    <c:forEach var="c" items="${list}">
+							      <tr class="text-center">
+							      		<input type="hidden" name="orderNo" value="${c.orderNo }">
+							      		<td style="color:white" class="total">${c.rownum }</td>
+								        <td style="color:white" class="total">${c.orderName }</td>
+								        <td style="color:white" class="total">${c.orderDate }</td>
+								        <td style="color:white" class="total">${c.expiryDate }</td>
+								       	<c:choose>
+								       		<c:when test="${c.orderStatus eq 'Y' }">
+								       			<td style="color:white" class="total">사용 가능</td>
+								       		</c:when>
+								       		<c:otherwise>
+								       			<td style="color:white" class="total">사용 만료</td>
+								       		</c:otherwise>
+								        </c:choose>
+							   	  </tr> 
+							    </c:forEach>
 						    </tbody>
 						  </table>
 					  </div>
     			</div>
     		</div>
-    		<div class="row justify-content-end">
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3 style="color:white">총 상품 구매금액</h3>
-    					<p  class="d-flex total-price">
-    						<span style="color:red">86,000 원</span>
-    					</p>
-						      <button id="btn_cancel" style="float:right">구매 취소</button>
-    				</div>
-    			</div>
-    		</div>
+    	
 			</div>
 		</section>
 
@@ -133,18 +130,24 @@
   <script src="resources/js2/main.js"></script>
 
   <script>
+		function date(){
+			var start=$("#startDate").val();
+			var end=$("#endDate").val()
+			
+			var sD=new Date(start);
+			var eD=new Date(end);
+			
+			if(sD>eD){
+				alert("날짜를 잘못 입력하셨습니다")
+				return false
+			}else{
+				return true
+			}			
+		}	
 		
-		
-		$("#btn_search").click(function(){
-			//기간에 맞는 주문 조회
-			console.log($("#startDate").val());
-			console.log($("#endDate").val());
-		})
-		
-		$("#btn_cancel").click(function(){
-			//주문 취소
+		$(document).on("click","tbody>tr",function(){
+			location.href="orderDetail.pd?ono="+$(this).children().eq(0).val()
 		})
 	</script>
-    
   </body>
 </html>

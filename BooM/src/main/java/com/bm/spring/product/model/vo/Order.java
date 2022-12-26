@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Order {
+	private int rownum;
 	private int orderDetailNo;
 	private int orderNo;
+	private String orderName;
 	private int productNo;
 	private int productCount;
 	private int productPrice;
@@ -20,4 +22,14 @@ public class Order {
 	private Date orderDate;
 	private String orderStatus;
 	private Date expiryDate;
+	private Product product;
+	
+	public Order(int productNo, int productCount, int productPrice) {
+		super();
+		this.productNo = productNo;
+		this.productCount = productCount;
+		this.productPrice = productPrice;
+	}
+	
+	
 }

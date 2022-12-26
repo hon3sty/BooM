@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.product.model.vo.Cart;
+import com.bm.spring.product.model.vo.DateChk;
+import com.bm.spring.product.model.vo.Order;
+import com.bm.spring.product.model.vo.OrderList;
 import com.bm.spring.product.model.vo.Product;
 
 @Repository
@@ -42,5 +45,25 @@ public class ProductDao {
 
 	public ArrayList<Cart> checkedCartList(SqlSessionTemplate sqlSession, ArrayList list) {
 		return (ArrayList)sqlSession.selectList("productMapper.checkedCartList", list);
+	}
+
+	public int purchaseInsert(SqlSessionTemplate sqlSession, Order order) {
+		return sqlSession.insert("productMapper.purchaseInsert",order);
+	}
+
+	public int orderDetailInsert(SqlSessionTemplate sqlSession, Order order) {
+		return sqlSession.insert("productMapper.orderDetailInsert", order);
+	}
+
+	public ArrayList<Order> purchaseList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("productMapper.purchaseList");
+		}
+
+	public ArrayList<Order> dateGet(SqlSessionTemplate sqlSession, DateChk date) {
+		return (ArrayList)sqlSession.selectList("productMapper.dateList", date);
+	}
+
+	public ArrayList<Order> detailGetList(SqlSessionTemplate sqlSession, int ono) {
+		return (ArrayList)sqlSession.selectList("productMapper.detailList",ono);
 	}
 }
