@@ -63,10 +63,10 @@
 						      <tr class="text-center">
 							        <div  style="float: right;display:inline-block; border:1px solid black";>
 										<strong class="period">조회기간</strong>
-										<p style="background-color:#82ae46">
+										<p style="background-color:#e53637">
 											<form action="date.pd" method="post">
 					            	        	<input id="startDate" name="startDate" type="date"> ~ <input id="endDate" name="endDate" type="date">
-												<button  class="btn btn-primary py-3 px-4" onclick="return date()" >조회 하기</button>
+												<button style="color:white" class="btn btn-primary py-3 px-4" onclick="return date()" >조회 하기</button>
 											</form>
 										</p>
 									</div>
@@ -103,6 +103,7 @@
     	
 			</div>
 		</section>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
     

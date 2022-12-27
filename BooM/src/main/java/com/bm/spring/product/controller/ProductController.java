@@ -100,7 +100,6 @@ public class ProductController {
 	public String cartDelte(int cno,Model model,HttpServletRequest request) {
 		int result=productService.cartDelete(cno); 		 		
 		  
-		
 		if(result>0) { 			
 			  	return "redirect:"+request.getHeader("Referer"); 		
 		  }else { 			
@@ -151,7 +150,7 @@ public class ProductController {
 		}
 		
 		if (result * result2 > 0) {
-			return "mypage/MY_0020";
+			return "redirect:/purchaseList.me";
 		} else {
 			model.addAttribute("errorMsg", "결제 실패");
 			return "common/errorPage";
@@ -171,10 +170,12 @@ public class ProductController {
 	
 	//구매목록 detail
 	@RequestMapping("orderDetail.pd")
-	public String detailGetList(int ono) {
+	public String detailGetList(int ono,Model model) {
 		ArrayList<Order> list=productService.detailGetList(ono);
 		
-		return null;
+		model.addAttribute("list", list);
+		
+		return "mypage/MY_0040";
 	}
 
 
