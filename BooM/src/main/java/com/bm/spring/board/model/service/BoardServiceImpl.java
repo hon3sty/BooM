@@ -1,11 +1,14 @@
 package com.bm.spring.board.model.service;
 
 import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.bm.spring.board.model.dao.BoardDao;
 import com.bm.spring.board.model.vo.Board;
+import com.bm.spring.board.model.vo.BoardAttachment;
 import com.bm.spring.common.model.vo.PageInfo;
 
 @Service
@@ -41,12 +44,24 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.noticeSelect(sqlSession,boardNo);
 	}
 
+	//공지사항 첨부파일 조회
+	@Override
+	public BoardAttachment noticeAttachSelect(int boardNo) {
+		return boardDao.noticeAttachSelect(sqlSession,boardNo);
+	}
+	
 	//공지사항 작성
 	@Override
 	public int noticeInsert(Board b) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.noticeInsert(sqlSession,b);
 	}
+	
+	//공지사항 첨부파일 등록
+	@Override
+	public int noticeAttachInsert(BoardAttachment ba) {
+		return boardDao.noticeAttachInsert(sqlSession,ba);
+	}
+	
 
 	//공지사항 삭제
 	@Override
@@ -61,5 +76,9 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
+	
 
 }

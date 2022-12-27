@@ -269,57 +269,60 @@ h2.tit {
 				<!-- 리스트 영역 시작 -->
 				<div id="ntc1">
 					<h2 class="tit">공지사항</h2>
-					<form name="regFrm" method="post" id="ntc2">
-					<input type="hidden" name="inqLclCd" value="INQD01">
-					<input type="hidden" name="custInqStatCd" value="INQST1">
-					<input type="hidden" name="cdLvl" value="3">
-					<input type="hidden" name="fileNo" value="">
-
-					<div class="table-wrap mt10">
-						<table class="board-form va-m">
-							<colgroup>
-								<col style="width:150px;">
-								<col>
-								<col style="width:150px;">
-								<col>
-							</colgroup>
-							<tbody>
-								<tr>
-									<th scope="row"><label for="qnaCustInqTitle">제목*</label> <em class="font-orange"></em></th>
-									<td colspan="3" style="width:700px;"><input type="text" name="custInqTitle" id="qnaCustInqTitle" class="input-text" maxlength="100"></td>
-								</tr>
-								<tr>
-									<th scope="row"><label for="textarea">내용*</label> <em class="font-orange"></em></th>
-									<td colspan="3" style="width:700px;">
-										<div class="textarea">
-											<textarea id="textarea" name="custInqCn" rows="5" cols="30" title="내용입력" 
-											class="input-textarea" placeholder="내용 입력" style="width:100%;" maxlength="500"></textarea>
-											<div class="util">
-												<p class="count" style="color:#fff">
-													<span id="textareaCnt">0</span> / 500
-												</p>
+					<form name="regFrm" method="post" action="noticeInsert.bo" id="ntc2" enctype="multipart/form-data">
+						<input type="hidden" name="boardWriter" value="${loginUser.memberNo}">
+						<div class="table-wrap mt10">
+							<table class="board-form va-m">
+								<colgroup>
+									<col style="width:150px;">
+									<col>
+									<col style="width:150px;">
+									<col>
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row">
+											<label for="qnaCustInqTitle">제목*</label><em class="font-orange"></em>
+										</th>
+										<td colspan="3" style="width:700px;">
+											<input type="text" name="boardTitle" id="qnaCustInqTitle" class="input-text" maxlength="100">
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">
+											<label for="textarea">내용*</label><em class="font-orange"></em>
+										</th>
+										<td colspan="3" style="width:700px;">
+											<div class="textarea">
+												<textarea id="textarea" name="boardContent" rows="5" cols="30" title="내용입력" 
+												class="input-textarea" placeholder="내용 입력" style="width:100%;" maxlength="500"></textarea>
+												<div class="util">
+													<p class="count" style="color:#fff">
+														<span id="textareaCnt">0</span> / 500
+													</p>
+												</div>
 											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">첨부파일</th>
-									<td colspan="3">
-										<div class="file-upload preview-image">
-										    <input type="text" class="upload-name" value="파일선택" disabled="disabled">
-										   	 	<label for="input-file">파일선택</label> 
-										    <input type="file" id="input-file" class="upload-hidden" style="display:none;"> 
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<br>
-					<div class="anime__details__btn" style="text-align:center;">
-                        <a href="noticeInsert.bo" class="follow-btn">등록</a>
-                    </div>
-				</form>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">첨부파일</th>
+										<td colspan="3">
+											<div class="file-upload preview-image">
+											    <input type="text" class="upload-name" value="파일선택" disabled="disabled">
+											   	 	<label for="input-file">파일선택</label> 
+											    <input type="file" id="input-file" class="upload-hidden" style="display:none;" name="upfile"> 
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<br>
+						<div class="anime__details__btn" style="text-align:center;">
+	                        <button type="submit" class="follow-btn">등록</button>
+	                        <button type="reset" class="follow-btn">취소</button>
+	                    </div>
+					</form>
 					<!-- 리스트 영역 끝 -->
  				 </div>
 			</div>
@@ -327,21 +330,16 @@ h2.tit {
 	</div>
 </div>
 
-<!-- 본문 글자 수 세기 -->
  <script>
-        $(function(){
-            $("#textarea").keyup(function(){    
-                $("#textareaCnt").text($(this).val().length); 
-            });
+	<!-- 본문 글자 수 세기 -->
+    $(function(){
+        $("#textarea").keyup(function(){    
+            $("#textareaCnt").text($(this).val().length); 
         });
+    });
  
-  
+   //첨부파일 등록 
   $(document).ready(function(){
-
-     //$('#ex_filename').change(function() {
-     //	var filename = $(this).val();
-     //	$('.upload-name').val(filename);
-     //});
 
      var fileTarget = $('.file-upload .upload-hidden');
 
@@ -355,15 +353,15 @@ h2.tit {
 
           // 추출한 파일명 삽입
           $(this).siblings('.upload-name').val(filename);
-     });
-}); 
+   	 	 });
+	}); 
 
-//preview image 
-var imgTarget = $('.preview-image .upload-hidden');
-
-imgTarget.on('change', function(){
-     var parent = $(this).parent();
-     parent.children('.upload-display').remove();
+	//preview image 
+	var imgTarget = $('.preview-image .upload-hidden');
+	
+	imgTarget.on('change', function(){
+	     var parent = $(this).parent();
+	     parent.children('.upload-display').remove();
 
      if(window.FileReader){
           //image 파일만
@@ -387,6 +385,7 @@ imgTarget.on('change', function(){
           img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
      }
 });
+
 
 </script>
 </body>
