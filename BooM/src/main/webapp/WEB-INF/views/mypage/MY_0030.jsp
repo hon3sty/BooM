@@ -214,7 +214,8 @@
 		    		 //전체 체크 해제
 		    		 $('tbody input:checkbox').prop('checked',false)
 		    	 }
-		    	 var arr=[];
+		    	 
+		    	    var arr=[];
 			   		var sum=0;
 			   		$('input[id="chk"]:checked').each(function(){
 			   			arr.push($(this).val())
@@ -224,9 +225,6 @@
 			   			sum+=parseInt(arr[i])
 			   		}
 			   		$("#sum").html(sum)
-			   		
-			   		
-		    	 
 		     })
 		     
 		    //한개 삭제 버튼 
@@ -244,13 +242,15 @@
 		     
 		     //선택항목 삭제
 		     $("#btn_delSel").click(function(){
-		    	 var arr=[];
+		    	 var arrC=[];
 		    	 $('input[id="chk"]:checked').each(function(){
-			   			arr.push($(this).parents().eq(1).children().eq(0).val())
+			   			arrC.push($(this).parents().eq(1).children().eq(0).val())
 			   	  })
 			   	  
-			   	  for(var i=0;i<arr.length;i++){
-			   		  location.href="cartDelete.pd?cno="+arr[i]
+			   	  console.log(arrC)
+			   	  
+			   	  for(var i=0;i<arrC.length;i++){
+			   		  location.href="cartDelete.pd?cno="+arrC[i]
 			   	  } 
 		     })
 		     
