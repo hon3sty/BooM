@@ -87,7 +87,7 @@
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
-    				<h3 style="color:white">장바구니</h3>
+    				<h3 style="color:white">구매한 상품</h3>
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
@@ -103,7 +103,7 @@
 							    <c:forEach var="c" items="${list}">
 							      <tr class="text-center">
 							      		<input type="hidden" id="total" value="${c.product.productPrice * c.productCount}" >
-								        <td class="image-prod"><div class="img" ></div></td>
+								        <td class="image-prod"><div class="img" style="background-image: url('${c.product.productImg}')" ></div></td>
 								        
 								        <td class="product-name">
 								        	<p id="pName" style="color:white">${c.product.productName}</p>
