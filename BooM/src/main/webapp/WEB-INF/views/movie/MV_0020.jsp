@@ -1,27 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- [영화] 영화 상세페이지 : 박연 -->
 <title>영화 상세페이지</title>
-
-<!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
-    
+<style>
+ .user_img{
+   background-color : #b7b7b7;
+   border-radius: 50%;
+ }
+ .review-area{
+   color:white;
+ }
+ .review-star{
+  float: right; 
+ }
+ .star {
+    position: relative;
+    font-size: 2rem;
+    color: #ddd;
+  }
+  
+  .star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;
+  }
+ 
+</style>
 </head>
 <body>
 
@@ -37,11 +59,11 @@
                 <div class="col-lg-12">
                     
                 
-                    <div class="breadcrumb__links">
+                    <%-- <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i> Home</a>
                         <a href="./categories.html">Categories</a>
-                        <span>Romance</span>
-                    </div>
+                        <span>${m.mvKeyword }</span>
+                    </div> --%>
                 </div>
             </div>
         </div>
@@ -54,9 +76,9 @@
             <div class="anime__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg="img/anime/mv1.jpg">
-                            <div class="comment"><i class="fa fa-comments"></i> 11</div> <!-- 별점리뷰 수 노출 부분 -->
-                           <div class="view"><i class="fa fa-eye"></i> 9141</div> <!-- 조회수 노출 부분 -->
+                        <div class="anime__details__pic set-bg" style="background-image : url(${m.mvImg}); background-size : contain;">
+                            <div class="comment"></div> <!-- 별점 노출 부분 -->
+                           <div class="view"><i class="fa fa-eye"></i> ${m.mvCount} </div> <!-- 조회수 노출 부분 -->
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -66,55 +88,132 @@
                             
                         <!--========== 타이틀 영역 ==========-->
                             <div class="anime__details__title">
-                                <h3>헤어질 결심</h3> <!-- 영화제목 -->
-                                <span>Decision To Leave, 2021</span> <!-- 부제(영문제목) -->
+                                <h3>${m.mvTitle }</h3> <!-- 영화제목 -->
+                                <span>${m.mvSubtitle}</span> <!-- 부제(영문제목) -->
                             </div>
                            
                         <!--==== 별점 영역 ====-->
                             <div class="anime__details__rating">
-                                <div class="rating"> <!-- 별점이미지 -->
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
+                                <div class="rating" id="starAvg-area"> <!-- 별점이미지 -->
+                                    
                                 </div>
-                                <span>8.96</span>
+                                <span>${starAvg }</span>
+                                
                             </div>
+                            
+                            <script>
+                                $(function(){
+                              	  var star="";
+                              	
+                              	  
+                              	  if(${starAvg}==0){
+                              		 star = 
+                                 		  "<i class='fa fa-star-o'></i>"+
+                                 		  "<i class='fa fa-star-o'></i>"+
+                                 		  "<i class='fa fa-star-o'></i>"+
+                                 		  "<i class='fa fa-star-o'></i>"+
+                                 		  "<i class='fa fa-star-o'></i>";
+                             		 
+                             	 }else if(${starAvg > 0 and starAvg < 1}){
+                              	  star = 
+                              		  "<i class='fa fa-star-half-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>";
+                              	 
+                              	 }else if(${starAvg} == 1){
+                              		 star =
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>";
+                              	 }else if(${starAvg > 1 and starAvg < 2}){
+                              		 star = 
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star-half-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>";
+                              		 
+                              	 }else if(${starAvg}==2){
+                              		 star = 
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>";
+                              		 
+                              	 }else if(${starAvg > 2 and starAvg < 3}){
+                              		 star = 
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star-half-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>";
+                              	 }else if(${starAvg}==3){
+                              		 star = 
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>";
+                              		 
+                              	 }else if(${starAvg > 3 and starAvg < 4}){
+                              		 star = 
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star-half-o'></i>"+
+                              		  "<i class='fa fa-star-o'></i>";
+                              		 
+                              	 }else if(${starAvg} == 4){
+                              		 star = 
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star-o'></i>";
+                              		 
+                              	 }else if(${starAvg > 4 and starAvg < 5}){
+                              		  star = 
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star-half-o'></i>";
+                              		 
+                              	 }else if(${starAvg} == 5){
+                              		 
+                              		 star = 
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>"+
+                              		  "<i class='fa fa-star'></i>";
+                              	 }
+                              	
+                              	  $("#starAvg-area").html(star);
+                                })
+                                
+                                </script>
                         <!--======== 줄거리 영역 =========-->
-                            <p>산 정상에서 추락한 한 남자의 변사 사건.
-                                담당 형사 '해준'(박해일)은
-                                사망자의 아내 '서래'(탕웨이)와 마주하게 된다.
-                                
-                                "산에 가서 안 오면 걱정했어요, 마침내 죽을까 봐."
-                                
-                                남편의 죽음 앞에서 특별한 동요를 보이지 않는 '서래'.
-                                경찰은 보통의 유가족과는 다른 '서래'를 용의선상에 올린다.
-                                '해준'은 사건 당일의 알리바이 탐문과 신문,
-                                잠복수사를 통해 '서래'를 알아가면서
-                                그녀에 대한 관심이 점점 커져가는 것을 느낀다.
-                                
-                                한편, 좀처럼 속을 짐작하기 어려운 '서래'는
-                                상대가 자신을 의심한다는 것을 알면서도
-                                조금의 망설임도 없이 '해준'을 대하는데….
-                                
-                                진심을 숨기는 용의자
-                                용의자에게 의심과 관심을 동시에 느끼는 형사
-                                그들의 <헤어질 결심></p>
+                            <p> ${m.mvContent } </p>
                             <div class="anime__details__widget">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>키워드 : </span>멜로/로맨스, 드라마, 서스펜스</li>
-                                            <li><span>개봉일 : </span>2022 .06.29</li>
-                                            <li><span>상영시간 : </span>136분</li>
+                                            <li><span>키워드 : </span>${m.mvKeyword} </li>
+                                            <li><span>개봉일 : </span>${m.openDate}</li>
+                                            <li><span>상영시간 : </span>${m.playTime }</li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>감독 : </span>박찬욱</li>
-                                            <li><span>출연 : </span>박해일(해준), 탕웨이(서래), 이정현(정안)</li>
-                                            <li><span>등급 : </span>[국내] 15세 관람가</li>
+                                            <li><span>감독 : </span>${m.director }</li>
+                                            <li><span>출연 : </span>${m.actor }</li>
+                                            <li><span>등급 : </span>${m.rating }</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -122,10 +221,62 @@
                         
                         <!-- ================== 좋아요, 예매하기 버튼 영역 ================= -->
                             <div class="anime__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> 좋아요</a>
+                                <a class="follow-btn" id="likeBtn"><i class="fa fa-heart-o"></i> 좋아요</a>
                                 <a href="#" class="watch-btn"><span>예매하기</span> <i
                                     class="fa fa-angle-right"></i></a>
                                 </div>
+                                
+                                <script>
+                                
+                                /* 로그인한 회원의 좋아요 디비에 해당 영화가 있으면 좋아요 버튼의 색을 채워주는 에이젝스*/
+                                
+                                
+                                /* 좋아요 버튼 바꾸는 함수 */
+                                function changeLikeFullBtn(){
+                                	
+                                	$("#likeBtn > i").attr("class","fa fa-heart");
+                                }
+                                
+                                /* 좋아요 버튼 바꾸는 함수 */
+                                function changeLikeEmptyBtn(){
+                                	
+                                	$("#likeBtn > i").attr("class","fa fa-heart-o");
+                                }
+                                
+                                
+                                /* 좋아요 인서트하는 에이젝스 */
+                                $("#likeBtn").click(function(){
+                                	$.ajax({
+                                		url:"MLike.mv",
+                                	    data:{
+                                	    	   memberNo : 1,
+                                	    	   mvNo : ${m.mvNo}
+                                	    	
+                                	    },
+                                	    success:function(result){
+                                	    	console.log("결과 : "+result);
+                                	    	console.log("통신성공");
+                                	    	if(result==1){
+                                	    		alert("좋아요 추가 성공");
+                                	    		changeLikeFullBtn();
+                                	    	}else if(result == 3){
+                                	    		alert("좋아요 취소 성공");
+                                	    		changeLikeEmptyBtn();
+                                	    	}else{
+                                	    		alert("둘다 실패");
+                                	    	}
+                                	    	
+                                	    },
+                                	    error: function(){
+                                	    	console.log("통신실패");
+                                	    }
+                                		
+                                		
+                                	})
+                                	  
+                                  })
+                                </script>
+                                
                             </div>
                         </div>
                     </div>
@@ -138,100 +289,258 @@
                             <div class="section-title">
                                 <h5>별점 리뷰</h5>
                             </div>
+                          
+                          <c:forEach var="mr" items="${mrList }" varStatus="status">
+                          <!-- 리뷰 한 개체 시작 -->
                             <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-1.jpg" alt="">
+                                <div class="anime__review__item__pic user_img">
+                                    <img src="resources/img/anime/user_img.png" alt="유저이미지" width="50px" height="50px">
                                 </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
+                                <div class="anime__review__item__text review-area">
+                                <div class="review-star" id="star${status.index}">
+                                
+                               
+                                 </div>
+                                    <h6>${mr.memberId } - <span>${mr.reCreateDate }</span></h6>
+                                    <p> ${mr.reContent }</p>
                                 </div>
                             </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-2.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-3.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-4.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-5.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-6.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
+                            <!-- //리뷰 한 개체 끝 -->
+                          <script>
+                          
+                          $(function(){
+                        	  var star = "";
+                        	
+                        	  switch(${mr.reStar}){
+                        	  case 0: 
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  break; 
+                        	  case 0.5: 
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star-half-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  
+                        		  break; 
+                        	  case 1: 
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  break; 
+                        	  case 1.5: 
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star-half-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  
+                        		  break; 
+                        	
+                        	  case 2.0: 
+                        		 
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  
+                        		  break; 
+                        	  case 2.5: 
+                        		   star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star-half-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  
+                        		  break; 	  
+                        	  case 3.0: 
+                        		    star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  
+                        		  break; 
+                        	  
+                        	  case 3.5: 
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star-half-o'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  
+                        		  
+                        		  break; 	  
+                        		  
+                        	  case 4.0: 
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star-o'></i>"+
+                        		  "</div>";
+                        		  
+                        		  break; 
+                        	  case 4.5: 
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star-half-o'></i>"+
+                        		  "</div>";
+                        		  
+                        		  break;	  
+                        		
+                        	  case 5.0: 
+                        		
+                        		  star = "<div class='rating'>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "<i class='fa fa-star'></i>"+
+                        		  "</div>";
+                        		  
+                        		  break;
+                        		 
+                        	  
+                        	  }
+                        	  
+                        	  $("#star${status.index}").empty();
+                        	  $("#star${status.index}").append(star);
+                          })
+                          
+                          
+                          </script>  
+                          
+                          </c:forEach>  
+                            
+                          
+                            
+                       
                         </div>
+                        
+                        <!-- 리뷰작성부분(로그인 했을때만 보이게) -->
                         <div class="anime__details__form">
                             <div class="section-title">
                                 <h5>리뷰 작성</h5>
                             </div>
-                            <form action="#">
-                                <textarea placeholder="Your Comment"></textarea>
-                                <button type="submit"><i class="fa fa-location-arrow"></i> 리뷰등록</button>
-                            </form>
+                            <form>
+                              <span class="star">
+                                                                                      ★★★★★
+                               <span>★★★★★</span>
+                               <input type="range" id="reStar" step="0.5" min="0" max="5">
+                              </span><span id="starScore" style="color:white;"></span>
+                                
+                                <textarea id="reContent" placeholder="Your Comment"></textarea>
+                                <button type="button" id="reviewBtn"><i class="fa fa-location-arrow"></i> 리뷰등록</button>
+                           </form>
                         </div>
+                       
+                        <script>
+                        $('#reStar').click(function(){
+                        	/* console.log($('#reStar').val() * 20+"%"); */
+                        	$('.star span').css("width", $('#reStar').val() * 20+"%");
+                        	
+                        	$("#starScore").empty();
+                        	$("#starScore").append($("#reStar").val());
+                       })
+                       
+                       
+                       function refreshMvDetail(){
+	                     	location.reload();
+	                   }
+                       
+                       $("#reviewBtn").click(function(){
+                    	   $.ajax({
+                    		   
+                    		   url:"mvReviewInsert.mv",
+                    		   data:{memberNo : 1,
+                    			     mvNo : ${m.mvNo}, 
+                    			     reContent: $("#reContent").val(),
+                    			     reStar: $("#reStar").val()
+                    			     },
+                    		   success : function(result){
+                    			   console.log("통신성공");
+                    	           alert("댓글이 등록 되었습니다.");
+                    	           refreshMvDetail();
+                    	           
+                    		   },
+                    		   error: function(){
+                    			   console.log("통신실패");
+                    		   }
+                    		   
+                    	   })
+                       })
+                       
+                        
+                        </script>
                     </div>
+                    
+                  <!--============================================ 추천 영화리스트 영역 ============================================ -->
                     <div class="col-lg-4 col-md-4">
-            
-                <!--============================================ 추천 영화리스트 영역 ============================================ -->
+             
                         <div class="anime__details__sidebar">
                             <div class="section-title">
                                 <h5>추천 영화 목록</h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-1.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Boruto: Naruto next generations</a></h5>
+                         <!-- 추천영화 반복문  --> 
+                        <c:choose>
+                          
+                          <c:when test="${fn:length(mList) < 4 }">
+                            
+                             <c:forEach var="ml" items="${mList }" varStatus="status">
+                          <!-- 추천영화 1개체 시작 -->
+                            <div class="product__sidebar__view__item set-bg" style="background-image : url(${ml.mvImg}); background-size : cover;">
+                                <div class="ep">${status.count}위</div>
+                                <div class="view"><i class="fa fa-eye"></i> ${ml.mvCount }</div>
+                                <h5><a href="movieDetail.mv?mno=${ml.mvNo}"> ${ml.mvTitle} </a></h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-2.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                           <!--// 추천영화 1개체 끝 -->
+                           </c:forEach>  
+                            
+                          </c:when>
+                          
+                          <c:otherwise>
+                            <c:forEach var="ml" items="${mList }" end="3" varStatus="status">
+                          <!-- 추천영화 1개체 시작 -->
+                            <div class="product__sidebar__view__item set-bg" style="background-image : url(${ml.mvImg}); background-size : cover;">
+                                <div class="ep"> ${status.count}위</div>
+                                <div class="view"><i class="fa fa-eye"></i> ${ml.mvCount }</div>
+                                <h5><a href="movieDetail.mv?mno=${ml.mvNo}"> ${ml.mvTitle} </a></h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-3.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                            </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-4.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                            </div>
+                           <!--// 추천영화 1개체 끝 -->
+                           </c:forEach>  
+                          </c:otherwise>
+                        
+                        </c:choose> 
+                       
+                           
                         </div>
                     </div>
                 </div>
@@ -252,17 +561,6 @@
     </div>
 </div>
 <!-- Search model end -->
- <%--  <jsp:include page=""/> --%>
-
-         <!-- Js Plugins -->
-         <script src="resources/js/jquery-3.3.1.min.js"></script>
-         <script src="resources/js/bootstrap.min.js"></script>
-         <script src="resources/js/player.js"></script>
-         <script src="resources/js/jquery.nice-select.min.js"></script>
-         <script src="resources/js/mixitup.min.js"></script>
-         <script src="resources/js/jquery.slicknav.js"></script>
-         <script src="resources/js/owl.carousel.min.js"></script>
-         <script src="resources/js/main.js"></script>
  
 </body>
 </html>

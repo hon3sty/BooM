@@ -106,7 +106,7 @@
 							      		<input type="hidden" id="productNo" name="productNo" value="${c.product.productNo }"> 
 							      		<input type="hidden" id="productPrice" name="productPrice" value="${c.product.productPrice * c.cartCount}"> 
 								        <td><input id="chk" name="chk" type="checkbox" value=${c.product.productPrice * c.cartCount}></td>
-								        <td class="image-prod"><div class="img" ></div></td>
+								        <td class="image-prod"><div class="img" style="background-image: url('${c.product.productImg}')" ></div></td>
 								        
 								        <td class="product-name">
 								        	<p style="color:white">${c.product.productName}</p>

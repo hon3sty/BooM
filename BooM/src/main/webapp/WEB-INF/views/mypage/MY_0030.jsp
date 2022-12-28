@@ -106,7 +106,7 @@
 							      <tr class="text-center">
 							      		<input type="hidden" id="cartNo" value="${c.cartNo }"> 
 								        <td><input id="chk" name="chk" type="checkbox" value=${c.product.productPrice * c.cartCount}></td>
-								        <td class="image-prod"><div class="img" ></div></td>
+								        <td class="image-prod"><div class="img" style="background-image: url('${c.product.productImg}')" ></div></td>
 								        
 								        <td class="product-name">
 								        	<p style="color:white">${c.product.productName}</p>
@@ -123,7 +123,7 @@
 								          	</div>
 							            </td>
 								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
-								        <td><a href="cartDelete.pd?cno=${c.cartNo }"; class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
+								        <td><a href="cartDelete.pd?cno=${c.cartNo }" class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
 							      </tr> 
 							    </c:forEach>
 						    </tbody>
@@ -275,11 +275,8 @@
 			   		$('input[id="chk"]:checked').each(function(){
 			   			arrS.push($(this).parents().eq(0).siblings().eq(0).val())
 			   		})
-			   		
 			   		if(arrS.length!=0){
-				   		
 							$('#buy').prop("href","checkedCart.pd?cnoArr="+arrS)		   		
-				   		
 			   		}else{
 			   			alert('구매할 항목을 선택해 주세요')
 			   		}
