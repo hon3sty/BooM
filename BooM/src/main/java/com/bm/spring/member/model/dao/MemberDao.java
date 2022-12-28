@@ -9,7 +9,7 @@ import com.bm.spring.member.model.vo.Review;
 
 @Repository
 public class MemberDao {
-
+	//ㅇ
 	public ArrayList<Review> reviewGetList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("memberMapper.reviewList");
 	}
