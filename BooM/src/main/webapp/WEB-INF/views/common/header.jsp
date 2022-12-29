@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,12 +46,138 @@
 	<script src="resources/js/jquery.slicknav.js"></script>
 	<script src="resources/js/owl.carousel.min.js"></script>
 	<script src="resources/js/main.js"></script>
-    
+<style>
+#header__logo3{
+    width: 15px;
+    height: 15px;
+	margin-right: 0px;
+}
+#header__logo4{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+.row_2{
+    display: -ms-flexbox;
+	display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -90px;
+    margin-left: 200px;
+    width:43%;
+}
+#header__logo2{
+    width: 17px;
+    height: 17px;
+	margin-right: 3px;
+}
+#header__logo3{
+    width: 15px;
+    height: 15px;
+	margin-right: 0px;
+}
+#header__logo4{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+	
+}
+.header__3{
+	text-decoration: none;
+	color: black;
+	font-size: 13px;	
+}
+#mem{
+	color : white;
+	font-size: 13px;	
+}
+#logogo{
+	color : #e1e1e1;
+	font-weight: 500;
+	line-height: 26px;
+	margin-right: 10px;
+    margin-top:10px;
+    font-size: 13px;
+    padding: 7px 3px 5px;
+}
+#logogo:hover{
+	color : white;
+	font-weight: 500;
+	line-height: 26px;
+	margin-right: 10px;
+    margin-top:10px;
+    font-size: 13px;
+    padding: 7px 3px 5px;
+}
+#logogo2:hover{
+	color : white;
+	font-weight: 500;
+	line-height: 26px;
+    font-size: 15px;
+}
+#login_1 {
+    text-align: right;
+    padding-left: 153px;
+    margin-right: 90px;
+}
+#login_2{ 
+	text-align: right;
+ 	margin-left: 75px; 
+    margin-right: 120px;
+}
+.row_1 {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -90px;
+    margin-left: -19px;
+}
+#sisi{
+	margin-right: -85px;
+} 
+#sisi2{
+	margin-right: -255px;
+}
+.row_2{
+    display: -ms-flexbox;
+	display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -90px;
+    margin-left: 200px;
+    width:43%;
+}
+.row_3{
+	display: flex;
+}
+#header_9{
+	display: flex;	
+}
+.row_4{
+	display: flex;	
+}
+#header_my0010{
+	position: fixed;
+	z-index: 99999;!important;
+  	top: 0;
+  	left: 0;
+ 	right: 0; 
+    background: #0b0c2a; 
+}
+</style>
 </head>
 <body>
+	<c:if test="${not empty alertMsg }">
+			<script>
+				alert("${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>
+		</c:if>
+<div id="header_my0010">
     <header class="header">
         <div class="container">
-            <div class="row">
+            <div class="row_1">
                 <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="./index.jsp">
@@ -60,36 +185,94 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li class="active"><a href="./index.jsp">Homepage</a></li>
-                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
-                                    <ul class="dropdown">
-                                        <li><a href="./categories.jsp">Categories</a></li>
-                                        <li><a href="./anime-details.jsp">Anime Details</a></li>
-                                        <li><a href="./anime-watching.jsp">Anime Watching</a></li>
-                                        <li><a href="./blog-details.jsp">Blog Details</a></li>
-                                        <li><a href="./signup.jsp">Sign Up</a></li>
-                                        <li><a href="./login.jsp">Login</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.jsp">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a href="./login.jsp"><span class="icon_profile"></span></a>
-                    </div>
-                </div>
-            </div>
+                <div class="col-lg-82">
+					<div class="header__nav">
+					    <nav class="header__menu mobile-menu">
+                          <ul id="row_2">
+                               <li><a href="">영화 <span class="arrow_carrot-down"></span></a>
+                                   <ul class="dropdown">
+                                      <li><a href="">현재상영작</a></li>
+                                      <li><a href="">무비차트</a></li>
+                          		   </ul>
+                               </li>
+                               <li><a href="">예매 <span class="arrow_carrot-down"></span></a>
+                                   <ul class="dropdown">
+                                      <li><a href="ticketing1.mv">빠른예매</a></li>
+                                   </ul>
+                               </li>
+                               <li><a href="productList.pd">스토어 <span class=""></span></a>
+                               </li>
+                               <li><a href="csMainForm.bo">고객센터 <span class="arrow_carrot-down"></span></a>
+                                   <ul class="dropdown">
+                                       <li><a href="">FAQ</a></li>
+                                       <li><a href="noticeList.bo">공지사항</a></li>
+                                       <li><a href="">1:1문의</a></li>
+                                       <li><a href="">분실물문의</a></li>                                        
+                                   </ul>
+                               </li> 
+                          <span id="login_1">
+                           <c:choose>
+      						  <c:when test="${empty Memberlogin}">
+      						  <span id="sisi">
+                                <a href="login.me"><img src="resources/img/common/lock.png" id="header__logo3"><span id="logogo"> 로그인 </span></a>                                
+                                <a href="insert.me"><img src="resources/img/common/user-a.png" id="header__logo3"><span id="logogo"> 회원가입 </span></a>
+                                
+                                <a href="login.me"><img src="resources/img/common/user-b.png" id="header__logo3"><span id="logogo"> 마이페이지 </span></a>
+            
+								<span class="col-lg-2">
+								<span class="header__right">
+                         		 <a href="#" class="search-switch"><img src="resources/img/common/search.png" id="header__logo3"></a></span>
+                         		 <a href="#"><img src="resources/img/common/menu-burger.png" id="header__logo4"><span id="logogo"></span></a></span>
+                         		 </span>
+                         		</span>
+                         		</span>
+        					  </c:when>
+							<c:otherwise>
+        				   <span id="login_2">	  	
+					 <!--	<lable id="mem">${Memberlogin.memberName}님 환영합니다</label> &nbsp;&nbsp;  -->
+					 		 <span id="sisi2">
+         						<a href="logout.me"><img src="resources/img/common/1_unlock.png" id="header__logo3"><span id="logogo"> 로그아웃 </span></a>
+         						<a href="mypage.me"><img src="resources/img/common/user-b.png" id="header__logo3"><span id="logogo"> 마이페이지 </span></a>
+         						<span class="col-lg-2">
+							 	<span class="header__right">
+                         	 	 <a href="#" class="search-switch"><img src="resources/img/common/search.png" id="header__logo3"></a></span>
+                         	 	 <a href="#"><img src="resources/img/common/menu-burger.png" id="header__logo4"><span id="logogo"></span></a></span>
+								</span>
+      					  	   </span>
+							 </c:otherwise>
+      					   </c:choose>
+      				  </ul>
+                    </nav>
+                  </div>
+               </div>              
+			 </div>
             <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
+            </div>
+             </div>
+        <script>       	
+        	$(function() {
+        		//돋보기 아이콘 클릭시 생성
+        		$(".search-switch").on("click",function(){
+            		$(".search-model").css("display","block");
+            	})
+        		//검색에서 X 버튼 클릭시 삭제
+        		$(".search-close-switch").click(function(){
+            		$(".search-model").css("display","none");
+            	})
+        	})      	
+        </script>
+</header>
+ <!-- Search model Begin -->
+  <div class="search-model" id="model-close">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="검색어를 입력해주세요.">
+        </form>
+    </div>
+  </div>
+<!-- Search model end -->
+</div>
+<br><br>
 </body>
 </html>

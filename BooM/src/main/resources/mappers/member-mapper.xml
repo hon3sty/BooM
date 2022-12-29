@@ -23,7 +23,47 @@
 		JOIN MOVIE USING (MV_NO)
 		WHERE MEMBER_NO=1
 	</select>
-
+	
+	<!-- 로그인 -->
+	<select id="Memberlogin" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_PWD = #{memberPwd}
+		AND STATUS = 'Y'
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="Memberinsert" parameterType="member">
+		INSERT INTO MEMBER(
+							MEMBER_NO
+							,MEMBER_ID
+							,MEMBER_PWD
+							,MEMBER_NAME
+							,MEMBER_BIRTH
+							,GENDER
+							,ADDRESS
+							,EMAIL
+							,PHONE
+							)
+				VALUES( 
+							SEQ_MNO.NEXTVAL
+					       ,#{memberId}
+					       ,#{memberPwd}
+					       ,#{memberName}
+					       ,#{memberBirth}
+					       ,#{gender}
+					       ,#{address}
+					       ,#{email}
+					       ,#{phone}
+						)
+	</insert>
+	<select id="checkId" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{checkId}
+		AND STATUS = 'Y'
+	</select>
 
 
 

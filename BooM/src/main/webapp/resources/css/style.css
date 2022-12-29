@@ -279,9 +279,9 @@ ol {
 	display: none;
 	position: fixed;
 	width: 100%;
-	height: 100%;
+	height: 40%;
 	left: 0;
-	top: 0;
+	top: 100px;
 	background: #000;
 	z-index: 99999;
 }
@@ -376,10 +376,10 @@ ol {
 	position: absolute;
 	left: 0;
 	top: 82px;
-	width: 150px;
+	width: 120px;
 	background: #ffffff;
-	text-align: left;
-	padding: 5px 0;
+	text-align: center;
+	padding: 3px 0;
 	z-index: 9;
 	opacity: 0;
 	visibility: hidden;
@@ -437,12 +437,29 @@ ol {
 	display: none;
 }
 
+.header__logo2{
+    width: 20px;
+    height: 20px;
+}
+.header__3{
+	text-decoration: none;
+	color: black;
+	font-size: 13px;	
+}
+#mem{
+	color : white;
+	font-size: 13px;	
+}
+#lolo{
+		color : white;
+	font-size: 13px;
+}
 /*---------------------
   Hero
 -----------------------*/
 
 .hero {
-	padding-top: 50px;
+	padding-top: 23px;
 }
 
 .hero__items {
@@ -1124,8 +1141,8 @@ ol {
 }
 
 .anime__review__item__pic img {
-	height: 150px;
-	width: 150px;
+	height: 50px;
+	width: 50px;
 	border-radius: 50%;
 }
 
@@ -1716,10 +1733,10 @@ ol {
   Login
 -----------------------*/
 
-.login {
-	padding-top: 130px;
+/* .login {
+	padding-top: 30px;
 	padding-bottom: 120px;
-}
+} */
 
 .login__form {
 	position: relative;
@@ -1995,6 +2012,16 @@ ol {
 	color: #e53637;
 }
 
+.footer__logo2{
+    width: 20px;
+    height: 20px;
+    margin: 4px;;
+        }
+        
+ #p1{
+ 	font-size : 12px; 
+ 	color: white;
+ }       
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1200px) and (max-width: 1300px) {
@@ -2338,5 +2365,13 @@ ol {
 	}
 	.anime__review__item__text {
 		padding: 18px 20px 20px;
+	}
+/*---------------------
+  MyPage
+-----------------------*/	
+	
+	.my_0010{
+	
+	
 	}
 }
