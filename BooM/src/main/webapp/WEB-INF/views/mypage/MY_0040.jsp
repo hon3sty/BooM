@@ -68,8 +68,16 @@
     </style>
     
   </head>
-  <body class="goto-here">
-  <jsp:include page="../common/header.jsp"/>
+<body class="goto-here">
+<jsp:include page="../common/header.jsp"/> 
+<!-- 전체 영역-->	
+<div id="outer_0010">		
+<!--메뉴바 -->
+<jsp:include page="../common/menu.jsp"/>
+
+<!--영역 시작  -->
+<div id="pd">	
+<!--영역 시작  -->	
 		
   
     <div class="hero-wrap hero-bread" style="background-image: url('resources/img/cart6.jpg'); background-size:contain;">
@@ -174,5 +182,10 @@
 		
 		   	
 	</script>
+<!--pd영역 끝-->
+</div>
+</div>
+<!--전체영역 끝--> 
+	<jsp:include page="../common/footer.jsp" />
   </body>
 </html>

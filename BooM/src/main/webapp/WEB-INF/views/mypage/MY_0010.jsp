@@ -121,7 +121,7 @@
 										<div class="sidebar__comment__1-1"></div>
 										<div class="sidebar__comment__1-2">
 											<h5>
-												<a href="#">무비스토리</a>
+												<a href="review.my">무비스토리</a>
 											</h5>
 										</div>
 									</div>
@@ -200,7 +200,7 @@
 
 								</div>
 							</div>
-						</div>
+						</div> 
 					</div>
 				</div>
 			</section>

@@ -41,7 +41,7 @@
                        <li><a href=""><img src="resources/img/common/1_headset.png" class="footer__logo5"> <span id="logogo2">고객센터</span></a></li>
                      </ul>
                 </div>
-            </div>
+            </div> 
             <br>
             <div class="col-lg-3">
             <div id="footer-sns">

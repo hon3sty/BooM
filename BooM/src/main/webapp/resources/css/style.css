@@ -964,6 +964,7 @@ ol {
 
 .anime-details {
 	padding-top: 60px;
+	width: 1000px;
 }
 
 .anime__details__content {
@@ -2365,13 +2366,5 @@ ol {
 	}
 	.anime__review__item__text {
 		padding: 18px 20px 20px;
-	}
-/*---------------------
-  MyPage
------------------------*/	
-	
-	.my_0010{
-	
-	
-	}
+	} 
 }

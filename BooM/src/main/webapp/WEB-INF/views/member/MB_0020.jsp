@@ -220,7 +220,7 @@
                            <span id="login__0010"><a href="insert.me" class="forget_pass"><img src="resources/img/common/user-a.png" id="header__logo2"> 회원가입</a></span>                
                         </form>
                         
-                    </div>
+                    </div> 
                 </div>
                 <div class="col-lg-6">
                     <div id="login__social__links">

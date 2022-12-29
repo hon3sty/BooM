@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+     
     <!-- template -->
     <meta name="description" content="Anime Template">
     <meta name="keywords" content="Anime, unica, creative, html">
@@ -204,7 +204,7 @@
                                </li>
                                <li><a href="csMainForm.bo">고객센터 <span class="arrow_carrot-down"></span></a>
                                    <ul class="dropdown">
-                                       <li><a href="">FAQ</a></li>
+                                       <li><a href="faqListForm.bo">FAQ</a></li>
                                        <li><a href="noticeList.bo">공지사항</a></li>
                                        <li><a href="">1:1문의</a></li>
                                        <li><a href="">분실물문의</a></li>                                        

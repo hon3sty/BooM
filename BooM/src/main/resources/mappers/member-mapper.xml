@@ -15,7 +15,17 @@
 		<result column="MV_TITLE" property="mvTitle"/>
 		<result column="MV_IMG" property="mvImg"/>
 	</resultMap>
-	
+	<resultMap type="member" id="memberResultSet">
+		<result column="MEMBER_ID" property="memberId"/>
+		<result column="MEMBER_PWD" property="memberPwd"/>
+		<result column="MEMBER_NAME" property="memberName"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
 	
 	<select id="reviewList" resultMap="reviewResult">
 		SELECT RE_NO,MV_NO,RE_STAR,RE_CONTENT,RE_CREATEDATE,MV_TITLE,MV_IMG
@@ -58,15 +68,12 @@
 					       ,#{phone}
 						)
 	</insert>
+	
+	<!-- 아이디 중복체크 -->
 	<select id="checkId" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE MEMBER_ID = #{checkId}
 		AND STATUS = 'Y'
-	</select>
-
-
-
-
-
+	</select> 
 </mapper>
