@@ -25,7 +25,7 @@ public class MemberController {
 	private MemberService memberService;
 	private com.bm.spring.member.model.service.MemberService serivce;
 	
-	//내가 쓴 리뷰
+	//내가 쓴 리뷰 
 	@RequestMapping("review.my")
 	public String reviewGetList(Model model) {
 		//member no 받아오기
