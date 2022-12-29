@@ -16,9 +16,11 @@ public class Member {
     private String memberId;    //  MEMBER_ID VARCHAR2(30)
     private String memberPwd;   //  MEMBER_PWD VARCHAR2(30)
     private String memberName;  //  MEMBER_NAME VARCHAR2(30)
+    private int memberBirth; 	//  MEMBER_BIRTH VARCHAR(100),
+    private String gender;   	//  GENDER VARCHAR2(1) CHECK (GENDER IN('M', 'F' ,'U')),
     private String phone;       //  PHONE VARCHAR2(13)
     private String email;       //  EMAIL VARCHAR2(100)
-    private String address;     //  ADDRESS VARCHAR2(200)
+    private String address;      //  ADDRESS VARCHAR2(200)
     private Date enrollDate;    //  ENROLL_DATE DATE
     private Date modifyDate;    //  MODIFY_DATE DATE
     private String status;      //  STATUS VARCHAR2(1)

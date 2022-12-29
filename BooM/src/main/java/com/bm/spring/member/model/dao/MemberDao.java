@@ -5,8 +5,8 @@ import com.bm.spring.member.model.vo.Member;
 
 @Repository
 public class MemberDao {
-  public Member Memberlogin(SqlSessionTemplate sqlSession, String MemberId) {
-    return sqlSession.selectOne("memberMapper.Memberlogin",MemberId);
+  public Member Memberlogin(SqlSessionTemplate sqlSession, Member m) {
+    return sqlSession.selectOne("memberMapper.Memberlogin",m);
   }
   public int Memberinsert(SqlSessionTemplate sqlSession, Member m) {
     return sqlSession.insert("memberMapper.Memberinsert",m);
@@ -18,6 +18,6 @@ public class MemberDao {
     return sqlSession.update("memberMapper.Memberdelete",MemberId);
   }
   public int checkId(SqlSessionTemplate sqlSession, String checkId) {
-    return sqlSession.selectOne("memberMapper.checkId",checkId);
+	  return sqlSession.selectOne("memberMapper.checkId",checkId);
   }
 }

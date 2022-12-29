@@ -459,7 +459,7 @@ ol {
 -----------------------*/
 
 .hero {
-	padding-top: 50px;
+	padding-top: 23px;
 }
 
 .hero__items {
@@ -1733,10 +1733,10 @@ ol {
   Login
 -----------------------*/
 
-.login {
-	padding-top: 130px;
+/* .login {
+	padding-top: 30px;
 	padding-bottom: 120px;
-}
+} */
 
 .login__form {
 	position: relative;

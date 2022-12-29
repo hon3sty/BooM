@@ -1,45 +1,212 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- [마이페이지] 마이페이지 메인 : 이지윤 -->
 <title>Insert title here</title>
+<style>
+ #outer_0010 {
+	display: flex;
+	justify-content: center;
+}
+.sidebar__comment__1 {
+	margin-bottom: 10px;
+	overflow: hidden;
+	margin-left: 20px;
+}
+.sidebar__comment__1-1, .sidebar__comment__2-1 {
+	float: left;
+	margin-right: 15px;
+}
+.sidebar__comment__2 {
+	margin-bottom: 10px;
+	margin-left: 20px;
+}
+.sidebar__comment__1-2 {
+	overflow: hidden;
+	font-size: 5px;
+}
+.sidebar__comment__1-2-3 h5 {
+	margin-bottom: 0px;
+}
+.sidebar__comment__1-2-3 h5 a {
+	color: #ffffff;
+	font-weight: 700;
+	line-height: 26px;
+}
+.sidebar__comment__1-2 h5 {
+	margin-bottom: 10px;
+}
+.sidebar__comment__1-2 h5 a {
+	color: #ffffff;
+	font-weight: 700;
+	line-height: 26px;
+}
+.sidebar__comment__2-2 {
+	overflow: hidden !important;
+	font-size: 5px !important;
+}
+.sidebar__comment__2-2 h5 {
+	margin-bottom: 5px;
+}
+.sidebar__comment__2-2 h5 a {
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 5px;
+	line-height: 26px;
+}
+.sidebar__comment__2-2-3 h5 {
+	margin-bottom: 0px;
+}
+.sidebar__comment__2-2-3 h5 a {
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 16px;
+}
+.sidebar__comment__2-2-3 h5 a:hover {
+	color: #e53637;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 16px;
+}
+.sidebar__comment__1-2-3 h5 a:hover {
+	color: #ffffff;
+	font-weight: 700;
+	line-height: 26px;
+	color: #e53637;
+}
+.sidebar__comment__1-2 h5 a:hover {
+	color: #e53637;
+	font-weight: 700 !important;
+	line-height: 26px;
+}
+#menubar {
+	padding-right: 30px;
+	padding-top: 60px;
+}
+#my_1 {
+	width: 1020px;
+	display: flex;
+}	
+</style>
 </head>
-<body>
+<!-- Header Section Begin -->
+<jsp:include page="../common/header.jsp" />
+<body class="">
+	<!-- 전체 영역-->
+	<div id="outer_0010">
+		<div id="menubar">
+			<!-- 메뉴바 영역 시작 -->
+			<section class="product_spad_2">
+				<div class="container_MY_0010">
+					<div class="row_3">
+						<div class="col-lg-42 col-md-62 col-sm-822">
+							<div class="product__sidebar">
+								<div class="product__sidebar__comment">
+									<div class="section-title">
+										<a href="mypage.me"><h5 style="color: #e53637;">마이페이지</h5>
+									</div>
+									<div class="sidebar__comment__1">
+										<div class="sidebar__comment__1-1"></div>
+										<div class="sidebar__comment__1-2">
+											<h5>
+												<a href="noticeListForm.bo">예매내역</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__1">
+										<div class="sidebar__comment__1-1"></div>
+										<div class="sidebar__comment__1-2">
+											<h5>
+												<a href="#">무비스토리</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__1">
+										<div class="sidebar__comment__1-1"></div>
+										<div class="sidebar__comment__1-2-3">
+											<h5>
+												<a href="#">나의 스토어</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__2">
+										<div class="sidebar__comment__2-1"></div>
+										<div class="sidebar__comment__2-2-3">
+											<h5>
+												<a href="wishList.me"> - 장바구니</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__2">
+										<div class="sidebar__comment__2-1"></div>
+										<div class="sidebar__comment__2-2-3">
+											<h5>
+												<a href="purchaseList.me"> - 구매목록</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__1">
+										<div class="sidebar__comment__1"></div>
+										<div class="sidebar__comment__1-2-3">
+											<h5>
+												<a href="#">회원정보</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__2">
+										<div class="sidebar__comment__2-1"></div>
+										<div class="sidebar__comment__2-2-3">
+											<h5>
+												<a href="#"> - 회원정보변경</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__2">
+										<div class="sidebar__comment__2-1"></div>
+										<div class="sidebar__comment__2-2-3">
+											<h5>
+												<a href="#"> - 회원탈퇴</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__1">
+										<div class="sidebar__comment__1"></div>
+										<div class="sidebar__comment__1-2-3">
+											<h5>
+												<a href="#">나의 문의내역</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__2">
+										<div class="sidebar__comment__2-1"></div>
+										<div class="sidebar__comment__2-2-3">
+											<h5>
+												<a href="#"> - 1:1문의</a>
+											</h5>
+										</div>
+									</div>
+									<div class="sidebar__comment__2">
+										<div class="sidebar__comment__2-1"></div>
+										<div class="sidebar__comment__2-2-3">
+											<h5>
+												<a href="#"> - 분실물 문의</a>
+											</h5>
+										</div>
+									</div>
 
-<jsp:include page="../common/header.jsp"/>
-  
-  
-<div class="my_0010">
-		<nav id="lnb">
-			<p class="tit on"><a href="/mypage">영화관 이름</a></p>
-
-			<ul>
-				<li><a href="" title="예매내역">예매내역</a></li>
-				<li><a href="" titel="나의 무비스토리">무비스토리</a></li>
-                   <li>
-                   	<a href="" title="스토어">스토어</a>
-					<ul class="depth3">
-						<li><a href="purchaseList.me" title="구매목록">구매목록</a></li>
-						<li><a href="wishList.me" title="장바구니">장바구니</a></li>
-						<li><a href="productPurchase.pd" title="결제하기">결제하기</a></li>
-					</ul>
-				   </li>
-				<li><a href="" title=""></a></li>
-				<li><a href="" title="나의 문의내역">문의내역</a></li>
-				<li>
-					<a href="" title="회원정보">회원정보</a>
-					<ul class="depth3">
-						<li><a href="" title="개인정보 수정">개인정보 수정</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div id="my_1"></div>
 	</div>
-
-<jsp:include page="../common/footer.jsp"/>
-
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

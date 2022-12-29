@@ -13,8 +13,8 @@ public class MemberServiceImpl implements MemberService{
   @Autowired
   private SqlSessionTemplate sqlSession;
   @Override
-  public Member Memberlogin(String MemberId) {
-    Member Memberlogin = memberDao.Memberlogin(sqlSession,MemberId);
+  public Member Memberlogin(Member m) {
+    Member Memberlogin = memberDao.Memberlogin(sqlSession,m);
         return Memberlogin;
   }
   @Override
