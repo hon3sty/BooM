@@ -40,10 +40,10 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>영화제목</h2>
-                                <p>설명</p>
-                                <a href="#"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
+                                <div>&nbsp;&nbsp;</div>
+                                <h2>&nbsp;&nbsp;</h2>
+                                <p>&nbsp;&nbsp;</p>
+                                <a href="ticketing1.mv"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -53,9 +53,33 @@
                         <div class="col-lg-6">
                             <div class="hero__text">
                                 <div class="label">Adventure</div>
-                                <h2>영화제목</h2>
-                                <p>설명</p>
-                                <a href="#"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
+                                <h2>아바타: 물의 길</h2>
+                                <p>'제이크 설리'와 '네이티리'가 이룬 가족이 겪게 되는 무자비한 위협과 살아남기 위해 떠나야 하는 긴 여정과 전투,그리고 견뎌내야 할 상처에 대한 이야기를 그렸다.</p>
+                                <a href="ticketing1.mv"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="hero__items set-bg" data-setbg="resources/img/common/SW_1.jpg">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <div class="label">Adventure</div>
+                                <h2>스위치</h2>
+                                <p>시놉시스 캐스팅 0순위 천만배우이자 자타공인 스캔들 메이커, 화려한 싱글 라이프를 만끽하던 톱스타 ‘박강’이 크리스마스에 인생이 180도 뒤바뀌는 순간을 맞이하면서 벌어지는 이야기</p>
+                                <a href="ticketing1.mv"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="hero__items set-bg" data-setbg="resources/img/common/AA_1.jpg">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <div>&nbsp;&nbsp;</div>
+                                <h2>&nbsp;&nbsp;</h2>
+                                <p>&nbsp;&nbsp;</p>
+                                <a href="ticketing1.mv"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>

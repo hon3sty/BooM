@@ -169,6 +169,14 @@
 	right: 80px;
 	bottom: 12px;
 }
+.slide1{
+	padding-top: 220px;
+}
+.spad{
+    padding-top: 220px !important;
+    padding-bottom: 0px !important;
+
+}
 </style>
 </head>
 <body>
@@ -179,8 +187,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="normal__breadcrumb__text">
-                        <h2>#</h2>
-                        <p>#</p>
+						<img class="slide1" src="resources/img/common/SW_1.jpg">
+						<img class="slide1" src="resources/img/common/boo.jpg" >
+						<img class="slide1" src="resources/img/common/AA.jpg">
+						<img class="slide1" src="resources/img/common/AA_1.jpg"> 
                     </div>
                 </div>
             </div>
@@ -206,7 +216,6 @@
                     <div class="login__form">
                         <h3>로그인</h3>
                         <form action="login.me" method="post">
-                        
                         <div class="input__item">
                                 <input type="text" placeholder="아이디를 입력해주세요" id="memberId" name="memberId">
                                 <span class="icon_profile"></span>
@@ -219,7 +228,6 @@
                            <span><a href="#" class="forget_pass1"><img src="resources/img/common/keyy.png" id="header__logo2"> 아이디 | 비밀번호 찾기</a></span> 
                            <span id="login__0010"><a href="insert.me" class="forget_pass"><img src="resources/img/common/user-a.png" id="header__logo2"> 회원가입</a></span>                
                         </form>
-                        
                     </div> 
                 </div>
                 <div class="col-lg-6">
@@ -236,6 +244,29 @@
             </div>
         </div>
  </section>
+ <script>
+    var index = 0;   //이미지에 접근하는 인덱스
+    window.onload = function(){
+        slideShow();
+    }
+    
+    function slideShow() {
+    var i;
+    var x = document.getElementsByClassName("slide1");  //slide1에 대한 dom 참조
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
+    }
+    index++;
+    if (index > x.length) {
+        index = 1;  //인덱스가 초과되면 1로 변경
+    }   
+    x[index-1].style.display = "block";  //해당 인덱스는 block으로
+    setTimeout(slideShow, 4000);   //함수를 4초마다 호출
+}
+</script>
+<body>
+<div>
+</div>
 <!-- Login Section End -->
 <jsp:include page="../common/footer.jsp"/>
 </body>

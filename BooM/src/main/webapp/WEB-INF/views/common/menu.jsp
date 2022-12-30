@@ -132,7 +132,7 @@
 			            <div class="sidebar__comment__1-1">
 			            </div>
 			            <div class="sidebar__comment__1-2">
-			                <h5><a href="#">무비스토리</a></h5>
+			                <h5><a href="review.my">무비스토리</a></h5>
 			            </div>
 			        </div>
 			        <div class="sidebar__comment__1">
@@ -167,7 +167,7 @@
 			            <div class="sidebar__comment__2-1">
 			            </div>
 			            <div class="sidebar__comment__2-2-3">
-			                <h5><a href="#"> - 회원정보변경</a></h5>
+			                <h5><a href="update.me"> - 회원정보변경</a></h5>
 			            </div>
 			        </div>
 			        <div class="sidebar__comment__2">
