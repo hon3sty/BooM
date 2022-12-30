@@ -8514,17 +8514,17 @@ h1, h2, h3, h4, h5,
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #e53637;
-    border: 1px solid #e53637;
+    background: #82ae46;
+    border: 1px solid #82ae46;
     color: #fff; }
     .btn.btn-primary:hover {
       border: 1px solid #82ae46;
       background: transparent;
       color: #82ae46; }
     .btn.btn-primary.btn-outline-primary {
-      border: 1px solid #e53637;
+      border: 1px solid #82ae46;
       background: transparent;
-      color: #e53637; }
+      color: #82ae46; }
       .btn.btn-primary.btn-outline-primary:hover {
         border: 1px solid transparent;
         background: #82ae46;
@@ -8924,7 +8924,7 @@ h1, h2, h3, h4, h5,
   .table th {
     font-weight: 500; }
   .table .thead-primary {
-    background: #e53637; }
+    background: #82ae46; }
     .table .thead-primary tr th {
       padding: 20px 10px;
       color: #fff !important;
@@ -10007,4 +10007,5 @@ textarea.form-control {
     stroke-dashoffset: -35px; }
   100% {
     stroke-dasharray: 89, 200;
-    stroke-dashoffset: -136px; } }
+    stroke-dashoffset: -136px; } 
+    }
