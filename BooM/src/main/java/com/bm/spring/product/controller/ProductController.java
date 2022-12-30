@@ -1,9 +1,10 @@
 package com.bm.spring.product.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.common.template.Pagination;
-import com.bm.spring.member.model.vo.Member;
 import com.bm.spring.product.model.service.ProductService;
 import com.bm.spring.product.model.vo.Cart;
 import com.bm.spring.product.model.vo.DateChk;
@@ -61,10 +61,8 @@ public class ProductController {
 	
 	//장바구니
 	@RequestMapping("wishList.me")
-	public String wishList(Model model,HttpSession session) {
-		int mno=((Member)session.getAttribute("Memberlogin")).getMemberNo();
-		
-		ArrayList<Cart> list = productService.cartGetList(mno);
+	public String wishList(Model model) {
+		ArrayList<Cart> list = productService.cartGetList();
 		
 		model.addAttribute("list",list);
 		
@@ -73,11 +71,9 @@ public class ProductController {
 	
 	//구매목록
 	@RequestMapping("purchaseList.me")
-	public String purchaseList(Model model,HttpSession session) {
-		
-		int mno=((Member)session.getAttribute("Memberlogin")).getMemberNo();
-		
-		ArrayList<Order> list=productService.purchaseList(mno);
+	public String purchaseList(Model model) {
+		//로그인 기능 후 memberNo 가져오기
+		ArrayList<Order> list=productService.purchaseList();
 		
 		model.addAttribute("list",list);
 		
@@ -135,11 +131,8 @@ public class ProductController {
 	
 	//상품 구매
 	@PostMapping("purchase.pd")
-	public String purchaseInsert(Order order,HttpSession session,@ModelAttribute(value="OrderList") OrderList list,@RequestParam("chkCount") int count, Model model) {
+	public String purchaseInsert(Order order,@ModelAttribute(value="OrderList") OrderList list,@RequestParam("chkCount") int count, Model model) {
 		ArrayList<Order> oList=new ArrayList();
-		int mno=((Member)session.getAttribute("Memberlogin")).getMemberNo();
-		
-		order.setMemberNo(mno);
 		
 		for(int i=0;i<count;i++) {
 			oList.add(new Order(list.getList().get(i).getProductNo(),list.getList().get(i).getProductCount(),list.getList().get(i).getProductPrice()));
@@ -166,14 +159,9 @@ public class ProductController {
 	
 	//구매목록 날짜 조회
 	@PostMapping("date.pd")
-	public String dateGet(DateChk date,HttpSession session,Model model,HttpServletRequest request) {
+	public String dateGet(DateChk date,Model model,HttpServletRequest request) {
 		
-		int mno=((Member)session.getAttribute("Memberlogin")).getMemberNo();
-		
-		Order order=new Order(mno,date.getStartDate(),date.getEndDate());
-		
-		
-		ArrayList<Order> list=productService.dateGet(order);
+		ArrayList<Order> list=productService.dateGet(date);
 		
 		model.addAttribute("list", list);
 		

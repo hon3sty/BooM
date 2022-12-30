@@ -4,7 +4,7 @@
     
 <!DOCTYPE html>
 <html lang="en">
-	<!-- 구매하기 페이지 [하늘]ㅇ -->
+	<!-- 구매하기 페이지 [하늘] -->
   <head>
     <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
