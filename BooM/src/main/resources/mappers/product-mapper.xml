@@ -42,6 +42,7 @@
 		SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,CART_COUNT,PRODUCT_IMG
 		FROM CART
 		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE MEMBER_NO=#{memberNo}
 	</select>
 
 
@@ -91,7 +92,7 @@
 							  ,ORDER_NAME
 							  ,MEMBER_PHONE)
 					VALUES(SEQ_OINO.NEXTVAL
-						  ,1
+						  ,#{memberNo}
 						  ,#{orderName}
 						  ,#{memberPhone})
 	</insert>
@@ -105,7 +106,7 @@
 		SELECT ROWNUM,A.*
 		FROM (SELECT ORDER_NO,ORDER_NAME,ORDER_DATE,ORDER_STATUS,EXPIRY_DATE
 		        FROM ORDER_INFO
-		        WHERE MEMBER_NO=1)A
+		        WHERE MEMBER_NO=#{memberNo})A
 		ORDER BY ORDER_DATE DESC
 	</select>
 	
@@ -113,8 +114,8 @@
 		SELECT ROWNUM,A.*
 		FROM (SELECT ORDER_NO,ORDER_NAME,ORDER_DATE,ORDER_STATUS,EXPIRY_DATE
 		        FROM ORDER_INFO
-		        WHERE MEMBER_NO=1)A
-        WHERE ORDER_DATE BETWEEN #{startDate} AND #{endDate}
+		        WHERE MEMBER_NO=#{memberNo})A
+        WHERE ORDER_DATE BETWEEN #{orderDate} AND #{expiryDate}
         ORDER BY ORDER_DATE DESC
 	
 	</select>

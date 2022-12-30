@@ -12,7 +12,7 @@ import com.bm.spring.product.model.vo.Product;
 public interface ProductService {
 
 	// 장바구니 목록
-	ArrayList<Cart> cartGetList();
+	ArrayList<Cart> cartGetList(int mno);
 
 	// 상품 주문
 	int orderInsert();
@@ -48,10 +48,10 @@ public interface ProductService {
 	int orderDetailInsert(Order order);
 	
 	//구매목록 리스트
-	ArrayList<Order> purchaseList();
+	ArrayList<Order> purchaseList(int mno);
 	
 	//날짜 조회 후 구매목록 리스트
-	ArrayList<Order> dateGet(DateChk date);
+	ArrayList<Order> dateGet(Order order);
 
 	ArrayList<Order> detailGetList(int ono);
 
