@@ -411,7 +411,7 @@ color:#fff;
 			            }
 			         }
 			         if(validAll == true){ // 유효성 모두 통과
-			            alert('부귀영화 가입을 축하드립니다!');      
+			            alert('회원가입을 축하드립니다!');      
 			         } else{
 			            alert('입력정보를 다시 확인하세요.')
 			         }
@@ -580,7 +580,7 @@ color:#fff;
 			            if(a == null || b = null){
 			               alert("주소를 확인하세요.");
 			               return false;
-			            }   */
+			            }   */ 
     
 			            $("[name=mem_oaddress]").val(data.zonecode);
 			            $("[name=mem_address]").val(fullRoadAddr);
