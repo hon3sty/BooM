@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <!-- [회원] 로그인 : 이지윤 -->
 <title>Insert title here</title>
+<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <style>
 #login__social {
 	padding-top: 52px;
@@ -169,6 +170,33 @@
 	right: 80px;
 	bottom: 12px;
 }
+.slide1{
+	padding-top: 220px;
+}
+.spad{
+    padding-top: 220px !important;
+    padding-bottom: 0px !important;
+}
+div.input__item i{
+    position: absolute;
+    left: 90%;
+    top: 18px;
+    color: #d84040d1 !important;
+}
+div.input__item{
+    position: relative;
+}
+div.input__item input{
+    width: 300px;
+    height: 30px;
+    background-color: black;
+    border: 0;
+    color: white;
+    text-indent: 10px;
+}
+.fa-eye:before {
+    content: "\f06e";
+}
 </style>
 </head>
 <body>
@@ -176,11 +204,13 @@
    <!-- Normal Breadcrumb Begin -->
       <section class="normal-breadcrumb set-bg" data-setbg="img/normal-breadcrumb.jpg">
         <div class="container">
-            <div class="row">
+            <div class="row">  
                 <div class="col-lg-12 text-center">
                     <div class="normal__breadcrumb__text">
-                        <h2>#</h2>
-                        <p>#</p>
+						<img class="slide1" src="resources/img/common/SW_1.jpg">
+						<img class="slide1" src="resources/img/common/boo.jpg" >
+						<img class="slide1" src="resources/img/common/AA.jpg">
+						<img class="slide1" src="resources/img/common/AA_1.jpg">
                     </div>
                 </div>
             </div>
@@ -206,20 +236,19 @@
                     <div class="login__form">
                         <h3>로그인</h3>
                         <form action="login.me" method="post">
-                        
                         <div class="input__item">
                                 <input type="text" placeholder="아이디를 입력해주세요" id="memberId" name="memberId">
                                 <span class="icon_profile"></span>
-                            </div>
-                            <div class="input__item">
-                                <input type="text" placeholder="비밀번호를 입력해주세요" id="memberPwd" name="memberPwd">
+                        </div>
+                        <div class="input__item">
+                                <input type="password" placeholder="비밀번호를 입력해주세요" id="memberPwd" name="memberPwd">
+                                <i class="fa fa-eye fa-lg"></i>
                                 <span class="icon_lock"></span>
-                            </div>                
+                        </div> 
                             <button type="submit" class="site-btn">login</button>
                            <span><a href="#" class="forget_pass1"><img src="resources/img/common/keyy.png" id="header__logo2"> 아이디 | 비밀번호 찾기</a></span> 
                            <span id="login__0010"><a href="insert.me" class="forget_pass"><img src="resources/img/common/user-a.png" id="header__logo2"> 회원가입</a></span>                
                         </form>
-                        
                     </div> 
                 </div>
                 <div class="col-lg-6">
@@ -236,6 +265,42 @@
             </div>
         </div>
  </section>
+ <script>
+    var index = 0;   //이미지에 접근하는 인덱스
+    window.onload = function(){
+        slideShow();
+    }
+    
+    function slideShow() {
+    var i;
+    var x = document.getElementsByClassName("slide1");  //slide1에 대한 dom 참조
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
+    }
+    index++;
+    if (index > x.length) {
+        index = 1;  //인덱스가 초과되면 1로 변경
+    }   
+    x[index-1].style.display = "block";  //해당 인덱스는 block으로
+    setTimeout(slideShow, 4000);   //함수를 4초마다 호출
+}
+
+    $(document).ready(function(){
+        $('.input__item i').on('click',function(){
+            $('input').toggleClass('active');
+            if($('input').hasClass('active')){
+                $(this).attr('class',"fa fa-eye-slash fa-lg")
+                .prev('input').attr('type',"text");
+            }else{
+                $(this).attr('class',"fa fa-eye fa-lg")
+                .prev('input').attr('type','password');
+            }
+        });
+    });
+</script>
+<body>
+<div>
+</div>
 <!-- Login Section End -->
 <jsp:include page="../common/footer.jsp"/>
 </body>

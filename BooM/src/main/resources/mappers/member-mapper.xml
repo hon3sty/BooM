@@ -16,6 +16,7 @@
 		<result column="MV_IMG" property="mvImg"/>
 	</resultMap>
 	<resultMap type="member" id="memberResultSet">
+		<result column="MEMBER_NO" property="memberNo"/>  
 		<result column="MEMBER_ID" property="memberId"/>
 		<result column="MEMBER_PWD" property="memberPwd"/>
 		<result column="MEMBER_NAME" property="memberName"/>
@@ -76,4 +77,27 @@
 		WHERE MEMBER_ID = #{checkId}
 		AND STATUS = 'Y'
 	</select> 
+	 
+	<!-- 회원정보 변경 -->
+	<update id="Memberupdate">
+		UPDATE MEMBER
+		SET MEMBER_NAME = #{memberName}
+		 ,  MEMBER_BIRTH =#{memberBirth}
+		 ,  GENDER = #{gender}
+		 ,  PHONE = #{phone}
+		 ,  EMAIL = #{email}
+		 ,  ADDRESS = #{address}
+		 ,  MODIFY_DATE = SYSDATE
+		WHERE MEMBER_ID = #{memberId}
+		AND STATUS = 'Y'
+	</update>    
+	 
+	<!-- 회원정보 삭제 -->  
+	<update id="Memberdelete">
+		UPDATE MEMBER
+		SET STATUS ='N'
+		WHERE MEMBER_ID = #{memberId}
+		AND STATUS ='Y'	
+	</update>
+	
 </mapper>

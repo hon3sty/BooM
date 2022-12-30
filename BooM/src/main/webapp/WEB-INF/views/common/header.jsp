@@ -25,7 +25,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+    rel="stylesheet">  
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
@@ -197,7 +197,7 @@
                                </li>
                                <li><a href="">예매 <span class="arrow_carrot-down"></span></a>
                                    <ul class="dropdown">
-                                      <li><a href="ticketing1.mv">빠른예매</a></li>
+                                      <li><a href="ticketing1.mv">빠른예매</a></li> 
                                    </ul>
                                </li>
                                <li><a href="productList.pd">스토어 <span class=""></span></a>
@@ -217,7 +217,7 @@
                                 <a href="login.me"><img src="resources/img/common/lock.png" id="header__logo3"><span id="logogo"> 로그인 </span></a>                                
                                 <a href="insert.me"><img src="resources/img/common/user-a.png" id="header__logo3"><span id="logogo"> 회원가입 </span></a>
                                 
-                                <a href="login.me"><img src="resources/img/common/user-b.png" id="header__logo3"><span id="logogo"> 마이페이지 </span></a>
+                                <a href="login.me"><img src="resources/img/common/user-b.png" id="header__logo3"><span id="logogo" onclick="mypage()"> 마이페이지 </span></a>
             
 								<span class="col-lg-2">
 								<span class="header__right">
@@ -272,6 +272,14 @@
     </div>
   </div>
 <!-- Search model end -->
+
+    <script>
+		function mypage() {
+  			alert("마이페이지는 로그인 후 사용하실 수 있습니다.");
+  			window.location.href = "login.me";
+		}
+	</script>
+
 </div>
 <br><br>
 </body>
