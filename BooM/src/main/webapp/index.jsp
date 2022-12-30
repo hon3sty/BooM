@@ -206,7 +206,7 @@
                     </div>
 				 </div>
 			  </div>
-			</div>
+			</div>  
 		</section>
   <!-- Search model Begin -->
   <div class="search-model">

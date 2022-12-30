@@ -14,6 +14,11 @@
 .footer__logo5{
     width: 14px;
     height: 14px;
+    margin 4px;
+}  
+.footer__logo2{
+    width: 20px;
+    height: 20px;
     margin: 4px;;
 }
 </style>  
