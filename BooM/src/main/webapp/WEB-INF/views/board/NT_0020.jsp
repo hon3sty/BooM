@@ -264,5 +264,9 @@ h2.tit {
 		</section>
 	</div>
 </div>
+
+<!-- 푸터  include 영역 시작-->
+<jsp:include page="../common/footer.jsp"/>
+<!-- 푸터  include 영역 끝-->
 </body>
 </html>

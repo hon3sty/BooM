@@ -269,7 +269,7 @@ h2.tit {
 				<!-- 리스트 영역 시작 -->
 				<div id="ntc1">
 					<h2 class="tit">공지사항</h2>
-					<form name="regFrm" method="post" action="noticeInsert.bo" id="ntc2" enctype="multipart/form-data">
+					<form name="enrollForm" method="post" action="noticeInsert.bo" id="ntc2" enctype="multipart/form-data">
 						<input type="hidden" name="boardWriter" value="${loginUser.memberNo}">
 						<div class="table-wrap mt10">
 							<table class="board-form va-m">
@@ -388,5 +388,9 @@ h2.tit {
 
 
 </script>
+
+<!-- 푸터  include 영역 시작-->
+<jsp:include page="../common/footer.jsp"/>
+<!-- 푸터  include 영역 끝-->
 </body>
 </html>

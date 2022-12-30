@@ -81,4 +81,41 @@
   		INSERT INTO BOARD_ATTA(FILE_NO,BOARD_NO,ORIGIN_NAME,SAVE_NAME,FILE_PATH)
   					VALUES(SEQ_BD_INO.NEXTVAL,SEQ_BNO.CURRVAL,#{originName},#{saveName},#{filePath})
   </insert>
+  
+  <!-- 공지사항 수정 -->
+  <update id="noticeUpdate">
+  		UPDATE BOARD
+  		SET BOARD_TITLE = #{boardTitle}
+  			,BOARD_CONTENT = #{boardContent}
+  			,BOARD_WRITER = #{boardWriter}
+  			,BOARD_DATE = SYSDATE
+  		WHERE BOARD_NO = #{boardNo}
+  		AND BOARD_STATUS = 'Y'
+  </update>
+  
+  <!-- 공지사항 첨부파일 수정 -->
+  <update id="noticeAttachUpdate">
+  		UPDATE BOARD_ATTA
+  		SET ORIGIN_NAME = #{originName}
+  			,SAVE_NAME = #{saveName}
+  			,FILE_PATH = #{filePath}
+  			,UPLOAD_DATE = SYSDATE
+  		WHERE BOARD_NO = #{boardNo}
+  </update>
+  
+  <!-- 공지사항 수정에서 첨부파일 없을 때 추가 -->
+  <insert id="noticeNewAttachInsert">
+  		INSERT INTO BOARD_ATTA(FILE_NO,BOARD_NO,ORIGIN_NAME,SAVE_NAME,FILE_PATH)
+  					VALUES(SEQ_BD_INO.NEXTVAL,#{boardNo},#{originName},#{saveName},#{filePath})
+  </insert> 
+  
+  <!-- 공지사항 삭제 -->
+  <delete id="noticeDelete">
+  		UPDATE BOARD
+  		SET BOARD_STATUS = 'N'
+  		WHERE BOARD_NO = #{boardNo}
+  		AND BOARD_STATUS = 'Y'
+  </delete> 
+  
+  
 </mapper>

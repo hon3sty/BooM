@@ -41,6 +41,7 @@
                         <div class="col-lg-6">
                             <div class="hero__text">
                                 <div>&nbsp;&nbsp;</div>
+                                <br><br>
                                 <h2>&nbsp;&nbsp;</h2>
                                 <p>&nbsp;&nbsp;</p>
                                 <a href="ticketing1.mv"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
@@ -77,6 +78,7 @@
                         <div class="col-lg-6">
                             <div class="hero__text">
                                 <div>&nbsp;&nbsp;</div>
+                                <br><br>
                                 <h2>&nbsp;&nbsp;</h2>
                                 <p>&nbsp;&nbsp;</p>
                                 <a href="ticketing1.mv"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
