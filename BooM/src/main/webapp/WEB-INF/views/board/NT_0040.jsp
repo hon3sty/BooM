@@ -307,7 +307,7 @@ h2.tit {
 									<p>
 										<span class="tit">첨부파일</span>
 										<c:choose>
-	   										<c:when test="${empty ba}">
+	   										<c:when test="${empty ba.originName}">
 												<span class="txt">첨부파일이 없습니다.</span>
 											</c:when>
 	               							<c:otherwise>
@@ -344,11 +344,30 @@ h2.tit {
 		                   </section>
 							<c:choose>
 							   <c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
-									<div class="anime__details__btn"  style="text-align:center;">
+									<div class="anime__details__btn"  style="text-align:center; cursor:pointer;">
 		                               <a href="noticeList.bo" class="follow-btn">목록</a>
-		                               <a href="noticeList.bo" class="follow-btn">수정</a>
-		                               <a href="noticeList.bo" class="follow-btn">삭제</a>
+		                               <a class="follow-btn" onclick="postFormSubmit(1);">수정</a>
+		                               <a class="follow-btn" onclick="postFormSubmit(2);">삭제</a>
 		                            </div>
+		                            
+									<script>
+										function postFormSubmit(num){
+											var form = $("<form>");
+											var cBno = $("<input>").prop("type", "hidden").prop("name","bno").prop("value", "${b.boardNo}");
+											var cFp = $("<input>").prop("type", "hidden").prop("name", "filePath").prop("value", "${ba.saveName}");
+											
+											form.append(cBno).append(cFp);
+											
+											if(num==1){
+												form.prop("action","noticeUpdateForm.bo");
+											}else{
+												form.prop("action","noticeDelete.bo");
+											}
+											$("body").append(form);
+											form.prop("method","POST").submit();
+										}
+									
+									</script>
 		                   	   </c:when>
 		                       <c:otherwise>
 			                       	<div class="anime__details__btn"  style="text-align:center;">
@@ -363,5 +382,9 @@ h2.tit {
 		</section>
 	</div>
 </div>
+
+<!-- 푸터  include 영역 시작-->
+<jsp:include page="../common/footer.jsp"/>
+<!-- 푸터  include 영역 끝-->
 </body>
 </html>

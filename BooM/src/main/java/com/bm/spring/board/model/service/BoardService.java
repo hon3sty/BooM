@@ -30,11 +30,18 @@ public interface BoardService {
 	//공지사항 첨부파일 등록
 	int noticeAttachInsert(BoardAttachment ba);
 	
-	//공지사항 삭제
-	int noticeDelete(int boardNo);
-	
 	//공지사항 수정
 	int noticeUpdate(Board b);
 	
-	// 막 장성함
+	//공지사항 첨부파일 수정
+	int noticeAttachUpdate(BoardAttachment ba);
+
+	//공지사항 수정에서 첨부파일 없을때 추가
+	int noticeNewAttachInsert(BoardAttachment ba);
+	
+	//공지사항 삭제
+	int noticeDelete(int boardNo);
+	
+	//공지사항 첨부파일 삭제
+	int noticeAttachDelete(int boardNo);
 }

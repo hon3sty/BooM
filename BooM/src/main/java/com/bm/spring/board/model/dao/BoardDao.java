@@ -53,6 +53,31 @@ public class BoardDao {
 	public BoardAttachment noticeAttachSelect(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.selectOne("boardMapper.noticeAttachSelect", boardNo);
 	}
+
+	//공지사항 수정
+	public int noticeUpdate(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.noticeUpdate", b);
+	}
+
+	//공지사항 첨부파일 수정
+	public int noticeAttachUpdate(SqlSessionTemplate sqlSession, BoardAttachment ba) {
+		return sqlSession.update("boardMapper.noticeAttachUpdate", ba);
+	}
+
+	//공지사항 수정에서 첨부파일 없을때 추가
+	public int noticeNewAttachInsert(SqlSessionTemplate sqlSession, BoardAttachment ba) {
+		return sqlSession.insert("boardMapper.noticeNewAttachInsert", ba);
+	}
+
+	//공지사항 삭제
+	public int noticeDelete(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.noticeDelete", boardNo);
+	}
+
+	//공지사항 첨부파일 삭제
+	public int noticeAttachInsert(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.noticeAttachDelete", boardNo);
+	}
 	
 
 }

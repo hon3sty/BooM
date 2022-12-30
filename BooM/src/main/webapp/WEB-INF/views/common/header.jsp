@@ -212,7 +212,7 @@
                                </li> 
                           <span id="login_1">
                            <c:choose>
-      						  <c:when test="${empty Memberlogin}">
+      						  <c:when test="${empty loginUser}">
       						  <span id="sisi">
                                 <a href="login.me"><img src="resources/img/common/lock.png" id="header__logo3"><span id="logogo"> 로그인 </span></a>                                
                                 <a href="insert.me"><img src="resources/img/common/user-a.png" id="header__logo3"><span id="logogo"> 회원가입 </span></a>

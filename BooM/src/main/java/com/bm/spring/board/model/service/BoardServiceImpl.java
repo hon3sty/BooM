@@ -62,23 +62,35 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.noticeAttachInsert(sqlSession,ba);
 	}
 	
-
-	//공지사항 삭제
-	@Override
-	public int noticeDelete(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	//공지사항 수정
 	@Override
 	public int noticeUpdate(Board b) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.noticeUpdate(sqlSession,b);
+	}
+	
+	//공지사항 첨부파일 수정
+	@Override
+	public int noticeAttachUpdate(BoardAttachment ba) {
+		return boardDao.noticeAttachUpdate(sqlSession,ba);
 	}
 
-
-
+	//공지사항 수정에서 첨부파일 없을때 추가
+	@Override
+	public int noticeNewAttachInsert(BoardAttachment ba) {
+		return boardDao.noticeNewAttachInsert(sqlSession,ba);
+	}
 	
+	//공지사항 삭제
+	@Override
+	public int noticeDelete(int boardNo) {
+		return boardDao.noticeDelete(sqlSession,boardNo);
+	}
+
+	//공지사항 첨부파일 삭제
+	@Override
+	public int noticeAttachDelete(int boardNo) {
+		return boardDao.noticeAttachInsert(sqlSession, boardNo);
+	}
+
 
 }

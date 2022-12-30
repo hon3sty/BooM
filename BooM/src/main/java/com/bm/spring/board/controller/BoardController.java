@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +100,7 @@ public class BoardController {
 			BoardAttachment ba = boardService.noticeAttachSelect(bno);
 			mv.addObject("b",b).addObject("ba", ba).setViewName("board/NT_0040");
 		}else {
-			mv.addObject("errorMsg", "공지사항 조회 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "공지사항 조회에 실패하였습니다.").setViewName("common/errorPage");
 		}
 		return mv;
 		
@@ -112,7 +113,7 @@ public class BoardController {
 		return "board/NT_0030";
 	}
 
-	// 공지사항 등록
+	// 공지사항 등록 + 첨부파일 등록
 	@PostMapping("noticeInsert.bo")
 	public ModelAndView noticeInsert(Board b, BoardAttachment ba, ModelAndView mv, HttpSession session, MultipartFile upfile) {
 
@@ -120,7 +121,6 @@ public class BoardController {
 		int result2 = 1;
 		
 		if (result > 0) {
-			
 			
 			if (result * result2 > 0 && !upfile.getOriginalFilename().equals("")) {
 				String saveName = saveFile(upfile,session);
@@ -134,21 +134,79 @@ public class BoardController {
 		} 
 		
 		else {
-			mv.addObject("errorMsg", "공지사항 등록 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "공지사항 등록에 실패하였습니다.").setViewName("common/errorPage");
 		}
 
 		return mv;
 	}
 
 	
-	// 공지사항 수정
-	public void noticeUpdate() {
-
+	// 공지사항 수정페이지로 이동
+	@RequestMapping("noticeUpdateForm.bo")
+	public String noticeUpdateForm(int bno,Model model) {
+		
+		Board b = boardService.noticeSelect(bno);
+		BoardAttachment ba = boardService.noticeAttachSelect(bno);
+		
+		model.addAttribute("b", b);
+		model.addAttribute("ba", ba);
+		
+		return "board/NT_0050";
 	}
 
+	// 공지사항 수정 + 첨부파일 수정
+	@RequestMapping("noticeUpdate.bo")
+	public ModelAndView noticeUpdate(Board b, BoardAttachment ba, MultipartFile upfile, HttpSession session, ModelAndView mv
+										,@RequestParam(value="originFileNo" ,required=false) String originFileNo) {
+		
+		int result2 = 0;
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			if(ba.getOriginName() != null) {
+				new File(session.getServletContext().getRealPath(ba.getSaveName())).delete();
+				
+			}
+			String saveName = saveFile(upfile,session);
+			
+			ba.setOriginName(upfile.getOriginalFilename());
+			ba.setSaveName("resources/uploadFiles/"+saveName);
+			
+			result2 = boardService.noticeAttachUpdate(ba);
+			
+			if(originFileNo == null){
+				result2 = boardService.noticeNewAttachInsert(ba);
+			}
+		}
+		
+		int result = boardService.noticeUpdate(b);
+		
+		if(result>0) {
+			session.setAttribute("alertMsg", "공지사항 수정이 완료되었습니다.");
+			mv.setViewName("redirect:/noticeDetail.bo?bno="+b.getBoardNo());
+		}else {
+			mv.addObject("errorMsg", "공지사항 수정에 실패하였습니다.");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	// 공지사항 삭제
-	public void noticeDelete() {
-
+	@RequestMapping("noticeDelete.bo")
+	public String noticeDelete(int bno, String filePath, HttpSession session, Model model) {
+		int result = boardService.noticeDelete(bno);
+		
+		if(result>0) {
+			if(!filePath.equals("")) {
+				String realPath = session.getServletContext().getRealPath(filePath);
+				new File(realPath).delete();
+			}
+			session.setAttribute("alertMsg", "공지사항 삭제가 완료되었습니다.");
+		}else {
+			model.addAttribute("errorMsg", "게시글 삭제에 실패하였습니다.");
+			return "common/errorPage";
+		}
+		return "redirect:/noticeList.bo";
 	}
 
 	//현재 넘어온 첨부파일 그 자체를 서버의 폴더에 저장시키는 메소드(모듈)
