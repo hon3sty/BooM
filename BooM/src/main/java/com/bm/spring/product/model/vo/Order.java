@@ -19,9 +19,9 @@ public class Order {
 	private int productPrice;
 	private int memberNo;
 	private String memberPhone;
-	private Date orderDate;
+	private String orderDate;
 	private String orderStatus;
-	private Date expiryDate;
+	private String expiryDate;
 	private Product product;
 	
 	public Order(int productNo, int productCount, int productPrice) {
@@ -30,6 +30,14 @@ public class Order {
 		this.productCount = productCount;
 		this.productPrice = productPrice;
 	}
+
+	public Order(int memberNo, String orderDate, String expiryDate) {
+		super();
+		this.memberNo = memberNo;
+		this.orderDate = orderDate;
+		this.expiryDate = expiryDate;
+	}
+	
 	
 	
 }

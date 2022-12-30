@@ -17,8 +17,8 @@ import com.bm.spring.product.model.vo.Product;
 @Repository
 public class ProductDao {
 
-	public ArrayList<Cart> cartGetList(SqlSessionTemplate sqlSession) {
-		return (ArrayList) sqlSession.selectList("productMapper.selectCart");
+	public ArrayList<Cart> cartGetList(SqlSessionTemplate sqlSession, int mno) {
+		return (ArrayList) sqlSession.selectList("productMapper.selectCart",mno);
 	}
 
 	public int productGetListCount(SqlSessionTemplate sqlSession) {
@@ -55,12 +55,12 @@ public class ProductDao {
 		return sqlSession.insert("productMapper.orderDetailInsert", order);
 	}
 
-	public ArrayList<Order> purchaseList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("productMapper.purchaseList");
+	public ArrayList<Order> purchaseList(SqlSessionTemplate sqlSession, int mno) {
+		return (ArrayList)sqlSession.selectList("productMapper.purchaseList",mno);
 		}
 
-	public ArrayList<Order> dateGet(SqlSessionTemplate sqlSession, DateChk date) {
-		return (ArrayList)sqlSession.selectList("productMapper.dateList", date);
+	public ArrayList<Order> dateGet(SqlSessionTemplate sqlSession, Order order) {
+		return (ArrayList)sqlSession.selectList("productMapper.dateList", order);
 	}
 
 	public ArrayList<Order> detailGetList(SqlSessionTemplate sqlSession, int ono) {
