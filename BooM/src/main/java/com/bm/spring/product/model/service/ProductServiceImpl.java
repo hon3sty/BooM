@@ -24,8 +24,8 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDao productDao;
 
 	@Override
-	public ArrayList<Cart> cartGetList(int mno) {
-		return productDao.cartGetList(sqlSession,mno);
+	public ArrayList<Cart> cartGetList() {
+		return productDao.cartGetList(sqlSession);
 	}
 
 	@Override
@@ -88,13 +88,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ArrayList<Order> purchaseList(int mno) {
-		return productDao.purchaseList(sqlSession,mno);
+	public ArrayList<Order> purchaseList() {
+		return productDao.purchaseList(sqlSession);
 	}
 
 	@Override
-	public ArrayList<Order> dateGet(Order order) {
-		return productDao.dateGet(sqlSession,order);
+	public ArrayList<Order> dateGet(DateChk date) {
+		return productDao.dateGet(sqlSession,date);
 	}
 
 	@Override
