@@ -41,112 +41,86 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
                     <div class="blog__details__title">
-                        
                         <h3 style="color:white">예매가 완료되었습니다.</h3><br>
                         <div class="col-lg-12">
-                    <div class="blog__details__pic">
-                        <!-- <img src="./예매완료2_files/blog-details-pic.jpg" alt=""> -->
-                       <!-- <div class="thumnail-area" float="left">
-                        
-                       </div> -->
+                    		<div class="blog__details__pic">
                        
-                       
-                      <!-- 영화 예매정보 테이블 영역 -->
-                       <div class="detailTable-area">
-                        
-                        <table align="center" style="color:white;">
-                            <tbody>
-                            
-                                <tr>
-                                    <th rowspan="8">
-                                      <img src="https://w.namu.la/s/2db10a346062200963354f62159e1690de15413604fb0a1e6b8971169ee4be69fcc1c8db51660d16b133f09057919a66b44074d2169affd899624230d34a7b9cf89555c40b1e44cd65bb1246292c64ee9062e40f8aaa37f42ffc7c8c313935ea3cec0c2347f1c771b3f641b221c7164f" alt="">
-                                     </th>
-                                   
-                                    <th>&nbsp; 예매번호 : </th>
-                                    <td>1111</td>
-                                </tr>
-                                <tr>
-                                    <th>&nbsp;영화 : </th>
-                                    <td>헤어질 결심</td>
+								<!-- 영화 예매정보 테이블 영역 -->
+		                        <div class="detailTable-area">
+									<table align="center" style="color:white;">
+                            			<tbody>
+                                			<tr>
+                                    			<th rowspan="8">
+                                      			<img src="${selectValue.mvImg}" alt="" style="width:250px;"></th>
+		                                    	<th>&nbsp; 예매번호 : </th>
+        		                            	<td>${selectValue.tsuccessNo}</td>
+                                			</tr>
+                                			<tr>
+                                    			<th>&nbsp;영화 : </th>
+                                    			<td>${selectValue.title}</td>
+                                			</tr>
+                                			<tr>
+                                    			<th>&nbsp; 극장 : </th>
+                                    			<td>${selectValue.multiplex} / ${selectValue.theaterNo}</td>
+                                			</tr>
+                                			<tr>
+                                    			<th>&nbsp; 일시 : </th>
+                                    			<td id="dayArea"><!-- 메소드로 넣음 --></td>
+                                			</tr>
+                                			<tr>
+                                    			<th>&nbsp; 인원 : </th>
+                                    			<td>성인 : ${selectValue.adultNum}명 아이 : ${selectValue.childNum} </td>
+                                			</tr>
+                                			<tr>
+                                    			<th>&nbsp; 좌석 : </th>
+                                    			<td>${selectValue.selectedSeats}</td>
 
-                                </tr>
-                                <tr>
-                                    <th>&nbsp; 극장 : </th>
-                                    <td>CGV센텀시티/스타리움1관</td>
-
-                                </tr>
-                                <tr>
-                                    
-                                    <th>&nbsp; 일시 : </th>
-                                    <td>2022-12-22</td>
-
-                                </tr>
-                                <tr>
-                                    <th>&nbsp; 인원 : </th>
-                                    <td>성인 2명</td>
-
-                                </tr>
-                                <tr>
-                                    <th>&nbsp; 좌석 : </th>
-                                    <td>F1, F2</td>
-
-                                </tr>
-                                <tr>
-                                    
-                                    <th>&nbsp; 결제금액 : </th>
-                                    <td>30,000원</td>
-
-                                </tr>
-                                <tr>
-                                
-                                    <th>&nbsp; 결제수단 : </th>
-                                    <td>신용카드 30,000원</td>
-
-                                </tr>
-                            </tbody>
-
-
-                        </table>
-
-                       </div>
-
-
-                       </div>
-                    </div>
-                </div>
-                
-               <!-- 예매내역, 홈으로 버튼 영역 -->
-                <div class="blog__details__social" align="center">
+                                			</tr>
+                                			<tr>
+                                    			<th>&nbsp; 결제금액 : </th>
+                                    			<td>${selectValue.priceText}원</td>
+			                                </tr>
+            			                    <tr>
+			                                    <th>&nbsp; 결제수단 : </th>
+            			                        <td>${selectValue.payment}</td>
+			                                </tr>
+            			                </tbody>
+                        			</table>
+								</div>
+                       		</div>
+                    	</div>
+                	</div>
+						<!-- 예매내역, 홈으로 버튼 영역 -->
+        		        <div class="blog__details__social" align="center">
                             <button type="button" class="btn btn-danger" type="button">예매내역 보기</button>
                             <button type="button" class="btn btn-primary" type="button"> Home</button>
-                            
-                            
                         </div>
                     </div>
                 </div>
-                
-                
-                </div>
-          <!--   </div> -->
-        </section>
+			</div>
+		</section>
         <!-- Blog Details Section End -->
         
         <!-- 푸터바 -->
-        <jsp:include page="../common/header.jsp"/>
+        <jsp:include page="../common/footer.jsp"/>
+       
+		<script>
+			$(function(){
+				//일시 subSting으로 바꿔주기	
+  				$("#dayArea").html('${selectValue.selectDay}'.substr(0,4)+"-"+'${selectValue.selectDay}'.substr(4,2)+"-"+'${selectValue.selectDay}'.substr(6,2));
+          	})
+		</script>
        
        
-       <!-- Js Plugins -->
-        <!-- -->  
-        <script src="../../resources/js/jquery-3.3.1.min.js"></script>
-        <script src="../../resources/js/bootstrap.min.js"></script>
-        <script src="../../resources/js/player.js"></script>
-        <script src="../../resources/js/jquery.nice-select.min.js"></script>
-        <script src="../../resources/js/mixitup.min.js"></script>
-        <script src="../../resources/js/jquery.slicknav.js"></script>
-        <script src="../../resources/js/owl.carousel.min.js"></script>
-        <script src="../../resources/js/main.js"></script>
-
-    
+		<!-- Js Plugins -->
+        <script src="resources/js/jquery-3.3.1.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
+        <script src="resources/js/player.js"></script>
+        <script src="resources/js/jquery.nice-select.min.js"></script>
+        <script src="resources/js/mixitup.min.js"></script>
+        <script src="resources/js/jquery.slicknav.js"></script>
+        <script src="resources/js/owl.carousel.min.js"></script>
+        <script src="resources/js/main.js"></script>
 
 </body>
 </html>

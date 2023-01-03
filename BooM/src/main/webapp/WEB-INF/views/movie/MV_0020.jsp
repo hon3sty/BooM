@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,11 @@
 <!-- [영화] 영화 상세페이지 : 박연 -->
 <title>영화 상세페이지</title>
 <style>
+/* .anime-details{
+ 	width : 1537px; !important
+} */
+
+
  .user_img{
    background-color : #b7b7b7;
    border-radius: 50%;
@@ -42,6 +48,8 @@
     overflow: hidden;
     pointer-events: none;
   }
+  
+ 
  
 </style>
 </head>
@@ -52,6 +60,7 @@
  <%--  <jsp:include page=""/> --%>
  
  <!-- ========== 카테고리링크 영역 ========== -->
+ 
   <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -71,7 +80,7 @@
     <!-- Breadcrumb End -->
 
    <!-- Anime Section Begin -->
-    <section class="anime-details spad">
+    <section class="anime-details_1 spad">
         <div class="container">
             <div class="anime__details__content">
                 <div class="row">
@@ -205,7 +214,7 @@
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
                                             <li><span>키워드 : </span>${m.mvKeyword} </li>
-                                            <li><span>개봉일 : </span>${m.openDate}</li>
+                                            <li><span>개봉일 : </span><fmt:formatDate type="date" value="${m.openDate}" pattern="yyyy-MM-dd"/></li>
                                             <li><span>상영시간 : </span>${m.playTime }</li>
                                         </ul>
                                     </div>
@@ -221,8 +230,10 @@
                         
                         <!-- ================== 좋아요, 예매하기 버튼 영역 ================= -->
                             <div class="anime__details__btn">
+                                
                                 <a class="follow-btn" id="likeBtn"><i class="fa fa-heart-o"></i> 좋아요</a>
-                                <a href="#" class="watch-btn"><span>예매하기</span> <i
+                                
+                                <a href="ticketing1.mv" class="watch-btn"><span>예매하기</span> <i
                                     class="fa fa-angle-right"></i></a>
                                 </div>
                                 
@@ -245,11 +256,13 @@
                                 
                                 
                                 /* 좋아요 인서트하는 에이젝스 */
+                                
                                 $("#likeBtn").click(function(){
+                                	
                                 	$.ajax({
                                 		url:"MLike.mv",
                                 	    data:{
-                                	    	   memberNo : 1,
+                                	    	   memberNo : ${loginUser.memberNo},
                                 	    	   mvNo : ${m.mvNo}
                                 	    	
                                 	    },
@@ -273,8 +286,9 @@
                                 		
                                 		
                                 	})
-                                	  
+                                	
                                   })
+                                
                                 </script>
                                 
                             </div>
@@ -446,6 +460,7 @@
                         </div>
                         
                         <!-- 리뷰작성부분(로그인 했을때만 보이게) -->
+                       <c:if test="${not empty loginUser}">
                         <div class="anime__details__form">
                             <div class="section-title">
                                 <h5>리뷰 작성</h5>
@@ -461,7 +476,7 @@
                                 <button type="button" id="reviewBtn"><i class="fa fa-location-arrow"></i> 리뷰등록</button>
                            </form>
                         </div>
-                       
+                       </c:if>
                         <script>
                         $('#reStar').click(function(){
                         	/* console.log($('#reStar').val() * 20+"%"); */
@@ -480,7 +495,7 @@
                     	   $.ajax({
                     		   
                     		   url:"mvReviewInsert.mv",
-                    		   data:{memberNo : 1,
+                    		   data:{memberNo : ${loginUser.memberNo},
                     			     mvNo : ${m.mvNo}, 
                     			     reContent: $("#reContent").val(),
                     			     reStar: $("#reStar").val()
@@ -550,17 +565,6 @@
          <!-- 푸터바 -->
 	     <jsp:include page="../common/footer.jsp"/>
 
-
-  <!-- Search model Begin -->
-  <div class="search-model">
-    <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="search-close-switch"><i class="icon_close"></i></div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here.....">
-        </form>
-    </div>
-</div>
-<!-- Search model end -->
  
 </body>
 </html>

@@ -65,7 +65,7 @@
     <jsp:include page="../common/header.jsp"/>
 
     <!-- Normal Breadcrumb Begin -->
-    <section class="normal-breadcrumb set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20190502_289%2F1556759412539S91Cw_JPEG%2Fmovie_image.jpg">
+    <section class="normal-breadcrumb set-bg" style="background-image : url(https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20190502_289%2F1556759412539S91Cw_JPEG%2Fmovie_image.jpg); background-size : cover;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -88,7 +88,7 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="blog__item set-bg" data-setbg="img/blog/mv1.jpg">
+                            <div class="blog__item set-bg" style="background-image : url(); background-size : cover;">
                                 <div class="blog__item__text">
                                     <p><span class="material-symbols-outlined icon"></span> 대충키워드적어주기</p>
                                     <h4><span class="material-symbols-outlined heart"></span><a href="#">헤어질 결심</a></h4>

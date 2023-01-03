@@ -3,11 +3,11 @@ package com.bm.spring.member.model.service;
 import java.util.ArrayList;
 
 import com.bm.spring.member.model.vo.Member;
-import com.bm.spring.member.model.vo.Review;
+
 
 public interface MemberService {
 
-	ArrayList<Review> reviewGetList();
+//	ArrayList<Review> reviewGetList();
 
 	//로그인 서비스 select 
 	Member Memberlogin(Member m);

@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+
+<!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 <%@ include file="WEB-INF/views/common/header.jsp" %>
@@ -211,14 +215,14 @@
 			</div>  
 		</section>
   <!-- Search model Begin -->
-  <div class="search-model">
+<!--  <div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch"><i class="icon_close"></i></div>
         <form class="search-model-form">
             <input type="text" id="search-input" placeholder="검색어를 입력해주세요.">
         </form>
     </div>
-</div>
+</div> -->
 <!-- Search model end -->
 
 <!-- Js Plugins -->

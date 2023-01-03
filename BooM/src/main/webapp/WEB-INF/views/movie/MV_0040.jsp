@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +25,8 @@
 </head>
 
 <body>
-
-   <!-- 메뉴바 영역 -->
-   <jsp:include page="../common/header.jsp"/> 
-
+	<!-- 메뉴바 영역 -->
+    <jsp:include page="../common/header.jsp"/> 
     <!-- Blog Details Section Begin -->
     <section class="blog-details spad">
         <div class="container">
@@ -86,26 +85,26 @@
                                     <tbody>
                                   
                                        <tr>
-                                           <th rowspan="5"><img align="center" src="https://w.namu.la/s/2db10a346062200963354f62159e1690de15413604fb0a1e6b8971169ee4be69fcc1c8db51660d16b133f09057919a66b44074d2169affd899624230d34a7b9cf89555c40b1e44cd65bb1246292c64ee9062e40f8aaa37f42ffc7c8c313935ea3cec0c2347f1c771b3f641b221c7164f"  style="height:200px;" alt=""></th>
+                                           <th rowspan="5"><img align="center" src=${map.mvImg}  style="height:200px;" alt=""></th>
                                            <th>&nbsp; 극장 : </th>
-                                           <td>&nbsp; CGV센텀시티/스타리움</td>
+                                           <td>&nbsp; ${map.multiplex} </td>
                                        </tr>
-                                       
                                        <tr>
+                                       
                                            <th>&nbsp; 관 : </th>
-                                           <td>&nbsp;1관</td>
-       
+                                           <td>&nbsp;${map.theaterNo}</td>
+
                                        </tr>
                                        <tr>
                                            
                                            <th>&nbsp; 일시 : </th>
-                                           <td>&nbsp;2022-12-22</td>
+                                           <td id="dayArea">&nbsp;</td>
        
                                        </tr>
                                        <tr>
                                            
                                            <th>&nbsp; 회차 : </th>
-                                           <td>&nbsp;8:00 ~ 11:22</td>
+                                           <td>&nbsp;${map.period}</td>
        
                                        </tr>
                                        <tr>
@@ -128,7 +127,7 @@
                      <div class="row">
                         <div class="col">
                            <div class="blog__details__btns__item" align="center">
-                              <h5><a href="#"><span class="arrow_right"></span> 결제선택</a></h5>
+                              <h5><a href="javascript:void(0);" onclick="checkPage();"><span class="arrow_right"></span> 결제선택</a></h5>
                            </div>
                         </div>
                      </div>
@@ -155,23 +154,29 @@
       </body>
 
    <!--좌석 함수-->
-   <script>
-      let test = [];
-      let selectedSeats = new Array();
-      let selectedSeatsMap = [];
-      const seatWrapper = document.querySelector(".seat-wrapper");
-      let clicked = "";
-      let div = "";
-      let children = $("#children").val();
-      let adult = $("#adult").val();
-      
-
-
-      for (let i = 0; i < 7; i++) {
-         div = document.createElement("div");
-         seatWrapper.append(div);
-         for (let j = 0; j < 7; j++) {
-            const input = document.createElement('input');
+	<script>
+	
+	//일시 subSting으로 바꿔주기
+	$(function(){
+		$("#dayArea").html('${map.selectDay}'.substr(0,4)+"-"+'${map.selectDay}'.substr(4,2)+"-"+'${map.selectDay}'.substr(6,2));
+		//예약좌석 색상 변경
+		disableSeat();
+	})
+   
+	let test = [];
+	let selectedSeats = new Array();
+	let selectedSeatsMap = [];
+	const seatWrapper = document.querySelector(".seat-wrapper");
+	let clicked = "";
+	let div = "";
+	let children = $("#children").val();
+	let adult = $("#adult").val();
+	
+	for (let i = 0; i < 7; i++) {
+		div = document.createElement("div");
+		seatWrapper.append(div);
+		for (let j = 0; j < 7; j++) {
+			const input = document.createElement('input');
             input.type = "button";
             input.name = "seats"
             input.classList = "seat";     
@@ -180,89 +185,154 @@
             div.append(input);
               
             input.addEventListener('click', function(e) {
-               //좌석수 보다 많은 자리를 클릭시에 막음
-               if( parseInt(adult)+parseInt(children) > selectedSeats.length){
-                  //중복방지 함수
-                  selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
+				//좌석수 보다 많은 자리를 클릭시에 막음
+                if( parseInt(adult)+parseInt(children) > selectedSeats.length){
+					//중복방지 함수
+                    selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
                   
-                  //click class가 존재할때(제거해주는 toggle)
-                  //클릭시 색상 변경
-                  $(this).css("background-color","white") 
+                    //click class가 존재할때(제거해주는 toggle)
+                    //클릭시 색상 변경
+                    $(this).css("background-color","white") 
                      
-                  if (input.classList.contains("clicked")) {
-                     input.classList.remove("clicked");
-                     clicked = document.querySelectorAll(".clicked");
-                     selectedSeats.splice(selectedSeats.indexOf(e.target.value), 1);
-                     //클릭시 색상 변경
-                     $(this).css("background-color","gray");
-                     clicked.forEach((data) => {
+                    if (input.classList.contains("clicked")) {
+						input.classList.remove("clicked");
+                     	clicked = document.querySelectorAll(".clicked");
+                     	selectedSeats.splice(selectedSeats.indexOf(e.target.value), 1);
+                     	//클릭시 색상 변경
+                     	$(this).css("background-color","gray");
+                     	clicked.forEach((data) => {
                         selectedSeats.push(data.value);
                      });
                      //click class가 존재하지 않을때 (추가해주는 toggle)
-                  } else {
-                     input.classList.add("clicked");
-                     clicked = document.querySelectorAll(".clicked");
-                     clicked.forEach((data) => {
-                        selectedSeats.push(data.value);
-                     })
-                  }
-                  $("#seats").html(selectedSeats.join(","));
-                        
-               }else{                     
-                  alert("좌석숫자 이상의 클릭을 하셨습니다."); 
-               }
-               console.log(selectedSeats);
-            })
-         }
-      }
-
-      //좌석에 value 넣어주는 함수
-      function mapping(input, i, j) {
-          if (i === 0) {
-              input.value = "A" + j;
-          } else if (i === 1) {
-              input.value = "B" + j;
-          } else if (i === 2) {
-              input.value = "C" + j;
-          } else if (i === 3) {
-              input.value = "D" + j;
-          } else if (i === 4) {
-              input.value = "E" + j;
-          } else if (i === 5) {
-              input.value = "F" + j;
-          } else if (i === 6) {
-              input.value = "G" + j;
-          }
-      }
+					} else {
+						input.classList.add("clicked");
+						clicked = document.querySelectorAll(".clicked");
+						clicked.forEach((data) => {
+							selectedSeats.push(data.value);
+						})
+					}
+                    $("#seats").html(selectedSeats.join(","));
+                    
+					}else{                     
+						alert("좌석숫자 이상의 클릭을 하셨습니다."); 
+					}
+               		//console.log(selectedSeats);
+					})
+				}
+			}
       
-      //아이 +,-버튼 함수
-      $('#cm').click(function(){
-         if(parseInt(adult)+parseInt(children)<= selectedSeats.length){
-            alert("잘못한 선택입니다.");
-         }else if($("#children").val()>0){
-            $("#children").attr("value",children-1);
-         }
-         children = $("#children").val();
-      });
-      $('#cp').click(function(){
-         $("#children").attr("value", parseInt(children)+1);
-         children = $("#children").val();
-      });
+		//좌석에 value 넣어주는 함수
+      	function mapping(input, i, j) {
+			if (i === 0) {
+				input.value = "A" + j;
+				input.id = "A" + j;
+         	} else if (i === 1) {
+           		input.value = "B" + j;
+           		input.id = "B" + j;
+          	} else if (i === 2) {
+           		input.value = "C" + j;
+           		input.id = "C" + j;
+          	} else if (i === 3) {
+             	input.value = "D" + j;
+             	input.id = "D" + j;
+          	} else if (i === 4) {
+           		input.value = "E" + j;
+           		input.id = "E" + j;
+          	} else if (i === 5) {
+           		input.value = "F" + j;
+           		input.id = "F" + j;
+       		} else if (i === 6) {
+           		input.value = "G" + j;
+           		input.id = "G" + j;
+       		}
+    	}
+      
+		//예약된 좌석 disabled 하고 배경 검은색으로 설정
+		function disableSeat(){
+			//seatList 배열로 변환 시작
+			let seatList = "${tDetailList}";
+			seatList = seatList.replace("[","");
+			seatList = seatList.replace("]","");
+			
+			for(let i=0 ; i < ${tDetailList.size()}; i++){
+				seatList = seatList.replace(" ","");
+				let seat = seatList.split(",");
+				console.log(seat[i]);
+				$("#"+seat[i]).attr("disabled",true);
+				$("#"+seat[i]).css("background-color","black");
+			}
+		}
+		
+		
+		//아이 +,-버튼 함수
+      	$('#cm').click(function(){
+			if(parseInt(adult)+parseInt(children) <= selectedSeats.length){
+            	alert("잘못한 선택입니다.");
+         	}else if($("#children").val()>0){
+            	$("#children").attr("value",children-1);
+         	}
+         	children = $("#children").val();
+      	});
+      	$('#cp').click(function(){
+         	$("#children").attr("value", parseInt(children)+1);
+         	children = $("#children").val();
+      	});
+	
+		//어른 +,-버튼 함수
+		$('#am').click(function(){
+			if(parseInt(adult)+parseInt(children)<= selectedSeats.length){
+				alert("잘못한 선택입니다.");
+			}else if($("#adult").val()>0){
+				$("#adult").attr("value",adult-1);
+			}         
+			adult = $("#adult").val();
+		});
+		$('#ap').click(function(){
+			$("#adult").attr("value",parseInt(adult)+1);
+			adult = $("#adult").val();
+		});
+      
+		function checkPage(){
+			if(selectedSeats.length == Number($("#children").val()) + Number($("#adult").val())){
+				
+				//selectedSeats에 null값 제거
+				selectedSeats = 
+					selectedSeats.filter(
+						(element, i) => element != null
+					);
+				
+				
+				var newForm = $('<form></form>');
+				//form 태그 생성(form) 
+				newForm.attr("name","newForm");
+				newForm.attr("method","post");
+				newForm.attr("action","ticketing3.mv");
+				
+				// input[type=hidden] 생성 
+				newForm.append($('<input/>', {type: 'hidden', name: 'title', value: '${map.title}'}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'mvImg', value: '${map.mvImg}'}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'mvLocation', value: '${map.mvLocation}'}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'multiplex', value: '${map.multiplex}'}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'selectDay', value: '${map.selectDay}'}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'selectTime', value: '${map.selectTime}'}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'period', value: '${map.period}'}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'theaterNo', value: '${map.theaterNo}'}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'timetableNo', value: '${map.timetableNo}'}));
+				//배열로 못넘겨서 JSON 타입으로 변환시키고 넘김
+				newForm.append($('<input/>', {type: 'hidden', name: 'selectedSeats', value: JSON.stringify(selectedSeats)}));
+				newForm.append($('<input/>', {type: 'hidden', name: 'childNum', value: $("#children").val() }));
+				newForm.append($('<input/>', {type: 'hidden', name: 'adultNum', value: $("#adult").val() }));
 
-      //어른 +,-버튼 함수
-      $('#am').click(function(){
-         if(parseInt(adult)+parseInt(children)<= selectedSeats.length){
-            alert("잘못한 선택입니다.");
-         }else if($("#adult").val()>0){
-            $("#adult").attr("value",adult-1);
-         }         
-         adult = $("#adult").val();
-      });
-      $('#ap').click(function(){
-         $("#adult").attr("value",parseInt(adult)+1);
-         adult = $("#adult").val();
-      });
+				// body 안에 form태그 넣기 
+				newForm.appendTo('body');
 
+				// submit 하기
+				newForm.submit();
+			}else{
+				alert("좌석을 다시 확인해주세요.");
+			}
+		}
+      
    </script>
 
 </html>

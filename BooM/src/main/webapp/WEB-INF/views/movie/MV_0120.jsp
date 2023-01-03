@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- 영화 시간표 관리페이지(관리자) / 박연 -->
+<title>상영스케줄 등록</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+<!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+<style>
+ .fa-video-location::before{
+    content: "\e0c8";
+    box-sizing: border-box;
+}
+
+</style>
+
+
 </head>
 
 <body>
@@ -58,40 +58,23 @@
                         <div class="card shadow mb-4">
                             <div class="card-header bg-danger">
 
-                                <a href="#" id="mv_insert"><h6 class="m-0 text-white">영화 등록</h6></a>
+                                <h6 class="m-0 text-white"><i class="fas fa-video"></i>영화 등록</h6>
                                 
                             </div>
                              
                             <div class="list-group list-group-flush small" style="height: 200px; overflow: auto;">
                               
+                              
+                              <!-- 영화리스트 한 개체 시작 -->
                               <a class="list-group-item list-group-item-action" href="#">
                                   <i class="fas fa-caret-right"></i> 헤어질 결심
                                </a>
+                              <!-- //영화리스트 한 개체 끝 -->
 
-                               <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 아바타
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 올빼미
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 러브 레터
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 이터널 선샤인
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 화양연화
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 중경삼림
-                             </a>
+                               
                              </div>
+                             
+                             
 
 
 
@@ -106,33 +89,14 @@
                                 <h6 class="m-0 text-white"><i class="fas fa-video"></i>지역 선택</h6>
                             </div>
                              <div class="list-group list-group-flush small" style="height: 200px; overflow: auto;">
+                             
+                             <!-- 지역 한 개체 시작 -->
                                <a class="list-group-item list-group-item-action" href="#">
                                   <i class="fas fa-caret-right"></i> 서울
                                </a>
+                             <!-- //지역 한 개체 끝 -->  
 
-                               <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 경기
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 인천
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 대전/충청/세종
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 부산/대구/경상
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 광주/전라/제주
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 강원
-                             </a>
+                            
                              </div>
 
 
@@ -149,33 +113,14 @@
                                 <h6 class="m-0 text-white"><i class="fas fa-video"></i>영화관 선택</h6>
                             </div>
                              <div class="list-group list-group-flush small" style="height: 200px; overflow: auto;">
+                               
+                               <!-- 영화관 한 개체 시작 -->
                                <a class="list-group-item list-group-item-action" href="#">
                                   <i class="fas fa-caret-right"></i> 강남
                                </a>
+                               <!-- //영화관 한 개체 끝 -->
 
-                               <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 강변
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 건대입구
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 구로
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 대학로
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 동대문
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 등촌
-                             </a>
+                               
                              </div>
 
 
@@ -190,37 +135,18 @@
                         <div class="card shadow mb-4">
                             <div class="card-header bg-success">
 
-                                <h6 class="m-0 text-white"><i class="fas fa-video"></i>2022-12월 &nbsp; &nbsp;<input id="datepicker" type="date" style="width: 25px;"></h6>
+                                <h6 class="m-0 text-white"><i class="fa-video-location"></i>2022-12월 &nbsp; &nbsp;<input id="datepicker" type="date" style="width: 25px;"></h6>
                                
                             </div>
                              <div class="list-group list-group-flush small" style="height: 200px; overflow: auto;">
+                               
+                               <!-- 상영일 한 개체 시작 -->
                                <a class="list-group-item list-group-item-action" href="#">
                                   <i class="fas fa-caret-right"></i> 오늘 13
                                </a>
+                               <!-- 상영일 한 개체 끝 -->
 
-                               <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 내일 14
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 목 15
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 금 16
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 토 17
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 일 18
-                             </a>
-
-                             <a class="list-group-item list-group-item-action" href="#">
-                                <i class="fas fa-caret-right"></i> 월 19
-                             </a>
+                              
                              </div>
 
 
@@ -369,17 +295,6 @@
         </section>
         <!-- Blog Details Section End -->
 
-
-        
-        <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/player.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
 
         <!-- 푸터바 영역 -->
         <jsp:include page="../common/footer.jsp"/>

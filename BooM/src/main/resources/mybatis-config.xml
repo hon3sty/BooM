@@ -16,7 +16,12 @@
 		<typeAlias type="com.bm.spring.product.model.vo.Cart" alias="cart"/>
 		<typeAlias type="com.bm.spring.product.model.vo.Order" alias="order"/>
 		<typeAlias type="com.bm.spring.board.model.vo.BoardAttachment" alias="boardAttachment"/>
-		<typeAlias type="com.bm.spring.member.model.vo.Review" alias="review"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.Review" alias="review"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.Multiplex" alias="multiplex"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.MLike" alias="mlike"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.Location" alias="location"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.Timetable" alias="timetable"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.Ticket" alias="ticket"/>
 	</typeAliases>
 	 
 	<mappers>
