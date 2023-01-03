@@ -146,12 +146,17 @@
 			var sD=new Date(start);
 			var eD=new Date(end);
 			
-			if(sD>eD){
+			if(start!='' && end!=''){
+				if(sD>eD){
+					alert("날짜를 잘못 입력하셨습니다")
+					return false
+				}else{
+					return true
+				}			
+			}else{
 				alert("날짜를 잘못 입력하셨습니다")
 				return false
-			}else{
-				return true
-			}			
+			}
 		}	
 		
 		$(document).on("click","tbody>tr",function(){

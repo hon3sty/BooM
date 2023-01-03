@@ -8514,13 +8514,13 @@ h1, h2, h3, h4, h5,
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #82ae46;
-    border: 1px solid #82ae46;
+    background: #e53637;
+    border: 1px solid #e53637;
     color: #fff; }
     .btn.btn-primary:hover {
-      border: 1px solid #82ae46;
+      border: 1px solid #e53637;
       background: transparent;
-      color: #82ae46; }
+      color: #e53637; }
     .btn.btn-primary.btn-outline-primary {
       border: 1px solid #82ae46;
       background: transparent;
@@ -8924,7 +8924,7 @@ h1, h2, h3, h4, h5,
   .table th {
     font-weight: 500; }
   .table .thead-primary {
-    background: #82ae46; }
+    background: #e53637; }
     .table .thead-primary tr th {
       padding: 20px 10px;
       color: #fff !important;
