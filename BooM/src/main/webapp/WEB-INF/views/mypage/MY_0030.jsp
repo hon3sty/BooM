@@ -4,7 +4,7 @@
     
 <!DOCTYPE html>
 <html lang="en">
-	<!-- 장바구니 [하늘] dd-->
+	<!-- 장바구니 [하늘]-->
   <head>
     <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
@@ -61,7 +61,7 @@
 
 .button:hover {
   background-color: #2EE59D;
-  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  box-shadow: 0px 15px 20px rgba(242, 203, 97, 0.4);
   color: #fff;
   transform: translateY(-7px);
 }
@@ -120,17 +120,17 @@
 								        	<p style="color:white">${c.product.productName}</p>
 								        </td>
 								        
-								        <td style="color:white" class="price">${c.product.productPrice}</td>
+								        <td style="color:white" class="price">${c.product.productPrice}원</td>
 								        
 								        <td class="quantity">
 									        <div class="input-group mb-3">
 									        	<button class="quantity-left-minus" style="background-color:white">&lt;</button>
-								             	<input type="text" id="quantity" id="cartCount" name="cartCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
+								             	<input type="text" id="quantity"  name="cartCount" class="quantity form-control input-number" value="${c.cartCount}" min="1" max="100">
 								             	<button class="quantity-right-plus" style="background-color:white">&gt;</button>&nbsp;
 								             	<button id="btn_change" style="background-color:white">변경</button>
 								          	</div>
 							            </td>
-								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
+								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}원</td>
 								        <td><a href="cartDelete.pd?cno=${c.cartNo }" class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
 							      </tr> 
 							    </c:forEach>
@@ -140,7 +140,7 @@
 					  </div>
     			</div>
     			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    			 <div class="col-md-12 ftco-animate"><button class="button" id="btn_delSel">선택 항목 삭제</button></div>
+    			 <div class="col-md-12 ftco-animate"><button class="button" id="btn_delSel" style="background-color:orange">선택 항목 삭제</button></div>
     		</div>
 			</div>
 			<div class="row justify-content-end">
@@ -232,7 +232,7 @@
 			   		for(var i=0;i<arr.length;i++){
 			   			sum+=parseInt(arr[i])
 			   		}
-			   		$("#sum").html(sum)
+			   		$("#sum").html(sum+'원')
 		     })
 		     
 		    //한개 삭제 버튼 

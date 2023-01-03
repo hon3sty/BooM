@@ -60,7 +60,7 @@
 
 .button:hover {
   background-color: #2EE59D;
-  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  box-shadow: 0px 15px 20px rgba(242, 203, 97, 0.4);
   color: #fff;
   transform: translateY(-7px);
 }
@@ -112,7 +112,7 @@
 								        	<p style="color:white">${c.product.productName}</p>
 								        </td>
 								        
-								        <td style="color:white" class="price">${c.product.productPrice}</td>
+								        <td style="color:white" class="price">${c.product.productPrice}원</td>
 								        
 								        <td class="quantity">
 								        	<div class="input-group mb-3">
@@ -122,7 +122,7 @@
 								             	<button type="button" id="btn_change" style="background-color:white">변경</button>
 							          		</div>
 							            </td>
-								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}</td>
+								        <td style="color:white" class="total">${c.product.productPrice * c.cartCount}원</td>
 								        <td><a href="cartDelete.pd?cno=${c.cartNo }" class="btn btn-primary py-3 px-4" id="delOne" onclick="return del()" >삭제</a></td>
 							      </tr> 
 							    </c:forEach>
@@ -132,7 +132,7 @@
     			</div>
     		</div>
     		
-    			 <div class="col-md-12 ftco-animate"><button type="button" class="button" id="btn_delSel">선택 항목 삭제</button></div>
+    			 <div class="col-md-12 ftco-animate"><button type="button" class="button" id="btn_delSel" style="background-color:orange">선택 항목 삭제</button></div>
     		
     		<div class="row justify-content-end">
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
@@ -246,7 +246,7 @@
 			   		for(var i=0;i<arr.length;i++){
 			   			sum+=parseInt(arr[i])
 			   		}
-			   		$("#sum").html(sum)
+			   		$("#sum").html(sum+'원')
 			   		
 			   		
 		    	 
