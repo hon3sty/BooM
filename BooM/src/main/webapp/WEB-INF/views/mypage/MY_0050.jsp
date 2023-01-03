@@ -65,7 +65,7 @@
                             <div class="section-title">
                                 <h5>내가 쓴 리뷰</h5>
                             </div>
-                            <c:forEach var="r" items="${list }">
+                            <c:forEach var="r" items="${myReviewList }">
 	                            <div class="anime__review__item">
 	                                <div class="anime__review__item__pic">
 	                                    <img src="${r.movie.mvImg }" alt="">
@@ -73,7 +73,7 @@
 	                                <div id="review" class="anime__review__item__text">
 	                                	<input type="hidden" id="mno" value="${r.mvNo }">
 	                                    <h6>${r.movie.mvTitle }</h6>
-	                                    <span style="color:white; float:right">${r.createDate }</span>
+	                                    <span style="color:white; float:right">${r.reCreateDate }</span>
 	                                    <p>${r.reContent }</p>
 	                                </div>
 	                            </div>

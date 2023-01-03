@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bm.spring.member.model.dao.MemberDao;
 import com.bm.spring.member.model.vo.Member;
-import com.bm.spring.member.model.vo.Review;
+
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -18,10 +18,10 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	@Override
-	public ArrayList<Review> reviewGetList() {
-		return memberDao.reviewGetList(sqlSession);
-	}
+//	@Override
+//	public ArrayList<Review> reviewGetList() {
+//		return memberDao.reviewGetList(sqlSession);
+//	}
 	
 	@Override
 	public Member Memberlogin(Member m) {

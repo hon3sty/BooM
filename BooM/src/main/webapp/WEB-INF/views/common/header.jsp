@@ -191,6 +191,7 @@
                           <ul id="row_2">
                                <li><a href="">영화 <span class="arrow_carrot-down"></span></a>
                                    <ul class="dropdown">
+                                      <li><a href="movieList.mv">전체영화</a></li>
                                       <li><a href="">현재상영작</a></li>
                                       <li><a href="">무비차트</a></li>
                           		   </ul>
@@ -266,8 +267,10 @@
   <div class="search-model" id="model-close">
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch"><i class="icon_close"></i></div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="검색어를 입력해주세요.">
+        <form class="search-model-form" action="mvSearch.mv" method="get">
+            <input type="hidden" name="currentPage" value="1"> 
+            <input type="text" id="search-input" name="SearchKeyword" placeholder="검색어를 입력해주세요.">
+            <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
         </form>
     </div>
   </div>

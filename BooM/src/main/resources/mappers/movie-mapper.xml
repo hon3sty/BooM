@@ -1,4 +1,485 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="movieMapper">
+
+<!-- 공통 -->
+	<resultMap type="movie" id="movieResultSet">
+		<result column="MV_NO" property="mvNo"/>
+		<result column="MV_TITLE" property="mvTitle"/>
+		<result column="MV_SUBTITLE" property="mvSubtitle"/>
+		<result column="DIRECTOR" property="director"/>
+		<result column="ACTOR" property="actor"/>
+		<result column="RATING" property="rating"/>
+		<result column="MV_CONTENT" property="mvContent"/>
+		<result column="MV_KEYWORD" property="mvKeyword"/>
+		<result column="MV_IMG" property="mvImg"/>
+		<result column="MV_COUNT" property="mvCount"/>
+		<result column="PLAYTIME" property="playTime"/>
+		<result column="OPENDATE" property="openDate"/>
+		<result column="CLOSEDATE" property="closeDate"/>
+		<result column="DATE_STATUS" property="dateStatus"/>
+		<result column="MV_STATUS" property="mvStatus"/>
+	</resultMap>
+	<!-- 공통 끝 -->
+
+<!-- 도균쓰 리저트맵 시작 -->
+	
+	<resultMap type="multiplex" id="multiplexResultSet">
+		<result column="MP_NO" property="mpNo"/>
+		<result column="LC_CODE" property="lcCode"/>
+		<result column="MP_NAME" property="mpName"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
+	
+	<resultMap type="location" id="locationResultSet">
+		<result column="LC_CODE" property="lcCode"/>
+		<result column="LC_NAME" property="lcName"/>
+	</resultMap>
+	
+	<resultMap type="timetable" id="timetableResultSet">
+		<result column="TIME_NO" property="timeNo"/>
+		<result column="MP_NO" property="mpNo"/>
+		<result column="THEATER_NAME" property="theaterNo"/>
+		<result column="MV_NO" property="mvNo"/>
+		<result column="OPENDATE" property="openDate"/>
+		<result column="OPENTIME" property="openTime"/>
+	</resultMap>
+	
+	<resultMap type="ticket" id="ticketResultSet">
+		<result column="TK_CODE" property="tkCode"/>
+		<result column="TK_NAME" property="tkName"/>
+		<result column="TK_PRICE" property="tkPrice"/>
+	</resultMap>
+	
+	<resultMap type="timetable" id="timetableUpdate">
+		<result column="TIME_NO" property="timeNo"/>
+		<result column="MP_NO" property="mpNo"/>
+		<result column="THEATER_NO" property="theaterNo"/>
+		<result column="MV_NO" property="mvNo"/>
+		<result column="OPENDATE" property="openDate"/>
+		<result column="OPENTIME" property="openTime"/>
+	</resultMap>
+	
+	<!-- 도균쓰 리저트맵 끝 -->
+	
+	<!-- 연 리저트맵 시작 -->
+	<resultMap type="review" id="reviewResultSet">
+		<result column="RE_NO" property="reNo"/>
+		<result column="MEMBER_ID" property="memberId"/>
+		<result column="MV_NO" property="mvNo"/>
+		<result column="RE_STAR" property="reStar"/>
+		<result column="RE_CONTENT" property="reContent"/>
+		<result column="RE_CREATEDATE" property="reCreateDate"/>
+		<result column="RE_STATUS" property="reStatus"/>
+		<collection property="movie" resultMap="movieResultSet"/>
+	</resultMap>
+		
+	
+	<resultMap type="mlike" id="mLikeResultSet">
+		<result column="MLIKE_NO" property="mlikeNo"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="MV_NO" property="mvNo"/>
+		
+	</resultMap>
+	
+	<!-- 연 리저트맵 끝 -->
+	
+
+<!-- 공통 sql 시작 -->
+   
+    <select id="movieGetList" resultMap="movieResultSet">
+		<![CDATA[ 
+ 	    SELECT * 
+ 		FROM MOVIE 
+ 		WHERE MV_STATUS = 'Y' 
+ 		AND CLOSEDATE >= SYSDATE  
+        AND DATE_STATUS = 'Y' 
+ 		ORDER BY MV_NO DESC 
+ 		]]> 
+	
+	</select>
+	
+	<select id="movieGetDetail" resultMap="movieResultSet">
+	  SELECT *
+	  FROM MOVIE
+	  WHERE MV_NO = #{mvNo}
+	  AND MV_STATUS = 'Y'
+	
+	</select>
+	
+    <!-- 전체영화리스트 조회(종영작까지조회) -->
+	<select id="movieGetAllList" resultMap="movieResultSet">
+		SELECT *
+		FROM MOVIE
+		WHERE MV_STATUS = 'Y'
+		ORDER BY MV_NO DESC,OPENDATE DESC
+	</select>
+	
+	<!-- 공통과 중복 수정하자
+	<select id="selectMovieListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM MOVIE
+		WHERE MV_STATUS ='Y'
+	</select> -->
+	
+	
+	
+	<select id="selectMovieCount" resultType="_int">
+	 SELECT COUNT(*)
+	 FROM MOVIE
+	 WHERE MV_STATUS = 'Y'
+	</select>
+	
+	
+	<!-- 공통 끝 -->
+	
+	<!-- 도균쓰 시작 -->
+	
+	<select id="nowScreenMoviegetList" resultMap="movieResultSet">
+		SELECT DISTINCT MV_NO,MV_IMG, MV_TITLE, PLAYTIME
+		FROM MOVIE
+		JOIN TIMETABLE USING(MV_NO)
+		WHERE MV_STATUS = 'Y'
+		AND DATE_STATUS = 'Y'
+		AND CLOSEDATE >= SYSDATE
+		ORDER BY MV_NO DESC
+	</select>
+	
+	<select id="locationGetList" resultMap="locationResultSet">
+		SELECT DISTINCT LC_CODE,LC_NAME
+		FROM MOVIE
+		JOIN TIMETABLE T USING(MV_NO)
+		JOIN MULTIPLEX M USING(MP_NO)
+		JOIN LOCATION L USING(LC_CODE)
+		WHERE MV_TITLE = #{mvTitle}
+	</select>
+
+	<select id="multiplexGetList" resultMap="multiplexResultSet">
+		SELECT DISTINCT MP_NAME
+		FROM MOVIE
+        JOIN TIMETABLE T USING(MV_NO)
+        JOIN MULTIPLEX M USING(MP_NO)
+		JOIN LOCATION L USING(LC_CODE)
+		WHERE LC_NAME= #{lcName}
+        AND MV_TITLE = #{mvTitle}
+	</select>
+
+	<select id="timetableGetList" resultMap="timetableResultSet">
+		SELECT *  
+		FROM TIMETABLE T
+		JOIN MOVIE M USING(MV_NO)
+		JOIN THEATER M USING(THEATER_NO)
+		WHERE T.OPENDATE = TO_DATE(#{openDate})
+		AND MV_TITLE = #{mvTitle}
+	</select>
+
+	<select id="ticketGetList" resultMap="ticketResultSet">
+		SELECT *  
+		FROM TICKET
+	</select>
+	
+	<select id="timetableGet" resultMap="timetableUpdate">
+		SELECT * 
+		FROM TIMETABLE
+		WHERE TIME_NO = #{timetableNo}
+	</select>
+	
+	<insert id="ticketInsert">
+		INSERT INTO TSUCCESS(TK_NO,
+							 MEMBER_NO,
+							 MV_NO,
+							 THEATER_NO,
+							 TIME_NO,
+							 MV_PAY,
+							 TOTALPRICE,
+							 FielTK_CANCLEd,
+							 STATUS) 
+					  VALUES(SEQ_TSNO.NEXTVAL,
+							 #{memberNo},
+							 #{mvNo},
+							 #{theaterNo},
+							 #{timetableNo},
+							 #{payment},
+							 #{priceText},
+							 'Y',
+							 'Y')
+	</insert>
+	
+	<insert id="adultInsert">
+		INSERT INTO TDETAIL(TK_DETAILNO,
+                    TK_CODE,
+                    MEMBER_NO,
+                    TK_NO,
+                    THEATER_NO,
+                    TK_SEATNO,
+                    STATUS)
+                    VALUES(SEQ_TDNO.NEXTVAL,
+                    2,
+                    #{memberNo},
+                    SEQ_TSNO.CURRVAL,
+                    #{theaterNo},
+                    #{selectedSeats},
+                    'Y'
+                    )
+	</insert>
+	
+	<insert id="childInsert">
+		INSERT INTO TDETAIL(TK_DETAILNO,
+                    TK_CODE,
+                    MEMBER_NO,
+                    TK_NO,
+                    THEATER_NO,
+                    TK_SEATNO,
+                    STATUS)
+                    VALUES(SEQ_TDNO.NEXTVAL,
+                    1,
+                    #{memberNo},
+                    SEQ_TSNO.CURRVAL,
+                    #{theaterNo},
+                    #{selectedSeats},
+                    'Y'
+                    )
+	</insert>
+	
+	<select id="tsuccessNoInsert" resultType="string">
+<!-- 		SELECT * -->
+<!-- 		FROM TSUCCESS -->
+<!-- 		WHERE MEMBER_NO = #{memberNo} -->
+<!-- 		AND MV_NO = #{mvNo} -->
+<!-- 		AND THEATER_NO = #{theaterNo} -->
+<!-- 		AND TIME_NO = #{timetableNo} -->
+<!-- 		AND MV_PAY = #{payment} -->
+<!-- 		AND TOTALPRICE = #{priceText} -->
+		SELECT LAST_NUMBER
+    	FROM all_sequences
+    	WHERE sequence_name = 'SEQ_TSNO'
+	</select>
+	
+	<select id="tDetailGetList" resultType="string">
+<!-- 		SELECT TK_SEATNO -->
+<!-- 		FROM TDETAIL -->
+<!-- 		WHERE THEATER_NO = #{timetableNo} -->
+<!-- 		AND STATUS = 'Y' -->
+		SELECT TD.TK_SEATNO 
+		FROM TDETAIL TD
+        JOIN TSUCCESS TS USING(TK_NO)
+		WHERE TS.TIME_NO = #{timetableNo}
+		AND TD.STATUS = 'Y'
+		
+	</select>
+	
+	<update id="movieUpdate">
+		<![CDATA[UPDATE MOVIE
+		SET MV_TITLE = #{mvTitle},
+		    MV_SUBTITLE = #{mvSubtitle},
+		    DIRECTOR = #{director},
+		    ACTOR = #{actor},
+		    RATING = #{rating},
+		    MV_CONTENT = #{mvContent},
+		    MV_KEYWORD = #{mvKeyword},
+		    MV_IMG = #{mvImg},
+		    PLAYTIME = #{playTime},
+			OPENDATE = #{openDate,jdbcType=TIMESTAMP},
+			CLOSEDATE = #{closeDate,jdbcType=TIMESTAMP}
+		WHERE MV_NO = #{mvNo}]]>
+	</update>
+	
+	<insert id="movieInsert">
+	INSERT INTO MOVIE(MV_NO,
+					  MV_TITLE,
+					  MV_SUBTITLE,
+					  DIRECTOR,
+					  ACTOR,
+					  RATING,
+					  MV_CONTENT,
+					  MV_KEYWORD,
+					  MV_IMG,
+					  PLAYTIME,
+					  OPENDATE,
+					  CLOSEDATE)
+		        VALUES(SEQ_MVNO.NEXTVAL
+					  ,#{mvTitle}
+					  ,#{mvSubtitle}
+					  ,#{director}
+					  ,#{actor}
+					  ,#{rating}
+					  ,#{mvContent}
+					  ,#{mvKeyword}
+					  ,#{mvImg}
+					  ,#{playTime}
+					  ,#{openDate,jdbcType=TIMESTAMP}
+					  ,#{closeDate,jdbcType=TIMESTAMP})
+	</insert>
+	
+	<update id="movieDelete">
+		UPDATE MOVIE
+		SET MV_STATUS = 'N'
+		WHERE MV_NO = #{mvNo}
+	</update>
+	
+	<select id="scheduleLocationGetList" resultMap="locationResultSet">
+		SELECT *
+		FROM LOCATION
+	</select>
+	
+	<!-- 도균쓰 끝 -->
+    
+    
+
+    <!-- 221220 수정(연) movie테이블 전체조회 -->	
+    
+    
+	
+	
+	
+	<update id="increaseCount">
+	
+	UPDATE MOVIE 
+	SET MV_COUNT = MV_COUNT+1
+	WHERE MV_NO = #{mvNo}
+	AND MV_STATUS = 'Y'
+	
+	</update>
+	
+	
+	<select id="sameKeywordMvGetList" resultMap="movieResultSet">
+	 <![CDATA[
+	 SELECT * 
+FROM MOVIE 
+WHERE MV_NO IN (SELECT MV_NO
+FROM (SELECT MV_NO,REGEXP_SUBSTR(M.MV_KEYWORD,'[^,]+',1, B.lv) AS MV_KEYWORD
+FROM MOVIE M, (SELECT LEVEL AS lv FROM DUAL CONNECT BY LEVEL <=10) B
+WHERE REGEXP_SUBSTR(M.MV_KEYWORD,'[^,]+',1, B.lv) IS NOT NULL
+AND MV_STATUS = 'Y')
+WHERE  MV_KEYWORD = ANY (SELECT REGEXP_SUBSTR(M.MV_KEYWORD,'[^,]+',1, B.lv) AS MV_KEYWORD
+FROM MOVIE M, (SELECT LEVEL AS lv FROM DUAL CONNECT BY LEVEL <=10) B
+WHERE REGEXP_SUBSTR(M.MV_KEYWORD,'[^,]+',1, B.lv) IS NOT NULL
+AND MV_STATUS = 'Y'
+AND MV_NO = #{mvNo})
+AND MV_NO != #{mvNo})
+ORDER BY MV_COUNT DESC
+ ]]>
+	</select>
+	
+	<select id="movieGetmvBest" resultMap="movieResultSet">
+	    SELECT *
+		FROM MOVIE
+		WHERE MV_STATUS = 'Y'
+		ORDER BY MV_COUNT DESC
+	</select>
+	
+	<select id="movieGetmvHigh" resultMap="movieResultSet">
+	    SELECT *
+FROM MOVIE
+LEFT JOIN (SELECT MV_NO,COUNT(*) AS COUNT
+FROM TSUCCESS
+GROUP BY MV_NO
+ORDER BY COUNT DESC) A
+USING (MV_NO)
+ORDER BY A.COUNT DESC NULLS LAST
+	</select>
+	
+	<select id="movieGetmvNow" resultMap="movieResultSet">
+	     <![CDATA[
+	    SELECT *
+		FROM MOVIE
+		WHERE MV_STATUS = 'Y'
+		AND CLOSEDATE >= SYSDATE 
+        AND DATE_STATUS = 'Y'
+		ORDER BY OPENDATE DESC
+		 ]]>
+	</select>
+	
+	<select id="movieGetmvNew" resultMap="movieResultSet">
+	    SELECT *
+		FROM MOVIE
+		WHERE MV_STATUS = 'Y'
+		ORDER BY MV_COUNT DESC
+	</select>
+	
+	<select id="selectSearchMovieCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MOVIE
+		WHERE MV_TITLE LIKE '%'||#{searchKeyword}||'%'
+		OR MV_SUBTITLE LIKE '%'||#{searchKeyword}||'%'
+		OR DIRECTOR LIKE '%'||#{searchKeyword}||'%'
+		OR ACTOR LIKE '%'||#{searchKeyword}||'%'
+		OR MV_KEYWORD LIKE '%'||#{searchKeyword}||'%'
+		AND MV_STATUS = 'Y'
+	    
+	</select>
+	
+	<select id="movieGetmvSearch" resultMap="movieResultSet">
+	    SELECT *
+		FROM MOVIE
+		WHERE REPLACE(TRIM(MV_TITLE),' ','') LIKE '%'||#{searchKeyword}||'%'
+		OR REPLACE(TRIM(LOWER(MV_SUBTITLE)),' ','') LIKE '%'||#{searchKeyword}||'%'
+		OR REPLACE(TRIM(DIRECTOR),' ','') LIKE '%'||#{searchKeyword}||'%'
+		OR REPLACE(TRIM(ACTOR),' ','') LIKE '%'||#{searchKeyword}||'%'
+		OR REPLACE(TRIM(MV_KEYWORD),' ','') LIKE '%'||#{searchKeyword}||'%'
+		AND MV_STATUS = 'Y'
+	</select>
+	
+	<select id="selectNowMovieCount" resultType="_int">
+	     <![CDATA[
+	    SELECT COUNT(*)
+		FROM MOVIE
+		WHERE MV_STATUS = 'Y'
+		AND CLOSEDATE >= SYSDATE 
+        AND DATE_STATUS = 'Y'
+		ORDER BY OPENDATE DESC
+		 ]]>
+	</select>
+	
+	<select id="movieReviewGetList" resultMap="reviewResultSet" parameterType="_int">
+SELECT RE_NO
+,MEMBER_ID
+,MV_NO
+,RE_STAR
+,RE_CONTENT
+,RE_CREATEDATE
+,RE_STATUS
+FROM REVIEW
+JOIN MEMBER USING(MEMBER_NO)
+WHERE MV_NO=#{mvNo}
+AND RE_STATUS = 'Y'
+ORDER BY RE_CREATEDATE DESC
+	</select>
+	
+	<insert id="movieReviewInsert">
+	 INSERT INTO REVIEW (RE_NO,MEMBER_NO,MV_NO,RE_STAR,RE_CONTENT) 
+	 VALUES(SEQ_RNO.NEXTVAL,#{memberNo},#{mvNo},#{reStar},#{reContent})
+	
+	</insert>
+	
+	<select id="movieStarAvgGet" resultType="_double">
+	 SELECT NVL(ROUND(AVG(RE_STAR),2),0)
+     FROM REVIEW
+     WHERE MV_NO=#{mvNo}
+     AND RE_STATUS='Y'
+	
+	</select>
+	
+	<insert id="movieLikeInsert">
+	 INSERT INTO MLIKE(MLIKE_NO, MEMBER_NO, MV_NO) VALUES(SEQ_MLNO.NEXTVAL,#{memberNo},#{mvNo})
+	</insert>
+	
+   <select id="movieLikeCheckGet" resultMap="mLikeResultSet">
+     SELECT * FROM MLIKE WHERE MV_NO=#{mvNo} AND MEMBER_NO=#{memberNo}
+   </select>
+   
+   <delete id="movieLikeDelete">
+    DELETE MLIKE WHERE MEMBER_NO=#{memberNo} AND MV_NO=#{mvNo}
+   </delete>
+   
+   <select id="movieMyReviewGetList" resultMap="reviewResultSet"> 
+    SELECT RE_NO,MV_NO,RE_STAR,RE_CONTENT,RE_CREATEDATE,MV_TITLE,MV_IMG
+		FROM REVIEW
+		JOIN MOVIE USING (MV_NO)
+		WHERE MEMBER_NO=#{memberNo}
+   </select>
+	
+
+<!-- // 연 수정 목록 끝 -->
+
 </mapper>

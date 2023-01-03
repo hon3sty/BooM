@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bm.spring.member.model.service.MemberService;
-import com.bm.spring.member.model.vo.Review;
 import com.bm.spring.member.model.vo.Member;
 
 @Controller
@@ -25,16 +24,16 @@ public class MemberController {
 	private MemberService memberService;
 	private com.bm.spring.member.model.service.MemberService serivce;
 	
-	//내가 쓴 리뷰  
-	@RequestMapping("review.my")
-	public String reviewGetList(Model model) {
-		//member no 받아오기
-		ArrayList<Review> list = memberService.reviewGetList();
-		
-		model.addAttribute("list", list);
-		
-		return "mypage/MY_0050";
-	}
+//	//내가 쓴 리뷰  
+//	@RequestMapping("review.my")
+//	public String reviewGetList(Model model) {
+//		//member no 받아오기
+//		ArrayList<Review> list = memberService.reviewGetList();
+//		
+//		model.addAttribute("list", list);
+//		
+//		return "mypage/MY_0050";
+//	} //마이페이지리뷰 무비컨트롤러에 있음
 	// 로그인
 	@GetMapping("login.me")
 	public String Memberlogin() {

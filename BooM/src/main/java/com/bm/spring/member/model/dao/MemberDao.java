@@ -6,14 +6,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bm.spring.member.model.vo.Member;
-import com.bm.spring.member.model.vo.Review;
+
 
 @Repository 
 public class MemberDao {
 	
-	public ArrayList<Review> reviewGetList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("memberMapper.reviewList");
-	}
+//	public ArrayList<Review> reviewGetList(SqlSessionTemplate sqlSession) {
+//		return (ArrayList)sqlSession.selectList("memberMapper.reviewList");
+//	}
 	public Member Memberlogin(SqlSessionTemplate sqlSession, Member m) {
 	    return sqlSession.selectOne("memberMapper.Memberlogin",m);
 	}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
-	<resultMap type="review" id="reviewResult">
+<!--	<resultMap type="review" id="reviewResult">
 		<result column="RE_NO" property="reNo"/>
 		<result column="MEMBER_NO" property="memberNo"/>
 		<result column="MV_NO" property="mvNo"/>
@@ -14,7 +14,7 @@
 	<resultMap type="movie" id="movieResult">
 		<result column="MV_TITLE" property="mvTitle"/>
 		<result column="MV_IMG" property="mvImg"/>
-	</resultMap>
+	</resultMap> -->
 	<resultMap type="member" id="memberResultSet">
 		<result column="MEMBER_NO" property="memberNo"/>  
 		<result column="MEMBER_ID" property="memberId"/>
@@ -28,12 +28,12 @@
 		<result column="STATUS" property="status"/>
 	</resultMap>
 	
-	<select id="reviewList" resultMap="reviewResult">
+<!--	<select id="reviewList" resultMap="reviewResult">
 		SELECT RE_NO,MV_NO,RE_STAR,RE_CONTENT,RE_CREATEDATE,MV_TITLE,MV_IMG
 		FROM REVIEW
 		JOIN MOVIE USING (MV_NO)
 		WHERE MEMBER_NO=1
-	</select>
+	</select> -->
 	
 	<!-- 로그인 -->
 	<select id="Memberlogin" resultMap="memberResultSet">

@@ -1,28 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<!-- [영화] 영화검색페이지2(통합검색결과) : 박연 -->
+<html lang="en">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- [영화] 영화 검색결과페이지 : 박연 -->
+    <title>검색 결과</title>
+
 
     <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
 
     <style>
 
@@ -97,10 +91,18 @@
 </head>
 
 <body>
+
+<!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+	<jsp:include page="../common/header.jsp"/>
+    <!-- Header End -->
 <!--=========================================================== 영화리스트, 영화 검색결과 페이지 =================================================================-->
     
 <!-- 메뉴바 영역 -->
-<jsp:include page="../common/header.jsp"/>
 
 
     <!-- 카테고리링크영역 Begin -->
@@ -130,22 +132,23 @@
                                 <div class="col-lg-8 col-md-8 col-sm-6">
                                     <div class="section-title">
                                     <!-- ============== 영화 리스트 타이틀 영역 ============= -->
-                                        <h4>검색 결과</h4><br><div class="filter_area">
-                                            <p><a href="">&nbsp;인기순&nbsp;</a> 
-                                               <a href="">&nbsp;예매율순&nbsp;</a> 
-                                               <a href="">&nbsp;최신순&nbsp;</a> 
-                                               <a href="">&nbsp;현재 상영작&nbsp;</a> </p> 
-                                           
+                                        <h4>검색결과</h4><br><div class="filter_area">
+                                            <p style="height:25px;">
+                                                </p> 
+                                            
+                                            
                                        </div>
                                     </div>
                                 </div>
                                 
+                               
                                     
-                                <!-- ====================== 정렬 필터영역 ====================== -->
+                                <!-- ====================== 검색 영역 ====================== -->
                                     <div class="col-lg-4">
                                         <div class="search_box">
-                                        <form action="." method="post">
-                                            <input class="search-txt" type="text" placeholder="검색어를 입력해 주세요">
+                                        <form action="mvSearch.mv" method="get">
+                                        <input type="hidden" name="currentPage" value="1">
+                                            <input class="search-txt" type="text" name="SearchKeyword" value="${SearchKeyword }" placeholder="검색어를 입력해 주세요">
                                             <button class="search-btn" type="submit">
                                                 <i class="fas fa-search"></i></button>
                                           </form>
@@ -157,230 +160,26 @@
 
                     <!-- ========================================= 영화리스트 영역 ========================================= -->
                     
-                    <!-- <div class="col-lg-4 filter_area">
-                        <p><a href="">&nbsp;인기순&nbsp;</a> 
-                           <a href="">&nbsp;예매율순&nbsp;</a> 
-                           <a href="">&nbsp;최신순&nbsp;</a> 
-                           <a href="">&nbsp;현재 상영작&nbsp;</a> </p> 
-                       
-                   </div> -->
-                    <div class="row">
-                            
-                            
+                <h5 style="color:white;">검색결과 ${pi.listCount} 건</h5><br>
+                    <div class="row" id="mvContent_area">
+                      
+                     <c:forEach var="m" items="${movieAllList}">       
                         <!-- 한 개체 시작-->
-                            <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/popular/mv1.jpg">
+                                    <div class="product__item__pic set-bg" style="background-image : url(${m.mvImg}); background-size : contain;">
                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                        <div class="comment"></div>
+                                        <div class="view"><i class="fa fa-eye"></i> ${m.mvCount } </div>
                                     </div>
-                                    <div class="product__item__text">
+                                    <div class="product__item__text" align="center">
                                         
-                                        <h5><a href="#">헤어질 결심</a></h5>
+                                        <h5><a href="movieDetail.mv?mno=${m.mvNo}"> ${m.mvTitle } </a></h5>
                                     </div>
                                 </div>
                             </div>
                         <!-- 한 개체 끝 -->
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20201028_19%2F1603867994616GALu9_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">화양연화</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150922_278%2F14429125873720WOoU_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">이터널선샤인</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 한 개체 시작-->
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/popular/mv1.jpg">
-                                       
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">헤어질 결심</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- 한 개체 끝 -->
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20201028_19%2F1603867994616GALu9_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">화양연화</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150922_278%2F14429125873720WOoU_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">이터널선샤인</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 한 개체 시작-->
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/popular/mv1.jpg">
-                                       
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">헤어질 결심</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- 한 개체 끝 -->
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20201028_19%2F1603867994616GALu9_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">화양연화</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150922_278%2F14429125873720WOoU_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">이터널선샤인</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 한 개체 시작-->
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/popular/mv1.jpg">
-                                       
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">헤어질 결심</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- 한 개체 끝 -->
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20201028_19%2F1603867994616GALu9_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">화양연화</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150922_278%2F14429125873720WOoU_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">이터널선샤인</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 한 개체 시작-->
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/popular/mv1.jpg">
-                                       
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">헤어질 결심</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- 한 개체 끝 -->
-
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20201028_19%2F1603867994616GALu9_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">화양연화</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150922_278%2F14429125873720WOoU_JPEG%2Fmovie_image.jpg">
-                                        
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        
-                                        <h5><a href="#">이터널선샤인</a></h5>
-                                    </div>
-                                </div>
-                            </div>
+                        </c:forEach>
 
                         
                         </div>
@@ -389,41 +188,43 @@
                 
                 <!--=================== 페이징바 영역 ====================-->
                     <div class="product__pagination" align="center">
-                        <a href="#" class="current-page">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                      <c:choose>
+                     <c:when test="${pi.currentPage == 1 }">
+                      <a class="disabled" href="mvSearch.mv?currentPage=${pi.startPage}&SearchKeyword=${SearchKeyword} "><i class="fa fa-angle-double-left"></i></a>
+                     </c:when>
+                     <c:otherwise>
+                      <a class="" href="mvSearch.mv?currentPage=${pi.currentPage-1}&SearchKeyword=${SearchKeyword} "><i class="fa fa-angle-double-left"></i></a>
+                     </c:otherwise>
+                    </c:choose>
+                    
+                    <%--페이징바 반복문 --%>
+                    <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+                      <a href="mvSearch.mv?currentPage=${p}&SearchKeyword=${SearchKeyword}" class="current-page">${p } </a>
+                    </c:forEach>
+                    
+                    
+                    <%--다음 버튼 활성화 --%>
+                    <c:choose>
+                     <c:when test="${pi.currentPage ne pi.maxPage}">
+                       <a class="" href="mvSearch.mv?currentPage=${pi.currentPage+1}&SearchKeyword=${SearchKeyword}"><i class="fa fa-angle-double-right"></i></a>
+                     </c:when>
+                     <c:otherwise>
+                     <a class="" href="mvSearch.mv?currentPage=${pi.maxPage}&SearchKeyword=${SearchKeyword}"><i class="fa fa-angle-double-right"></i></a>
+                     </c:otherwise>
+                    </c:choose>    
+                 
                     </div>
                 </div>
-                <!-- <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="product__sidebar">
-                        
-                    
-
-</div>
-</div> -->
+               
 </div>
 </div>
 </section>
 
-<!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/player.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
-
-
 <!-- Product Section End -->
 
 <!-- 푸터바 영역 -->
-<jsp:include page="../common/footer.jsp"/>
 
 </body>
+
 
 </html>

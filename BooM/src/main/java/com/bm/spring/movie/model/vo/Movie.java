@@ -1,15 +1,17 @@
 package com.bm.spring.movie.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
+
 public class Movie {
+	
 	private int mvNo;
 	private String mvTitle;
     private String mvSubtitle;
@@ -25,4 +27,6 @@ public class Movie {
 	private Date closeDate;
 	private String dateStatus;
 	private String mvStatus;
+	
+	
 }
