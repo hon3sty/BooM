@@ -3,9 +3,10 @@
 <configuration>
 
 	<settings>
+	    
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
-	
+		
 	<!-- 별칭 등록 -->
 	 
 	<typeAliases>
@@ -22,6 +23,12 @@
 		<typeAlias type="com.bm.spring.movie.model.vo.Location" alias="location"/>
 		<typeAlias type="com.bm.spring.movie.model.vo.Timetable" alias="timetable"/>
 		<typeAlias type="com.bm.spring.movie.model.vo.Ticket" alias="ticket"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.Tsuccess" alias="tsuccess"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.Tdetail" alias="tdetail"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.Theater" alias="theater"/>
+		<typeAlias type="com.bm.spring.movie.model.vo.ScheduleTimetable" alias="scheduleTimetable"/>
+		
+		
 	</typeAliases>
 	 
 	<mappers>

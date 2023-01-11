@@ -28,6 +28,9 @@
 			height : 36px !important;
 			border-radius : 0px !important;
 		}
+		.anime-details{
+			width : 1900px !important;
+		}
     </style>
 </head>
 <body>

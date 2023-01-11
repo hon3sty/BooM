@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <!DOCTYPE html>
@@ -16,15 +17,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
     <Style>
          * {
             margin: 0;
@@ -117,7 +109,7 @@
 		   }
 		    
 		   .board_list .title {
-		      width: 55%;
+		      width: 40%;
 		      text-align: left;
 		      padding-left: 50px;
 		   }
@@ -144,7 +136,7 @@
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="section-title">
 								<!-- ============== 예매페이지1 타이틀 영역 ============= -->
-								<h4>관리자 페이지(리스트)</h4>
+								<h4>관리자 페이지(시간표 페이지)</h4>
 								</div>
                             </div>
                       	</div>
@@ -154,11 +146,8 @@
 	            <div class="board_list_wrap">
 					<!--추가 삭제 버튼 시작-->
 	               	<div style="float: right; margin-bottom: 10px;">
-	               	
-						<button style="color: black;" class="btn btn-success" onClick="location.href='movieInsert.mv'">추가</button>
-	                  	<button style="color: black;" class="btn btn-danger" onClick="movieDelete();">삭제</button>
-	                  	
-	                  	<input type='hidden' id="mvNoArr" name="mvNoArr">
+						<button class="btn btn-success" style="color: black;" onClick="location.href='adminMovieScheduleEdit.mv'">추가</button>
+	                  	<button class="btn btn-danger" style="color: black;" onClick="timeTableDelete();">삭제</button>
 	                </div>
 	                <!--추가 삭제 버튼 끝-->
 	                <!--영화 list 시작-->
@@ -169,24 +158,30 @@
 	                            <th class="check"><input type="checkbox" onclick="selectAll(this);"></th>
 	                            <th class="num">번호</th>
 	                            <th class="title">제목</th>
-	                            <th >개봉일</th>
-								<th class="date">종영일</th>
+	                            <th> 지점명 </th>
+	                            <th> 상영관 </th>
+	                            <th> 상영일 </th>
+								<th class="date">시작 시간</th>
 	                        </tr>
 	                    </thead>
 						<tbody>
-							<c:forEach var="m" items="${movieList}">
+							<c:forEach var="t" items="${timetableList}">
 								<tr>
-		                        	<td class="check"><input type="checkbox" name="mvNo" value="${m.mvNo}"></td>
-		                        	<td class="num">${m.mvNo}</td>
-		                        	<td class="tit title">
-		                            	<a href="movieUpdate.mv?mvNo=${m.mvNo}">${m.mvTitle}</a>
-		                        	</td>
+		                        	<td class="check"><input type="checkbox" name="timeNo" value="${t.timeNo}"></td>
+		                        	<td class="num">${t.timeNo}</td>
+		                        	<td>${t.mvNo}</td>
+		                        	<th>${t.mpNo} </th>
+		                        	<th>${t.theaterNo} </th>
+		                        	<td>${fn:substring(t.openDate,0,10)}</td>
 		                        	<td>
-		                        		<fmt:formatDate type="date" value="${m.openDate}"/>
-		                        	</td>
-		                        	<td class="date">
-		                        		<fmt:formatDate type="date" value="${m.closeDate}"/>
-		                        	</td>
+		                        	<c:choose>
+		                        		<c:when test="${t.openTime <100000}">
+				                        	0${fn:substring(t.openTime,0,1)}:${fn:substring(t.openTime,1,3)}</td>
+		                        		</c:when>
+		                        		<c:otherwise>
+		                        			${fn:substring(t.openTime,0,2)}:${fn:substring(t.openTime,2,4)}</td>
+		                        		</c:otherwise>
+		                        	</c:choose>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -197,23 +192,23 @@
 					<div class="product__pagination" align="center">
 	               		<c:choose>
                      		<c:when test="${pi.currentPage == 1 }">
-                      			<a class="disabled" href="adminMovieList.mv?currentPage=${pi.startPage} "><i class="fa fa-angle-double-left"></i></a>
+                      			<a class="disabled" href="movieScheduleDelete.mv?currentPage=${pi.startPage} "><i class="fa fa-angle-double-left"></i></a>
                      		</c:when>
                      		<c:otherwise>
-                      			<a class="" href="adminMovieList.mv?currentPage=${pi.currentPage-1} "><i class="fa fa-angle-double-left"></i></a>
+                      			<a class="" href="movieScheduleDelete.mv?currentPage=${pi.currentPage-1} "><i class="fa fa-angle-double-left"></i></a>
                      		</c:otherwise>
                     	</c:choose>
                     	<%--페이징바 반복문 --%>
                     	<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-                      		<a href="adminMovieList.mv?currentPage=${p}" class="current-page">${p } </a>
+                      		<a href="movieScheduleDelete.mv?currentPage=${p}" class="current-page">${p } </a>
                     	</c:forEach>
                     	<%--다음 버튼 활성화 --%>
                     	<c:choose>
                      		<c:when test="${pi.currentPage ne pi.maxPage}">
-                       			<a class="" href="adminMovieList.mv?currentPage=${pi.currentPage+1}"><i class="fa fa-angle-double-right"></i></a>
+                       			<a class="" href="movieScheduleDelete.mv?currentPage=${pi.currentPage+1}"><i class="fa fa-angle-double-right"></i></a>
                      		</c:when>
                      		<c:otherwise>
-                       			<a class="" href="adminMovieList.mv?currentPage=${pi.maxPage}"><i class="fa fa-angle-double-right"></i></a>
+                       			<a class="" href="movieScheduleDelete.mv?currentPage=${pi.maxPage}"><i class="fa fa-angle-double-right"></i></a>
                      		</c:otherwise>
                     	</c:choose>
                     </div>
@@ -229,12 +224,12 @@
 
 <script>
 	var obj;
-	var mvNoArray;
+	var timeNoArray;
 	
 	//체크박스 클릭시 전체 선택
 	function selectAll(selectAll)  {
 	   const checkboxes 
-	   = document.getElementsByName('mvNo');
+	   = document.getElementsByName('timeNo');
 	   
 	   checkboxes.forEach((checkbox) => {
 	      checkbox.checked = selectAll.checked;
@@ -242,26 +237,29 @@
 	}
 	
 	$(function(){
-		//체크박스 클릭시 배열에 mvNo담기
+		//체크박스 클릭시 배열에 timeNo담기
 		$("input:checkbox").on('click', function() {
-			obj = $("[name=mvNo]");
-			mvNoArray = new Array(); // 배열 선언
-	 
-	        $('input:checkbox[name=mvNo]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
-	        	mvNoArray.push(this.value);
+			obj = $("[name=timeNo]");
+			timeNoArray = new Array(); // 배열 선언
+			
+	        $('input:checkbox[name=timeNo]:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
+	        	timeNoArray.push(this.value);
 	        });
-	        $('#mvNoArr').val(mvNoArray);
+	        $('#timeNoArr').val(timeNoArray);
 		});
 	})
 	
-	function movieDelete(){
+	function timeTableDelete(){
 		$.ajax({
-			  url : "movieDelete.mv",
+			  url : "movieScheduleDelete.mv",
 			  type : "post",
 			  data : {
-				  mvNoArr : mvNoArray
+				  timeNoArr : timeNoArray
 			  },
 			  success : function(result){
+				  console.log("asd");
+				  
+				  console.log(result);
 			    if(result > 0) {
 			    	alert("삭제 성공되었습니다.");
 			    	location.reload();

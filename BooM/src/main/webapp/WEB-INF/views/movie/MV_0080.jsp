@@ -223,7 +223,7 @@
 <!-- Product Section End -->
 
 <!-- 푸터바 영역 -->
-
+<jsp:include page="../common/footer.jsp" />
 </body>
 
 

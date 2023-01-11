@@ -23,7 +23,7 @@
 	<!-- 공통 끝 -->
 
 <!-- 도균쓰 리저트맵 시작 -->
-	
+
 	<resultMap type="multiplex" id="multiplexResultSet">
 		<result column="MP_NO" property="mpNo"/>
 		<result column="LC_CODE" property="lcCode"/>
@@ -60,6 +60,23 @@
 		<result column="OPENTIME" property="openTime"/>
 	</resultMap>
 	
+	<resultMap type="theater" id="theaterResultSet">
+		<result column="THEATER_NO" property="theaterNo"/>
+		<result column="MP_NO" property="mpNo"/>
+		<result column="THEATER_NAME" property="theaterName"/>
+		<result column="SEAT_COUNT" property="seatCount"/>
+	</resultMap>
+	
+	
+	<resultMap type="scheduleTimetable" id="scheduleTimetableResultSet">
+		<result column="TIME_NO" property="timeNo"/>
+		<result column="MP_NAME" property="mpNo"/>
+		<result column="THEATER_NAME" property="theaterNo"/>
+		<result column="MV_TITLE" property="mvNo"/>
+		<result column="OPENDATE" property="openDate"/>
+		<result column="OPENTIME" property="openTime"/>
+	</resultMap>
+	
 	<!-- 도균쓰 리저트맵 끝 -->
 	
 	<!-- 연 리저트맵 시작 -->
@@ -80,6 +97,30 @@
 		<result column="MEMBER_NO" property="memberNo"/>
 		<result column="MV_NO" property="mvNo"/>
 		
+	</resultMap>
+	
+	<resultMap type="tsuccess" id="tsuccessResultSet">
+		<result column="TK_NO" property="tkNo"/>
+		<result column="MEMBER_NAME" property="memberNo"/>
+		<result column="MV_TITLE" property="mvNo"/>
+		<result column="THEATER_NAME" property="theaterNo"/>
+		<result column="OPENTIME" property="timeNo"/>
+		<result column="MV_PAY" property="mvPay"/>
+		<result column="TOTALPRICE" property="totalPrice"/>
+		<result column="FIELTK_CANCLED" property="fieltkCancled"/>
+		<result column="TS_CREATEDATE" property="tsCreateDate"/>
+		<result column="MV_IMG" property="mvImg"/>
+		<result column="OPENDATE" property="openDate"/>
+	</resultMap>
+	
+	<resultMap type="tdetail" id="tdetailResultSet">
+		<result column="TK_DETAILNO" property="tkDetailNo"/>
+		<result column="TK_NAME" property="tkCode"/>
+		<result column="TK_SEATNO" property="tkSeatNo"/>
+		<result column="TD_CREATEDATE" property="tdCreateDate"/>
+		<result column="STATUS" property="status"/>
+		<result column="MP_NAME" property="mpName"/>
+		<result column="TK_PRICE" property="tkPrice"/>
 	</resultMap>
 	
 	<!-- 연 리저트맵 끝 -->
@@ -138,10 +179,11 @@
 	<select id="nowScreenMoviegetList" resultMap="movieResultSet">
 		SELECT DISTINCT MV_NO,MV_IMG, MV_TITLE, PLAYTIME
 		FROM MOVIE
-		JOIN TIMETABLE USING(MV_NO)
+		JOIN TIMETABLE T USING(MV_NO)
 		WHERE MV_STATUS = 'Y'
 		AND DATE_STATUS = 'Y'
 		AND CLOSEDATE >= SYSDATE
+		AND T.OPENDATE >= TO_CHAR(SYSDATE,'YYYY-MM-DD')
 		ORDER BY MV_NO DESC
 	</select>
 	
@@ -241,7 +283,7 @@
                     )
 	</insert>
 	
-	<select id="tsuccessNoInsert" resultType="string">
+		<select id="tsuccessNoInsert" resultType="string">
 <!-- 		SELECT * -->
 <!-- 		FROM TSUCCESS -->
 <!-- 		WHERE MEMBER_NO = #{memberNo} -->
@@ -322,6 +364,71 @@
 		FROM LOCATION
 	</select>
 	
+	
+	<!-- 230109 도균 -->
+	
+	<select id="scheduleMultiplexGetList" resultMap="multiplexResultSet">
+		SELECT *
+		FROM MULTIPLEX
+		JOIN LOCATION USING(LC_CODE)
+		WHERE LC_NAME = #{lcName}
+	</select>
+	
+	<select id="movieScheTheater" resultMap="theaterResultSet">
+		SELECT * FROM THEATER
+		WHERE MP_NO = #{mpNo}
+	</select>
+	
+	<update id="movieScheduleInsert">
+		INSERT INTO TIMETABLE(TIME_NO,
+							  MP_NO,
+							  THEATER_NO,
+							  MV_NO,
+							  OPENDATE,
+							  OPENTIME
+							  ) 
+						VALUES(SEQ_TTNO.NEXTVAL,
+						#{multiplexNo},
+						#{theaterNo},
+						#{mvNo},
+						#{selectDay},
+						to_number(#{selectTime})
+						)
+	</update>
+	
+	<select id="selectTimetableCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM TIMETABLE T
+		JOIN MULTIPLEX USING(MP_NO)
+		JOIN MOVIE USING(MV_NO)
+		JOIN THEATER USING(THEATER_NO)
+		WHERE T.OPENDATE >= SYSDATE
+	</select>
+	
+	<select id="scheduleTimetableGetList" resultMap="scheduleTimetableResultSet">
+		SELECT TIME_NO,MP_NAME,MV_TITLE,THEATER_NAME,T.OPENTIME,T.OPENDATE
+		FROM TIMETABLE T
+		JOIN MULTIPLEX USING(MP_NO)
+		JOIN MOVIE USING(MV_NO)
+		JOIN THEATER USING(THEATER_NO)
+		WHERE T.OPENDATE >= TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		ORDER BY TIME_NO
+	</select>
+	
+	<delete id="movieScheduleDelete">
+		DELETE FROM TIMETABLE
+		WHERE TIME_NO = #{timeNo}
+	</delete>
+	
+	<select id="mainMovieGetList" resultMap="movieResultSet">
+		<![CDATA[
+		SELECT ROWNUM, M.* 
+		FROM MOVIE M
+		WHERE ROWNUM <=8
+		ORDER BY MV_COUNT DESC
+		]]>
+	</select>
+	
 	<!-- 도균쓰 끝 -->
     
     
@@ -394,7 +501,7 @@ ORDER BY A.COUNT DESC NULLS LAST
 	    SELECT *
 		FROM MOVIE
 		WHERE MV_STATUS = 'Y'
-		ORDER BY MV_COUNT DESC
+		ORDER BY OPENDATE DESC
 	</select>
 	
 	<select id="selectSearchMovieCount" resultType="_int">
@@ -477,8 +584,245 @@ ORDER BY RE_CREATEDATE DESC
 		FROM REVIEW
 		JOIN MOVIE USING (MV_NO)
 		WHERE MEMBER_NO=#{memberNo}
+		AND RE_STATUS='Y'
+		ORDER BY RE_CREATEDATE DESC
+   </select>
+   
+   <update id="movieReviewUpdate">
+    UPDATE REVIEW SET RE_STAR = #{reStar},
+                      RE_CONTENT = #{reContent},
+                      RE_CREATEDATE = SYSDATE
+WHERE MEMBER_NO=#{memberNo} AND RE_NO=#{reNo} AND RE_STATUS='Y'
+   </update>
+   
+   <update id="movieReviewDelete">
+    UPDATE REVIEW SET RE_STATUS = 'N',
+                      RE_CREATEDATE = SYSDATE
+WHERE MEMBER_NO=#{memberNo} AND RE_NO=#{reNo}
+   </update>
+   
+   <select id="movieMyMLikeGetList" resultMap="movieResultSet">
+    SELECT MV_NO
+          ,MV_TITLE
+          ,MV_SUBTITLE
+          ,DIRECTOR
+          ,ACTOR
+          ,RATING
+          ,MV_CONTENT
+		  ,MV_KEYWORD
+		  ,MV_IMG
+		  ,MV_COUNT
+		  ,PLAYTIME
+		  ,OPENDATE
+		  ,CLOSEDATE
+		  ,DATE_STATUS
+		  ,MV_STATUS
+              FROM MOVIE M
+              JOIN (SELECT *
+              FROM MLIKE
+              WHERE MEMBER_NO=#{memberNo}) S USING(MV_NO)
+              WHERE MV_STATUS = 'Y'
+              ORDER BY MLIKE_NO DESC
+   
+   </select>
+   
+   <select id="selectMyMLikeMovieCount" resultType="_int">
+     SELECT COUNT(*)
+     FROM MOVIE
+     JOIN (SELECT *
+     FROM MLIKE
+     WHERE MEMBER_NO=#{memberNo}) USING(MV_NO)
+     WHERE MV_STATUS = 'Y'
+   </select>
+   
+   <select id="selectMyTSuccessCount" resultType="_int">
+     SELECT COUNT(*)
+FROM (SELECT *
+FROM (SELECT *
+FROM TSUCCESS
+JOIN THEATER USING(THEATER_NO)
+WHERE MEMBER_NO=#{memberNo}
+AND STATUS='Y') A
+JOIN MULTIPLEX USING(MP_NO)
+JOIN TIMETABLE T USING(TIME_NO)
+JOIN MEMBER USING(MEMBER_NO)
+JOIN MOVIE M ON(A.MV_NO=M.MV_NO))
+   </select>
+   
+   <select id="movieMyTSuccessGetList" resultMap="tsuccessResultSet">
+     SELECT TK_NO, 
+       MEMBER_NAME, 
+       MV_TITLE, 
+       MV_PAY,
+       TS_CREATEDATE,
+       T.OPENDATE AS OPENDATE,
+       T.OPENTIME AS OPENTIME,
+       TOTALPRICE,
+       DECODE(FIELTK_CANCLED,'Y','예매완료','N','예매취소','T','부분취소') AS FIELTK_CANCLED,
+       MV_IMG,
+       TH.THEATER_NAME AS THEATER_NAME
+FROM (SELECT *
+FROM TSUCCESS
+JOIN THEATER USING(THEATER_NO)
+WHERE MEMBER_NO=#{memberNo}
+AND STATUS='Y') A
+JOIN MULTIPLEX USING(MP_NO)
+JOIN TIMETABLE T USING(TIME_NO)
+JOIN MEMBER USING(MEMBER_NO)
+JOIN MOVIE M ON(A.MV_NO=M.MV_NO)
+JOIN THEATER TH ON(A.THEATER_NO=TH.THEATER_NO)
+ORDER BY TK_NO DESC
+   </select>
+   
+   <select id="selectTicketDateCount" resultType="_int">
+   <![CDATA[
+    SELECT COUNT(*)
+FROM (SELECT *
+FROM (SELECT *
+FROM TSUCCESS
+JOIN THEATER USING(THEATER_NO)
+WHERE MEMBER_NO=#{memberNo}
+AND (TO_CHAR(TS_CREATEDATE,'YYYY-MM-DD') >= #{mvDateChk.startDate} AND TO_CHAR(TS_CREATEDATE,'YYYY-MM-DD') <= #{mvDateChk.endDate})
+AND STATUS='Y') A
+JOIN MULTIPLEX USING(MP_NO)
+JOIN TIMETABLE T USING(TIME_NO)
+JOIN MEMBER USING(MEMBER_NO)
+JOIN MOVIE M ON(A.MV_NO=M.MV_NO))
+ ]]>
    </select>
 	
+   <select id="movieTicketDateGetList" resultMap="tsuccessResultSet">
+    <![CDATA[
+     SELECT TK_NO, 
+       MEMBER_NAME, 
+       MV_TITLE, 
+       MV_PAY,
+       TS_CREATEDATE,
+       T.OPENDATE AS OPENDATE,
+       T.OPENTIME AS OPENTIME,
+       TOTALPRICE,
+       DECODE(FIELTK_CANCLED,'Y','예매완료','N','예매취소','T','부분취소') AS FIELTK_CANCLED,
+       MV_IMG,
+       TH.THEATER_NAME AS THEATER_NAME
+FROM (SELECT *
+FROM TSUCCESS
+JOIN THEATER USING(THEATER_NO)
+WHERE MEMBER_NO=#{memberNo}
+AND (TO_CHAR(TS_CREATEDATE,'YYYY-MM-DD') >= #{mvDateChk.startDate} AND TO_CHAR(TS_CREATEDATE,'YYYY-MM-DD') <= #{mvDateChk.endDate})
+AND STATUS='Y') A
+JOIN MULTIPLEX USING(MP_NO)
+JOIN TIMETABLE T USING(TIME_NO)
+JOIN MEMBER USING(MEMBER_NO)
+JOIN MOVIE M ON(A.MV_NO=M.MV_NO)
+JOIN THEATER TH ON(A.THEATER_NO=TH.THEATER_NO)
+ORDER BY TS_CREATEDATE DESC
+ ]]>
+   </select>
+   
+   <select id="movieTSuccessGet" resultMap="tsuccessResultSet">
+    <![CDATA[
+     SELECT TK_NO, 
+       MEMBER_NAME, 
+       MV_TITLE, 
+       MV_PAY,
+       TS_CREATEDATE,
+       T.OPENDATE AS OPENDATE,
+       CASE WHEN SUBSTR(T.OPENTIME,0,1)>2 AND  SUBSTR(T.OPENTIME,0,1)<10
+THEN SUBSTR('0'||T.OPENTIME,0,2)||'시'||SUBSTR('0'||T.OPENTIME,3,2)||'분'
+ELSE SUBSTR(T.OPENTIME,0,2)||'시'||SUBSTR(T.OPENTIME,3,2)||'분'
+END "OPENTIME",
+       TOTALPRICE,
+       DECODE(FIELTK_CANCLED,'Y','예매완료','N','예매취소','T','부분취소') AS FIELTK_CANCLED,
+       MV_IMG,
+       TH.THEATER_NAME AS THEATER_NAME
+FROM (SELECT *
+FROM TSUCCESS
+JOIN THEATER USING(THEATER_NO)
+WHERE MEMBER_NO=#{memberNo}
+AND TK_NO = #{tkNo}
+AND STATUS='Y') A
+JOIN MULTIPLEX USING(MP_NO)
+JOIN TIMETABLE T USING(TIME_NO)
+JOIN MEMBER USING(MEMBER_NO)
+JOIN MOVIE M ON(A.MV_NO=M.MV_NO)
+JOIN THEATER TH ON(A.THEATER_NO=TH.THEATER_NO)
+ ]]>
+   </select>
+   
+   <select id="movieMyTDetailGetList" resultMap="tdetailResultSet">
+    SELECT TK_DETAILNO, TK_NAME, TK_PRICE, TK_SEATNO, TD_CREATEDATE, DECODE(A.STATUS,'Y','예매','N','취소') AS STATUS,MP_NAME
+FROM(SELECT TK_DETAILNO, TK_NAME, TK_PRICE, TK_SEATNO, TD_CREATEDATE, TD.STATUS AS STATUS,MP_NO
+FROM TDETAIL TD
+JOIN TICKET TT USING(TK_CODE)
+JOIN THEATER TH ON(TD.THEATER_NO=TH.THEATER_NO)
+WHERE MEMBER_NO=#{memberNo}
+AND TK_NO=#{tkNo}) A
+JOIN MULTIPLEX USING(MP_NO)
+   </select>
+   
+   <!-- 마이페이지 좋아요 기반 추천영화리스트 -->
+   <select id="movieRecommendGetList" resultMap="movieResultSet">
+  <![CDATA[
+    SELECT *
+    FROM (SELECT * 
+FROM MOVIE 
+WHERE MV_NO IN (SELECT MV_NO
+FROM (SELECT MV_NO,REGEXP_SUBSTR(M.MV_KEYWORD,'[^,]+',1, B.lv) AS MV_KEYWORD
+FROM MOVIE M, (SELECT LEVEL AS lv FROM DUAL CONNECT BY LEVEL <=10) B
+WHERE REGEXP_SUBSTR(M.MV_KEYWORD,'[^,]+',1, B.lv) IS NOT NULL
+AND MV_STATUS = 'Y')
+WHERE  MV_KEYWORD = ANY (SELECT REGEXP_SUBSTR(M.MV_KEYWORD,'[^,]+',1, B.lv) AS MV_KEYWORD
+FROM MOVIE M, (SELECT LEVEL AS lv FROM DUAL CONNECT BY LEVEL <=10) B
+WHERE REGEXP_SUBSTR(M.MV_KEYWORD,'[^,]+',1, B.lv) IS NOT NULL
+AND MV_STATUS = 'Y'
+AND MV_NO IN(SELECT MV_NO
+FROM MLIKE
+WHERE MEMBER_NO=#{memberNo}))
+AND MV_NO NOT IN(SELECT MV_NO
+FROM MLIKE
+WHERE MEMBER_NO=#{memberNo}))
+ORDER BY MV_COUNT DESC)
+ORDER BY DBMS_RANDOM.RANDOM
+ ]]>
+   </select>
+   
+   <update id="myTicketDelete">
+    UPDATE TDETAIL SET STATUS = 'N' WHERE MEMBER_NO=#{memberNo} AND TK_DETAILNO IN <foreach collection="mvNoArray" item="mvNoArray" open="(" close=")" separator="," index="index">
+            #{mvNoArray}
+        </foreach>
+    
+   </update>
+   
+   <update id="myTicketDelete2">
+    
+    UPDATE TSUCCESS SET FIELTK_CANCLED='T' WHERE TK_NO=#{tkNo} AND MEMBER_NO=#{memberNo}
+   </update>
+   
+   
+   <update id="myTicketAllDelete">
+   
+    UPDATE TDETAIL SET STATUS = 'N' WHERE MEMBER_NO=#{memberNo} 
+    AND TK_DETAILNO IN <foreach collection="mvNoArray" item="mvNoArray" open="(" close=")" separator="," index="index">
+            #{mvNoArray}
+        </foreach>
+    
+  
+   </update>
+   
+   <update id="myTicketAllDelete2">
+   
+    
+    UPDATE TSUCCESS SET FIELTK_CANCLED='N' WHERE TK_NO=#{tkNo} AND MEMBER_NO=#{memberNo}
+  
+   </update>
+   
+   <select id="myCancleTicketCount" resultType="_int">
+    SELECT COUNT(*)
+    FROM TDETAIL
+    WHERE MEMBER_NO = #{memberNo}
+    AND TK_NO = #{tkNo} 
+    AND STATUS = 'N'
+   </select>
 
 <!-- // 연 수정 목록 끝 -->
 
