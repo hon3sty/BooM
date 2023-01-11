@@ -505,13 +505,21 @@ ORDER BY A.COUNT DESC NULLS LAST
 	</select>
 	
 	<select id="selectSearchMovieCount" resultType="_int">
-		SELECT COUNT(*)
+		<!-- SELECT COUNT(*)
 		FROM MOVIE
 		WHERE MV_TITLE LIKE '%'||#{searchKeyword}||'%'
 		OR MV_SUBTITLE LIKE '%'||#{searchKeyword}||'%'
 		OR DIRECTOR LIKE '%'||#{searchKeyword}||'%'
 		OR ACTOR LIKE '%'||#{searchKeyword}||'%'
 		OR MV_KEYWORD LIKE '%'||#{searchKeyword}||'%'
+		AND MV_STATUS = 'Y' -->
+		SELECT COUNT(*)
+		FROM MOVIE
+		WHERE REPLACE(TRIM(MV_TITLE),' ','') LIKE '%'||#{searchKeyword}||'%'
+		OR REPLACE(TRIM(LOWER(MV_SUBTITLE)),' ','') LIKE '%'||#{searchKeyword}||'%'
+		OR REPLACE(TRIM(DIRECTOR),' ','') LIKE '%'||#{searchKeyword}||'%'
+		OR REPLACE(TRIM(ACTOR),' ','') LIKE '%'||#{searchKeyword}||'%'
+		OR REPLACE(TRIM(MV_KEYWORD),' ','') LIKE '%'||#{searchKeyword}||'%'
 		AND MV_STATUS = 'Y'
 	    
 	</select>
