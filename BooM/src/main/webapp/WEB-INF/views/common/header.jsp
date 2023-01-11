@@ -46,6 +46,9 @@
 	<script src="resources/js/jquery.slicknav.js"></script>
 	<script src="resources/js/owl.carousel.min.js"></script>
 	<script src="resources/js/main.js"></script>
+	
+	<!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 #header__logo3{
     width: 15px;
@@ -165,6 +168,15 @@
  	right: 0; 
     background: #0b0c2a !important;
 }
+
+.search-btn {
+    position: absolute;
+    color: #EDEDED;
+    width: 70px;
+    height: 70px;
+    border: none;
+    background: none;
+   }
 </style>
 </head>
 <body>

@@ -33,7 +33,7 @@
  
         }
 
-        .search-btn {
+        .search-btn1 {
             position: absolute;
   color: #EDEDED;
   
@@ -162,7 +162,7 @@
                                         <form action="mvSearch.mv" method="get">
                                         <input type="hidden" name="currentPage" value="1">
                                             <input class="search-txt" type="text" name="SearchKeyword" placeholder="검색어를 입력해 주세요">
-                                            <button class="search-btn" type="submit">
+                                            <button class="search-btn1" type="submit">
                                                 <i class="fas fa-search"></i></button>
                                           </form>
                                           </div>
