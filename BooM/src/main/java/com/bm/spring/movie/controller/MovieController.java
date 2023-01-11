@@ -696,7 +696,8 @@ public class MovieController {
 				                       ,Model model) {
 		
 			//검색결과 리스트 페이징 처리
-			int listCount = movieService.selectSearchMovieCount(SearchKeyword);
+			String SearchKeyword1 = (SearchKeyword.replace(" ", "")).toLowerCase();
+			int listCount = movieService.selectSearchMovieCount(SearchKeyword1);
 			int pageLimit = 10;
 			int movieLimit = 16; //한페이지에 보여질 영화 갯수
 			
@@ -705,7 +706,7 @@ public class MovieController {
 			PageInfo pi = Pagination.getPageinfo(listCount, currentPage, pageLimit, movieLimit);
 			
 			//영화 전체 조회
-			ArrayList<Movie> mvSearchList = movieService.movieGetmvSearch(pi,(SearchKeyword.replace(" ", "")).toLowerCase());
+			ArrayList<Movie> mvSearchList = movieService.movieGetmvSearch(pi,SearchKeyword1);
 			//model.addAttribute("mvFilter","검색결과");
 			model.addAttribute("movieAllList",mvSearchList);
 			model.addAttribute("SearchKeyword",SearchKeyword);
