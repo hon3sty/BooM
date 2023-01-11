@@ -65,7 +65,20 @@
                         </div>
                     </div>
                 </div>
-                                <div class="hero__items set-bg" data-setbg="resources/img/common/SW_1.jpg">
+                <div class="hero__items set-bg" data-setbg="resources/img/common/SU_1.jpg">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <div>&nbsp;&nbsp;</div>
+                                <br><br>
+                                <h2>&nbsp;&nbsp;</h2>
+                                <p>&nbsp;&nbsp;</p>
+                                <a href="ticketing1.mv"><span>예매하기</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   <div class="hero__items set-bg" data-setbg="resources/img/common/SW_1.jpg">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
@@ -93,11 +106,6 @@
             </div>
         </div>
     </section>
-     <!-- 여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기 -->
-    <a href="movieScheduleDelete.mv">타임테이블 삭제 페이지로</a>
-    <a href="adminMovieList.mv">영화 추가 페이지로</a>
-    <a href="myTicketDetail.mv">박연님 페이지로</a>
-    <!-- 여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기  여기 -->
     <!-- Hero Section End -->
     <section class="product spad">
         <div class="container">
@@ -125,8 +133,8 @@
 			  </div>
 			</div>  
 		</section>
-		
-		<script>
+        
+        <script>
 			$(function(){
 				$.ajax({
 					url : "mainMovieGetList.mv",

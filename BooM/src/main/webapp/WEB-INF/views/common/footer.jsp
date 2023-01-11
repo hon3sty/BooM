@@ -8,18 +8,48 @@
     <!-- [공통] footer : 이지윤 -->
     <title>Document</title>
 <style>
-#footer-sns{ 
-    margin-left:120px;
- } 
+.footer {
+	background: #070720;
+	padding-top: 60px;
+	padding-bottom: 40px;
+	position: relative;
+    width: 100%;
+}
+.footer__logo2{
+    width: 24px;
+    height: 24px;
+    margin: 4px;
+}
 .footer__logo5{
     width: 14px;
     height: 14px;
-    margin 4px;
-}  
-.footer__logo2{
-    width: 20px;
-    height: 20px;
     margin: 4px;;
+}
+#logogo2:hover{
+	color : #cbc3c3;
+	font-weight: 500;
+	line-height: 26px;
+    font-size: 14px;
+}
+#logogo2{
+	color : white;
+	font-weight: 500;
+	line-height: 26px;
+	margin-right: 10px;
+    margin-top:10px;
+	font-size: 14px;
+	padding: 7px 3px 5px;
+}
+#footer-sns{ 
+    margin-left:120px;
+ } 
+ p {
+	font-size: 15px;
+	font-family: "Mulish", sans-serif;
+	color: #3d3d3d;
+	font-weight: 400;
+	line-height: 25px;
+	margin: 0 0 15px 15px !important;;
 }
 </style>  
 </head>
@@ -34,16 +64,16 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="footer__logo">
-                    <a href="./index.jsp"><img src="resources/img/logo.png" alt=""></a>
+                    <a href="./index.jsp"><img src="resources/img/common/22.png" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="footer__nav">
                     <ul>
-                       <li><a href=""><img src="resources/img/common/1_film.png" class="footer__logo5"><span id="logogo2" >영화</span></a></li>
-                       <li><a href=""><img src="resources/img/common/1_ticket.png" class="footer__logo5"> <span id="logogo2">예매</span></a></li>
-                       <li><a href=""><img src="resources/img/common/1_shopping-cart.png" class="footer__logo5"><span id="logogo2">스토어</span></a></li>
-                       <li><a href=""><img src="resources/img/common/1_headset.png" class="footer__logo5"> <span id="logogo2">고객센터</span></a></li>
+                       <li><a href="movieList.mv"><img src="resources/img/common/1_film.png" class="footer__logo5"><span id="logogo2" >영화</span></a></li>
+                       <li><a href="ticketing1.mv"><img src="resources/img/common/1_ticket.png" class="footer__logo5"> <span id="logogo2">예매</span></a></li>
+                       <li><a href="productList.pd"><img src="resources/img/common/1_shopping-cart.png" class="footer__logo5"><span id="logogo2">스토어</span></a></li>
+                       <li><a href="csMainForm.bo"><img src="resources/img/common/1_headset.png" class="footer__logo5"> <span id="logogo2">고객센터</span></a></li>
                      </ul>
                 </div>
             </div> 
