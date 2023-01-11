@@ -49,7 +49,9 @@
     pointer-events: none;
   }
   
- 
+ .follow-btn{
+  cursor:pointer;
+ }
  
 </style>
 </head>
@@ -85,11 +87,24 @@
             <div class="anime__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" style="background-image : url(${m.mvImg}); background-size : contain;">
+                        <div class="anime__details__pic set-bg titleImg" style="background-image : url(${m.mvImg}); background-size : contain;">
                             <div class="comment"></div> <!-- 별점 노출 부분 -->
                            <div class="view"><i class="fa fa-eye"></i> ${m.mvCount} </div> <!-- 조회수 노출 부분 -->
                         </div>
                     </div>
+                    
+                    <script>
+                    
+                      $(".titleImg").click(function(){
+                    	
+                    	  var OpenWindow=window.open("", "_blank","width=1415px,height=800px");
+                    	  OpenWindow.document.write("<img src='${m.mvImg}'>");
+                    	  
+                      })
+                      
+                    
+                    </script>
+                    
                     <div class="col-lg-9">
                       
                <!--==================================================== 영화 상세정보 영역 ========================================================== -->
@@ -230,8 +245,20 @@
                         
                         <!-- ================== 좋아요, 예매하기 버튼 영역 ================= -->
                             <div class="anime__details__btn">
+                               <c:choose>
+                                 <c:when test="${not empty loginUser}">
+                                 
+                                 <a class="follow-btn" id="likeBtn"><i class="fa fa-heart-o"></i> 좋아요</a>
+                                 <input type="hidden" id="mno" value="${loginUser.memberNo}">
+                                 </c:when>
+                                 
+                                 <c:otherwise>
+                                 
+                                 <a class="follow-btn" id="likeBtn-1"><i class="fa fa-heart-o"></i> 좋아요</a>
+                                 
+                                 </c:otherwise>
+                               </c:choose> 
                                 
-                                <a class="follow-btn" id="likeBtn"><i class="fa fa-heart-o"></i> 좋아요</a>
                                 
                                 <a href="ticketing1.mv" class="watch-btn"><span>예매하기</span> <i
                                     class="fa fa-angle-right"></i></a>
@@ -239,8 +266,18 @@
                                 
                                 <script>
                                 
-                                /* 로그인한 회원의 좋아요 디비에 해당 영화가 있으면 좋아요 버튼의 색을 채워주는 에이젝스*/
+                                $("#likeBtn-1").click(function(){
+                                	alert("로그인을 해주세요.");
+                                })
                                 
+                                /* 로그인한 회원의 좋아요 디비에 해당 영화가 있으면 좋아요 버튼의 색을 채워주는 에이젝스*/
+                                if(${mlikeHeart ==1}){
+                                	
+                                	changeLikeFullBtn();
+                                }else{
+                                	changeLikeEmptyBtn();
+                                	
+                                }
                                 
                                 /* 좋아요 버튼 바꾸는 함수 */
                                 function changeLikeFullBtn(){
@@ -256,13 +293,13 @@
                                 
                                 
                                 /* 좋아요 인서트하는 에이젝스 */
-                                
+                          
                                 $("#likeBtn").click(function(){
                                 	
                                 	$.ajax({
                                 		url:"MLike.mv",
                                 	    data:{
-                                	    	   memberNo : ${loginUser.memberNo},
+                                	    	   memberNo : $("#mno").val(),
                                 	    	   mvNo : ${m.mvNo}
                                 	    	
                                 	    },
@@ -288,6 +325,8 @@
                                 	})
                                 	
                                   })
+                                  
+                                
                                 
                                 </script>
                                 

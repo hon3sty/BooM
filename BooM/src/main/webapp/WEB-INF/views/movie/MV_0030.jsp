@@ -356,19 +356,27 @@
 	                               			timeText = "0" + timeText;
 	                               		}
 	                               		
-	                               		
 	                               		hour = parseInt(timeText.substr(0,2));
 	                               		if(hour <10){
 	                               			hour = "0" + hour;
 	                               		}
 	                               		minute = parseInt(timeText.substr(2,2));
+	                               		if(minute <= 0){
+	                               			minute = "0" + minute;
+	                               		}
 	                               		seconds = parseInt(timeText.substr(4,2));
 	                               		
 	                               		//끝나는 시간 초로 저장
 	                               		endTime = (hour*60*60)+(minute*60)+seconds+(playTime*60);
 	                               		
 	                               		endHour =  parseInt(endTime/3600);
+	                               		if(endHour  < 10){
+	                               			endHour  = "0" + endHour ;
+	                               		}
 	                               		endMinute = parseInt((endTime%3600)/60);
+	                               		if(endMinute < 10){
+	                               			endMinute = "0" + endMinute;
+	                               		}
 	                               		
 	                               		//1~9사이의 숫자일 경우 0을 더해줌
 	                               		//ex) 1분 -> 01분

@@ -125,7 +125,7 @@
 			            <div class="sidebar__comment__1-1">
 			            </div>
 			            <div class="sidebar__comment__1-2">
-			                <h5><a href="noticeListForm.bo">예매내역</a></h5>
+			                <h5><a href="myTicketList.mv">예매내역</a></h5>
 			            </div>
 			        </div>
 			        <div class="sidebar__comment__1">
@@ -133,6 +133,8 @@
 			            </div>
 			            <div class="sidebar__comment__1-2">
 			                <h5><a href="review.my">무비스토리</a></h5>
+			                <h5><a href="myLikeMovieList.mv">영화좋아요리스트</a></h5>	
+			                <h5><a href="movieRecommend.mv">추천영화리스트</a></h5>			                
 			            </div>
 			        </div>
 			        <div class="sidebar__comment__1">

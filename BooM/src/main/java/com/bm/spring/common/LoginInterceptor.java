@@ -1,12 +1,13 @@
 package com.bm.spring.common;
 
-import java.lang.reflect.Member;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.bm.spring.member.model.vo.Member;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 	

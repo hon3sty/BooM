@@ -92,8 +92,8 @@
                 	</div>
 						<!-- 예매내역, 홈으로 버튼 영역 -->
         		        <div class="blog__details__social" align="center">
-                            <button type="button" class="btn btn-danger" type="button">예매내역 보기</button>
-                            <button type="button" class="btn btn-primary" type="button"> Home</button>
+                            <a href="myTicketList.mv" type="button" class="btn btn-danger">예매내역 보기</a>
+							<a href="index.jsp" type="button" class="btn btn-primary"> Home</a>
                         </div>
                     </div>
                 </div>

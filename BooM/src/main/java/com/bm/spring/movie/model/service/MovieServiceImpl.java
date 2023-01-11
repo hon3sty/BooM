@@ -15,8 +15,12 @@ import com.bm.spring.movie.model.vo.MLike;
 import com.bm.spring.movie.model.vo.Movie;
 import com.bm.spring.movie.model.vo.Multiplex;
 import com.bm.spring.movie.model.vo.Review;
+import com.bm.spring.movie.model.vo.ScheduleTimetable;
+import com.bm.spring.movie.model.vo.Tdetail;
+import com.bm.spring.movie.model.vo.Theater;
 import com.bm.spring.movie.model.vo.Ticket;
 import com.bm.spring.movie.model.vo.Timetable;
+import com.bm.spring.movie.model.vo.Tsuccess;
 
 @Service
 public class MovieServiceImpl implements MovieService{
@@ -28,110 +32,154 @@ public class MovieServiceImpl implements MovieService{
 	private MovieDao moviedao;
 	
 	
-	
 	//영화 제목,이미지 리스트
-	@Override
-	public ArrayList<Movie> movieGetList() {
-		return moviedao.movieGetList(sqlSession);
-	}
-
-	//지역 리스트
-	@Override
-	public ArrayList<Location> locationGetList(String mvTitle) {
-			return moviedao.locationGetList(sqlSession,mvTitle);	
+		@Override
+		public ArrayList<Movie> movieGetList() {
+			return moviedao.movieGetList(sqlSession);
 		}
 
-	//영화관 리스트
-	@Override
-	public ArrayList<Multiplex> multiplexGetList(Map map) {
-		return moviedao.multiplexGetList(sqlSession,map);
-	}
-	
-	
-	//시간표 리스트
+		//지역 리스트
 		@Override
-		public ArrayList<Timetable> timetableGetList(Map map) {
-			return moviedao.timetableGetList(sqlSession,map);
-		}
+		public ArrayList<Location> locationGetList(String mvTitle) {
+				return moviedao.locationGetList(sqlSession,mvTitle);	
+			}
 
-		//가격표 리스트
+		//영화관 리스트
 		@Override
-		public ArrayList<Ticket> ticketGetList() {
-			return moviedao.ticketGetList(sqlSession);
+		public ArrayList<Multiplex> multiplexGetList(Map map) {
+			return moviedao.multiplexGetList(sqlSession,map);
 		}
+		
+		
+		//시간표 리스트
+			@Override
+			public ArrayList<Timetable> timetableGetList(Map map) {
+				return moviedao.timetableGetList(sqlSession,map);
+			}
 
-		//TSUCCESS테이블 INSERT
-		@Override
-		public int ticketInsert(Map<String, String> map) {
-			//timeNo를 통해서 다른번호 조회
-			Timetable t = moviedao.timetableGet(sqlSession,map);
-			int result = 0;
+			//가격표 리스트
+			@Override
+			public ArrayList<Ticket> ticketGetList() {
+				return moviedao.ticketGetList(sqlSession);
+			}
+
+			//TSUCCESS테이블 INSERT
+			@Override
+			public int ticketInsert(Map<String, String> map) {
+				//timeNo를 통해서 다른번호 조회
+				Timetable t = moviedao.timetableGet(sqlSession,map);
+				int result = 0;
+				
+				if(t != null) {
+					//조회한 값을 map에 추가
+					map.put("mvNo",String.valueOf(t.getMvNo()));
+					map.put("theaterNo",String.valueOf(t.getTheaterNo()));
+					
+					result = moviedao.ticketInsert(sqlSession,map);
+
+					int childNum = Integer.parseInt(map.get("childNum"));
+					int adultNum = Integer.parseInt(map.get("adultNum"));
+					
+					// ","단위로 끊어주기
+					String[] seatArr = map.get("selectedSeats").split(",");
+					
+					//TDETAIL테이블 INSERT(티켓이 아이인 경우)
+					int index =0;
+					for(int i=0 ; i<childNum ; i++) {
+						map.put("selectedSeats",seatArr[i]);
+						result *= moviedao.childInsert(sqlSession,map);
+						index++;
+					}
+
+					//TDETAIL테이블 INSERT(티켓이 어른인 경우)
+					for(int i=index ; i<seatArr.length ; i++) {
+						map.put("selectedSeats",seatArr[i]);
+						result *= moviedao.adultInsert(sqlSession,map);
+					}
+				}
+				return result;
+			}
+
+			//INSERT 성공시 TSUCCESS테이블에서 NO조회
+			@Override
+			public String tsuccessNoInsert(Map<String, String> map) {
+				return moviedao.tsuccessNoInsert(sqlSession,map);
+			}
+
+			//현제 좌석 조회
+			@Override
+			public ArrayList<String> tDetailGetList(String timetableNo) {
+				return moviedao.tDetailGetList(sqlSession,timetableNo);
+			}
 			
-			if(t != null) {
-				//조회한 값을 map에 추가
-				map.put("mvNo",String.valueOf(t.getMvNo()));
-				map.put("theaterNo",String.valueOf(t.getTheaterNo()));
-				
-				result = moviedao.ticketInsert(sqlSession,map);
-
-				int childNum = Integer.parseInt(map.get("childNum"));
-				int adultNum = Integer.parseInt(map.get("adultNum"));
-				
-				// ","단위로 끊어주기
-				String[] seatArr = map.get("selectedSeats").split(",");
-				
-				//TDETAIL테이블 INSERT(티켓이 아이인 경우)
-				int index =0;
-				for(int i=0 ; i<childNum ; i++) {
-					map.put("selectedSeats",seatArr[i]);
-					result *= moviedao.childInsert(sqlSession,map);
-					index++;
-				}
-
-				//TDETAIL테이블 INSERT(티켓이 어른인 경우)
-				for(int i=index ; i<seatArr.length ; i++) {
-					map.put("selectedSeats",seatArr[i]);
-					result *= moviedao.adultInsert(sqlSession,map);
-				}
+			//영화 수정
+			@Override
+			public int movieUpdate(Movie m) {
+				return moviedao.movieUpdate(sqlSession, m);
 			}
-			return result;
-		}
 
-		//INSERT 성공시 TSUCCESS테이블에서 NO조회
-		@Override
-		public String tsuccessNoInsert(Map<String, String> map) {
-			return moviedao.tsuccessNoInsert(sqlSession,map);
-		}
-
-		//현제 좌석 조회
-		@Override
-		public ArrayList<String> tDetailGetList(String timetableNo) {
-			return moviedao.tDetailGetList(sqlSession,timetableNo);
-		}
-		
-		//영화 수정
-		@Override
-		public int movieUpdate(Movie m) {
-			return moviedao.movieUpdate(sqlSession, m);
-		}
-
-		//영화 추가
-		@Override
-		public int movieInsert(Movie m) {
-			return moviedao.movieInsert(sqlSession, m);
-		}
-
-		//영화 삭제
-		@Override
-		public int movieDelete(List<String> mvNoArr) {
-			int result = 0;
-			for(String s : mvNoArr) {
-				result +=  moviedao.movieDelete(sqlSession, Integer.parseInt(s));
+			//영화 추가
+			@Override
+			public int movieInsert(Movie m) {
+				return moviedao.movieInsert(sqlSession, m);
 			}
-			return result;
-		}
-		
-		
+
+			//영화 삭제
+			@Override
+			public int movieDelete(List<String> mvNoArr) {
+				int result = 0;
+				for(String s : mvNoArr) {
+					result +=  moviedao.movieDelete(sqlSession, Integer.parseInt(s));
+				}
+				return result;
+			}
+			
+			
+	//230109 도균
+			//timetable 추가시 필요한 Multiplex 조회
+			@Override
+			public ArrayList<Multiplex> scheduleMultiplexGetList(String lcName) {
+				return moviedao.scheduleMultiplexGetList(sqlSession , lcName);
+			}
+
+			//timetable 추가시 필요한 Theater 조회
+			@Override
+			public ArrayList<Theater> movieScheTheater(int mpNo) {
+				return moviedao.movieScheTheater(sqlSession , mpNo);
+			}
+
+			//timetable 추가
+			@Override
+			public int movieScheduleInsert(Map<String, String> map) {
+				return moviedao.movieScheduleInsert(sqlSession , map);
+			}
+
+			//timetable 개수
+			@Override
+			public int selectTimetableCount() {
+				return moviedao.selectTimetableCount(sqlSession);
+			}
+			
+			//timetable 조회(삭제시)
+			@Override
+			public ArrayList<ScheduleTimetable> scheduleTimetableGetList(PageInfo pi) {
+				return moviedao.scheduleTimetableGetList(sqlSession,pi);
+			}
+
+			//timetable 삭제
+			@Override
+			public int movieScheduleDelete(List<String> timeNoArr) {
+				int result = 0;
+				for(String s : timeNoArr) {
+					result +=  moviedao.movieScheduleDelete(sqlSession, Integer.parseInt(s));
+				}
+				return result;
+			}
+	
+			@Override
+			public ArrayList<Movie> mainMovieGetList() {
+				return moviedao.mainMovieGetList(sqlSession);
+			}
 
 		
 		//--------------------------------도균끝
@@ -264,9 +312,105 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	//timetable 추가시 필요한 location 조회
+		@Override
+		public ArrayList<Location> scheduleLocationGetList() {
+			return moviedao.scheduleLocationGetList(sqlSession);
+		}
+
+	//무비 리뷰 업데이트
 	@Override
-	public ArrayList<Location> scheduleLocationGetList() {
-		return moviedao.scheduleLocationGetList(sqlSession);
+	public int movieReviewUpdate(Review r) {
+		return moviedao.movieReviewUpdate(sqlSession,r);
+	}
+
+	//무비리뷰 삭제(업데이트)
+	@Override
+	public int movieReviewDelete(Review r) {
+		return moviedao.movieReviewDelete(sqlSession,r);
+	}
+
+	//마이페이지 영화 좋아요 리스트
+	@Override
+	public ArrayList<Movie> movieMyMLikeGetList(int memberNo, PageInfo pi) {
+		return moviedao.movieMyMLikeGetList(sqlSession,memberNo,pi);
+	}
+
+	//마이페이지 영화 좋아요 갯수  
+	@Override
+	public int selectMyMLikeMovieCount(int memberNo) {
+		return moviedao.selectMyMLikeMovieCount(sqlSession,memberNo);
+	}
+
+	//회원의 전체 예매내역 갯수 조회
+	@Override
+	public int selectMyTSuccessCount(int memberNo) {
+		return moviedao.selectMyTSuccessCount(sqlSession,memberNo);
+	}
+
+	//회원의 전체 예매내역 조회
+	@Override
+	public ArrayList<Tsuccess> movieMyTSuccessGetList(int memberNo, PageInfo pi) {
+		return moviedao.movieMyTSuccessGetList(sqlSession,memberNo,pi);
+	}
+
+	//예매내역 날짜검색결과 갯수
+	@Override
+	public int selectTicketDateCount(Tsuccess ts) {
+		return moviedao.selectTicketDateCount(sqlSession,ts);
+	}
+
+	//예매내역 날짜검색결과 리스트
+	@Override
+	public ArrayList<Tsuccess> movieTicketDateGetList(Tsuccess ts, PageInfo pi) {
+		return moviedao.movieTicketDateGetList(sqlSession,ts,pi);
+	}
+
+	//선택한 예매번호의 상세정보 조회1
+	@Override
+	public Tsuccess movieTSuccessGet(Tdetail td) {
+		return moviedao.movieTSuccessGet(sqlSession,td);
+	}
+
+	//선택한 예매번호의 상세정보 조회2
+	@Override
+	public ArrayList<Tdetail> movieMyTDetailGetList(Tdetail td) {
+		return moviedao.movieMyTDetailGetList(sqlSession,td);
+	}
+
+	//좋아요기반 추천영화 리스트
+	@Override
+	public ArrayList<Movie> movieRecommendGetList(int memberNo) {
+		return moviedao.movieRecommendGetList(sqlSession,memberNo);
+	}
+
+	//예매내역 취소 
+	@Override
+	public int myTicketDelete(Tdetail td) {
+		return moviedao.myTicketDelete(sqlSession,td);
+	}
+
+	//예매 전체취소
+	@Override
+	public int myTicketAllDelete(Tdetail td) {
+		return moviedao.myTicketAllDelete(sqlSession,td);
+	}
+
+	//예매전체취소2
+	@Override
+	public int myTicketAlldelete2(Tdetail td) {
+		return moviedao.myTicketAlldelete2(sqlSession,td);
+	}
+
+	//예매 부분취소2
+	@Override
+	public int myTicketDelete2(Tdetail td) {
+		return moviedao.myTicketDelete2(sqlSession,td);
+	}
+
+	//취소된 티켓 수
+	@Override
+	public int myCancleTicketCount(Tdetail td) {
+		return moviedao.myCancleTicketCount(sqlSession,td);
 	}
 	
 	

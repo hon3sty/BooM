@@ -23,9 +23,16 @@
 	
 	<context:component-scan base-package="com.bm.spring" />
 	
-	<interceptors>
+	<!-- <interceptors>
 	 	<interceptor>
 	 		<mapping path=""/>
+	 		<beans:bean class="com.bm.spring.common.LoginInterceptor" id="loginInterceptor"></beans:bean>
+	 	</interceptor>
+	 </interceptors> -->
+	 
+	 <interceptors>
+	 	<interceptor>
+	 		<mapping path="/ticketing1.mv"/>
 	 		<beans:bean class="com.bm.spring.common.LoginInterceptor" id="loginInterceptor"></beans:bean>
 	 	</interceptor>
 	 </interceptors>
