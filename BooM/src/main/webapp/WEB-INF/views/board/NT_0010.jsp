@@ -8,6 +8,7 @@
 <!-- [게시판 : 고객센터] 공지사항 : 이지은 -->
 <title>공지사항</title>
 <style type="text/css">
+
 #cs{
 	position: relative;
     width: 980px;
@@ -154,20 +155,20 @@ h2.tit {
 					                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 					            </div>
 					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">1:1 문의</a></h5>
-					            </div>
-					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">분실물 문의</a></h5>
-					            </div>
-					        </div>
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">1:1 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">분실물 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
 					    </div>
 					</div>
 				</div>
@@ -179,14 +180,14 @@ h2.tit {
 						<div id="ntc2">
 							<div class="board-list-util">
 								<p class="result-count" style="color:#fff"><strong>전체 <em class="font-gblue">${pi.listCount }</em>건</strong></p>
-								<select name="selsearchfield" id="selsearchfield" class="c_select" style="width:100px;" selected="selected">
-									<option selected="selected" value="0">제목</option>
-									<option value="1">내용</option>
-								</select>
-								<div class="board-search">
-									<input type="text" id="searchTxt" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" value="" maxlength="15">
-									<button type="button" id="searchBtn" class="btn-search-input">검색</button>
-								</div>
+<!-- 								<select name="selsearchfield" id="selsearchfield" class="c_select" style="width:100px;" selected="selected"> -->
+<!-- 									<option selected="selected" value="0">제목</option> -->
+<!-- 									<option value="1">내용</option> -->
+<!-- 								</select> -->
+<!-- 								<div class="board-search"> -->
+<!-- 									<input type="text" id="searchTxt" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" value="" maxlength="15"> -->
+<!-- 									<button type="button" id="searchBtn" class="btn-search-input">검색</button> -->
+<!-- 								</div> -->
 							</div>
 							<br>
 							<div class="table-wrap">

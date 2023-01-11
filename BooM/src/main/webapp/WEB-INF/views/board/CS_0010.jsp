@@ -112,20 +112,20 @@
 						                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 						            </div>
 						        </div>
-						        <div class="product__sidebar__comment__item">
-						            <div class="product__sidebar__comment__item__pic">
-						            </div>
-						            <div class="product__sidebar__comment__item__text">
-						                <h5><a href="#">1:1 문의</a></h5>
-						            </div>
-						        </div>
-						        <div class="product__sidebar__comment__item">
-						            <div class="product__sidebar__comment__item__pic">
-						            </div>
-						            <div class="product__sidebar__comment__item__text">
-						                <h5><a href="#">분실물 문의</a></h5>
-						            </div>
-						        </div>
+<!-- 						        <div class="product__sidebar__comment__item"> -->
+<!-- 						            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 						            </div> -->
+<!-- 						            <div class="product__sidebar__comment__item__text"> -->
+<!-- 						                <h5><a href="#">1:1 문의</a></h5> -->
+<!-- 						            </div> -->
+<!-- 						        </div> -->
+<!-- 						        <div class="product__sidebar__comment__item"> -->
+<!-- 						            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 						            </div> -->
+<!-- 						            <div class="product__sidebar__comment__item__text"> -->
+<!-- 						                <h5><a href="#">분실물 문의</a></h5> -->
+<!-- 						            </div> -->
+<!-- 						        </div> -->
 						    </div>
 						</div>
 					</div>
@@ -146,12 +146,12 @@
 									<a href="noticeList.bo" style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">공지사항</a></h4></li>
 								<li style="width: 245px; height: 200px; text-align: center;"><h4>
 									<a href="faqListForm.bo" style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">자주하는 질문</a></h4></li>
-								<li style="width: 245px; height: 200px; text-align: center;"><h4>
-									<a href="/user/mycgv/reserve/?g=1#contaniner" target="_blank" title="새창열기" 
-									style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">1:1 문의</a></h4></li>
-								<li style="width: 245px; height: 200px; text-align: center;"><h4>
-									<a href="/user/guest/default.aspx" target="_blank" title="새창열기" 
-									style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">분실물 문의</a></h4></li>
+<!-- 								<li style="width: 245px; height: 200px; text-align: center;"><h4> -->
+<!-- 									<a href="/user/mycgv/reserve/?g=1#contaniner" target="_blank" title="새창열기"  -->
+<!-- 									style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">1:1 문의</a></h4></li> -->
+<!-- 								<li style="width: 245px; height: 200px; text-align: center;"><h4> -->
+<!-- 									<a href="/user/guest/default.aspx" target="_blank" title="새창열기"  -->
+<!-- 									style="width: 245px; height: 200px; text-align: center; padding-top: 80px;">분실물 문의</a></h4></li> -->
 							</ul>
 						</div>
 					</div>

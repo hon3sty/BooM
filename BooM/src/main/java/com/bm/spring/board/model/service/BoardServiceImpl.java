@@ -93,4 +93,38 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
+	//faq 리스트 조회 
+	@Override
+	public ArrayList<Board> faqSelectList(Integer bCategoryNo) {
+		return boardDao.faqSelectList(sqlSession,bCategoryNo);
+	}
+
+	//faq 작성
+	@Override
+	public int faqInsert(Board b) {
+		return boardDao.faqInsert(sqlSession,b);
+	}
+
+	//faq 수정
+	@Override
+	public int faqUpdate(Board b) {
+		return boardDao.faqUpdate(sqlSession,b);
+	}
+
+	//faq 삭제
+	@Override
+	public int faqDelete(int boardNo) {
+		return boardDao.faqDelete(sqlSession,boardNo);
+	}
+	
+	//faq 수정 정보 가져가기
+	@Override
+	public Board faqSelectDetail(int boardNo) {
+		return boardDao.faqSelectDetail(sqlSession,boardNo);
+	}
+
+
+
+	
+
 }

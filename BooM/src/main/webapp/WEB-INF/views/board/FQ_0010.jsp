@@ -59,7 +59,6 @@ h2.tit {
     position: relative;
     float: left;
     margin: 0;
-    padding-top: 15px;
     line-height: 1.1;
     vertical-align: top;
 }
@@ -69,7 +68,6 @@ h2.tit {
     width: 150px;
     height: 33px;
     border: 1px solid #d8d9db;
-/*     border-radius: 3px; */
     padding: 0 5px;
     margin-right: 7px;
     margin-bottom: 3px;
@@ -86,7 +84,6 @@ h2.tit {
     height: 36px;
     margin: 0;
     padding: 0 31px 0 0;
-/*     border: 1px solid #d8d9db; */
     border-radius: 3px;
 }
 .board-search .input-text {
@@ -153,7 +150,14 @@ h2.tit {
     background-color: #fff;
     border: none;
 }
-
+/*아코디언 css 시작*/
+.card{
+	background-color:rgba(255, 255, 255, 0.2);
+}
+.card-body{
+	background-color:#fff;
+}
+/*아코디언 css 끝*/
 </style>
 </head>
 
@@ -188,87 +192,115 @@ h2.tit {
 					                <h5><a href="faqListForm.bo" style="color:#e53637;">자주하는 질문</a></h5>
 					            </div>
 					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">1:1 문의</a></h5>
-					            </div>
-					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">분실물 문의</a></h5>
-					            </div>
-					        </div>
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">1:1 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">분실물 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
 					    </div>
 					</div>
 				</div>
 				<!-- 사이드바 끝 -->
 				
-				
-				   	
 				<!-- 리스트 영역 시작 -->
 				<div id="ntc1">
 					<h2 class="tit">자주하는 질문</h2>
 						<div id="ntc2">
 						<!-- 검색창 시작 -->
-					    <div class="search_box" id="search_box">
-							<input id="searchtext" type="text" title="검색어 입력" placeholder="검색어를 입력해 주세요.">
-							<button type="button" class="btn_search" title="검색하기" id="btn_search"></button>
-					   	</div>
+<!-- 					    <div class="search_box" id="search_box"> -->
+<!-- 							<input id="searchtext" type="text" title="검색어 입력" placeholder="검색어를 입력해 주세요."> -->
+<!-- 							<button type="button" class="btn_search" title="검색하기" id="btn_search"></button> -->
+<!-- 					   	</div> -->
 				   		<!-- 검색창 끝 -->
 							<div class="board-list-util">
 							<div class="anime__details__episodes">
-	                        <a href="#">영화예매</a>
-	                        <a href="#">결제/환불</a>
-	                        <a href="#">극장</a>
-	                        <a href="#">스토어</a><br>
-	                        <a href="#">특별관</a>
-	                        <a href="#">VIP</a>
-	                        <a href="#">멤버십</a>
-	                        <a href="#">관람권</a>
+	                        <a href="faqList.bo?bCategoryNo=0">전체</a>
+	                        <a href="faqList.bo?bCategoryNo=10">영화예매</a>
+	                        <a href="faqList.bo?bCategoryNo=20">결제/환불</a>
+	                        <a href="faqList.bo?bCategoryNo=30">극장</a>
+	                        <a href="faqList.bo?bCategoryNo=40">스토어</a><br>
+	                        <a href="faqList.bo?bCategoryNo=50">특별관</a>
+	                        <a href="faqList.bo?bCategoryNo=60">VIP</a>
+	                        <a href="faqList.bo?bCategoryNo=70">멤버십</a>
+	                        <a href="faqList.bo?bCategoryNo=80">관람권</a>
 	                    </div>
-								<p class="result-count" style="color:#fff"><strong>전체 <em class="font-gblue">${pi.listCount }</em>건</strong></p>
-								
+<%-- 								<p class="result-count" style="color:#fff"><strong>전체 <em class="font-gblue">${pi.listCount }</em>건</strong></p> --%>
+<!-- 									&nbsp;&nbsp;&nbsp; -->
+<%-- 								<c:if test="${not empty loginUser and loginUser.memberId eq 'admin'}"> --%>
+<!-- 									<input type="checkbox" id="selectall" name="selectall" onclick="selectAll(this)"> -->
+<%-- 								</c:if> --%>
 							</div>
 							<br>
 							<div class="table-wrap">
-							 	<jsp:include page="../board/Accordion.jsp"/>
+							 	<div class="container" style="padding-top:20px; padding-left:0px;">
+								<br>
+							  <div id="accordion"> 
+							    <div class="card" style="background-color:rgba(255, 255, 255, 0.2);">
+							    <form id="form" method="post">
+						        <input type="hidden" id="arrayParam" name="arrayParam"/>
+							    <c:forEach var="b" items="${list }">
+							      <div class="card-header">
+							      <c:if test="${not empty loginUser and loginUser.memberId eq 'admin'}">
+							      <div>
+							      	<input type="checkbox" class="del" id="ckbox" name="RowCheck" value="${b.boardNo }" onclick="checkSelectAll()">
+							      </div>
+							      </c:if>
+							        <a class="card-link" data-toggle="collapse">
+							          ${b.boardTitle}
+							        </a>
+							      </div>
+							      <div id="collapseOne" class="collapse" data-parent="#accordion">
+							        <div class="card-body" style="color:black;">
+							         ${b.boardContent }
+							        </div>
+							      </div>
+							      </c:forEach>
+							      </form>
+							    </div>
+							  </div>
+							</div>
 							</div>
 							<br>
 							
 							<!-- 페이징 영역 시작 -->
-							<div class="product__pagination" style="padding-top:20px; padding-left:160px;">
-								<a href="noticeList.bo?currentPage=${pi.startPage}"><i class="fa fa-angle-double-left"></i></a>
-									<!-- currentPage가 1이면 숨기기 -->
-									<c:if test="${pi.currentPage ne 1}">
-										<a href="noticeList.bo?currentPage=${pi.currentPage-1}">&lt</a>
-									</c:if>
-									<c:forEach begin="${pi.startPage}" end="${pi.endPage}" var="p">
-										<c:choose>
-			              					<c:when test="${pi.currentPage eq p }">
-			                        			<a href="noticeList.bo?currentPage=${p}" class="current-page">${p}</a>
-			                        		</c:when>
-			                        		<c:otherwise>
-			                        			<a href="noticeList.bo?currentPage=${p}">${p}</a>
-			                        		</c:otherwise>
-			                        	</c:choose>
-									</c:forEach>
-		                        	<!-- currentPage가 maxPage와 일치하면 숨기기 -->
-		                        	<c:if test="${pi.currentPage ne pi.maxPage}">
-		                        		<a href="noticeList.bo?currentPage=${pi.currentPage+1}">&gt</a>
-		                        	</c:if>
-	                        	<a href="noticeList.bo?currentPage=${pi.endPage }"><i class="fa fa-angle-double-right"></i></a>
-                    		</div>
+<!-- 							<div class="product__pagination" style="padding-top:20px; padding-left:160px;"> -->
+<%-- 								<a href="noticeList.bo?currentPage=${pi.startPage}"><i class="fa fa-angle-double-left"></i></a> --%>
+<!-- 									currentPage가 1이면 숨기기 -->
+<%-- 									<c:if test="${pi.currentPage ne 1}"> --%>
+<%-- 										<a href="noticeList.bo?currentPage=${pi.currentPage-1}">&lt</a> --%>
+<%-- 									</c:if> --%>
+<%-- 									<c:forEach begin="${pi.startPage}" end="${pi.endPage}" var="p"> --%>
+<%-- 										<c:choose> --%>
+<%-- 			              					<c:when test="${pi.currentPage eq p }"> --%>
+<%-- 			                        			<a href="noticeList.bo?currentPage=${p}" class="current-page">${p}</a> --%>
+<%-- 			                        		</c:when> --%>
+<%-- 			                        		<c:otherwise> --%>
+<%-- 			                        			<a href="noticeList.bo?currentPage=${p}">${p}</a> --%>
+<%-- 			                        		</c:otherwise> --%>
+<%-- 			                        	</c:choose> --%>
+<%-- 									</c:forEach> --%>
+<!-- 		                        	currentPage가 maxPage와 일치하면 숨기기 -->
+<%-- 		                        	<c:if test="${pi.currentPage ne pi.maxPage}"> --%>
+<%-- 		                        		<a href="noticeList.bo?currentPage=${pi.currentPage+1}">&gt</a> --%>
+<%-- 		                        	</c:if> --%>
+<%-- 	                        	<a href="noticeList.bo?currentPage=${pi.endPage }"><i class="fa fa-angle-double-right"></i></a> --%>
+<!--                     		</div> -->
                     		<!-- 페이징 영역 끝 -->
                     		<!-- 관리자 로그인 시 등록,수정,삭제 버튼 보이게 함 -->
                     		<c:if test="${not empty loginUser and loginUser.memberId eq 'admin'}">
                     			<div class="anime__details__btn"  style="text-align:center; cursor:pointer;">
-	                               <a href="noticeList.bo" class="follow-btn">등록</a>
-	                               <a class="follow-btn" onclick="">수정</a>
-	                               <a class="follow-btn" onclick="">삭제</a>
+	                               <a href="faqInsert.bo" class="follow-btn">등록</a>
+	                               <a href="javascript:void(0);" id="updateBtn" class="follow-btn" onclick="return updateClick()">수정</a>
+	                               <a href="" id="deleteBtn" class="follow-btn" onclick="deleteClick()">삭제</a>
 	                            </div>
                            	</c:if>
 						</div>
@@ -283,5 +315,111 @@ h2.tit {
 <!-- 푸터  include 영역 시작-->
 <jsp:include page="../common/footer.jsp"/>
 <!-- 푸터  include 영역 끝-->
+
+	<script>
+	
+	   //아코디언
+       $(function(){
+           $(".card-header").click(function(){
+
+               var $answer = $(this).next();
+
+               if($answer.css("display")=="none"){//p태그의 display가 none일때
+                  
+               	$answer.slideDown();
+               }else{
+               	
+                   $answer.slideUp();
+               }
+           })
+       })
+        
+		
+
+		//체크박스 하나라도 선택해제 될 경우 전체 선택 해제 + 하나씩 전체 선택하면 자동 전체 체크박스 선택
+		function checkSelectAll()  {
+		  // 전체 체크박스
+		  const checkboxes = document.querySelectorAll('input[name="RowCheck"]');
+		  // 선택된 체크박스
+		  const checked = document.querySelectorAll('input[name="RowCheck"]:checked');
+		  // select all 체크박스
+		  const selectAll = document.querySelector('input[name="selectall"]');
+		  
+		  if(checkboxes.length === checked.length)  {
+		    selectAll.checked = true;
+		  }else {
+		    selectAll.checked = false;
+		  }
+		  
+		}
+
+		//체크박스 전체 선택
+		function selectAll(selectAll)  {
+			  const checkboxes = document.getElementsByName('RowCheck');
+			  
+			  checkboxes.forEach((checkbox) => {
+			    checkbox.checked = selectAll.checked
+			  })
+			}
+        
+
+		//수정
+		function updateClick(){
+     		//체크된 게시글의 숫자
+        let count=$("input:checkbox[name='RowCheck']:checked").length;
+     		
+     	var bno=$("input:checkbox[name='RowCheck']:checked").val();
+     	
+     	if(count==0){ //체크박스 선택하지 않으면 수정버튼작동x 수정폼으로 넘어가지 않게함
+     	    alert("수정할 게시글을 선택해주세요.");
+     		return false;
+     	}else{
+      	   if(count>=2){ //체크박스 2개를 선택했을시에 1개만 선택하도록 알람
+      		  $(this).prop("checked",false);
+      		  alert("수정은 게시글 1개까지만 선택할 수 있습니다.");
+      	   }else{ // 체크박스 하나만 선택했을시에 업데이트 폼으로 보냄 (정상작동)
+      		   console.log(count);
+      		   console.log(bno);
+      		location.href="faqUpdateForm.bo?bno="+bno;
+      	   }
+     	}
+      	   
+        }
+       
+        //버튼 누르면 선택삭제 스크립트 (여러개의 게시글 번호를 가지고 간다.) 
+         function deleteClick(){
+        	  
+        	 var checkBoxArr=[]; //선택한 체크박스값 넣어줄 배열
+        	 
+        	 //console.log($("input:checkbox[name='ckbox']:checked")); //Object
+        	 
+        	 $("input:checkbox[name='RowCheck']:checked").each(function(){
+        		 checkBoxArr.push($(this).val());
+        		 //var bno=$("input[name=ckbox]:checked").val();
+        		 console.log("asd"+checkBoxArr); 
+              	});
+        	 
+        	 
+        	 $.ajax({
+           		
+               	url:"faqDelete.bo",
+               	type:"post",
+               	traditional:true,
+               	data:{
+               		"bno":checkBoxArr
+               	},
+               	dataType:"json",
+               	success:function(result){
+               		console.log("통신성공");
+               	},
+               	error:function(){
+               	console.log("통신실패");
+               	}
+         	 })
+        	
+          }
+        
+
+    </script>
 </body>
 </html>

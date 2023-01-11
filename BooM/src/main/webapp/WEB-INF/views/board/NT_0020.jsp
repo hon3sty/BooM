@@ -154,20 +154,20 @@ h2.tit {
 					                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 					            </div>
 					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">1:1 문의</a></h5>
-					            </div>
-					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">분실물 문의</a></h5>
-					            </div>
-					        </div>
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">1:1 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">분실물 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
 					    </div>
 					</div>
 				</div>
@@ -253,7 +253,7 @@ h2.tit {
                     		</div>
                     		<!-- 페이징 영역 끝 -->
                     		<div class="anime__details__btn">
-                                <a href="#" class="follow-btn" style="float:right;">삭제</a>
+<!--                                 <a href="#" class="follow-btn" style="float:right;">삭제</a> -->
                                 <a href="noticeInsert.bo" class="follow-btn" style="float:right;">등록</a>
                             </div>
 						</div>

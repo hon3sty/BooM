@@ -247,20 +247,20 @@ h2.tit {
 					                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 					            </div>
 					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">1:1 문의</a></h5>
-					            </div>
-					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">분실물 문의</a></h5>
-					            </div>
-					        </div>
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">1:1 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">분실물 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
 					    </div>
 					</div>
 				</div>

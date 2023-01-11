@@ -21,4 +21,7 @@ public class Board {
 	private String boardComment; //	BOARD_COMMENT
 	private String boardSort; //	BOARD_SORT
 	private String boardDepth; //	BOARD_DEPTH
+	
+	private String categoryNo; // CATEGORY_NO
+	
 }
