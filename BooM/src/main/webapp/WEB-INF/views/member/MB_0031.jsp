@@ -47,20 +47,21 @@ ol, ul {
     padding: 0;
 }
 .tab-list>ul>li.on {
-    border: 1px solid #e53637;
+     border: 1px solid #e53637;
     border-bottom: 0;
 }
 .tab-list>ul>li {
     float: left;
     height: 42px;
     margin: 0;
+   /*   border: 1px solid #e53637; */
     border-width: 1px 0 1px 1px;
 }
-.tab-list>ul>li.on>a { /*아이디 찾기*/
+.tab-list>ul>li.on>a {
     z-index: 3;
     color: white; 
     background-color: #0b0c2a;
-    }
+}
 .tab-list>ul>li>a {
     position: relative;
     display: block;
@@ -79,10 +80,10 @@ ol, ul {
 .tab-list>ul>li.on+li {
     border-left: 0;
 }
-.tab-list>ul>li:last-child {/*비밀번호 옆에 꺼*/
-    border-right: 1px solid #555;
+.tab-list>ul>li:last-child {
+    border-right: 1px solid #e53637;
 }
-.tab-list>ul>li {/*비밀번호 */
+.tab-list>ul>li {
     float: left;
     height: 42px;
     margin: 0;
@@ -98,12 +99,12 @@ ol, ul {
     padding: 0;
     text-align: center;
     color: white;
-    font-weight: bolder;
     font-size: 1.0667em;
     text-decoration: none;
 }
 .table-wrap {
     position: relative;
+   /*  border-top: 1px solid #555; */
 }
 table {
     width: 100%;
@@ -122,18 +123,20 @@ table caption {
     opacity: 0;
 }
 table {
+   /* border-collapse: separate;*/
     text-indent: initial;
     border-spacing: 2px;
 }
-.board-form tbody th { /*밑에꺼 배경색*/
+.board-form tbody th {
     background: #0b0c2a;
     color:white;
 }
-.board-form tbody td, .board-form tbody th { 
+.board-form tbody td, .board-form tbody th {
     position: relative;
     height: 50px;
     padding: 7px 15px;
     text-align: left;
+    border-bottom: 1px solid #555;
 }
 th {
     display: table-cell;
@@ -149,12 +152,12 @@ label {
 .member-wrap .table-wrap .board-form tr td:last-child {
     padding-right: 0;
 }
-.board-form tbody td, .board-form tbody th {/*이름 중간 선*/
+.board-form tbody td, .board-form tbody th {
     position: relative;
     height: 50px;
     padding: 7px 15px;
     text-align: left;
-    border-bottom: 1px solid #d1d5dd; 
+    border-bottom: 1px solid #d1d5dd;
 }
 td {
     display: table-cell;
@@ -163,7 +166,7 @@ td {
 .w230px {
     width: 230px!important;
 }
-.input-text { /*이름 입력칸*/
+.input-text {
     display: inline-block;
     width: 100%;
     height: 32px;
@@ -180,7 +183,7 @@ button, input {
     overflow: visible;
 }
 .member-wrap .btn-member-bottom.v1 {
-    margin: 0 0 40px 0; 
+    margin: 0 0 40px 0;
     padding: 40px 0;
     border-bottom: 1px solid #eaeaea;
 }
@@ -202,11 +205,11 @@ button, input {
     border: 0;
     background: #e53637;
 }
-.button.purple:hover {
-   color: white !important;
+.button[disabled] {
+   color: white!important;
     cursor: default!important;
     background-color: #e0e0e0!important;
-    border-color: #e0e0e0!important; 
+    border-color: #e0e0e0!important;
 }
 .button {
     display: inline-block;
@@ -254,21 +257,22 @@ button, input {
     width: 39%;
     margin-bottom: 5px;
     font-weight: bolder;
-    border-radius: 5px;
-    margin-left: 140px;
+     border-radius: 5px;
+     margin-left: 140px;
 }
-#outer_0010 {
+ #outer_0010 {
     display: flex;
     justify-content: center;
     padding-top: 120px;
+/*     margin-left: -110px; */
 }
  #membercheck{
     padding-left: 9%;
-}     
+} 
 .section-title_0030 {
     margin-bottom: 30px;
     padding-left: 100px !important;
-}    
+}
 .section-title_0030 h4{
 	color: #ffffff;
 	font-weight: 600;
@@ -278,14 +282,15 @@ button, input {
 	position: relative;
 	font-family: "Oswald", sans-serif;
 }
-.section-title_0030 h4:after {/*빨간색 ..*/
+.section-title_0030 h4:after{
 	position: absolute;
 	left: 0;
 	top: -6px;
 	height: 32px;
 	width: 4px;
 	background: #e53637;
-}    
+	content: "";
+}
 </style>
 </head>
 <body>
@@ -293,20 +298,18 @@ button, input {
 	<!-- 전체 영역-->
 	<div id="outer_0010">
 	   <div class="member_0010">
-	   
-  			<div class="section-title_0030">
-	 		  <h4>아이디/비밀번호 찾기</h4>
-	 		</div>
-		<div class="member-wrap">
 
-		<!-- col-wrap -->
+  		<div class="section-title_0030">
+		   <h4>아이디/비밀번호 찾기</h4>
+		 </div>
+	<div class="member-wrap">
 		<div class="col-wrap">
 			<!-- col -->
 			<div class="col">
 				<div class="tab-list">
 					<ul>
-						<li class="on"><a href="javaScript:void(0);" title="아이디찾기 선택">아이디 찾기<!--아이디찾기--></a></li>
-						<li><a href="passFind.me" title="비밀번호 찾기 선택">비밀번호 찾기<!--비밀번호 찾기--></a></li>
+						<li><a href="userFind.me" title="아이디 찾기 선택">아이디 찾기</a></li>
+						<li class="on"><a href="javaScript:void(0);" title="비밀번호 찾기 선택">비밀번호 찾기<!--비밀번호 찾기--></a></li>
 					</ul>
 				</div>
 				<div class="table-wrap">
@@ -315,48 +318,49 @@ button, input {
 						<br>
 						<tbody>
 							<tr>
+								<th scope="row"><label for="memberId">아이디</label></th>
+								<td>
+									<input id="memberId" maxlength="20" type="text" placeholder="아이디" class="input-text w230px">
+								</td>
+							</tr>
+							<tr>
 								<th scope="row"><label for="memberName">이름</label></th>
 								<td>
 									<input id="memberName" maxlength="20" type="text" placeholder="이름" class="input-text w230px">
 								</td>
 							</tr>
 							<tr>
-								<th scope="row"><label for="memberBirth">생년월일</label></th>
+								<th scope="row"><label for="email">이메일</label></th>
 								<td>
-									<input id="memberBirth" maxlength="8" type="text" placeholder="생년월일 8자리" class="input-text w230px">
-									<!--  <div id="memberBirth" class="alert"></div>  -->
-								</td>
-							</tr>
-							<tr>
-								<th scope="row"><label for="memberEmail">이메일</label></th>
-								<td>
-									<input id="memberEmail" type="text" placeholder="ex) name@example.com" class="input-text w230px">
-									 <!-- <div id="memberEmail" class="alert"></div>  -->
+									<input type="text" id="email" maxlength="40" placeholder="ex) name@example.com" class="input-text w230px">
+								<!-- 	<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w75px ml08 disabled" disabled="disabled">인증요청인증요청</button> -->
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<input type="button" value="아이디 찾기" id="button_0010" onclick="idCheck();"> 
+				<input type=button value="비밀번호 찾기" id="button_0010" onclick="pwdCheck();"> 
+			 </div>
+			</div>
+			  </div>
 				</div>
 				</div>
-				</div>
+	
 			</div>
 		</div>
 		<script>
-		
-		function idCheck(){
+		function pwdCheck(){
 			$.ajax({
-				url:"userFind.me",
+				url:"passFind.me",
 				type :"post",
 				data:{
-					memberName : $("#memberName").val(),
-					memberBirth  : $("#memberBirth").val() ,
-					email : $("#memberEmail").val()
+					memberId : $("#memberId").val(),
+					memberName  : $("#memberName").val() ,
+					email : $("#email").val()
 				},
 				success : function(result){
 					if(result != ""){
-						alert("회원님의 아이디는 " +result+" 입니다.");	
+						alert("비밀번호 : "+result +"입니다.");	
 					}else{
 						alert("입력정보를 정확하게 작성해주세요.");
 					}
@@ -366,7 +370,8 @@ button, input {
 				}
 			})
 		}
-	</script>
+		</script>
+		
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

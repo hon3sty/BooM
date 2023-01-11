@@ -40,6 +40,10 @@
 	overflow: hidden;
 	font-size: 5px;	
 }
+.sidebar__comment__1-2-1{
+	overflow: hidden;
+	font-size: 5px;	
+}
 .sidebar__comment__1-2-3 h5{
 	margin-bottom: 0px;	
 }
@@ -49,7 +53,7 @@
 	line-height: 26px;	
 }
 .sidebar__comment__1-2 h5{
-	margin-bottom: 10px;
+
 }
 .sidebar__comment__1-2 h5 a{
 	color: #ffffff;
@@ -125,20 +129,39 @@
 			            <div class="sidebar__comment__1-1">
 			            </div>
 			            <div class="sidebar__comment__1-2">
-			                <h5><a href="myTicketList.mv">예매내역</a></h5>
+			                <h5><a href="noticeListForm.bo">예매내역</a></h5>
 			            </div>
 			        </div>
 			        <div class="sidebar__comment__1">
-			            <div class="sidebar__comment__1-1">
+			            <div class="sidebar__comment__1">
 			            </div>
 			            <div class="sidebar__comment__1-2">
-			                <h5><a href="review.my">무비스토리</a></h5>
-			                <h5><a href="myLikeMovieList.mv">영화좋아요리스트</a></h5>	
-			                <h5><a href="movieRecommend.mv">추천영화리스트</a></h5>			                
+			                <h5><a href="#">무비스토리</a></h5>
+			            </div>
+			        </div>
+			         <div class="sidebar__comment__2">
+			            <div class="sidebar__comment__2-1">
+			            </div>
+			            <div class="sidebar__comment__2-2-3">
+			                <h5><a href="review.my"> - 내가 쓴 리뷰</a></h5>
+			            </div>
+			        </div>
+			         <div class="sidebar__comment__2">
+			            <div class="sidebar__comment__2-1">
+			            </div>
+			            <div class="sidebar__comment__2-2-3">
+			                <h5><a href="movieRecommend.mv"> - 추천 영화</a></h5>
+			            </div>
+			        </div>
+			         <div class="sidebar__comment__2">
+			            <div class="sidebar__comment__2-1">
+			            </div>
+			            <div class="sidebar__comment__2-2-3">
+			                <h5><a href="myLikeMovieList.mv"> - 보고싶은 영화</a></h5>
 			            </div>
 			        </div>
 			        <div class="sidebar__comment__1">
-			            <div class="sidebar__comment__1-1">
+			            <div class="sidebar__comment__1">
 			            </div>
 			            <div class="sidebar__comment__1-2-3">
 			                <h5><a href="#">나의 스토어</a></h5>
@@ -169,38 +192,40 @@
 			            <div class="sidebar__comment__2-1">
 			            </div>
 			            <div class="sidebar__comment__2-2-3">
-			                <h5><a href="update.me"> - 회원정보변경</a></h5>
+			                <h5><a href="update.me"> - 회원정보 변경</a></h5>
 			            </div>
 			        </div>
 			        <div class="sidebar__comment__2">
 			            <div class="sidebar__comment__2-1">
 			            </div>
 			            <div class="sidebar__comment__2-2-3">
-			                <h5><a href="#"> - 회원탈퇴</a></h5>
+			                <h5><a href="delete.me"> - 회원탈퇴</a></h5>
 			            </div>
-			        </div>
-			        <div class="sidebar__comment__1">
-			            <div class="sidebar__comment__1">
-			            </div>
-			            <div class="sidebar__comment__1-2-3">
-			                <h5><a href="#">나의 문의내역</a></h5>
-			            </div>
-			        </div>
-			        <div class="sidebar__comment__2">
-			            <div class="sidebar__comment__2-1">
-			            </div>
-			            <div class="sidebar__comment__2-2-3">
-			                <h5><a href="#"> - 1:1문의</a></h5>
-			            </div>
-			        </div>
-			        <div class="sidebar__comment__2">
-			            <div class="sidebar__comment__2-1">
-			            </div>
-			            <div class="sidebar__comment__2-2-3" >
-			                <h5><a href="#"> - 분실물 문의</a></h5>
-			            </div>
-			        </div>
+			        </div>	        
 			        
+			        <c:if test="${loginUser.memberId eq 'admin'}">
+				        <div class="sidebar__comment__1">
+				            <div class="sidebar__comment__1">
+				            </div>
+				            <div class="sidebar__comment__1-2-3">
+				                <h5><a href="#">관리자 페이지</a></h5>
+				            </div>
+				        </div>
+				        <div class="sidebar__comment__2">
+				            <div class="sidebar__comment__2-1">
+				            </div>
+				            <div class="sidebar__comment__2-2-3">
+				                <h5><a href="adminMovieList.mv"> - 영화추가</a></h5>
+				            </div>
+				        </div>
+				        <div class="sidebar__comment__2">
+				            <div class="sidebar__comment__2-1">
+				            </div>
+				            <div class="sidebar__comment__2-2-3" >
+				                <h5><a href="movieScheduleDelete.mv"> - 타임테이블 추가</a></h5>
+				            </div>
+				        </div>
+			        </c:if>
 			    </div>
 			</div>
 		</div>

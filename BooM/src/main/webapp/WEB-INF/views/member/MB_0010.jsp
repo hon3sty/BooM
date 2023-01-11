@@ -17,8 +17,8 @@
 /* Google web font CDN*/
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
 *{
-    box-sizing: border-box; /*전체에 박스사이징*/
-    outline: none; /*focus 했을때 테두리 나오게 */
+    box-sizing: border-box; 
+    outline: none;
 }
 body{
     font-family: 'Noto Sans KR', sans-serif;
@@ -59,8 +59,8 @@ a{
 }
 .member_0010 input[type=button],
 .member_0010 input[type=submit]{
-background-color: #e53637;
-color:#fff;
+	background-color: #e53637;
+	color:#fff;
 }
 .member_0010 input:focus, .member_0010 select:focus{
     border: 1px solid #2db400;
@@ -87,27 +87,22 @@ color:#fff;
     display: block; 
     position:relative;
 }
-
 .placehold-text:before{ 
-   /*  content : "@naver.com"; */
-    position:absolute; /*before은 inline 요소이기 때문에 span으로 감싸줌 */
+    position:absolute;
     right : 20px;
     top:13px;
-    pointer-events: none; /*자체가 가지고 있는 pointer event 를 없애준다 */
+    pointer-events: none;
 }
-
 .userpw{
     background:url(./images/images2/icon-01.png) no-repeat center right 15px;
     background-size: 20px;
     background-color: #fff;
 }
-
 .userpw-confirm{
     background:url(./images/images2/icon-02.png) no-repeat center right 15px;
     background-size: 20px;
     background-color: #fff;
 }
-
 @media (max-width:768px) {
     .member_0010{
         width: 100%;
@@ -116,15 +111,7 @@ color:#fff;
 .field b{
 	color :white;
     margin-bottom: 7px;
-
 }
-
-/* .member_0010 input:not(input[type=radio]), .member_0010 select {
-    border: 1px solid #e53637;
-    padding: 15px;
-    width: 100%;
-    margin-bottom: 5px;
-} */
 #button_0010{
     border: 1px solid #e53637;
     padding: 15px;
@@ -223,14 +210,14 @@ color:#fff;
         </div>
         <!-- 5. 이메일 -->
         <div class="field">
-            <b>본인 확인 이메일<small>(선택)</small></b>
-            <input type="email" placeholder="ex) me@example.com" id="email" name="email">
+            <b>이메일</b>
+            <input type="email" placeholder="ex) example@gmail.com" id="email" name="email">
             <div class="eheck_font" id="email_check"></div>
         </div>
        <!--  <!-- 6. 휴대전화 -->
         <div class="field">
             <b>휴대전화</b>
-            <input type="phone" placeholder="(-)없이 번호만 입력" id="phone" name="phone">
+            <input type="phone" placeholder="ex) 010-0000-0000" id="phone" name="phone">
             <div class="eheck_font" id="phone_check"></div>
         </div> 
         <div class="field">

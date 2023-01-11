@@ -20,6 +20,7 @@
 		<result column="MEMBER_ID" property="memberId"/>
 		<result column="MEMBER_PWD" property="memberPwd"/>
 		<result column="MEMBER_NAME" property="memberName"/>
+		<result column="MEMBER_BIRTH" property="memberBirth"/>
 		<result column="PHONE" property="phone"/>
 		<result column="EMAIL" property="email"/>
 		<result column="ADDRESS" property="address"/>
@@ -81,23 +82,75 @@
 	<!-- 회원정보 변경 -->
 	<update id="Memberupdate">
 		UPDATE MEMBER
-		SET MEMBER_NAME = #{memberName}
-		 ,  MEMBER_BIRTH =#{memberBirth}
-		 ,  GENDER = #{gender}
+		SET MEMBER_PWD = #{memberPwd}
+	     ,  MEMBER_NAME = #{memberName}
 		 ,  PHONE = #{phone}
 		 ,  EMAIL = #{email}
-		 ,  ADDRESS = #{address}
+		 ,  MEMBER_BIRTH =#{memberBirth}
 		 ,  MODIFY_DATE = SYSDATE
 		WHERE MEMBER_ID = #{memberId}
 		AND STATUS = 'Y'
 	</update>    
-	 
-	<!-- 회원정보 삭제 -->  
+	  
+	<select id="passChk" resultType="int">
+		SELECT COUNT(*)FROM MP_MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_PWD = #{memberPwd}
+	</select>
+	
+	<!-- 회원탈퇴 -->
 	<update id="Memberdelete">
 		UPDATE MEMBER
-		SET STATUS ='N'
-		WHERE MEMBER_ID = #{memberId}
-		AND STATUS ='Y'	
+        SET STATUS = 'N'
+        WHERE MEMBER_ID = #{memberId}
 	</update>
 	
+	<!-- 아이디 찾기 -->
+	<select id="getId" resultType="string">
+		SELECT MEMBER_ID
+		FROM MEMBER
+		WHERE MEMBER_NAME = #{memberName}
+		AND MEMBER_BIRTH = #{memberBirth}
+        AND EMAIL = #{email}
+		AND STATUS = 'Y'
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="getPwd" resultType="string">
+		SELECT MEMBER_PWD
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_NAME = #{memberName}
+        AND EMAIL = #{email}
+		AND STATUS = 'Y'
+	</select>
+
+	<!-- 회원수 카운트 -->
+	<select id="selectMemberCount" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE STATUS = 'Y' 
+	</select>
+	
+	<!-- 회원리스트 -->
+	<select id="memberGetList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE STATUS ='Y'
+	</select>
+	
+	<select id="movieGetAllList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE STATUS = 'Y' 
+	</select>
+	
+	<!-- 회원 삭제 -->
+	<update id="memberDelete">
+		UPDATE MEMBER
+		SET STATUS = 'N' 
+		,MODIFY_DATE = SYSDATE
+		WHERE MEMBER_NO = #{memberNo}  
+	</update>
+
 </mapper>

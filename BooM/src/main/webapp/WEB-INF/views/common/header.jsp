@@ -159,11 +159,11 @@
 }
 #header_my0010{
 	position: fixed;
-	z-index: 99999;!important;
+	z-index: 99999 !important;
   	top: 0;
   	left: 0;
  	right: 0; 
-    background: #0b0c2a; 
+    background: #0b0c2a !important;
 }
 </style>
 </head>
@@ -181,7 +181,7 @@
                 <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="./index.jsp">
-                            <img src="resources/img/logo.png" alt="">
+                            <img src="resources/img/common/22.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -192,8 +192,6 @@
                                <li><a href="">영화 <span class="arrow_carrot-down"></span></a>
                                    <ul class="dropdown">
                                       <li><a href="movieList.mv">전체영화</a></li>
-                                      <li><a href="">현재상영작</a></li>
-                                      <li><a href="">무비차트</a></li>
                           		   </ul>
                                </li>
                                <li><a href="">예매 <span class="arrow_carrot-down"></span></a>
@@ -206,9 +204,7 @@
                                <li><a href="csMainForm.bo">고객센터 <span class="arrow_carrot-down"></span></a>
                                    <ul class="dropdown">
                                        <li><a href="faqListForm.bo">FAQ</a></li>
-                                       <li><a href="noticeList.bo">공지사항</a></li>
-                                       <li><a href="">1:1문의</a></li>
-                                       <li><a href="">분실물문의</a></li>                                        
+                                       <li><a href="noticeList.bo">공지사항</a></li>                        
                                    </ul>
                                </li> 
                           <span id="login_1">
@@ -217,9 +213,7 @@
       						  <span id="sisi">
                                 <a href="login.me"><img src="resources/img/common/lock.png" id="header__logo3"><span id="logogo"> 로그인 </span></a>                                
                                 <a href="insert.me"><img src="resources/img/common/user-a.png" id="header__logo3"><span id="logogo"> 회원가입 </span></a>
-                                
                                 <a href="login.me"><img src="resources/img/common/user-b.png" id="header__logo3"><span id="logogo" onclick="mypage()"> 마이페이지 </span></a>
-            
 								<span class="col-lg-2">
 								<span class="header__right">
                          		 <a href="#" class="search-switch"><img src="resources/img/common/search.png" id="header__logo3"></a></span>

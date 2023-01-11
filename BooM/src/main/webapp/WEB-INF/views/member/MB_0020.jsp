@@ -128,25 +128,24 @@
 	color: #b7b7b7;
 	font-size: 20px;
 	position: absolute;
-	left: 15px;
-	top: 13px;
+	top: 13px;4
 }
 .login__form form button {
 	border-radius: 0;
 	margin-top: 10px;
 }
-.login__form .forget_pass {
+.login__form .insert_m {
 	font-size: 15px;
 	color: #ffffff;
 	display: inline-block;
-/* 	position: absolute; */
 	right: 80px;
 	bottom: 12px;
+	margin-left: 15px;
 }
-.forget_pass {
+.insert_m {
     margin-right: 30px !important;
 }
-.forget_pass1 {
+.find_btn {
     margin-left: 10px !important;
 }
 .login__register {
@@ -162,11 +161,10 @@
 	background: #e53637;
 	padding: 12px 42px;
 }
-.login__form .forget_pass1 {
+.login__form .find_btn {
 	font-size: 15px;
 	color: #ffffff;
 	display: inline-block;
-/* 	position: absolute; */
 	right: 80px;
 	bottom: 12px;
 }
@@ -207,6 +205,7 @@ div.input__item input{
             <div class="row">  
                 <div class="col-lg-12 text-center">
                     <div class="normal__breadcrumb__text">
+						<img class="slide1" src="resources/img/common/SU_1.jpg">
 						<img class="slide1" src="resources/img/common/SW_1.jpg">
 						<img class="slide1" src="resources/img/common/boo.jpg" >
 						<img class="slide1" src="resources/img/common/AA.jpg">
@@ -246,8 +245,8 @@ div.input__item input{
                                 <span class="icon_lock"></span>
                         </div> 
                             <button type="submit" class="site-btn">login</button>
-                           <span><a href="#" class="forget_pass1"><img src="resources/img/common/keyy.png" id="header__logo2"> 아이디 | 비밀번호 찾기</a></span> 
-                           <span id="login__0010"><a href="insert.me" class="forget_pass"><img src="resources/img/common/user-a.png" id="header__logo2"> 회원가입</a></span>                
+                           <span><a href="userFind.me" class="find_btn"><img src="resources/img/common/keyy.png" id="header__logo2"> 아이디 | 비밀번호 찾기</a></span> 
+                           <span id="login__0010"><a href="insert.me" class="insert_m"><img src="resources/img/common/user-a.png" id="header__logo2"> 회원가입</a></span>                
                         </form>
                     </div> 
                 </div>
@@ -297,6 +296,12 @@ div.input__item input{
             }
         });
     });
+    
+    $(function(){
+    	$("find_btn").click(function(){
+    		location.href="member/MB_0030";
+    	})
+    })
 </script>
 <body>
 <div>
