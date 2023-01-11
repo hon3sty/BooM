@@ -44,4 +44,23 @@ public interface BoardService {
 	
 	//공지사항 첨부파일 삭제
 	int noticeAttachDelete(int boardNo);
+	
+	//faq 리스트 조회 
+	ArrayList<Board> faqSelectList(Integer bCategoryNo);
+	
+	//faq 작성
+	int faqInsert(Board b);
+	
+	//faq 수정 정보 가져가기
+	Board faqSelectDetail(int boardNo);
+	
+	//faq 수정
+	int faqUpdate(Board b);
+	
+	//faq 삭제
+	int faqDelete(int boardNo);
+	
+
+
+	
 }

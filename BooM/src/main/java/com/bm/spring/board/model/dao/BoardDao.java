@@ -78,6 +78,33 @@ public class BoardDao {
 	public int noticeAttachInsert(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.noticeAttachDelete", boardNo);
 	}
+
+	//faq 리스트 조회 + 페이징 처리
+	public ArrayList<Board> faqSelectList(SqlSessionTemplate sqlSession, Integer bCategoryNo) {
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.faqSelectList", bCategoryNo);
+	}
+
+	//faq 작성
+	public int faqInsert(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.faqInsert", b);
+	}
+
+	//faq 수정 정보 가져가기
+	public Board faqSelectDetail(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.faqSelectDatail", boardNo);
+	}
+	
+	//faq 수정
+	public int faqUpdate(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.faqUpdate", b);
+	}
+
+	//faq 삭제
+	public int faqDelete(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.delete("boardMapper.faqdelete", boardNo);
+	}
+	
 	
 
 }

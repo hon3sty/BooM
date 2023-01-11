@@ -15,6 +15,7 @@
 	  	<result column="BOARD_COMMENT" property="boardComment"/>
 	  	<result column="BOARD_SORT" property="boardSort"/>
 	  	<result column="BOARD_DEPTH" property="boardDepth"/>
+	  	<result column="CATEGORY_NO" property="categoryNo"/>
   </resultMap>
   
   <resultMap type="boardAttachment" id="boardAttachResultSet">
@@ -41,7 +42,7 @@
  		FROM BOARD B
  		JOIN MEMBER ON(BOARD_WRITER=MEMBER_NO)
  		WHERE B.BCATEGORY_NO = 1 AND B.BOARD_STATUS='Y'
- 		ORDER BY BOARD_DATE DESC
+ 		ORDER BY B.BOARD_DATE DESC, B.BOARD_NO DESC
   </select>
   
   <!-- 공지사항 조회수 증가 -->
@@ -117,5 +118,47 @@
   		AND BOARD_STATUS = 'Y'
   </delete> 
   
+  <!-- faq 리스트 조회  -->
+   <select id="faqSelectList" resultMap="boardResultSet">
+		SELECT BOARD_NO,BOARD_TITLE,BOARD_CONTENT,BCATEGORY_NO
+ 		FROM BOARD
+ 		JOIN CATEGORY ON(BCATEGORY_NO = CATEGORY_NO) 
+ 		WHERE BCATEGORY_NO LIKE '%'|| #{bCategoryNo} ||'%' 
+ 			AND BOARD_STATUS='Y'
+ 		ORDER BY BOARD_NO
+  </select>
   
+  <!-- faq 작성 -->
+  <insert id="faqInsert">
+  		INSERT INTO BOARD(BOARD_NO,BCATEGORY_NO,BOARD_WRITER,BOARD_TITLE,BOARD_CONTENT)
+  					VALUES(SEQ_BNO.NEXTVAL,#{bCategoryNo},#{boardWriter},#{boardTitle},#{boardContent})
+  </insert>
+  
+  <!-- faq 수정 정보 가져가기 -->
+  <select id="faqSelectDatail" resultMap="boardResultSet">
+  		SELECT BOARD_NO,BOARD_TITLE,BOARD_CONTENT,CATEGORY_NO
+ 		FROM BOARD
+ 		JOIN CATEGORY ON(BCATEGORY_NO = CATEGORY_NO) 
+ 		WHERE BOARD_NO = #{boardNo}
+  </select>
+  
+  
+  <!-- faq 수정 -->
+  <update id="faqUpdate">
+  		UPDATE BOARD
+  		SET BOARD_TITLE = #{boardTitle}
+  			,BOARD_CONTENT = #{boardContent}
+  			,BCATEGORY_NO = #{categoryNo}
+  			,BOARD_DATE = SYSDATE
+		WHERE BOARD_NO = #{boardNo}
+  		AND BOARD_STATUS = 'Y'
+  </update>
+  
+  <!-- faq 삭제 --> 
+  <delete id="faqdelete">
+  		UPDATE BOARD
+  		SET BOARD_STATUS = 'N'
+  		WHERE BOARD_NO = #{boardNo}
+  		AND BOARD_STATUS = 'Y'
+  </delete>
 </mapper>

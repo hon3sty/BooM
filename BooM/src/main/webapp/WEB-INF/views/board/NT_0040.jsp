@@ -252,20 +252,20 @@ h2.tit {
 					                <h5><a href="faqListForm.bo">자주하는 질문</a></h5>
 					            </div>
 					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">1:1 문의</a></h5>
-					            </div>
-					        </div>
-					        <div class="product__sidebar__comment__item">
-					            <div class="product__sidebar__comment__item__pic">
-					            </div>
-					            <div class="product__sidebar__comment__item__text">
-					                <h5><a href="#">분실물 문의</a></h5>
-					            </div>
-					        </div>
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">1:1 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
+<!-- 					        <div class="product__sidebar__comment__item"> -->
+<!-- 					            <div class="product__sidebar__comment__item__pic"> -->
+<!-- 					            </div> -->
+<!-- 					            <div class="product__sidebar__comment__item__text"> -->
+<!-- 					                <h5><a href="#">분실물 문의</a></h5> -->
+<!-- 					            </div> -->
+<!-- 					        </div> -->
 					    </div>
 					</div>
 				</div>
@@ -318,30 +318,30 @@ h2.tit {
 								</div>
 							</div>
 						</div>
-						<section class="blog-details spad" style="padding-bottom: 0px;">
-				        	<div class="container">
-				           		 <div class="row d-flex justify-content-center">
-										<div class="col-lg-12">
-											<div class="blog__details__content">
-												<div class="blog__details__btns" style="padding: 20px 0 15px; margin-bottom: 65px;">
-					                            	<div class="row">
-					                                	<div class="col-lg-6">
-					                                    	<div class="blog__details__btns__item">
-					                                        	<h5><a href="#"><span class="arrow_left"></span>이전글</a></h5>
-					                                   		</div>
-					                                	</div>
-					                                	<div class="col-lg-6">
-					                                    	<div class="blog__details__btns__item next__btn">
-					                                        	<h5><a href="#">다음글<span class="arrow_right"></span></a></h5>
-					                                        </div>
-					                                    </div>
-		                              				 </div>
-		                          				 </div>
-		                         			</div>
-		                        		</div>
-		                   		 </div>
-		                 	 </div>
-		                   </section>
+<!-- 						<section class="blog-details spad" style="padding-bottom: 0px;"> -->
+<!-- 				        	<div class="container"> -->
+<!-- 				           		 <div class="row d-flex justify-content-center"> -->
+<!-- 										<div class="col-lg-12"> -->
+<!-- 											<div class="blog__details__content"> -->
+<!-- 												<div class="blog__details__btns" style="padding: 20px 0 15px; margin-bottom: 65px;"> -->
+<!-- 					                            	<div class="row"> -->
+<!-- 					                                	<div class="col-lg-6"> -->
+<!-- 					                                    	<div class="blog__details__btns__item"> -->
+<!-- 					                                        	<h5><a href="#"><span class="arrow_left"></span>이전글</a></h5> -->
+<!-- 					                                   		</div> -->
+<!-- 					                                	</div> -->
+<!-- 					                                	<div class="col-lg-6"> -->
+<!-- 					                                    	<div class="blog__details__btns__item next__btn"> -->
+<!-- 					                                        	<h5><a href="#">다음글<span class="arrow_right"></span></a></h5> -->
+<!-- 					                                        </div> -->
+<!-- 					                                    </div> -->
+<!-- 		                              				 </div> -->
+<!-- 		                          				 </div> -->
+<!-- 		                         			</div> -->
+<!-- 		                        		</div> -->
+<!-- 		                   		 </div> -->
+<!-- 		                 	 </div> -->
+<!-- 		                   </section> -->
 							<c:choose>
 							   <c:when test="${not empty loginUser and loginUser.memberId eq 'admin'}">
 									<div class="anime__details__btn"  style="text-align:center; cursor:pointer;">
