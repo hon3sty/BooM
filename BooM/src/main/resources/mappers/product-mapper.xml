@@ -1,50 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
 <mapper namespace="productMapper">
-<resultMap type="cart" id="cartResult">
-<result column="CART_NO" property="cartNo"/>
-<result column="PRODUCT_NO" property="productNo"/>
-<result column="MEMBER_NO" property="memberNo"/>
-<result column="CART_COUNT" property="cartCount"/>
-<collection property="product" resultMap="productResult"/>
-</resultMap>
-<resultMap type="product" id="productResult">
-<result column="PRODUCT_NO" property="productNo"/>
-<result column="CATEGORY_NO" property="categoryNo"/>
-<result column="PRODUCT_NAME" property="productName"/>
-<result column="PRODUCT_PRICE" property="productPrice"/>
-<result column="PRODUCT_IMG" property="productImg"/>
-<result column="PRODUCT_DESC" property="productDesc"/>
-<result column="PRODUCT_DATE" property="productDate"/>
-<result column="STATUS" property="status"/>
-</resultMap>
-<resultMap type="order" id="orderResult">
-<result column="ROWNUM" property="rownum"/>
-<result column="ORDER_DETAIL_NO" property="orderDetailNo"/>
-<result column="ORDER_NO" property="orderNo"/>
-<result column="ORDER_NAME" property="orderName"/>
-<result column="PRODUCT_NO" property="productNo"/>
-<result column="PRODUCT_COUNT" property="productCount"/>
-<result column="PRODUCT_PRICE" property="productPrice"/>
-<result column="MEMBER_NO" property="memberNo"/>
-<result column="MEMBER_PHONE" property="memberPhone"/>
-<result column="ORDER_DATE" property="orderDate"/>
-<result column="ORDER_STATUS" property="orderStatus"/>
-<result column="EXPIRY_DATE" property="expiryDate"/>
-<collection property="product" resultMap="productResult"/>
-</resultMap>
-<select id="selectCart" resultMap="cartResult"> SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,CART_COUNT,PRODUCT_IMG FROM CART JOIN PRODUCT USING(PRODUCT_NO) WHERE MEMBER_NO=#{memberNo} </select>
-<select id="productGetListCount" resultType="_int"> SELECT COUNT(*) FROM PRODUCT WHERE STATUS='Y' </select>
-<select id="productGetList" resultMap="productResult"> SELECT PRODUCT_NO, CATEGORY_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_IMG, PRODUCT_DESC, PRODUCT_DATE, STATUS, CATEGORY_NAME FROM PRODUCT JOIN CATEGORY USING(CATEGORY_NO) WHERE STATUS = 'Y' ORDER BY PRODUCT_DATE DESC </select>
-<update id="changeCount"> UPDATE CART SET CART_COUNT = #{cartCount} WHERE CART_NO = #{cartNo} </update>
-<delete id="cartDelete"> DELETE FROM CART WHERE CART_NO=#{cartNo} </delete>
-<select id="checkedCartList" resultMap="cartResult">
-SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_IMG,CART_COUNT FROM CART JOIN PRODUCT USING(PRODUCT_NO) WHERE CART_NO in
-<foreach collection="list" item="cartNo" open="(" close=")" separator=","> #{cartNo} </foreach>
-</select>
-<insert id="purchaseInsert"> INSERT INTO ORDER_INFO(ORDER_NO ,MEMBER_NO ,ORDER_NAME ,MEMBER_PHONE) VALUES(SEQ_OINO.NEXTVAL ,#{memberNo} ,#{orderName} ,#{memberPhone}) </insert>
-<insert id="orderDetailInsert"> INSERT INTO ORDER_DETAIL VALUES(SEQ_ODNO.NEXTVAL,#{productNo},SEQ_OINO.CURRVAL,#{productCount},#{productPrice}) </insert>
-<select id="purchaseList" resultMap="orderResult"> SELECT ROWNUM,A.* FROM (SELECT ORDER_NO,ORDER_NAME,ORDER_DATE,ORDER_STATUS,EXPIRY_DATE FROM ORDER_INFO WHERE MEMBER_NO=#{memberNo})A ORDER BY ORDER_DATE DESC </select>
-<select id="dateList" resultMap="orderResult"> SELECT ROWNUM,A.* FROM (SELECT ORDER_NO,ORDER_NAME,ORDER_DATE,ORDER_STATUS,EXPIRY_DATE FROM ORDER_INFO WHERE MEMBER_NO=#{memberNo})A WHERE ORDER_DATE BETWEEN #{orderDate} AND #{expiryDate} ORDER BY ORDER_DATE DESC </select>
-<select id="detailList" resultMap="orderResult"> SELECT PRODUCT_NAME,O.PRODUCT_PRICE,PRODUCT_COUNT,PRODUCT_IMG FROM ORDER_DETAIL O JOIN PRODUCT USING(PRODUCT_NO) WHERE ORDER_NO=#{orderNo} </select>
+
+	<resultMap type="cart" id="cartResult">
+		<result column="CART_NO" property="cartNo" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="CART_COUNT" property="cartCount" />
+		<collection property="product" resultMap="productResult" />
+	</resultMap>
+	
+	<resultMap type="product" id="productResult">
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="CATEGORY_NO" property="categoryNo" />
+		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PRODUCT_PRICE" property="productPrice" />
+		<result column="PRODUCT_IMG" property="productImg" />
+		<result column="PRODUCT_DESC" property="productDesc" />
+		<result column="PRODUCT_DATE" property="productDate" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+	
+	<resultMap type="order" id="orderResult">
+		<result column="ROWNUM" property="rownum" />
+		<result column="ORDER_DETAIL_NO" property="orderDetailNo" />
+		<result column="ORDER_NO" property="orderNo" />
+		<result column="ORDER_NAME" property="orderName" />
+		<result column="PRODUCT_NO" property="productNo" />
+		<result column="PRODUCT_COUNT" property="productCount" />
+		<result column="PRODUCT_PRICE" property="productPrice" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="MEMBER_PHONE" property="memberPhone" />
+		<result column="ORDER_DATE" property="orderDate" />
+		<result column="ORDER_STATUS" property="orderStatus" />
+		<result column="EXPIRY_DATE" property="expiryDate" />
+		<collection property="product" resultMap="productResult" />
+	</resultMap>
+	
+	<select id="selectCart" resultMap="cartResult"> 
+		SELECT
+			CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,CART_COUNT,PRODUCT_IMG
+		FROM CART
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE MEMBER_NO=#{memberNo} 
+	</select>
+	
+	<select id="productGetListCount" resultType="_int"> 
+		SELECT COUNT(*)
+		FROM PRODUCT
+		WHERE STATUS='Y'
+	</select>
+	
+	<select id="productGetList" resultMap="productResult"> 
+		SELECT PRODUCT_NO, CATEGORY_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_IMG, PRODUCT_DESC, PRODUCT_DATE, STATUS, CATEGORY_NAME 
+		FROM PRODUCT
+		JOIN CATEGORY USING(CATEGORY_NO) 
+		WHERE STATUS = 'Y'
+		ORDER BY PRODUCT_DATE DESC 
+	</select>
+	
+	<select id="productDetail" resultMap="productResult"> 
+		SELECT PRODUCT_NO, CATEGORY_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_IMG, PRODUCT_DESC, PRODUCT_DATE, STATUS, CATEGORY_NAME 
+		FROM PRODUCT
+		JOIN CATEGORY USING(CATEGORY_NO) 
+		WHERE STATUS = 'Y'
+		AND PRODUCT_NO =  #{productNo}
+	</select>
+	
+	<update id="changeCount">
+		UPDATE CART
+		SET CART_COUNT = #{cartCount} 
+		WHERE CART_NO = #{cartNo}
+	</update>
+	
+	<delete id="cartDelete">
+		DELETE FROM CART
+		WHERE CART_NO=#{cartNo}
+	</delete>
+	
+	<select id="checkedCartList" resultMap="cartResult">
+		SELECT CART_NO,PRODUCT_NO,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_IMG,CART_COUNT
+		FROM CART
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE CART_NO in
+		<foreach collection="list" item="cartNo" open="(" close=")" separator=","> #{cartNo} </foreach>
+	</select>
+	
+	<insert id="purchaseInsert">
+		INSERT INTO ORDER_INFO (ORDER_NO ,MEMBER_NO ,ORDER_NAME ,MEMBER_PHONE) 
+		VALUES(SEQ_OINO.NEXTVAL ,#{memberNo} ,#{orderName} ,#{memberPhone})
+	</insert>
+	
+	<insert id="orderDetailInsert">
+		INSERT INTO ORDER_DETAIL
+		VALUES(SEQ_ODNO.NEXTVAL,#{productNo},SEQ_OINO.CURRVAL,#{productCount},#{productPrice})
+	</insert>
+	
+	<select id="purchaseList" resultMap="orderResult">
+		SELECT ROWNUM,A.*
+		FROM (SELECT ORDER_NO,ORDER_NAME,ORDER_DATE,ORDER_STATUS,EXPIRY_DATE 
+				FROM ORDER_INFO
+				WHERE MEMBER_NO=#{memberNo})A 
+				ORDER BY ORDER_DATE DESC 
+	</select>
+	
+	<select id="dateList" resultMap="orderResult"> 
+		SELECT ROWNUM,A.*
+		FROM (SELECT ORDER_NO,ORDER_NAME,ORDER_DATE,ORDER_STATUS,EXPIRY_DATE 
+				FROM ORDER_INFO
+				WHERE MEMBER_NO=#{memberNo})A
+		WHERE ORDER_DATE BETWEEN #{orderDate} AND #{expiryDate}
+		ORDER BY ORDER_DATE DESC
+	</select>
+	
+	<select id="detailList" resultMap="orderResult">
+		SELECT PRODUCT_NAME,O.PRODUCT_PRICE,PRODUCT_COUNT,PRODUCT_IMG
+		FROM ORDER_DETAIL O
+		JOIN PRODUCT USING(PRODUCT_NO)
+		WHERE ORDER_NO=#{orderNo}
+	</select>
+	
 </mapper>

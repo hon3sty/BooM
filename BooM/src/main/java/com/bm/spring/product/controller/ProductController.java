@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bm.spring.common.model.vo.PageInfo;
 import com.bm.spring.common.template.Pagination;
@@ -49,13 +50,25 @@ public class ProductController {
 
 	// 상품 상세
 	@RequestMapping("productDetail.pd")
-	public String productDetail() {
-		return "product/PD_0020";
+	public ModelAndView productDetail(int pno, ModelAndView mv) {
+		Product p = productService.productDetail(pno);
+		mv.addObject("p", p).setViewName("product/PD_0020");
+		
+		return mv;
+
 	}
 	
-	//결제하기 페이지
+	// 결제하기 페이지
 	@RequestMapping("productPurchase.pd")
-	public String productPurchasList() {
+	public String productPurchasList(int pno, int pprice, HttpSession session, Model model) {
+		int mno=((Member)session.getAttribute("loginUser")).getMemberNo();
+		
+		ArrayList arr=new ArrayList();
+		
+//		Order plist[] = new Order[mno,pno,1,pprice];
+//		
+//		model.addAttribute("plist", plist);
+		
 		return "product/PD_0030";
 	}
 	

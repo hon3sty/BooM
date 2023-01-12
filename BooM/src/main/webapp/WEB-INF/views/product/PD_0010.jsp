@@ -25,7 +25,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.jsp"><i class="fa fa-home"></i> Home</a>
-                        <a href="productList.pd">상품</a>
+                        <a href=productList.pd?currentPage=${pi.currentPage-1}>상품</a>
                         <!-- <span>상품</span> -->
                     </div>
                 </div>
@@ -60,49 +60,38 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-6">
 	                            <c:forEach var="p" items="${list}">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
 	                                <div class="product__item">
-	                                    <!-- <div class="product__item__pic set-bg" data-setbg="resources/img/popular/popular-1.jpg">
+	                                    <div class="product__item__pic set-bg" style="background-image : url(${p.productImg })">
 	                                        <div class="ep">18 / 18</div>
 	                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
 	                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-	                                    </div> -->
+	                                    </div>
 	                                    <div class="product__item__text">
 	                                        <ul>
 	                                            <li>Movie</li>
 	                                        </ul>
-	                                        <h5><a href="#">${p.productName}</a></h5>
+	                                        <h5><a href="productDetail.pd?pno=${p.productNo}">${p.productName}</a></h5>
 	                                    </div>
 	                                </div>
-                                </c:forEach>
                             </div>
+                                </c:forEach>
                         </div>
                     </div>
                     <div class="product__pagination">
-                    <!-- 
-                        <a href="#" class="current-page">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
-                         -->
                     <c:choose>
                 		<c:when test="${pi.currentPage ne 1 }">
                 			<a href="productList.pd?currentPage=${pi.currentPage-1}"><i class="fa fa-angle-double-left"></i></a>
                 		</c:when>
-	                    <%-- <c:otherwise><!-- currentPage가 1일경우 (1페이지) -->
-	                   		<a class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
-	                    </c:otherwise> --%>
                 	</c:choose>
                 	<c:forEach begin="${pi.startPage }" end="${pi.endPage }" var="pg">
 	                  <c:choose>
                 		<c:when test="${pi.currentPage eq pg }">
-                			<a class="page-link" href="productList.pd?currentPage=${pg}">${pg}</a>
+                			<a class="current-page" href="productList.pd?currentPage=${pg}">${pg}</a>
                 		</c:when>
                 		<c:otherwise>
-	                    	<a class="page-link" href="productList.pd?currentPage=${pg}">${pg}</a>
+	                    	<a class="current-page" href="productList.pd?currentPage=${pg}">${pg}</a>
                 		</c:otherwise>
                 		</c:choose>
                 	</c:forEach>
@@ -124,6 +113,9 @@
 		</div>
 </section>
 <!-- Product Section End -->
+
+<script>
+</script>
 
 <!-- Footer Section Begin -->
 	<jsp:include page="../common/footer.jsp"/>
