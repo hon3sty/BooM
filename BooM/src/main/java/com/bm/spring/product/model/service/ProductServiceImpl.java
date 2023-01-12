@@ -57,9 +57,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int productDetail() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Product productDetail(int pno) {
+		return productDao.productDetail(sqlSession, pno);
 	}
 
 	@Override

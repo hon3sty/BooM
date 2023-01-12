@@ -66,4 +66,8 @@ public class ProductDao {
 	public ArrayList<Order> detailGetList(SqlSessionTemplate sqlSession, int ono) {
 		return (ArrayList)sqlSession.selectList("productMapper.detailList",ono);
 	}
+
+	public Product productDetail(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("productMapper.productDetail", pno);
+	}
 }

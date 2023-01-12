@@ -30,7 +30,7 @@ public interface ProductService {
 	ArrayList<Product> productGetList(PageInfo pi);
 
 	// 상품 상세
-	int productDetail();
+	Product productDetail(int pno);
 	
 	//장바구니 수량 변경
 	int changeCount(Cart c);
