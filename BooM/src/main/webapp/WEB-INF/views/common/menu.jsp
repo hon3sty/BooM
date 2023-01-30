@@ -129,7 +129,7 @@
 			            <div class="sidebar__comment__1-1">
 			            </div>
 			            <div class="sidebar__comment__1-2">
-			                <h5><a href="noticeListForm.bo">예매내역</a></h5>
+			                <h5><a href="myTicketList.mv">예매내역</a></h5>
 			            </div>
 			        </div>
 			        <div class="sidebar__comment__1">
