@@ -9,10 +9,14 @@
 <meta charset="UTF-8">
 <!-- [영화] 영화 상세페이지 : 박연 -->
 <title>영화 상세페이지</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>
 /* .anime-details{
  	width : 1537px; !important
 } */
+
+
+
 
 
  .user_img{
@@ -52,6 +56,8 @@
  .follow-btn{
   cursor:pointer;
  }
+ 
+ 
  
 </style>
 </head>

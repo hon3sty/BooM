@@ -11,7 +11,7 @@
     <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>선호하는 영화</title>
+    <title>보고싶은 영화</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -92,7 +92,7 @@ h6 > a:hover{
                                 <div class="col-lg-8 col-md-8 col-sm-6">
                                     <div class="section-title">
                                     <!-- ============== 영화 리스트 타이틀 영역 ============= -->
-                                        <h4>선호하는 영화 리스트</h4>
+                                        <h4>보고싶은 영화</h4>
                                     </div>
                                 </div>
                                
